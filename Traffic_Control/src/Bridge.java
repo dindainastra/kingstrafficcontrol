@@ -4,7 +4,7 @@ public class Bridge implements Terrain{
 	@Override
 	public void setInWhichNodeLocated() {
 		// TODO Auto-generated method stub
-		
+	int a = 3;
 	}
 
 	@Override

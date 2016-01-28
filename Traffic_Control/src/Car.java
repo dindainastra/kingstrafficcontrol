@@ -1,6 +1,6 @@
 
 public class Car implements Vehicle {
-
+	int i;
 	@Override
 	public int getPriority() {
 		// TODO Auto-generated method stub
