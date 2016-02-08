@@ -8,7 +8,7 @@ public class Car implements Vehicle {
 	}
 
 	@Override
-	public void sePriority(int priority) {
+	public void setPriority(int priority) {
 		// TODO Auto-generated method stub
 		
 	}
