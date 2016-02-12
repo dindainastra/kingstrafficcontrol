@@ -1,5 +1,3 @@
-package Objects;
-
 
 public interface Vehicle {
 
