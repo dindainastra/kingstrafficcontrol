@@ -3,6 +3,9 @@ package Objects;
 
 public class Bridge implements Terrain{
 
+	
+	//dummy comment
+	
 	@Override
 	public void setInWhichNodeLocated() {
 		// TODO Auto-generated method stub
