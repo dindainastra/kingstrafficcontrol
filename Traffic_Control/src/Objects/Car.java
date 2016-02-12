@@ -1,3 +1,5 @@
+package Objects;
+
 
 public class Car implements Vehicle {
 
@@ -15,13 +17,13 @@ public class Car implements Vehicle {
 
 	@Override
 	public int getPerson() {
-		// TODO Auto-generated method stub
+		// TODO Auto-generatesdaddsdasasdadsasdadadsd method stub
 		return 0;
 	}
 
 	@Override
 	public void setPerson() {
-		// TODO Auto-generated method stub
+		// TODO Auto-geneadsdasadsadsrated method stub
 		
 	}
 

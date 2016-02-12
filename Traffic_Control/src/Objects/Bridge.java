@@ -1,3 +1,7 @@
+package Objects;
+
+
+//bridge dummy comment
 
 public class Bridge implements Terrain{
 

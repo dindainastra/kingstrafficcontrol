@@ -1,0 +1,148 @@
+\documentclass{article} \usepackage{graphicx} 
+\usepackage{amsmath}
+\usepackage{color,soul}
+\usepackage{lastpage}
+
+
+
+
+\begin{document}
+	
+	\title{Initial Report
+    \\ Group Project 7CCSMGPR} 	
+    \author{King's Traffic Control}
+	\maketitle
+	
+	 \section{Project Description} 		
+        To design an efficient Traffic Simulator System to demonstrate traffic flow and interaction under different traffic policies.
+        
+         \subsection{Project Aims and Strategy}
+          Strategy: To complete a fully functioning Traffic Simulation System (Mandatory Level
+           1 specification). Complete Level 2 and 3 of the Aims as time permits. The whole project will be designed 
+           using the Agile model (scrum). 
+           \\The simulation will be programmed in Java with the use of GitHub repository. JUnit framework will be used for testing. 
+         The working branch will be used to hold committed code on a regular basis of everyone's daily changes. 
+         A 'master' branch is made to act as the container of the main code. At the end of each sprint the completed 
+         and tested objectives will be merge into the master branch. This is done to prevent changes being made to the 
+         main branch  with conflicts.
+			\subsubsection{Project Strategy - Scrum}
+			Scrum is a management framework for incremental product development using one or more cross-functional, 
+			self-organizing teams. It provides a structure of roles, meetings and rules. Our team is responsible for 
+			creating and adapting our processes within this framework. Scrum uses fixed-length iterations, called Sprints. 
+			Each of our sprints are two weeks long. We have intermediate meetings between each sprints to ensure that we are on target. 
+			Sprint review will be done at a Thursday meeting in the middle of each 2 week sprint. The project tasks mentioned 
+			in the next section are the backlogs.
+			
+			\subsubsection{Project Tasks:} 					
+			See Gantt chart under 1.3 Project Schedule, for when each tasks is planned to be accomplished.
+            \begin{description} 				
+                \item[Level 1] Mandatory Specification
+                        (1) Individual vehicles
+                                (a) Cars, lorries, bike, buses, coaches, motorbikes 					
+                                (b) Reckless driver, cautious, normal 								
+                        (2) Road network including traffic lights
+                        (3) Entrance to road networks and exists
+                        (4) Individual behaviours
+                        (5) Timing of journeys - rush hours
+                        (6) Emergency services - police, ambulance, fire truck
+                        (7) Management policies - divert traffic or roadworks
+                        (8) Time granularity 						
+                        	
+                  \item[Level 2] Optional Specification
+                            (1) People crossings
+                            (2) Politeness level
+                            (3) Map scale user interface
+                            (4) Congestion rate user interface
+                            (5) Pause, stop, resume, play
+                            (6) Speed limit option
+                            (7) Scenery
+                  \item[Level 3] Optional Specification
+                        (1) Configurable map
+                        (2) Road types
+                            (a) Bridge
+                            (b) Crossings
+                            (c) Traffic lights mechanism
+                            (d) Junctions
+                            (e) Single carriageways
+                            (f) Dual
+                            (g) Roundabouts
+                            (h) Tolls gates
+                            (i) Uphill/downhill
+                            (j) Ramps
+                        (3) Parking (street)
+                        (4) Changing lanes
+                        (5) Weather conditions
+                \end{description}
+
+
+                \subsection{Project Design}
+              
+				\begin{figure}[h]
+							\centering
+							\caption{Class diagram}	
+							\includegraphics[width=150mm]{ClassDiagram.png}
+					\end{figure}                
+                				  
+                \subsection{Project Schedule}
+                \subsubsection{Rudimentary Timetable}
+                    The figure bellow is the GANTT Chart. This shows the critical tasks the group must accomplish for the project to remain on target. From 					this, a risk management section is also created as shown below on 2.3 Rish Management. The GANTT Chart highlights how the scrum agile 						method has been incorporated into the project. If issues arise they will be addressed in the Sprint review.
+
+					\begin{figure}[h]
+							\centering
+							\caption{Gantt chart}
+							\includegraphics[width=150mm]{TrafficSimulatorNew.png} 
+					\end{figure}										                
+                    		
+                \subsection{Initial Progression}
+                \begin{description}
+				
+				\item[Level 1] GUI Based:\\
+                    (a)GUI Road network, buttons, slider, etc.
+                    (b)Object classes
+                    (c)Using swing Library
+                    
+                 \item[Level 2] Algorithm:\\
+                     (a)Network node libraries
+                     (b)Node diagram
+                     (c)Pseudo codes, Implementation of algorithms.
+                    
+                 \item[Level 3] Management:\\
+                     (a)Everything is represented as a vehicle.
+                     (b)Vehicle behaviour depends on the priority.
+                     (c)Approach based on attributes of an object in different threads.
+                     
+                  \end{description}               
+
+
+
+	\section{Project Organisation}
+        \subsection{Project Role and Responsibilities}
+            As shown in Figure 1, on the 1.3.1 Rudimentary Timetable section of this 
+            report, level 1 of the project will be the first to be implemented. Level 
+            1 of the project has been split into three parts. As a group of six, two
+             persons are allocated for each part. The task distribution are as follows: 			
+            \begin{itemize}
+                \item GUI, Objects and Report: Sai Kurdukar and Daniella Bacud
+                \item Algorithms: Patrick Martins - Yedenu, Grigorios Pavlidis and (Daniella Bacud)
+                \item Management Policies: Dyah Damapuspita and Constantinos Hasikos
+            \end{itemize}
+        \subsection{Communication}
+            Physical meetings are held on Thursday at 13:00 or Fridays at 13:30 each week. 
+            Additional meetings may be conducted as required. Main communication tools used are Whatsapp, Email, Trello, Slack and GitHub. 
+            All the documents are maintained on the Google drive.
+            \\Conflicts and disagreements are solved through the majority voting in the group.
+            \\The tasks are allocated in such a way that each member of the team has the same amount of workload and contributes equally
+              to the project. In cases where tasks cannot be fairly distributed, members with less load will take up the workload required
+              to complete the reports and/or presentations. 
+          \subsection{Peer assessment}
+          Peer assessment is handled by equal work distribution. In case if any member is not able to complete the task allocated to him/her and some other 		  member has to take on the task the member looses his marks to the person who takes on the task.
+               		
+        \subsection{Risk Management} 		
+            At each weekly meeting, tasks for the next are set and the progress of the team 
+            is marked. In situations whereby a member is having difficulties in completing 
+            their tasks, it will be immediately identified and resolved either through 
+            mitigation (the help of another member) or through reallocation of tasks, 
+            or through avoidance. 	
+		        
+        
+\end{document} 
