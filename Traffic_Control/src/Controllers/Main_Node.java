@@ -1,4 +1,7 @@
-package Objects;
+package Controllers;
+
+import Objects.Car;
+import Objects.Person;
 
 public class Main_Node {
 
