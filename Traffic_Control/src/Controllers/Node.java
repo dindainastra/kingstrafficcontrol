@@ -25,6 +25,14 @@ public class Node {
 		this.myStack.remove(obj);
 	}
 
+	public void printStack(){
+		
+		for (Object item : myStack) {   
+		    System.out.println	(item);
+		}		
+		
+	}
+	
 	public String getNameOfNode() {
 		return nameOfNode;
 	}
