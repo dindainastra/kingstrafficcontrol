@@ -15,6 +15,10 @@ public class NodeManager {
 	}
 	
 	
+	public ArrayList<Node> getArrayList(){
+		return Nodes;
+	}
+	
 	public void addNode(Node n){
 		this.Nodes.add(n);
 	}

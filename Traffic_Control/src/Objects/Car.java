@@ -3,30 +3,39 @@ package Objects;
 
 public class Car implements Vehicle {
 
-	@Override
+	private Person driver;
+	private int priorityLevel;
+	
+	public Car(Person p){
+		driver = p;
+		priorityLevel = 0; //default no priority
+	}
+	
 	public int getPriority() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.priorityLevel;
 	}
 
-	@Override
 	public void setPriority(int priority) {
-		// TODO Auto-generated method stub
-		
+		this.priorityLevel = priority;
+	}
+
+	public String getDriversName() {
+		return driver.getName();
+	}
+	
+	public int getDriversPolitenssLevel() {
+		return driver.getPolitenessLevel();
+	}
+	
+	public void setPerson(Person p) {
+		this.driver = p;
 	}
 
 	@Override
 	public int getPerson() {
-		// TODO Auto-generatesdaddsdasasdadsasdadadsd method stub
+		// TODO Auto-generated method stub
 		return 0;
 	}
-
-	@Override
-	public void setPerson() {
-		// TODO Auto-geneadsdasadsadsrated method stub
-		
-	}
-
 	
 	
 }
