@@ -23,30 +23,13 @@ public class RoadNetworks extends JFrame {
     
     // Variables declaration                     
     private JLabel backgroundImage;
-    private JCheckBox bridgeCheckBox;
-    private JLabel congestionLabel;
-    private JSlider congestionSlider;
-    private JLabel congestionValue;
-    private JCheckBox crossingCheckBox;
-    private JCheckBox dCarriagewayCheckBox;
-    private JLabel emergencyLabel;
-    private JPanel jPanel1;
-    private JCheckBox junctionCheckBox;
-    private JButton pauseButton;
-    private JButton playButton;
-    private JCheckBox rampsCheckBox;
-    private JButton replayButton;
-    private JLabel roadNetworkLabel;
-    private JCheckBox roundaboutsCheckBox;
-    private JCheckBox sCarriagewayCheckBox;
-    private JButton stopButton;
-    private JLabel time;
-    private JLabel timeIntervalLabel;
-    private JSlider timeIntervalSlider;
-    private JLabel timeIntervalValue;
-    private JCheckBox tollGateCheckBox;
+    private JCheckBox bridgeCheckBox, tollGateCheckBox, crossingCheckBox,dCarriagewayCheckBox, junctionCheckBox,rampsCheckBox,roundaboutsCheckBox,sCarriagewayCheckBox ;
+    private JLabel congestionLabel, congestionValue,emergencyLabel,roadNetworkLabel,time,timeIntervalLabel,weatherLabel,timeIntervalValue;
+    private JButton pauseButton, playButton, replayButton, stopButton;
+    private JSlider congestionSlider,timeIntervalSlider;
     private JComboBox<String> weatherComboBox;
-    private JLabel weatherLabel;
+    private JPanel jPanel1;
+    
     // End of variables declaration    
     
     /**
@@ -96,25 +79,25 @@ public class RoadNetworks extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         //set play, pause, stop and replay button icon and ActionListener 
-        replayButton.setIcon(new ImageIcon("C:\\Users\\daniella\\Documents\\Mine\\Term 2\\Group Project\\rewind.PNG")); // NOI18N
+        replayButton.setIcon(new ImageIcon("src/Resources/rewind.PNG")); // NOI18N
         replayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 replayButtonActionPerformed(evt);
             }
         });
-        playButton.setIcon(new ImageIcon("C:\\Users\\daniella\\Documents\\Mine\\Term 2\\Group Project\\play.PNG")); // NOI18N
+        playButton.setIcon(new ImageIcon("src/Resources/play.PNG")); // NOI18N
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 playButtonActionPerformed(evt);
             }
         }); 
-        pauseButton.setIcon(new ImageIcon("C:\\Users\\daniella\\Documents\\Mine\\Term 2\\Group Project\\pause.PNG")); // NOI18N
+        pauseButton.setIcon(new ImageIcon("src/Resources/pause.PNG")); // NOI18N
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 pauseButtonActionPerformed(evt);
             }
         });
-        stopButton.setIcon(new ImageIcon("C:\\Users\\daniella\\Documents\\Mine\\Term 2\\Group Project\\stop.PNG")); // NOI18N
+        stopButton.setIcon(new ImageIcon("src/Resources/stop.PNG")); // NOI18N
         stopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 stopButtonActionPerformed(evt);
@@ -125,7 +108,7 @@ public class RoadNetworks extends JFrame {
         time.setText("time");
         
         //temporary road map
-        backgroundImage.setIcon(new ImageIcon("C:\\Users\\daniella\\Documents\\Mine\\Term 2\\Group Project\\Capture.PNG")); // NOI18N
+        backgroundImage.setIcon(new ImageIcon("src/Resources/Capture.PNG")); // NOI18N
         
         //slider interface for time interval and congestion rate
         timeIntervalSlider.setMajorTickSpacing(20);
@@ -342,11 +325,11 @@ public class RoadNetworks extends JFrame {
     }// </editor-fold>                        
 
     private void replayButtonActionPerformed(ActionEvent evt) {                                             
-      InputStream in;
+      InputStream music;
       //replay music when replay JButton is pressed
       try{
-        in = new FileInputStream(new File ("C:\\Users\\daniella\\Documents\\NetBeansProjects\\kingstrafficcontrol\\Traffic_Control\\src\\Objects\\beep09.wav"));
-        AudioStream  audios = new AudioStream(in);
+        music = new FileInputStream(new File ("src/Resources/beep09.wav"));
+        AudioStream  audios = new AudioStream(music);
         if (evt.getSource() == replayButton)
           {
               AudioPlayer.player.stop(audios);
@@ -364,12 +347,12 @@ public class RoadNetworks extends JFrame {
      }**/
     
     private void playButtonActionPerformed(ActionEvent evt) {                                           
-      InputStream in;
+      InputStream music;
       
       //start music when play JButton is pressed
       try{
-        in = new FileInputStream(new File ("C:\\Users\\daniella\\Documents\\NetBeansProjects\\kingstrafficcontrol\\Traffic_Control\\src\\Objects\\beep09.wav"));
-        AudioStream  audios = new AudioStream(in);
+        music = new FileInputStream(new File ("src/Resources/beep09.wav"));
+        AudioStream  audios = new AudioStream(music);
         if (evt.getSource() == playButton){
               AudioPlayer.player.start(audios);
           }
@@ -379,10 +362,10 @@ public class RoadNetworks extends JFrame {
     }                                                                                    
 
     private void pauseButtonActionPerformed(ActionEvent evt) {                                            
-      InputStream in;
+      InputStream music;
       try{
-      in = new FileInputStream(new File ("C:\\Users\\daniella\\Documents\\NetBeansProjects\\kingstrafficcontrol\\Traffic_Control\\src\\Objects\\beep09.wav"));
-      AudioStream  audios = new AudioStream(in);
+      music = new FileInputStream(new File ("src/Resources/beep09.wav"));
+      AudioStream  audios = new AudioStream(music);
       if (evt.getSource() == pauseButton)
         AudioPlayer.player.stop(audios);
       }
@@ -391,10 +374,10 @@ public class RoadNetworks extends JFrame {
     }                                           
 
     private void stopButtonActionPerformed(ActionEvent evt) {                                           
-      InputStream in;
+      InputStream music;
       try{
-      in = new FileInputStream(new File ("C:\\Users\\daniella\\Documents\\NetBeansProjects\\kingstrafficcontrol\\Traffic_Control\\src\\Objects\\beep09.wav"));
-      AudioStream  audios = new AudioStream(in);
+      music = new FileInputStream(new File ("src/Resources/beep09.wav"));
+      AudioStream  audios = new AudioStream(music);
       if (evt.getSource() == stopButton)
         AudioPlayer.player.stop(audios);
       }
