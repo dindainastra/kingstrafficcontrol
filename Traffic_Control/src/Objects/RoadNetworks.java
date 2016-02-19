@@ -13,6 +13,8 @@ import java.awt.event.*;
 import javax.swing.*;
 //Imports for music
 import java.io.*;
+import java.net.URL;
+
 import sun.audio.*;
 
 /**
@@ -78,37 +80,44 @@ public class RoadNetworks extends JFrame {
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        URL stopURL = getClass().getResource("../Resources/stop.PNG");
+        URL rewindURL = getClass().getResource("../Resources/rewind.PNG");
+        URL playURL = getClass().getResource("../Resources/play.PNG");
+        URL pauseURL = getClass().getResource("../Resources/pause.PNG");
+        URL captureURL = getClass().getResource("../Resources/capture.PNG");
+
         //set play, pause, stop and replay button icon and ActionListener 
-        replayButton.setIcon(new ImageIcon("src/Resources/rewind.PNG")); // NOI18N
+        replayButton.setIcon(new ImageIcon(rewindURL)); // NOI18N
         replayButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 replayButtonActionPerformed(evt);
             }
         });
-        playButton.setIcon(new ImageIcon("src/Resources/play.PNG")); // NOI18N
+        playButton.setIcon(new ImageIcon(playURL)); // NOI18N
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 playButtonActionPerformed(evt);
             }
         }); 
-        pauseButton.setIcon(new ImageIcon("src/Resources/pause.PNG")); // NOI18N
+        pauseButton.setIcon(new ImageIcon(pauseURL)); // NOI18N
         pauseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 pauseButtonActionPerformed(evt);
             }
         });
-        stopButton.setIcon(new ImageIcon("src/Resources/stop.PNG")); // NOI18N
+
+        stopButton.setIcon(new ImageIcon(stopURL)); // NOI18N
         stopButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 stopButtonActionPerformed(evt);
             }
         });
-        
+
         //create temp time text for later use (real time)
         time.setText("time");
         
         //temporary road map
-        backgroundImage.setIcon(new ImageIcon("src/Resources/Capture.PNG")); // NOI18N
+        backgroundImage.setIcon(new ImageIcon(captureURL)); // NOI18N
         
         //slider interface for time interval and congestion rate
         timeIntervalSlider.setMajorTickSpacing(20);
@@ -328,7 +337,7 @@ public class RoadNetworks extends JFrame {
       InputStream music;
       //replay music when replay JButton is pressed
       try{
-        music = new FileInputStream(new File ("src/Resources/beep09.wav"));
+        music = new FileInputStream(new File ("beep09.wav"));
         AudioStream  audios = new AudioStream(music);
         if (evt.getSource() == replayButton)
           {
@@ -351,7 +360,7 @@ public class RoadNetworks extends JFrame {
       
       //start music when play JButton is pressed
       try{
-        music = new FileInputStream(new File ("src/Resources/beep09.wav"));
+        music = new FileInputStream(new File ("beep09.wav"));
         AudioStream  audios = new AudioStream(music);
         if (evt.getSource() == playButton){
               AudioPlayer.player.start(audios);
@@ -364,7 +373,7 @@ public class RoadNetworks extends JFrame {
     private void pauseButtonActionPerformed(ActionEvent evt) {                                            
       InputStream music;
       try{
-      music = new FileInputStream(new File ("src/Resources/beep09.wav"));
+      music = new FileInputStream(new File ("beep09.wav"));
       AudioStream  audios = new AudioStream(music);
       if (evt.getSource() == pauseButton)
         AudioPlayer.player.stop(audios);
@@ -376,7 +385,7 @@ public class RoadNetworks extends JFrame {
     private void stopButtonActionPerformed(ActionEvent evt) {                                           
       InputStream music;
       try{
-      music = new FileInputStream(new File ("src/Resources/beep09.wav"));
+      music = new FileInputStream(new File ("beep09.wav"));
       AudioStream  audios = new AudioStream(music);
       if (evt.getSource() == stopButton)
         AudioPlayer.player.stop(audios);
