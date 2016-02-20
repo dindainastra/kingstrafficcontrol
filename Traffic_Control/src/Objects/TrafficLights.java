@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-package objects;
-=======
+
 package Objects;
 
->>>>>>> refs/remotes/origin/working
 
 public class TrafficLights implements Terrain{
 
@@ -19,10 +16,12 @@ public class TrafficLights implements Terrain{
     public int change() {
         switch (currentColour) {
             case Red:
-                currentColour = Green;
-                System.out.println("Green");
+                
+                currentColour = Yellow;
+                System.out.println("Red ");
 
                 break;
+            
             case Yellow:
                 currentColour = Red;
                 System.out.println("Red");
@@ -43,7 +42,7 @@ public class TrafficLights implements Terrain{
 
     public void run() {
 
-        // Make sure the traffic light starts out as red
+        
         while (this.currentColour != Red) {
             this.change();
         }
@@ -96,16 +95,19 @@ public class TrafficLights implements Terrain{
     }
 
 
+    @Override
 	public void setInWhichNodeLocated() {
 		// TODO Auto-generated method stub
 		
 	}
 
+    @Override
 	public int getInWhichNodeLocated() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+    @Override
 	public int getPerson() {
 		// TODO Auto-generated method stub
 		return 0;
@@ -115,6 +117,10 @@ public class TrafficLights implements Terrain{
 		// TODO Auto-generated method stub
 		
 	}
+        public static void main(String[] args){
+            TrafficLights a = new TrafficLights();
+            a.run();
+        }
 
 }
 
