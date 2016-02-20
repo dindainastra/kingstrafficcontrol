@@ -18,7 +18,7 @@ public class TrafficLights implements Terrain{
             case Red:
                 
                 currentColour = Yellow;
-                System.out.println("Red ");
+                System.out.println("Yellow ");
 
                 break;
             
