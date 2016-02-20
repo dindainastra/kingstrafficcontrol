@@ -13,6 +13,10 @@ public class TrafficLights implements Terrain{
     private final static int GREEN_SECS = 15;
     private Thread runner;
 
+    /**
+     * This method takes the initial state of the traffic lights (Red) and makes decisions accordingly
+     * @return 
+     */
     public int change() {
         switch (currentColour) {
             case Red:
