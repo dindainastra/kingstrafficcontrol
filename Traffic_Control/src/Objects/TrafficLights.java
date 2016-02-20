@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 package objects;
+=======
+package Objects;
+
+>>>>>>> refs/remotes/origin/working
 
 public class TrafficLights implements Terrain{
 
