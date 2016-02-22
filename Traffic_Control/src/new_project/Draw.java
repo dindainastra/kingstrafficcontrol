@@ -12,41 +12,40 @@ public class Draw extends JPanel {
    
     // Variables declaration
     private int numCars=2;
-    private int numHRoads=1;
+    private int numSRoads=1;
     private int numVRoads=1;
     
     //Create arrays for each objects
     ArrayList<SquareJunction> squarejuncions = new ArrayList<>();
-    ArrayList<HRoad> hroads = new ArrayList<>(numHRoads);
-    //ArrayList<VRoad> vroads = new ArrayList<>(numVRoads);
-    //ArrayList<Vehicle> vehicles=new ArrayList<>(numCars);
+    ArrayList<SRoad> sroads = new ArrayList<>();
+    ArrayList<Vehicle> vehicles=new ArrayList<>();
     
     //Make cars, roads, traffic lights
     public Draw() {
-        
-        hroads.add(new HRoad(200,25,10,1,90));
-        hroads.add(new HRoad(100,25,01,2,90));
-       // vroads.add(new VRoad(300,75,10,1));
+        //Draw map network
+        //sroads.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor(),getrotation());
+        sroads.add(new SRoad(200,25,01,3,0));
+        sroads.add(new SRoad(100,25,00,2,0));
         squarejuncions.add(new SquareJunction(300,25));
+        sroads.add(new SRoad(300,25,00,2,0));
         
-//        vehicles.add(new Vehicle(210,30,2));
-//        vehicles.add(new Vehicle(250,55,1));  
-//        vehicles.add(new Vehicle(270,30,3));
+        //Draw traffic
+        vehicles.add(new Vehicle(210,30,2));
+        vehicles.add(new Vehicle(250,55,1));  
+        vehicles.add(new Vehicle(270,30,3));
     }
     @Override
     public void paintComponent(Graphics g){
+        Graphics2D f =(Graphics2D) g;
         super.paintComponent(g);
-//        for(VRoad VRoad : vroads){
-//            VRoad.doDrawing(g);
-//        }
-        for(HRoad HRoad : hroads){
-            HRoad.doDrawing(g);
+        for(SRoad SRoad : sroads){
+            SRoad.doDrawing(f);
         } 
         for(SquareJunction SquareJunction : squarejuncions){
-            SquareJunction.doDrawing(g);
+            SquareJunction.doDrawing(f);
         }
-//        for (Vehicle vehicle : vehicles) {
-//            vehicle.doDrawing(g); 
-//        }
+        for (Vehicle vehicle : vehicles) {
+            vehicle.doDrawing(f); 
+        }
     }    
 }

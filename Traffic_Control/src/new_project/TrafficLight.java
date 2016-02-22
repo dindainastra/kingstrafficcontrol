@@ -23,12 +23,11 @@ public class TrafficLight{
     }   
     
     //draw traffic light
-    protected static void doDrawing(Graphics g){
-        Graphics2D light=(Graphics2D) g;
+    protected static void doDrawing(Graphics2D g){
+        //g.rotate((double)Math.toRadians(rotates));
+        g.setColor(new Color (R,G,B));
         
-        light.setColor(new Color (R,G,B));
-        light.rotate(Math.toRadians(rotates));
-        light.fillRect(pos_x, pos_y, width, length); 
+        g.fillRect(pos_x, pos_y, width, length); 
         System.out.print("traffic is on B\n");
     } 
 }

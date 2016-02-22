@@ -15,8 +15,7 @@ public class SquareJunction extends JFrame {
         this.yStart = y_Start;
     }   
     
-    protected void doDrawing(Graphics g)
-    {
+    protected void doDrawing(Graphics g){
         Graphics2D road=(Graphics2D) g;
         Graphics2D lane_divider=(Graphics2D) g;
         Graphics2D road_border=(Graphics2D) g;
