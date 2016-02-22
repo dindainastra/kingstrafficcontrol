@@ -6,25 +6,37 @@
  */
 package Objects;
 
-//vehicles
-import java.awt.Graphics;
-//music
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
+//Imports for graphics
+
+import java.awt.Font;
+import java.awt.event.*;
+import javax.swing.*;
+//Imports for music
+import java.io.*;
+import java.net.URL;
+
 import sun.audio.*;
 
 /**
  *
  * @author daniella
  */
-public class RoadNetworks extends javax.swing.JFrame {
-
+public class RoadNetworks extends JFrame {
+    
+    // Variables declaration                     
+    private JLabel backgroundImage;
+    private JCheckBox bridgeCheckBox, tollGateCheckBox, crossingCheckBox,dCarriagewayCheckBox, junctionCheckBox,rampsCheckBox,roundaboutsCheckBox,sCarriagewayCheckBox ;
+    private JLabel congestionLabel, congestionValue,emergencyLabel,roadNetworkLabel,time,timeIntervalLabel,weatherLabel,timeIntervalValue;
+    private JButton pauseButton, playButton, replayButton, stopButton;
+    private JSlider congestionSlider,timeIntervalSlider;
+    private JComboBox<String> weatherComboBox;
+    private JPanel jPanel1;
+    
+    // End of variables declaration    
+    
     /**
      * Creates new form RoadNetworks
      */
-    public static int music;
-     
     public RoadNetworks() {
         initComponents();
     }
@@ -38,177 +50,186 @@ public class RoadNetworks extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
     private void initComponents() {
 
-        replayButton = new javax.swing.JButton();
-        pauseButton = new javax.swing.JButton();
-        playButton = new javax.swing.JButton();
-        stopButton = new javax.swing.JButton();
-        time = new javax.swing.JLabel();
-        timeIntervalValue = new javax.swing.JLabel();
-        congestionValue = new javax.swing.JLabel();
-        backgroundImage = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        timeIntervalSlider = new javax.swing.JSlider();
-        rampsCheckBox = new javax.swing.JCheckBox();
-        roundaboutsCheckBox = new javax.swing.JCheckBox();
-        crossingCheckBox = new javax.swing.JCheckBox();
-        junctionCheckBox = new javax.swing.JCheckBox();
-        dCarriagewayCheckBox = new javax.swing.JCheckBox();
-        sCarriagewayCheckBox = new javax.swing.JCheckBox();
-        timeIntervalLabel = new javax.swing.JLabel();
-        congestionLabel = new javax.swing.JLabel();
-        bridgeCheckBox = new javax.swing.JCheckBox();
-        tollGateCheckBox = new javax.swing.JCheckBox();
-        emergencyLabel = new javax.swing.JLabel();
-        roadNetworkLabel = new javax.swing.JLabel();
-        weatherComboBox = new javax.swing.JComboBox<>();
-        weatherLabel = new javax.swing.JLabel();
-        congestionSlider = new javax.swing.JSlider();
-        //Graphics car;
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        replayButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\daniella\\Documents\\Mine\\Term 2\\Group Project\\rewind.PNG")); // NOI18N
-        replayButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                replayButtonActionPerformed(evt, music);
-            }
-        });
-
-        playButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\daniella\\Documents\\Mine\\Term 2\\Group Project\\play.PNG")); // NOI18N
-        playButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                playButtonActionPerformed(evt, music);
-            }
-        });
+        //create button, label, checkbox and slider interfaces
+        replayButton = new JButton();
+        pauseButton = new JButton();
+        playButton = new JButton();
+        stopButton = new JButton();
+        time = new JLabel();
+        timeIntervalValue = new JLabel();
+        congestionValue = new JLabel();
+        backgroundImage = new JLabel();
+        jPanel1 = new JPanel();
+        timeIntervalSlider = new JSlider();
+        rampsCheckBox = new JCheckBox();
+        roundaboutsCheckBox = new JCheckBox();
+        crossingCheckBox = new JCheckBox();
+        junctionCheckBox = new JCheckBox();
+        dCarriagewayCheckBox = new JCheckBox();
+        sCarriagewayCheckBox = new JCheckBox();
+        timeIntervalLabel = new JLabel();
+        congestionLabel = new JLabel();
+        bridgeCheckBox = new JCheckBox();
+        tollGateCheckBox = new JCheckBox();
+        emergencyLabel = new JLabel();
+        roadNetworkLabel = new JLabel();
+        weatherComboBox = new JComboBox<>();
+        weatherLabel = new JLabel();
+        congestionSlider = new JSlider();
         
-        pauseButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\daniella\\Documents\\Mine\\Term 2\\Group Project\\pause.PNG")); // NOI18N
-        pauseButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pauseButtonActionPerformed(evt, music);
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        URL stopURL = getClass().getResource("../Resources/stop.PNG");
+        URL rewindURL = getClass().getResource("../Resources/rewind.PNG");
+        URL playURL = getClass().getResource("../Resources/play.PNG");
+        URL pauseURL = getClass().getResource("../Resources/pause.PNG");
+        URL captureURL = getClass().getResource("../Resources/capture.PNG");
+
+        //set play, pause, stop and replay button icon and ActionListener 
+        replayButton.setIcon(new ImageIcon(rewindURL)); // NOI18N
+        replayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                replayButtonActionPerformed(evt);
+            }
+        });
+        playButton.setIcon(new ImageIcon(playURL)); // NOI18N
+        playButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                playButtonActionPerformed(evt);
+            }
+        }); 
+        pauseButton.setIcon(new ImageIcon(pauseURL)); // NOI18N
+        pauseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                pauseButtonActionPerformed(evt);
             }
         });
 
-        stopButton.setIcon(new javax.swing.ImageIcon("C:\\Users\\daniella\\Documents\\Mine\\Term 2\\Group Project\\stop.PNG")); // NOI18N
-        stopButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopButtonActionPerformed(evt, music);
+        stopButton.setIcon(new ImageIcon(stopURL)); // NOI18N
+        stopButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                stopButtonActionPerformed(evt);
             }
         });
 
+        //create temp time text for later use (real time)
         time.setText("time");
-
-        backgroundImage.setIcon(new javax.swing.ImageIcon("C:\\Users\\daniella\\Documents\\Mine\\Term 2\\Group Project\\Capture.PNG")); // NOI18N
-
+        
+        //temporary road map
+        backgroundImage.setIcon(new ImageIcon(captureURL)); // NOI18N
+        
+        //slider interface for time interval and congestion rate
         timeIntervalSlider.setMajorTickSpacing(20);
         timeIntervalSlider.setMinorTickSpacing(10);
         timeIntervalSlider.setPaintLabels(true);
         timeIntervalSlider.setPaintTicks(true);
-        timeIntervalSlider.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+        timeIntervalSlider.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
                 timeIntervalSliderMousePressed(evt);
             }
         });
-
-        rampsCheckBox.setText("Ramps");
-        rampsCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rampsCheckBoxActionPerformed(evt);
-            }
-        });
-
-        roundaboutsCheckBox.setText("Roundabouts");
-        roundaboutsCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                roundaboutsCheckBoxActionPerformed(evt);
-            }
-        });
-
-        crossingCheckBox.setText("Crossings");
-        crossingCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crossingCheckBoxActionPerformed(evt);
-            }
-        });
-
-        junctionCheckBox.setText("Junctions");
-        junctionCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                junctionCheckBoxActionPerformed(evt);
-            }
-        });
-
-        dCarriagewayCheckBox.setText("Dual carriageways");
-        dCarriagewayCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dCarriagewayCheckBoxActionPerformed(evt);
-            }
-        });
-
-        sCarriagewayCheckBox.setText("Single carriageways");
-        sCarriagewayCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sCarriagewayCheckBoxActionPerformed(evt);
-            }
-        });
-
-        timeIntervalLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        timeIntervalLabel.setText("Time Interval");
-
-        congestionLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        congestionLabel.setText("Congestion Rate");
-
-        bridgeCheckBox.setText("Bridge");
-        bridgeCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bridgeCheckBoxActionPerformed(evt);
-            }
-        });
-
-        tollGateCheckBox.setText("Tolls gates");
-        tollGateCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tollGateCheckBoxActionPerformed(evt);
-            }
-        });
-
-        emergencyLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        emergencyLabel.setText("Emergency Services");
-
-        roadNetworkLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        roadNetworkLabel.setText("Road Network");
-
-        weatherComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Normal", "Hazardous", "Night", "Day" }));
-        weatherComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                weatherComboBoxActionPerformed(evt);
-            }
-        });
-
-        weatherLabel.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        weatherLabel.setText("Weather Option:");
-
         congestionSlider.setMajorTickSpacing(20);
         congestionSlider.setMinorTickSpacing(10);
         congestionSlider.setPaintLabels(true);
         congestionSlider.setPaintTicks(true);
-        congestionSlider.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+        congestionSlider.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
                 congestionSliderMousePressed(evt);
             }
         });
         
+        //checkbox interfaces for different road maps
+        rampsCheckBox.setText("Ramps");
+        rampsCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                rampsCheckBoxActionPerformed(evt);
+            }
+        });
+        roundaboutsCheckBox.setText("Roundabouts");
+        roundaboutsCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                roundaboutsCheckBoxActionPerformed(evt);
+            }
+        });
+        crossingCheckBox.setText("Crossings");
+        crossingCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                crossingCheckBoxActionPerformed(evt);
+            }
+        });
+        junctionCheckBox.setText("Junctions");
+        junctionCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                junctionCheckBoxActionPerformed(evt);
+            }
+        });
+        dCarriagewayCheckBox.setText("Dual carriageways");
+        dCarriagewayCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                dCarriagewayCheckBoxActionPerformed(evt);
+            }
+        });
+        sCarriagewayCheckBox.setText("Single carriageways");
+        sCarriagewayCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                sCarriagewayCheckBoxActionPerformed(evt);
+            }
+        });
+        bridgeCheckBox.setText("Bridge");
+        bridgeCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                bridgeCheckBoxActionPerformed(evt);
+            }
+        });
+        tollGateCheckBox.setText("Tolls gates");
+        tollGateCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                tollGateCheckBoxActionPerformed(evt);
+            }
+        });
+        bridgeCheckBox.setText("Bridge");
+        bridgeCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                bridgeCheckBoxActionPerformed(evt);
+            }
+        });
+        tollGateCheckBox.setText("Tolls gates");
+        tollGateCheckBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                tollGateCheckBoxActionPerformed(evt);
+            }
+        });
+        weatherComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "Normal", "Hazardous", "Night", "Day" }));
+        weatherComboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                weatherComboBoxActionPerformed(evt);
+            }
+        });
         
+        //set labels for interfaces
+        emergencyLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        emergencyLabel.setText("Emergency Services");
+        roadNetworkLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        roadNetworkLabel.setText("Road Network");
+        timeIntervalLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        timeIntervalLabel.setText("Time Interval");
+        congestionLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        congestionLabel.setText("Congestion Rate");
+        weatherLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        weatherLabel.setText("Weather Option:");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        //set layout of the interfaces
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(timeIntervalLabel)
                     .addComponent(congestionLabel)
-                    .addComponent(timeIntervalSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(timeIntervalSlider, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
                     .addComponent(emergencyLabel)
                     .addComponent(roadNetworkLabel)
                     .addComponent(roundaboutsCheckBox)
@@ -221,28 +242,28 @@ public class RoadNetworks extends javax.swing.JFrame {
                     .addComponent(rampsCheckBox)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(weatherLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(weatherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(congestionSlider, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(weatherComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(congestionSlider, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(timeIntervalLabel)
                 .addGap(5, 5, 5)
-                .addComponent(timeIntervalSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(timeIntervalSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(congestionLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(congestionSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(congestionSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(emergencyLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                     .addComponent(weatherLabel)
-                    .addComponent(weatherComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(weatherComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                 .addGap(11, 11, 11)
                 .addComponent(roadNetworkLabel)
                 .addGap(8, 8, 8)
@@ -263,11 +284,10 @@ public class RoadNetworks extends javax.swing.JFrame {
                 .addComponent(rampsCheckBox)
                 .addGap(36, 36, 36))
         );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(time)
@@ -279,88 +299,82 @@ public class RoadNetworks extends javax.swing.JFrame {
                 .addComponent(playButton)
                 .addGap(6, 6, 6)
                 .addComponent(stopButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(congestionValue)
                     .addComponent(timeIntervalValue))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(backgroundImage)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(congestionValue)
                     .addComponent(timeIntervalValue)
                     .addComponent(backgroundImage)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                 .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(time))
                     .addComponent(replayButton)
-                    .addComponent(pauseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pauseButton, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
                     .addComponent(playButton)
                     .addComponent(stopButton)))
         );
-
         pack();
     }// </editor-fold>                        
 
-    private int replayButtonActionPerformed(java.awt.event.ActionEvent evt, int music) {                                             
-      InputStream in;
+    private void replayButtonActionPerformed(ActionEvent evt) {                                             
+      InputStream music;
       //replay music when replay JButton is pressed
       try{
-        in = new FileInputStream(new File ("C:\\Users\\daniella\\Documents\\NetBeansProjects\\kingstrafficcontrol\\Traffic_Control\\src\\Objects\\beep09.wav"));
-        AudioStream  audios = new AudioStream(in);
+        music = new FileInputStream(new File ("beep09.wav"));
+        AudioStream  audios = new AudioStream(music);
         if (evt.getSource() == replayButton)
           {
               AudioPlayer.player.stop(audios);
               AudioPlayer.player.start(audios);
-              music = 1;
           }
       }
       catch(Exception e){
       }
-      return music;
-    }                                            
+    }   
+    /**
    public void paint(Graphics car) {
           int pos_x = 75, pos_y = 10;
            int carW = 20, carH = 20;
             car.fillRect (pos_x, pos_y, carW,carH );
-     }
+     }**/
     
-    private int playButtonActionPerformed(java.awt.event.ActionEvent evt, int music) {                                           
-      InputStream in;
+    private void playButtonActionPerformed(ActionEvent evt) {                                           
+      InputStream music;
       
       //start music when play JButton is pressed
       try{
-        in = new FileInputStream(new File ("C:\\Users\\daniella\\Documents\\NetBeansProjects\\kingstrafficcontrol\\Traffic_Control\\src\\Objects\\beep09.wav"));
-        AudioStream  audios = new AudioStream(in);
-        if (music==0)
-          if (evt.getSource() == playButton){
-              music = 1;
-             
+        music = new FileInputStream(new File ("beep09.wav"));
+        AudioStream  audios = new AudioStream(music);
+        if (evt.getSource() == playButton){
               AudioPlayer.player.start(audios);
           }
       }
       catch(Exception e){
       }
-      return music;
     }                                                                                    
 
-    private void pauseButtonActionPerformed(java.awt.event.ActionEvent evt, int music) {                                            
-      InputStream in;
+    private void pauseButtonActionPerformed(ActionEvent evt) {                                            
+      InputStream music;
       try{
-      in = new FileInputStream(new File ("C:\\Users\\daniella\\Documents\\NetBeansProjects\\kingstrafficcontrol\\Traffic_Control\\src\\Objects\\beep09.wav"));
-      AudioStream  audios = new AudioStream(in);
+      music = new FileInputStream(new File ("beep09.wav"));
+      AudioStream  audios = new AudioStream(music);
       if (evt.getSource() == pauseButton)
         AudioPlayer.player.stop(audios);
       }
@@ -368,11 +382,11 @@ public class RoadNetworks extends javax.swing.JFrame {
       }
     }                                           
 
-    private void stopButtonActionPerformed(java.awt.event.ActionEvent evt, int music) {                                           
-      InputStream in;
+    private void stopButtonActionPerformed(ActionEvent evt) {                                           
+      InputStream music;
       try{
-      in = new FileInputStream(new File ("C:\\Users\\daniella\\Documents\\NetBeansProjects\\kingstrafficcontrol\\Traffic_Control\\src\\Objects\\beep09.wav"));
-      AudioStream  audios = new AudioStream(in);
+      music = new FileInputStream(new File ("beep09.wav"));
+      AudioStream  audios = new AudioStream(music);
       if (evt.getSource() == stopButton)
         AudioPlayer.player.stop(audios);
       }
@@ -380,47 +394,47 @@ public class RoadNetworks extends javax.swing.JFrame {
       }
     }                                          
 
-    private void weatherComboBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                
+    private void weatherComboBoxActionPerformed(ActionEvent evt) {                                                
         // TODO add your handling code here:
     }                                               
 
-    private void roundaboutsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                    
+    private void roundaboutsCheckBoxActionPerformed(ActionEvent evt) {                                                    
         // TODO add your handling code here:
     }                                                   
 
-    private void crossingCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+    private void crossingCheckBoxActionPerformed(ActionEvent evt) {                                                 
         // TODO add your handling code here:
     }                                                
 
-    private void sCarriagewayCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+    private void sCarriagewayCheckBoxActionPerformed(ActionEvent evt) {                                                     
         // TODO add your handling code here:
     }                                                    
 
-    private void dCarriagewayCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                     
+    private void dCarriagewayCheckBoxActionPerformed(ActionEvent evt) {                                                     
         // TODO add your handling code here:
     }                                                    
 
-    private void junctionCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+    private void junctionCheckBoxActionPerformed(ActionEvent evt) {                                                 
         // TODO add your handling code here:
     }                                                
 
-    private void rampsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                              
+    private void rampsCheckBoxActionPerformed(ActionEvent evt) {                                              
         // TODO add your handling code here:
     }                                             
     
-    private void bridgeCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                               
+    private void bridgeCheckBoxActionPerformed(ActionEvent evt) {                                               
         // TODO add your handling code here:
     }                                              
 
-    private void tollGateCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+    private void tollGateCheckBoxActionPerformed(ActionEvent evt) {                                                 
         // TODO add your handling code here:
     }    
     
-    private void timeIntervalSliderMousePressed(java.awt.event.MouseEvent evt) {                                                
+    private void timeIntervalSliderMousePressed(MouseEvent evt) {                                                
         // TODO add your handling code here:
     }                                               
 
-    private void congestionSliderMousePressed(java.awt.event.MouseEvent evt) {                                              
+    private void congestionSliderMousePressed(MouseEvent evt) {                                              
         // TODO add your handling code here:
     }                                             
 
@@ -434,9 +448,9 @@ public class RoadNetworks extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
@@ -446,7 +460,7 @@ public class RoadNetworks extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(RoadNetworks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(RoadNetworks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(RoadNetworks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -458,34 +472,5 @@ public class RoadNetworks extends javax.swing.JFrame {
                 new RoadNetworks().setVisible(true);
             }
         });
-    }
-
-    // Variables declaration - do not modify                     
-    private javax.swing.JLabel backgroundImage;
-    private javax.swing.JCheckBox bridgeCheckBox;
-    private javax.swing.JLabel congestionLabel;
-    private javax.swing.JSlider congestionSlider;
-    private javax.swing.JLabel congestionValue;
-    private javax.swing.JCheckBox crossingCheckBox;
-    private javax.swing.JCheckBox dCarriagewayCheckBox;
-    private javax.swing.JLabel emergencyLabel;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JCheckBox junctionCheckBox;
-    private javax.swing.JButton pauseButton;
-    private javax.swing.JButton playButton;
-    private javax.swing.JCheckBox rampsCheckBox;
-    private javax.swing.JButton replayButton;
-    private javax.swing.JLabel roadNetworkLabel;
-    private javax.swing.JCheckBox roundaboutsCheckBox;
-    private javax.swing.JCheckBox sCarriagewayCheckBox;
-    private javax.swing.JButton stopButton;
-    private javax.swing.JLabel time;
-    private javax.swing.JLabel timeIntervalLabel;
-    private javax.swing.JSlider timeIntervalSlider;
-    private javax.swing.JLabel timeIntervalValue;
-    private javax.swing.JCheckBox tollGateCheckBox;
-    private javax.swing.JComboBox<String> weatherComboBox;
-    private javax.swing.JLabel weatherLabel;
-    // End of variables declaration                   
-
+    }               
 }
