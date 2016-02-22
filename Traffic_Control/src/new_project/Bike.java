@@ -4,7 +4,7 @@ import java.awt.*;
 public class Bike{
     // Variables declaration
     private final int pos_x,pos_y;
-    private final int R=218, G=112, B=214; //pastel purple
+    private final int R=128, G=0, B=128; //pastel purple
     private final int length = 10 ,width = 11;
     
     //set Bike position

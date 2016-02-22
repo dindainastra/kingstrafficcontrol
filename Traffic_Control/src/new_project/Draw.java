@@ -18,22 +18,31 @@ public class Draw extends JPanel {
     //Create arrays for each objects
     ArrayList<SquareJunction> squarejuncions = new ArrayList<>();
     ArrayList<SRoad> sroads = new ArrayList<>();
-    ArrayList<Vehicle> vehicles=new ArrayList<>();
+    ArrayList<Car> cars=new ArrayList<>();
+    ArrayList<Motorbike> motorbikes=new ArrayList<>();
+    ArrayList<Bike> bikes=new ArrayList<>();
+    ArrayList<Lorry> lorries=new ArrayList<>();
     
     //Make cars, roads, traffic lights
     public Draw() {
         //Draw map network
         //sroads.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor(),getrotation());
-        sroads.add(new SRoad(200,25,01,3,0));
-        sroads.add(new SRoad(100,25,00,2,0));
-        squarejuncions.add(new SquareJunction(300,25));
-        sroads.add(new SRoad(300,25,00,2,0));
+          sroads.add(new SRoad(100,25,00,2,0));
+          sroads.add(new SRoad(200,25,01,3,0));
+          sroads.add(new SRoad(350,25,11,2,0));
+          
+          sroads.add(new SRoad(500,25,11,1,90)); 
+//          sroads.add(new SRoad(350,75,01,2,90)); --BUG
+//        sroads.add(new SRoad(350,275,01,2,90));          
+          squarejuncions.add(new SquareJunction(300,25));
         
-        //Draw traffic
-        vehicles.add(new Vehicle(210,30,2));
-        vehicles.add(new Vehicle(250,55,1));  
-        vehicles.add(new Vehicle(270,30,3));
+          //Draw traffic
+          cars.add(new Car(210,30));
+          motorbikes.add(new Motorbike(250,55));  
+          lorries.add(new Lorry(240,30));
+          bikes.add(new Bike(170,30));
     }
+    
     @Override
     public void paintComponent(Graphics g){
         Graphics2D f =(Graphics2D) g;
@@ -44,8 +53,17 @@ public class Draw extends JPanel {
         for(SquareJunction SquareJunction : squarejuncions){
             SquareJunction.doDrawing(f);
         }
-        for (Vehicle vehicle : vehicles) {
-            vehicle.doDrawing(f); 
+        for (Car car : cars) {
+            car.doDrawing(f); 
+        }
+        for (Motorbike motorbike : motorbikes) {
+            motorbike.doDrawing(f); 
+        }
+        for (Lorry lorry : lorries) {
+            lorry.doDrawing(f); 
+        }
+        for (Bike bike : bikes) {
+            bike.doDrawing(f); 
         }
     }    
 }

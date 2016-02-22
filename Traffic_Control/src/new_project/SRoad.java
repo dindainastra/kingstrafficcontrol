@@ -1,5 +1,6 @@
 package new_project;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
 public class SRoad{
 
@@ -20,40 +21,52 @@ public class SRoad{
     protected void doDrawing(Graphics2D g){
         Graphics2D road=(Graphics2D) g;
         Graphics2D lane_divider=(Graphics2D) g;
-        Graphics2D hroad_border=(Graphics2D) g;
+        Graphics2D sroad_border=(Graphics2D) g;
         
         //draw straight road
+        AffineTransform old = road.getTransform();
         road.rotate(Math.toRadians(rotation),xStart,yStart);
         road.setColor(Color.gray);
         road.fillRect(xStart, yStart, road_length , road_width);
         
-        //draw road border
-        hroad_border.setColor(Color.white);//bug - draws dash lines rather than solid
-        hroad_border.drawLine(xStart,road_width/2,xStart+road_length-1,road_width/2);
-        hroad_border.drawLine(xStart,(road_width*3/2),xStart+road_length-1,(road_width*3/2));
-        
         //draw road divider
-        float[] dash = {4f, 0f, 2f};
-        BasicStroke bs3 = new BasicStroke(1, BasicStroke.CAP_BUTT,
-                BasicStroke.JOIN_ROUND, 1.0f, dash, 2f);
+        float[] dash1 = {4f, 0f, 2f};
+        float[] dash2 = {100f,0f};
+        BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
+        BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
         
-        //draw road lines
-        lane_divider.setStroke(bs3);
-        lane_divider.setColor(Color.white);
+        //draw road border
+        sroad_border.setStroke(bs2);
+        sroad_border.setColor(Color.black);
+        sroad_border.drawLine(xStart,road_width/2,xStart+road_length-1,road_width/2);
+        sroad_border.drawLine(xStart,(road_width*3/2),xStart+road_length-1,(road_width*3/2));
+                
+        //draw road lanes
+        lane_divider.setStroke(bs1);
+        lane_divider.setColor(Color.black);
         lane_divider.drawLine(xStart,road_width,xStart+road_length,road_width);
         
-        if (trafficlight ==10){//traffic lights on the left hand side
+        //draw traffic lights
+        if (trafficlight ==10){//traffic lights on the left hand side of the road
             TrafficLight.trafficlight(xStart, road_width/2,  RGB, rotation);
             TrafficLight.doDrawing(g);
             TrafficLight.trafficlight(xStart, road_width,  RGB, rotation);
             TrafficLight.doDrawing(g);
-            System.out.print(" Reached here B:" + RGB+ " .\n");
-        }else if (trafficlight ==01){//traffic lights on the right hand side
+        }else if (trafficlight ==01){//traffic lights on the right hand side of the road
             TrafficLight.trafficlight(xStart+road_length-5, road_width/2,RGB,rotation);
             TrafficLight.doDrawing(g); 
             TrafficLight.trafficlight(xStart+road_length-5, road_width,RGB,rotation);
             TrafficLight.doDrawing(g);  
-            System.out.print(" Reached here C:" + RGB+ " .\n");
+        }else if (trafficlight ==11){//traffic lights on both side of the road
+            TrafficLight.trafficlight(xStart, road_width/2,  RGB, rotation);
+            TrafficLight.doDrawing(g);
+            TrafficLight.trafficlight(xStart, road_width,  RGB, rotation);
+            TrafficLight.doDrawing(g);
+            TrafficLight.trafficlight(xStart+road_length-5, road_width/2,RGB,rotation);
+            TrafficLight.doDrawing(g); 
+            TrafficLight.trafficlight(xStart+road_length-5, road_width,RGB,rotation);
+            TrafficLight.doDrawing(g);
         }
+        road.setTransform(old);
     } 
 }
