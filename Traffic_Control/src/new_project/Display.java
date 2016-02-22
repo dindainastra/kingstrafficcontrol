@@ -19,8 +19,8 @@ public class Display {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrame frame = new JFrame();
-                frame.add(new Draw());
-                //frame.add(new New_Project());
+                //frame.add(new Draw());
+                frame.add(new New_project());
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//
                 frame.pack();//
                 frame.setLocationRelativeTo(null);

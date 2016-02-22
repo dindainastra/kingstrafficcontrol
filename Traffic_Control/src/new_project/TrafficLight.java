@@ -1,28 +1,34 @@
 package new_project;
 import java.awt.*;
-import javax.swing.*;
 
-public class TrafficLight extends JFrame {
+public class TrafficLight{
+
     // Variables declaration for traffic light
-    private int pos_x, pos_y;
-    private final int length = 25;
-    private final int width = 5;
-    private int R,G,B;
-    
+    private static int pos_x, pos_y, rotates;
+    private static final int width = 5, length = 25;
+    private static int R,G,B;
     
     //set traffic light colour and shape
-    TrafficLight(int x_coordinate, int y_coordinate, int R, int G, int B){    
-        this.pos_x = x_coordinate;
-        this.pos_y = y_coordinate;
-        this.R = R;
-        this.G = G;
-        this.B = B;
+    static void trafficlight(int x_coordinate, int y_coordinate, int RGB, int rotation){    
+        TrafficLight.pos_x = x_coordinate;
+        TrafficLight.pos_y = y_coordinate;
+        rotates = rotation;
+        if (RGB==1){//RED
+        R = 255; G=0; B=0;
+        }else if (RGB==2){//GREEN
+        R = 0; G=255; B=0;
+        }else if (RGB ==3){//AMBER
+        R = 255; G=215; B=0;
+        }
     }   
     
     //draw traffic light
-    protected void doDrawing(Graphics g){
-        g.setColor(new Color (R,G,B));
-        g.fillRect(pos_x, pos_y, width, length);    
-    }
-      
+    protected static void doDrawing(Graphics g){
+        Graphics2D light=(Graphics2D) g;
+        
+        light.setColor(new Color (R,G,B));
+        light.rotate(Math.toRadians(rotates));
+        light.fillRect(pos_x, pos_y, width, length); 
+        System.out.print("traffic is on B\n");
+    } 
 }

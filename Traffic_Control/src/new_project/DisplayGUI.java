@@ -118,9 +118,10 @@ public class DisplayGUI {
                 stopButtonActionPerformed(evt);
             }
         });
-
+        
+       // sec = Display.main();
         //create temp time text for later use (real time)
-        time.setText("time");
+        time.setText("sec");
         
         //temporary road map
         backgroundImage.setIcon(new ImageIcon(captureURL)); // NOI18N
