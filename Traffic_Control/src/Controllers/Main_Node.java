@@ -1,12 +1,13 @@
 package Controllers;
 
+import java.util.ArrayList;
+
 import Objects.Car;
 import Objects.Person;
 
 public class Main_Node {
-
+	
 	public static void main(String[] args) {
-		
 		
 		//Declarations
 		//Create the main Objects on the Node Network
@@ -44,7 +45,8 @@ public class Main_Node {
 		n2.addToStack(c1);
 		n2.addToStack(c2);
 		n3.addToStack(c3);
-		
+//		n2.removeFromStack(c1);
+
 		//Debug start   -- Just print my objects and check if node has the correct objects in it.
 		for (Node item : nm.getArrayList()) {   
 		    System.out.println	(

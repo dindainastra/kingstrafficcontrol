@@ -16,6 +16,10 @@ public class Node {
 		this.setTime(text3);
 
 	}
+
+	public Object returnStack(){
+		return this.myStack;
+	}
 	
 	public void addToStack(Object obj){
 		this.myStack.add(obj);

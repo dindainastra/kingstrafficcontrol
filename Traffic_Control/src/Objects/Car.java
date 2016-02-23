@@ -5,6 +5,7 @@ public class Car implements Vehicle {
 
 	private Person driver;
 	private int priorityLevel;
+	private int nodeID;
 	
 	public Car(Person p){
 		driver = p;
@@ -31,10 +32,8 @@ public class Car implements Vehicle {
 		this.driver = p;
 	}
 
-	@Override
-	public int getPerson() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Person getPerson() {
+		return this.driver;
 	}
 	
 	
