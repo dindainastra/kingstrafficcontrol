@@ -16,10 +16,6 @@ public class Node {
 		this.setTime(text3);
 
 	}
-
-	public Object returnStack(){
-		return this.myStack;
-	}
 	
 	public void addToStack(Object obj){
 		this.myStack.add(obj);
@@ -29,14 +25,6 @@ public class Node {
 		this.myStack.remove(obj);
 	}
 
-	public void printStack(){
-		
-		for (Object item : myStack) {   
-		    System.out.println	(item);
-		}		
-		
-	}
-	
 	public String getNameOfNode() {
 		return nameOfNode;
 	}
