@@ -43,7 +43,9 @@ public class TrafficLights implements Terrain{
     public int getCurrentColour() {
         return currentColour;
     }
-
+    /**
+     * 
+     */
     public void run() {
 
         
