@@ -7,6 +7,7 @@ public class TrafficLights implements Terrain{
     public static final int Red = 0;
     public static final int Yellow = 1;
     public static final int Green = 2;
+    public static final int Orange = 3;
     private int currentColour = Red;
     private final static int RED_SECS = 15;
     private final static int YELLOW_SECS = 5;
@@ -43,7 +44,9 @@ public class TrafficLights implements Terrain{
     public int getCurrentColour() {
         return currentColour;
     }
-
+    /**
+     * 
+     */
     public void run() {
 
         
