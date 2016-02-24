@@ -16,13 +16,14 @@ public class Motorbike implements Vehicle {
 	}
 
 	@Override
-	public int getPerson() {
+	public Person getPerson() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+
 	@Override
-	public void setPerson() {
+	public void setPerson(Person p) {
 		// TODO Auto-generated method stub
 		
 	}
