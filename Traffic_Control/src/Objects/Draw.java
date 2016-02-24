@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package new_project;
+
+package Objects;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,9 +7,7 @@ import java.util.ArrayList;
 public class Draw extends JPanel {
    
     // Variables declaration
-    private int numCars=2;
-    private int numSRoads=1;
-    private int numVRoads=1;
+    private Person p; //temp
     
     //Create arrays for each objects
     ArrayList<SquareJunction> squarejuncions = new ArrayList<>();
@@ -23,7 +17,7 @@ public class Draw extends JPanel {
     ArrayList<Bike> bikes=new ArrayList<>();
     ArrayList<Lorry> lorries=new ArrayList<>();
     
-    //Make cars, roads, traffic lights
+    //Draw cars, roads, traffic lights
     public Draw() {
         //Draw map network
         //sroads.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor(),getrotation());
@@ -37,7 +31,7 @@ public class Draw extends JPanel {
           squarejuncions.add(new SquareJunction(300,25));
         
           //Draw traffic
-          cars.add(new Car(210,30));
+          cars.add(new Car(p,210,30));
           motorbikes.add(new Motorbike(250,55));  
           lorries.add(new Lorry(240,30));
           bikes.add(new Bike(170,30));
@@ -67,3 +61,4 @@ public class Draw extends JPanel {
         }
     }    
 }
+

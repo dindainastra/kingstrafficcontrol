@@ -1,9 +1,9 @@
-package new_project;
+
+package Objects;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
-public class SRoad{
-
+public class SRoad {
     // Variables declaration
     //Set size of straight road
     private int xStart,yStart, trafficlight, RGB, rotation;
@@ -48,25 +48,27 @@ public class SRoad{
         
         //draw traffic lights
         if (trafficlight ==10){//traffic lights on the left hand side of the road
-            TrafficLight.trafficlight(xStart, road_width/2,  RGB, rotation);
-            TrafficLight.doDrawing(g);
-            TrafficLight.trafficlight(xStart, road_width,  RGB, rotation);
-            TrafficLight.doDrawing(g);
+            TrafficLightGUI.trafficlightgui(xStart, road_width/2,  RGB, rotation);
+            TrafficLightGUI.doDrawing(g);
+            TrafficLightGUI.trafficlightgui(xStart, road_width,  RGB, rotation);
+            TrafficLightGUI.doDrawing(g);
         }else if (trafficlight ==01){//traffic lights on the right hand side of the road
-            TrafficLight.trafficlight(xStart+road_length-5, road_width/2,RGB,rotation);
-            TrafficLight.doDrawing(g); 
-            TrafficLight.trafficlight(xStart+road_length-5, road_width,RGB,rotation);
-            TrafficLight.doDrawing(g);  
+            TrafficLightGUI.trafficlightgui(xStart+road_length-5, road_width/2,RGB,rotation);
+            TrafficLightGUI.doDrawing(g); 
+            TrafficLightGUI.trafficlightgui(xStart+road_length-5, road_width,RGB,rotation);
+            TrafficLightGUI.doDrawing(g);  
         }else if (trafficlight ==11){//traffic lights on both side of the road
-            TrafficLight.trafficlight(xStart, road_width/2,  RGB, rotation);
-            TrafficLight.doDrawing(g);
-            TrafficLight.trafficlight(xStart, road_width,  RGB, rotation);
-            TrafficLight.doDrawing(g);
-            TrafficLight.trafficlight(xStart+road_length-5, road_width/2,RGB,rotation);
-            TrafficLight.doDrawing(g); 
-            TrafficLight.trafficlight(xStart+road_length-5, road_width,RGB,rotation);
-            TrafficLight.doDrawing(g);
+            TrafficLightGUI.trafficlightgui(xStart, road_width/2,  RGB, rotation);
+            TrafficLightGUI.doDrawing(g);
+            TrafficLightGUI.trafficlightgui(xStart, road_width,  RGB, rotation);
+            TrafficLightGUI.doDrawing(g);
+            TrafficLightGUI.trafficlightgui(xStart+road_length-5, road_width/2,RGB,rotation);
+            TrafficLightGUI.doDrawing(g); 
+            TrafficLightGUI.trafficlightgui(xStart+road_length-5, road_width,RGB,rotation);
+            TrafficLightGUI.doDrawing(g);
         }
         road.setTransform(old);
     } 
 }
+
+

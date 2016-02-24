@@ -1,4 +1,4 @@
-package new_project;
+package Objects;
 import java.awt.*;
 import javax.swing.*;
 
@@ -15,12 +15,11 @@ public class SquareJunction extends JFrame {
         this.yStart = y_Start;
     }   
     
-    protected void doDrawing(Graphics g){
+    protected void doDrawing(Graphics2D g){
         Graphics2D road=(Graphics2D) g;
         Graphics2D lane_divider=(Graphics2D) g;
         Graphics2D road_border=(Graphics2D) g;
         
-       
         //draw junction
         road.setColor(Color.gray);
         road.fillRect(xStart, yStart, road_width , road_length);
@@ -43,6 +42,5 @@ public class SquareJunction extends JFrame {
         lane_divider.setColor(Color.white);
         lane_divider.drawLine(xStart+road_width/2,yStart,xStart+road_width/2,yStart+road_length-1);
         lane_divider.drawLine(xStart,road_width,xStart+road_length,road_width);
-    }
-       
+    }      
 }
