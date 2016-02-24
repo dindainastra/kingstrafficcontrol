@@ -17,7 +17,8 @@ public class Main_Node2 {
 		
 		Person p1 = new Person("Person1", 10, false);
 		Person p2 = new Person("Person2", 9, false);
-		Person p3 = new Person("Person3", 8, true); //This Person is a pedestrian, So dont add it on a Car
+		//This Person is a pedestrian, So dont add it in a Car
+		Person p3 = new Person("Person3", 8, true); 
 		Person p4 = new Person("Person4", 10, false);
 		
 		
@@ -26,12 +27,9 @@ public class Main_Node2 {
 		carList.add(new Car(p1));
 		carList.add(new Car(p1));
 		carList.add(new Car(p1));
-		//carList.add(new Car(p2));
-		//carList.add(new Car(p4));
 		
 		//Create the Note Manager or Node Network relations
 		NodeManager  nm = new NodeManager();
-		
 		
 		//Create a basic node network structure.
 		//eg
@@ -60,22 +58,8 @@ public class Main_Node2 {
 		nodeList.get(1).addToStack(carList.get(2));  //node 1  with car3
 		nodeList.get(2).addToStack(carList.get(3));  //node 2  with car4
 		
-		
-/*		
-		nodeList.get(1).addToStack(carList.get(0));
-		carList.get(0).setInWhichNodeIsIt(1);
-		
-		nodeList.get(1).addToStack(carList.get(1));
-		carList.get(1).setInWhichNodeIsIt(1);
-		
-		nodeList.get(2).addToStack(carList.get(2));
-		carList.get(2).setInWhichNodeIsIt(2);
-		*/
-//		n2.removeFromStack(c1);
-
-		//Debug start   -- Just print my objects and check if node has the correct objects in it.
 		for (Node item : nm.getArrayList()) {   
-		    System.out.println	(
+		    System.out.println(
 		    		item.getNameOfNode() 
 		    		+ " " 
 		    		+ item.getTime() 
@@ -86,7 +70,7 @@ public class Main_Node2 {
 		}
 	    System.out.println("");
 
-		for (int i=0;i<5;i++){  //for (;;) {
+		for (;;) {
 		
 			for (int ii=0;ii<nodeList.size();ii++){
 				
@@ -99,20 +83,13 @@ public class Main_Node2 {
 					System.out.println("" + nodeList.get(ii+1).getNameOfNode() + " add to stack "+nodeTmpStack.get(0));
 					nodeList.get(ii+1).addToStack(nodeTmpStack.get(0));
 					}
-					
 					System.out.println("" + nodeList.get(ii).getNameOfNode() + " remove from stack "+nodeTmpStack.get(0));
 					nodeList.get(ii).removeFromStack(nodeTmpStack.get(0));
 					
-				
-					System.out.println("I " + i);
 					System.out.println("->I2 " + ii);
 					System.out.println("->->I3 " + iii);
 					System.out.println("nodeTmpStack.size() -->>"+nodeTmpStack.size());
-					
-					
-//				n.get(ii+1).addToStack(c.get(0));
-//				n.get(ii).removeFromStack(c.get(0));
-			
+	
 					for (Node item : nm.getArrayList()) {   
 						System.out.println	(
 					    		item.getNameOfNode() 
