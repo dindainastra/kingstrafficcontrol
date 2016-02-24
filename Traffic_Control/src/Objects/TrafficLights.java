@@ -21,22 +21,22 @@ public class TrafficLights implements Terrain{
     public int change() {
         switch (currentColour) {
             case Red:
-                
-                currentColour = Yellow;
-                System.out.println("Yellow ");
-
-                break;
-            
-            case Yellow:
+                currentColour = Orange;
+                System.out.println("Red and Yellow ");
+                break;          
+            case Orange:
                 currentColour = Green;
                 System.out.println("Green");
 
                 break;
             case Green:
-                currentColour = Red;
-                System.out.println("Red");
+                currentColour = Yellow;
+                System.out.println("Yellow");
 
                 break;
+            case Yellow:
+                currentColour = Red;
+                System.out.println("Red");
         }
         return currentColour;
     }
@@ -48,7 +48,7 @@ public class TrafficLights implements Terrain{
      * 
      */
     public void run() {
-
+        System.out.println("Red");
         
         while (this.currentColour != Red) {
             this.change();
