@@ -79,11 +79,11 @@ fabric.properties
 /Traffic_Control/build/
 
 # Eclipse #
-bin/
-.settings/
+/Traffic_Control/bin/
+/Traffic_Control/.settings/
 
 # Eclipse Core
-.project
+/Traffic_Control/.project
 
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
+/Traffic_Control/.classpath
