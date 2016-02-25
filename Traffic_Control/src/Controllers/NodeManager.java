@@ -14,15 +14,21 @@ public class NodeManager {
 	private String teamName;
 	private String slogan;
 	
+	//Constructor
+	//For now, it is just for fun :D 
+	//Possible uses: Create here each thread
 	public NodeManager (){
 		this.teamName = "KingsTrafficControl";
 		this.slogan = "Only you can control your future, and in our case only we can control the Traffic :D";
 	}
 	
+	
+	//Return the nodeNetwork.
 	public ArrayList<Node> getNodeList(){
 		return nodeList;
 	}
 	
+	//Calculates the MAX Size of a Node. Simplify: Return an integer of the biggest stack. 
 	public int getMAXNodeSize(){
 		
 		int max = 0;
@@ -32,10 +38,15 @@ public class NodeManager {
 		return max;
 	}
 	
+	
+	//Add a node to the network
 	public void addNodeToTheNodeNetwork(Node n){
 		this.nodeList.add(n);
 	}
 	
+	//Print in that specific time how my network looks like. 
+	//Where are the objects, in which node and things like that. 
+	//Possible future debugging using the Threads
 	public void printMyNetwork(){
 		
 		for (Node n : getNodeList())
@@ -57,6 +68,10 @@ public class NodeManager {
 		System.out.println("");
 	}
 	
+	//Version 1 - Every object moves from the one node to the other if the previous is empty!
+	// Future things to do:
+	// 1) Check if an Object is Terrain and STICK it into its NODE. So, don't move the Terrain Objects
+	// 2) Every Object should not move periodically, for example, from stack to stack if the previous stack is empty, BUT in a sequence. Possible solution for this: MThreading. 
 	public void vehicleFlow_version1(){
 		
 		System.out.println("Flow_version1");
@@ -82,8 +97,9 @@ public class NodeManager {
 		
 	}
 	
+	//Version 2 - IT DOES NOT WORK! JUST AS REMINDER IF THINGS GO VERY WRONG WITH THE MULTITHREADING.
 	public void vehicleFlow_version2(){
-		//it wouldnt work with iterators...
+		//it wouldn't work with iterators...
 		//basically, it will be much more difficult.
 		//I let it as an example, if the version1 is not possible to be parallelized
 		
@@ -106,21 +122,27 @@ public class NodeManager {
 		
 	}
 	
-	
+	//Add a Vehicle to the Starting Node!
+	//It declares every vehicle to the starting point because obviously  every car/bus/etc should enter first of all into the network and them to go to their direction.
 	//should exist because if we need to add manually Vehicles call it for how many Vehicles are needed
 	public void addANewVehicleToTheNetwork(Person p, String obj){
 		if (obj.equals("CAR"))
 			getNodeList().get(0).addToStack(new Car(p, 0, 0));
 	}
 	
+	//Add ANY Terrain object to  a specific NODE.
+	//It needs to be to a specific node, because the map is fixed.
 	public void addANewTerrainToTheNetwork(Terrain t, int i){
 		getNodeList().get(i).addToStack(t);
 	}
 	
+	//Just reset the Node Network
 	public void resetNodeNetwork(){
 		nodeList.clear();
 	}
 	
+	//Declare the Node Network
+	//also link the one node with as many next node it has.
 	public void createMyNodeNetwork(){
 
 		Node previousNode;
@@ -153,6 +175,7 @@ public class NodeManager {
 
 	}
 
+	//This method adds ALL the objects to the Node Network!
 	public void addObjectsToTheNetwork() {
 		
 		addANewVehicleToTheNetwork(new Person("Person1", 10, false),"CAR");			
