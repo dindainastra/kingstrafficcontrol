@@ -11,7 +11,6 @@ public class Draw extends JPanel {
     
     //Create arrays for each objects
     ArrayList<SquareJunction> squarejuncions = new ArrayList<>();
-    ArrayList<Background> backgrounds = new ArrayList<>();
     ArrayList<SRoad> sroads = new ArrayList<>();
     ArrayList<Car> cars=new ArrayList<>();
     ArrayList<Emergency> emergencies =new ArrayList<>();
@@ -44,9 +43,10 @@ public class Draw extends JPanel {
     public void paintComponent(Graphics g){
         Graphics2D f =(Graphics2D) g;
         super.paintComponent(g);
-        for(Background background : backgrounds){
-            background.doDrawing(f);
-        }
+        //draw background 
+        g.setColor(new Color (50,150,50));
+        g.fillRect(0, 0, 700, 700);   
+        
         for(SRoad SRoad : sroads){
             SRoad.doDrawing(f);
         } 
@@ -68,6 +68,6 @@ public class Draw extends JPanel {
         for (Emergency emergency : emergencies) {
             emergency.doDrawing(f); 
         } 
-    }    
+    }   
 }
 
