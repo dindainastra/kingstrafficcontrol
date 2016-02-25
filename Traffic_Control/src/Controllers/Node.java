@@ -27,6 +27,26 @@ public class Node {
 
 	}
 
+	public boolean hasNext(){
+		
+		if (this.nextNodeList.get(0) instanceof Node)
+			return true;
+		return false;
+		
+	}
+	
+	public boolean hasNodes(){
+		
+		if (!this.nextNodeList.isEmpty())
+			return true;
+		return false;
+		
+	}
+	
+	public String toString () {
+        return nameOfNode + "";
+    } 
+	
 	public void setNextNodeToTheNodeList(Node n){
 		this.nextNodeList.add(n);
 	}

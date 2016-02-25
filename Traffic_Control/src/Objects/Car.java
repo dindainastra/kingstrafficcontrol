@@ -48,5 +48,9 @@ public class Car implements Vehicle {
 	public Person getPerson() {
 		return this.driver;
 	}	
+	
+	public String toString(){
+		return this.driver.getName();
+	}
 }
 

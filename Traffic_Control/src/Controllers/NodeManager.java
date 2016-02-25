@@ -6,6 +6,7 @@ import java.util.Iterator;
 import Objects.Car;
 import Objects.Person;
 import Objects.Terrain;
+import Objects.TrafficLights;
 
 public class NodeManager {
 
@@ -57,7 +58,7 @@ public class NodeManager {
 		for (int j=0;j<getMAXNodeSize();j++){
 			for (Node n : getNodeList())
 				if (n.returnStack().size() > 0 && n.returnStack().size() > i)
-					System.out.print(n.returnStack().get(i)+"\t\t");
+					System.out.print(n.returnStack().get(i).toString()+"\t\t");
 				else 
 				{
 					System.out.print("\t\t\t\t\t");
@@ -180,8 +181,8 @@ public class NodeManager {
 		
 		addANewVehicleToTheNetwork(new Person("Person1", 10, false),"CAR");			
 		addANewVehicleToTheNetwork(new Person("Person2", 9, false),"CAR");
-//		addANewTerrainToTheNetwork(new TrafficLights(),1);	//TL in Node = 1	//I have to and the option to stick the Terrain Class and not move it from Node to Node.
-//		addANewTerrainToTheNetwork(new TrafficLights(),2);	//TL in Node = 2	//same as above...
+		addANewTerrainToTheNetwork(new TrafficLights(),1);	//TL in Node = 1	//I have to and the option to stick the Terrain Class and not move it from Node to Node.
+		addANewTerrainToTheNetwork(new TrafficLights(),2);	//TL in Node = 2	//same as above...
 		addANewVehicleToTheNetwork(new Person("Person3", 9, false),"CAR");
 		addANewVehicleToTheNetwork(new Person("Person4", 9, false),"CAR");
 		addANewVehicleToTheNetwork(new Person("Person5", 9, false),"CAR");
