@@ -1,18 +1,18 @@
-
-package Objects;
+package new_project;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
-public class TrafficLightGUI {
-    
+public class TrafficLight{
+
     // Variables declaration for traffic light
     private static int pos_x, pos_y, rotates;
     private static final int width = 5, length = 25;
     private static int R,G,B;
     
     //set traffic light colour and shape
-    static void trafficlightgui(int x_coordinate, int y_coordinate, int RGB, int rotation){    
-        TrafficLightGUI.pos_x = x_coordinate;
-        TrafficLightGUI.pos_y = y_coordinate;
+    static void trafficlight(int x_coordinate, int y_coordinate, int RGB, int rotation){    
+        TrafficLight.pos_x = x_coordinate;
+        TrafficLight.pos_y = y_coordinate;
         rotates = rotation;
         if (RGB==1){//RED
             R = 255; G=0; B=0;
@@ -31,10 +31,4 @@ public class TrafficLightGUI {
         g.fillRect(pos_x, pos_y, width, length); 
         //g.setTransform(old3);
     } 
-    
-    
 }
-
-
-    
-  

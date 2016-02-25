@@ -16,14 +16,13 @@ public class Bus implements Vehicle {
 	}
 
 	@Override
-	public Person getPerson() {
+	public int getPerson() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-
 	@Override
-	public void setPerson(Person p) {
+	public void setPerson() {
 		// TODO Auto-generated method stub
 		
 	}
