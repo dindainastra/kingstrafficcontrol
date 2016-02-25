@@ -77,3 +77,13 @@ fabric.properties
 
 /nbproject/private/
 /Traffic_Control/build/
+
+# Eclipse #
+bin/
+.settings/
+
+# Eclipse Core
+.project
+
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
