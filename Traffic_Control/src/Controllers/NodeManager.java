@@ -11,9 +11,12 @@ public class NodeManager {
 
 	private ArrayList<Node> nodeList = new ArrayList<Node>();
 	private Iterator<Node> iterator;
+	private String teamName;
+	private String slogan;
 	
 	public NodeManager (){
-
+		this.teamName = "KingsTrafficControl";
+		this.slogan = "Only you can control your future, and in our case only we can control the Traffic :D";
 	}
 	
 	public ArrayList<Node> getNodeList(){
