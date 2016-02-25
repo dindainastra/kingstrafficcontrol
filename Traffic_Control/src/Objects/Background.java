@@ -7,23 +7,12 @@ package Objects;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import javax.swing.*;
 
 /**
  *
  * @author daniella
  */
 public class Background {
-    
-    // Variables declaration                     
-    private JCheckBox bridgeCheckBox, tollGateCheckBox, crossingCheckBox,dCarriagewayCheckBox, junctionCheckBox,rampsCheckBox,roundaboutsCheckBox,sCarriagewayCheckBox ;
-    private JLabel congestionLabel, congestionValue,emergencyLabel,roadNetworkLabel,time,timeIntervalLabel,weatherLabel,timeIntervalValue;
-    private JButton pauseButton, playButton, replayButton, stopButton;
-    private JSlider congestionSlider,timeIntervalSlider;
-    private JComboBox<String> weatherComboBox;
-    private JLabel backgroundImage;
-    private JPanel jPanel;
-    // End of variables declaration
     
     Background(){
         
