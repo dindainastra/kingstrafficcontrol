@@ -7,6 +7,7 @@ public class Motorbike implements Vehicle {
     private final int pos_x,pos_y;
     private final int R=221, G=160, B=221; //pastel purple
     private final int length = 10 ,width = 11;
+    private Person driver;
     
     //set Motorbike position
     Motorbike(int x_coordinate, int y_coordinate){
@@ -36,13 +37,13 @@ public class Motorbike implements Vehicle {
     @Override
     public Person getPerson() {
             // TODO Auto-generated method stub
-            return 0;
+            return this.driver;
     }
 
 
     @Override
     public void setPerson(Person p) {
-            // TODO Auto-generated method stub
-
+    	this.driver = p;
     }
 }
+
