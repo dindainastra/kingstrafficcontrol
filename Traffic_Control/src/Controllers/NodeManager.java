@@ -107,7 +107,7 @@ public class NodeManager {
 	//should exist because if we need to add manually Vehicles call it for how many Vehicles are needed
 	public void addANewVehicleToTheNetwork(Person p, String obj){
 		if (obj.equals("CAR"))
-			getNodeList().get(0).addToStack(new Car(p));
+			getNodeList().get(0).addToStack(new Car(p, 0, 0));
 	}
 	
 	public void addANewTerrainToTheNetwork(Terrain t, int i){
