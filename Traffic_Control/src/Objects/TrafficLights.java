@@ -120,6 +120,7 @@ public class TrafficLights implements Terrain{
 		return 0;
 	}
 
+    @Override
 	public void setPerson() {
 		// TODO Auto-generated method stub
 		
