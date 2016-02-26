@@ -3,6 +3,8 @@ package Objects;
 
 public class Bus implements Vehicle {
 
+	private Person driver;
+
 	@Override
 	public int getPriority() {
 		// TODO Auto-generated method stub
@@ -16,14 +18,15 @@ public class Bus implements Vehicle {
 	}
 
 	@Override
-	public int getPerson() {
+	public Person getPerson() {
 		// TODO Auto-generated method stub
-		return 0;
+		return this.driver;
 	}
 
+
 	@Override
-	public void setPerson() {
-		// TODO Auto-generated method stub
+	public void setPerson(Person p) {
+		this.driver = p;
 		
 	}
 

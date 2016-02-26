@@ -1,4 +1,4 @@
-package new_project;
+package Objects;
 import java.awt.*;
 
 public class Lorry {
@@ -16,7 +16,7 @@ public class Lorry {
     protected void doDrawing(Graphics g){
         g.setColor(new Color (R,G,B));
         g.fillRect(pos_x, pos_y, length, width);   
-       // repaint(); - i think we need to repaint our vehicles as they move
+       // repaint(); 
     }
       
 }
