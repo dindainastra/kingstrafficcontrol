@@ -1,7 +1,7 @@
 
 package Objects;
 
-
+//ss
 public class TrafficLights implements Terrain{
 
     public static final int Red = 0;

@@ -1,6 +1,6 @@
 package Objects;
 
-
+//ss
 public class Bus implements Vehicle {
 
 	private Person driver;
