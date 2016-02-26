@@ -46,4 +46,3 @@ public class Motorbike implements Vehicle {
     	this.driver = p;
     }
 }
-

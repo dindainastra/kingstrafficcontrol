@@ -1,13 +1,5 @@
 package Objects;
 
-/*
- * 
- * Person is used due to the fact we will need to control the pedestrians and the car drivers. 
- * In this case the Hierarchy of the objects should be on top with the Person Object.
- * eg  Person -> Vehicle -> Node Manager  ->   Node
- * We will control every event that occurs in the Cars via Person.
- * 
- */
 
 public class Person {
 
