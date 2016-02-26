@@ -1,5 +1,5 @@
 package Objects;
-//ss
+
 public class Junction implements Terrain{
 
 	@Override

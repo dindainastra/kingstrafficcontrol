@@ -53,4 +53,3 @@ public class Car implements Vehicle {
 		return this.driver.getName();
 	}
 }
-

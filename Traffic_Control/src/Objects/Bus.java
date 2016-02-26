@@ -1,6 +1,6 @@
 package Objects;
 
-//ss
+
 public class Bus implements Vehicle {
 
 	private Person driver;
@@ -23,11 +23,9 @@ public class Bus implements Vehicle {
 		return this.driver;
 	}
 
-
 	@Override
 	public void setPerson(Person p) {
-		this.driver = p;
-		
+		this.driver = p;	
 	}
 
 	

@@ -57,10 +57,8 @@ public class NodeManager {
 		int i=0;
 		for (int j=0;j<getMAXNodeSize();j++){
 			for (Node n : getNodeList())
-				if (n.returnStack().size() > 0 && n.returnStack().size() > i){	
+				if (n.returnStack().size() > 0 && n.returnStack().size() > i)
 					System.out.print(n.returnStack().get(i).toString()+"\t\t");
-					
-				}
 				else 
 				{
 					System.out.print("\t\t\t\t\t");
@@ -193,5 +191,4 @@ public class NodeManager {
 
 		
 	}
-	
 }

@@ -1,6 +1,6 @@
 package Objects;
 
-//s
+
 public interface Terrain {
 
 	public void setInWhichNodeLocated();

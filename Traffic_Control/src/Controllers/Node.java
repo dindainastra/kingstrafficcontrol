@@ -17,7 +17,7 @@ public class Node {
 		this.time = text3;
 
 	}
-	
+
 	public Node(String text, double text2, double text3, ArrayList<Node> nextNodeList) {
 		
 		this.nameOfNode = text;
@@ -74,7 +74,7 @@ public class Node {
 		}		
 		
 	}
-	
+
 	public String getNameOfNode() {
 		return nameOfNode;
 	}
