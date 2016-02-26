@@ -14,7 +14,7 @@ public class Car implements Vehicle {
         private final int length = 20 ,width = 15;
     
         //draw Vehicle
-        protected void doDrawing(Graphics g){
+        public void doDrawing(Graphics g){
             g.setColor(new Color (R,G,B));
             g.fillRect(pos_x, pos_y, length, width);   
         }
