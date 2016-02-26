@@ -23,11 +23,9 @@ public class Bus implements Vehicle {
 		return this.driver;
 	}
 
-
 	@Override
 	public void setPerson(Person p) {
-		this.driver = p;
-		
+		this.driver = p;	
 	}
 
 	
