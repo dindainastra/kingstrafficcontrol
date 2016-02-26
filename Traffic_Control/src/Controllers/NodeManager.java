@@ -59,10 +59,7 @@ public class NodeManager {
 			for (Node n : getNodeList())
 				if (n.returnStack().size() > 0 && n.returnStack().size() > i){	
 					System.out.print(n.returnStack().get(i).toString()+"\t\t");
-					if (n.returnStack().get(i) instanceof TrafficLights) {
-						(TrafficLights) n.returnStack().get(i);
-						}
-					}
+					
 				}
 				else 
 				{
