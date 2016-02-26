@@ -87,3 +87,4 @@ fabric.properties
 
 # JDT-specific (Eclipse Java Development Tools)
 /Traffic_Control/.classpath
+Traffic_Control/src/Controllers/NodeManager.java
