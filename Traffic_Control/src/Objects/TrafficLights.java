@@ -65,7 +65,7 @@ public class TrafficLights implements Terrain{
     }
 
     private int getSecs() {
-
+    	
         switch (currentColour) {
 
             case Red:
