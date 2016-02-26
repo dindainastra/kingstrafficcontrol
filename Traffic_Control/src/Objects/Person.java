@@ -6,7 +6,7 @@ package Objects;
  * In this case the Hierarchy of the objects should be on top with the Person Object.
  * eg  Person -> Vehicle -> Node Manager  ->   Node
  * We will control every event that occurs in the Cars via Person.
- * 
+ * sdgsdg
  */
 
 public class Person {
