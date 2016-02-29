@@ -17,9 +17,9 @@ public class RoadNetworks extends JFrame {
     
     // Variables declaration        
     private JCheckBox bridgeCheckBox, tollGateCheckBox, crossingCheckBox,dCarriagewayCheckBox, junctionCheckBox,rampsCheckBox,roundaboutsCheckBox,sCarriagewayCheckBox ;
-    private JLabel congestionLabel, congestionValue,emergencyLabel,roadNetworkLabel,time,timeIntervalLabel,weatherLabel,timeIntervalValue;
+    private JLabel congestionLabel, congestionValue,emergencyLabel,roadNetworkLabel,time,timeIntervalLabel,weatherLabel,timeIntervalValue, speedLimitLabel;
     private JButton pauseButton, playButton, replayButton, stopButton;
-    private JSlider congestionSlider,timeIntervalSlider;
+    private JSlider congestionSlider,timeIntervalSlider,speedLimitSlider;
     private JComboBox<String> weatherComboBox, emergencyComboBox;
     // End of variables declaration    
     
@@ -52,11 +52,13 @@ public class RoadNetworks extends JFrame {
         weatherLabel = new JLabel();
         timeIntervalLabel = new JLabel();
         congestionLabel = new JLabel();
-         emergencyLabel = new JLabel();
+        emergencyLabel = new JLabel();
         roadNetworkLabel = new JLabel();
+        speedLimitLabel = new JLabel();
         //Create JSlider
         timeIntervalSlider = new JSlider();
         congestionSlider = new JSlider();
+        speedLimitSlider = new JSlider();
         //Create JCheckBox
         rampsCheckBox = new JCheckBox();
         roundaboutsCheckBox = new JCheckBox();
@@ -115,6 +117,15 @@ public class RoadNetworks extends JFrame {
         timeIntervalSlider.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
                 timeIntervalSliderMousePressed(evt);
+            }
+        });
+        speedLimitSlider.setMajorTickSpacing(20);
+        speedLimitSlider.setMinorTickSpacing(10);
+        speedLimitSlider.setPaintLabels(true);
+        speedLimitSlider.setPaintTicks(true);
+        speedLimitSlider.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
+                speedLimitSliderMousePressed(evt);
             }
         });
         congestionSlider.setMajorTickSpacing(20);
@@ -207,11 +218,13 @@ public class RoadNetworks extends JFrame {
         roadNetworkLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
         roadNetworkLabel.setText("Road Network");
         timeIntervalLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
-        timeIntervalLabel.setText("Time Interval");
+        timeIntervalLabel.setText("Time Interval:");
         congestionLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
-        congestionLabel.setText("Congestion Rate");
+        congestionLabel.setText("Congestion Rate:");
         weatherLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
         weatherLabel.setText("Weather Option:");
+        speedLimitLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        speedLimitLabel.setText("Speed Limit Option:");
 
         //set layout of the interfaces
         jPanel.setLayout(jPanelLayout);
@@ -223,6 +236,7 @@ public class RoadNetworks extends JFrame {
                 .addGroup(jPanelLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addComponent(timeIntervalLabel)
                     .addComponent(congestionLabel)
+                    .addComponent(speedLimitLabel)
                     .addComponent(timeIntervalSlider, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
                     .addComponent(emergencyLabel)
                     .addComponent(roadNetworkLabel)
@@ -242,7 +256,8 @@ public class RoadNetworks extends JFrame {
                         .addComponent(emergencyLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(emergencyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))    
-                    .addComponent(congestionSlider, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(congestionSlider, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(speedLimitSlider, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelLayout.setVerticalGroup(
@@ -252,6 +267,10 @@ public class RoadNetworks extends JFrame {
                 .addComponent(timeIntervalLabel)
                 .addGap(5, 5, 5)
                 .addComponent(timeIntervalSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(speedLimitLabel)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(speedLimitSlider, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(congestionLabel)
                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
@@ -431,6 +450,10 @@ public class RoadNetworks extends JFrame {
     private void congestionSliderMousePressed(MouseEvent evt) {                                              
         // TODO add your handling code here:
     }                                             
+    
+    private void speedLimitSliderMousePressed(MouseEvent evt) {                                              
+        // TODO add your handling code here:
+    }   
 
     /**
      * @param args the command line arguments
