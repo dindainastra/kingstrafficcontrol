@@ -23,16 +23,16 @@ public class Draw extends JPanel {
     public Draw() {
         //Draw horizontal roads
         //sroads.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor(),getrotation());  
-          sroads.add(new SRoad(100,225,00,2,0));
-          sroads.add(new SRoad(200,225,01,3,0));
-          sroads.add(new SRoad(350,225,10,3,0));
-          sroads.add(new SRoad(450,225,01,2,0));
-          sroads.add(new SRoad(350,75,00,2,0));
-          sroads.add(new SRoad(450,75,00,2,0));
+          sroads.add(new SRoad(100,225,00,1,3,0));
+          sroads.add(new SRoad(200,225,01,3,3,0));
+          sroads.add(new SRoad(350,225,10,1,3,0));
+          sroads.add(new SRoad(450,225,01,1,3,0));
+          sroads.add(new SRoad(350,75,00,1,1,0));
+          sroads.add(new SRoad(450,75,00,1,1,0));
           //Draw vertical roads
-          sroads.add(new SRoad(600,125,11,1,90)); 
-          sroads.add(new SRoad(350,125,01,2,90));
-          sroads.add(new SRoad(300,325,01,2,90));
+          sroads.add(new SRoad(600,125,11,1,1,90)); 
+          sroads.add(new SRoad(350,125,01,2,2,90));
+          sroads.add(new SRoad(300,325,01,2,2,90));
           
           //Draw curved roads
           croads.add(new CRoad(500,75,360));
