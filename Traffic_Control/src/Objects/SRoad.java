@@ -3,6 +3,7 @@ package Objects;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
+//Straight Road
 public class SRoad {
     // Variables declaration
     //Set size of straight road
@@ -38,33 +39,33 @@ public class SRoad {
         //draw road border
         sroad_border.setStroke(bs2);
         sroad_border.setColor(Color.black);
-        sroad_border.drawLine(xStart,road_width/2,xStart+road_length-1,road_width/2);
-        sroad_border.drawLine(xStart,(road_width*3/2),xStart+road_length-1,(road_width*3/2));
+        sroad_border.drawLine(xStart,yStart,xStart+road_length-1,yStart);
+        sroad_border.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
                 
         //draw road lanes
         lane_divider.setStroke(bs1);
-        lane_divider.setColor(Color.black);
-        lane_divider.drawLine(xStart,road_width,xStart+road_length,road_width);
+        lane_divider.setColor(Color.white);
+        lane_divider.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
         
         //draw traffic lights
         if (trafficlight ==10){//traffic lights on the left hand side of the road
-            TrafficLightGUI.trafficlightgui(xStart, road_width/2,  RGB, rotation);
+            TrafficLightGUI.trafficlightgui(xStart, yStart,  RGB, rotation);
             TrafficLightGUI.doDrawing(g);
-            TrafficLightGUI.trafficlightgui(xStart, road_width,  RGB, rotation);
+            TrafficLightGUI.trafficlightgui(xStart,  yStart+road_width/2,  RGB, rotation);
             TrafficLightGUI.doDrawing(g);
         }else if (trafficlight ==01){//traffic lights on the right hand side of the road
-            TrafficLightGUI.trafficlightgui(xStart+road_length-5, road_width/2,RGB,rotation);
+            TrafficLightGUI.trafficlightgui(xStart+road_length-5, yStart,RGB,rotation);
             TrafficLightGUI.doDrawing(g); 
-            TrafficLightGUI.trafficlightgui(xStart+road_length-5, road_width,RGB,rotation);
+            TrafficLightGUI.trafficlightgui(xStart+road_length-5, yStart+road_width/2,RGB,rotation);
             TrafficLightGUI.doDrawing(g);  
         }else if (trafficlight ==11){//traffic lights on both side of the road
-            TrafficLightGUI.trafficlightgui(xStart, road_width/2,  RGB, rotation);
+            TrafficLightGUI.trafficlightgui(xStart, yStart,  RGB, rotation);
             TrafficLightGUI.doDrawing(g);
-            TrafficLightGUI.trafficlightgui(xStart, road_width,  RGB, rotation);
+            TrafficLightGUI.trafficlightgui(xStart,  yStart+road_width/2,  RGB, rotation);
             TrafficLightGUI.doDrawing(g);
-            TrafficLightGUI.trafficlightgui(xStart+road_length-5, road_width/2,RGB,rotation);
+            TrafficLightGUI.trafficlightgui(xStart+road_length-5, yStart,RGB,rotation);
             TrafficLightGUI.doDrawing(g); 
-            TrafficLightGUI.trafficlightgui(xStart+road_length-5, road_width,RGB,rotation);
+            TrafficLightGUI.trafficlightgui(xStart+road_length-5,  yStart+road_width/2,RGB,rotation);
             TrafficLightGUI.doDrawing(g);
         }
         road.setTransform(old);
