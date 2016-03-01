@@ -2,7 +2,9 @@ package Objects;
 
 import java.awt.*;
 
-public class Motorbike implements Vehicle {
+import javax.swing.JPanel;
+
+public class Motorbike extends JPanel implements Vehicle {
     // Variables declaration
     private final int pos_x,pos_y;
     private final int R=221, G=160, B=221; //pastel purple
@@ -45,4 +47,34 @@ public class Motorbike implements Vehicle {
     public void setPerson(Person p) {
     	this.driver = p;
     }
+
+	@Override
+	public void doDrawing(Graphics2D g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void set_pos_x(int x) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int get_pos_x() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void move() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

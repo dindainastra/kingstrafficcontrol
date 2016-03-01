@@ -1,5 +1,7 @@
 package Objects;
 
+import java.awt.Graphics2D;
+
 public class Junction implements Terrain{
 
 	@Override
@@ -22,6 +24,12 @@ public class Junction implements Terrain{
 
 	@Override
 	public void setPerson() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void doDrawing(Graphics2D g) {
 		// TODO Auto-generated method stub
 		
 	}

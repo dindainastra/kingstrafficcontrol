@@ -1,6 +1,7 @@
 
 package Objects;
 
+import java.awt.Graphics2D;
 
 public class TrafficLights implements Terrain{
 
@@ -129,6 +130,12 @@ public class TrafficLights implements Terrain{
             TrafficLights a = new TrafficLights();
             a.run();
         }
+
+		@Override
+		public void doDrawing(Graphics2D g) {
+			// TODO Auto-generated method stub
+			
+		}
 
 }
 
