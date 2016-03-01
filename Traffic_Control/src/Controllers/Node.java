@@ -8,13 +8,13 @@ public class Node {
 	private ArrayList<Node> nextNodeList = new ArrayList<Node>(); //I will need probably to add an option to control the junctions... we'll see
 	private String nameOfNode;
 	private double weightOfDifficulty;
-	private double time;
+	private double distranceOfNode;
 
 	public Node(String text, double text2, double text3) {
 		
 		this.nameOfNode = text;
 		this.weightOfDifficulty = text2;
-		this.time = text3;
+		this.distranceOfNode = text3;
 
 	}
 
@@ -22,7 +22,7 @@ public class Node {
 		
 		this.nameOfNode = text;
 		this.weightOfDifficulty = text2;
-		this.time = text3;
+		this.distranceOfNode = text3;
 		this.nextNodeList = nextNodeList;
 
 	}
@@ -92,11 +92,11 @@ public class Node {
 	}
 
 	public double getTime() {
-		return time;
+		return distranceOfNode;
 	}
 
 	public void setTime(double time) {
-		this.time = time;
+		this.distranceOfNode = time;
 	}
 
 }
