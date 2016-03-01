@@ -5,16 +5,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import Objects.CRoad;
-import Objects.Car;
-import Objects.Display;
-import Objects.Draw;
-import Objects.Person;
-import Objects.SRoad;
-import Objects.SquareJunction;
-import Objects.Terrain;
-import Objects.TrafficLights;
-import Objects.Vehicle;
+import Objects.*;
 
 public class TestingNodeNetwork {
 
@@ -33,9 +24,7 @@ public class TestingNodeNetwork {
 		aNodeList = new ArrayList<Node>();
 		aTerrainList = new ArrayList<Terrain>();
 		
-		//Declarations of the Network
-		
-		//add Persons
+		//Declarations
 		aPersonList.add(new Person("Person1", 10, false));
 		aPersonList.add(new Person("Person2", 10, false));
 		aPersonList.add(new Person("Person3", 10, false));
@@ -43,51 +32,36 @@ public class TestingNodeNetwork {
 		aPersonList.add(new Person("Person5", 10, false));
 		aPersonList.add(new Person("Person6", 10, false));
 		
-		//Set Person to every Car and add the car in the road
 		for (Person p : aPersonList)
 			if (!p.isPedestrian())
 				aVehicleList.add(new Car(p,0,0));
-				
-		//add horizontal roads
-		//aTerrainList.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor(),getrotation());  
+		
 		aTerrainList.add(new SRoad(100,225,00,2,0));
 		aTerrainList.add(new SRoad(200,225,01,3,0));
-		aTerrainList.add(new SRoad(350,225,10,3,0));
-		aTerrainList.add(new SRoad(450,225,01,2,0));
-		aTerrainList.add(new SRoad(350,75,00,2,0));
-		aTerrainList.add(new SRoad(450,75,00,2,0));
-        
-		//add vertical roads
-		aTerrainList.add(new SRoad(600,125,11,1,90)); 
+		aTerrainList.add(new SRoad(350,255,11,1,0));
+		aTerrainList.add(new SRoad(100,225,00,2,0));
+		aTerrainList.add(new TrafficLights());
+		//Draw vertical roads
+		aTerrainList.add(new SRoad(600,125,11,1,90));
 		aTerrainList.add(new SRoad(350,125,01,2,90));
 		aTerrainList.add(new SRoad(300,325,01,2,90));
-        
-        //add curved roads
+
+          //Draw curved roads
 		aTerrainList.add(new CRoad(500,75,360));
 		aTerrainList.add(new CRoad(500,175,270));
 		aTerrainList.add(new CRoad(250,225,270));
 		aTerrainList.add(new CRoad(250,275,90));
-        
+
 		aTerrainList.add(new CRoad(300,75,90));
-        
-        //add roundabout
+
+          //draw roundabout
 		aTerrainList.add(new CRoad(225,400,90));
 		aTerrainList.add(new CRoad(225,400,180));
 		aTerrainList.add(new CRoad(225,400,270));
 		aTerrainList.add(new CRoad(225,400,360));
-        
-		//add junctions
+          //Draw junctions
 		aTerrainList.add(new SquareJunction(300,225));
-        
-//        //Draw traffic
-//        cars.add(new Car(p,210,230));
-//        motorbikes.add(new Motorbike(250,255));  
-//        lorries.add(new Lorry(240,230));
-//        bikes.add(new Bike(170,230));
-//        emergencies.add(new Emergency(120,230));
-		
-		
-		//add nodes
+
 		aNodeList.add(new Node("START",0,0));
 		aNodeList.add(new Node("First Node",0.8,10.0));
 		aNodeList.add(new Node("Second Node",0.5,20.0));
@@ -115,7 +89,6 @@ public class TestingNodeNetwork {
 		
 		System.out.println("My network is like that:");
 		nodeManager.printMyNetwork();
-		nodeManager.vehicleFlow_version1();
 
 		nodeManager.start();
 		
