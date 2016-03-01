@@ -1,67 +1,88 @@
 package Controllers;
 
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
+
+import Objects.Car;
+import Objects.Display;
+import Objects.Draw;
 import Objects.Person;
+import Objects.SRoad;
+import Objects.Terrain;
+import Objects.TrafficLights;
+import Objects.Vehicle;
 
 public class TestingNodeNetwork {
 
 	private static NodeManager  nodeManager;
+	private static Draw aDraw;
+	private static ArrayList<Vehicle> aVehicleList;
+	private static ArrayList<Person> aPersonList;
+	private static ArrayList<Node> aNodeList;
+	private static ArrayList<Terrain> aTerrainList;
+	private static JFrame frame;
 	
 	public static void main(String[] args) {
 		
+		aPersonList = new ArrayList<Person>();
+		aVehicleList = new ArrayList<Vehicle>();
+		aNodeList = new ArrayList<Node>();
+		aTerrainList = new ArrayList<Terrain>();
+		
 		//Declarations
+		aPersonList.add(new Person("Person1", 10, false));
+		aPersonList.add(new Person("Person2", 10, false));
+		aPersonList.add(new Person("Person3", 10, false));
+		aPersonList.add(new Person("Person4", 10, false));
+		aPersonList.add(new Person("Person5", 10, false));
+		aPersonList.add(new Person("Person6", 10, false));
+		
+		for (Person p : aPersonList)
+			if (!p.isPedestrian())
+				aVehicleList.add(new Car(p,0,0));
+		
+		aTerrainList.add(new SRoad(100,225,00,2,0));
+//		aTerrainList.add(new TrafficLights());
+//		aTerrainList.add(new TrafficLights());
+//		
+		aNodeList.add(new Node("START",0,0));
+		aNodeList.add(new Node("First Node",0.8,10.0));
+		aNodeList.add(new Node("Second Node",0.5,20.0));
+		aNodeList.add(new Node("Third Node",0.5,20.0));
+		aNodeList.add(new Node("END",0,20.0));
+		
+		aDraw = new Draw(aVehicleList,aTerrainList);
+		
+		SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                frame = new JFrame();
+                frame.add(aDraw);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setVisible(true);
+                frame.setSize(700, 700);
+            }
+        });		
 		
 		//create the node managers who has all the informations about the nodes, and he will change the vehicles from node to node upon each car request
-		nodeManager = new NodeManager();
+		System.out.println("Debug Draw: "+aDraw);
+		nodeManager = new NodeManager(aDraw);
+		//nodeManager.setMap(aDraw);
 		
-		//node manager creates and add the nodes to the node network
-		nodeManager.addNodeToTheNodeNetwork(new Node("START",0,0));
-		nodeManager.addNodeToTheNodeNetwork(new Node("First Node",0.8,10.0));
-		nodeManager.addNodeToTheNodeNetwork(new Node("Second Node",0.5,20.0));
-		nodeManager.addNodeToTheNodeNetwork(new Node("END",0,0));
-	
-		//create Persons, set them as drivers to a Vehicle, and add them into the Node Network
-		nodeManager.addANewVehicleToTheNetwork(new Person("Person1", 10, false),"Car");			
-		nodeManager.addANewVehicleToTheNetwork(new Person("Person2", 9, false),"Car");		
-		nodeManager.addANewVehicleToTheNetwork(new Person("Person3", 10, false),"Car");		
-		nodeManager.addANewVehicleToTheNetwork(new Person("Person4", 10, false),"Car");
-		nodeManager.addANewVehicleToTheNetwork(new Person("Person5", 9, false),"Car");		
-		nodeManager.addANewVehicleToTheNetwork(new Person("Person6", 10, false),"Car");		
-		nodeManager.addANewVehicleToTheNetwork(new Person("Person7", 10, false),"Car");
+		nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
 		
-		//print the whole network to see what is going on every time
-		//nodeManager.printMyNetwork();
+		System.out.println("My network is like that:");
+		nodeManager.printMyNetwork();
 
-		//start this thing to work, baby.  
-		//VERSION 1 - Move things to the next Node Stack ONLY if the previous Stack if empty.
-		/*
-		 *  Stack1		Stack2		Stack3
-		 * 	4 Veh		0 Veh		0 Veh
-		 * 
-		 * So, Vehicles will move to stack3 ONLY when Stack1 is empty!
-		 * Version_1 sends the Vehicles from stack to stack periodically.
-		 * 
-		 */
-		//nodeManager.vehicleFlow_version1();  //  <--- maybe if it is on thread it should work. Dunno now
+		nodeManager.start();
 		
-		//version2 uses iterators. Maybe it is more easy to parallelized but many conflicts with the iterators. Thats why I leave it as an example and reminder if version1 is not gonna work well.
-//		nodeManager.vehicleFlow_version2();
-		
-//		nodeManager.vehicleFlow_version1();
-		
-		nodeManager.resetNodeNetwork();
-		
-		//if I haven't already remove from the vehicleFlow_version all the Objects it returns nothing because I have reset the network (nodeList declared as null)
-		//The nodes that are in the memory are going to be deleted automatically due to the default garbage collector of JAVA
 		nodeManager.vehicleFlow_version1();
 		
-		//node manager creates and add the nodes to the node network
-		nodeManager.createMyNodeNetwork();
-	
-		//create Persons, set them as drivers to a Vehicle, and add them into the Node Network
-		nodeManager.addObjectsToTheNetwork();
-		
-		nodeManager.vehicleFlow_version1();
+//		nodeManager.resetNodeNetwork(); there is a bug now, but whatever
 
+		nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
+		
 		
 	}
 

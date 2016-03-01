@@ -1,26 +1,47 @@
 package Controllers;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import Objects.Car;
+import Objects.Draw;
 import Objects.Person;
 import Objects.Terrain;
 import Objects.TrafficLights;
+import Objects.Vehicle;
 
 public class NodeManager {
 
-	private ArrayList<Node> nodeList = new ArrayList<Node>();
-	private Iterator<Node> iterator;
+	private ArrayList<Node> nodeList = new ArrayList<Node>();	
+	private ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle>();	
+	private ArrayList<Terrain> terrainList = new ArrayList<Terrain>();	
 	private String teamName;
 	private String slogan;
+	private Draw map;
 	
 	//Constructor
 	//For now, it is just for fun :D 
 	//Possible uses: Create here each thread
-	public NodeManager (){
+	public NodeManager (Draw d){
+				
+		map = d;
 		this.teamName = "KingsTrafficControl";
 		this.slogan = "Only you can control your future, and in our case only we can control the Traffic :D";
+	}
+	
+	public void start(){
+		for (Vehicle c : vehicleList){
+			for (int steps=5; steps>0; steps--)
+			try {
+				Thread.sleep(1000);
+				if (c instanceof Car){
+					c.move();
+					map.revalidate();
+					map.repaint();
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	
@@ -39,11 +60,6 @@ public class NodeManager {
 		return max;
 	}
 	
-	
-	//Add a node to the network
-	public void addNodeToTheNodeNetwork(Node n){
-		this.nodeList.add(n);
-	}
 	
 	//Print in that specific time how my network looks like. 
 	//Where are the objects, in which node and things like that. 
@@ -96,99 +112,53 @@ public class NodeManager {
 		}
 		
 		
-	}
-	
-	//Version 2 - IT DOES NOT WORK! JUST AS REMINDER IF THINGS GO VERY WRONG WITH THE MULTITHREADING.
-	public void vehicleFlow_version2(){
-		//it wouldn't work with iterators...
-		//basically, it will be much more difficult.
-		//I let it as an example, if the version1 is not possible to be parallelized
-		
-		System.out.println("Flow_version2");
-		printMyNetwork();
-		
-//		if (NodeList != null)
-		
-		iterator = nodeList.iterator();
-		
-		while (iterator.hasNext()) {
-		    System.out.println("Iterator Says: "+iterator.next().getNameOfNode());
-		    printMyNetwork();
-		}
-		
-		while (iterator.hasNext()) {
-		    System.out.println("::2:: Iterator Says: "+iterator.next().getNameOfNode());
-		    printMyNetwork();
-		}
-		
-	}
+	}	
+
 	
 	//Add a Vehicle to the Starting Node!
 	//It declares every vehicle to the starting point because obviously  every car/bus/etc should enter first of all into the network and them to go to their direction.
 	//should exist because if we need to add manually Vehicles call it for how many Vehicles are needed
-	public void addANewVehicleToTheNetwork(Person p, String obj){
-		if (obj.equals("CAR"))
-			getNodeList().get(0).addToStack(new Car(p, 0, 0));
+	public void addANewVehicleToTheNetwork(Vehicle aVehicle){
+		getNodeList().get(0).addToStack(aVehicle);
 	}
 	
 	//Add ANY Terrain object to  a specific NODE.
 	//It needs to be to a specific node, because the map is fixed.
-	public void addANewTerrainToTheNetwork(Terrain t, int i){
-		getNodeList().get(i).addToStack(t);
+	public void addANewTerrainToTheNetwork(Terrain t, int whichNode){
+		getNodeList().get(whichNode).addToStack(t);
 	}
 	
 	//Just reset the Node Network
 	public void resetNodeNetwork(){
 		nodeList.clear();
+		vehicleList.clear();
 	}
 	
-	//Declare the Node Network
-	//also link the one node with as many next node it has.
-	public void createMyNodeNetwork(){
-
-		Node previousNode;
-		Node startNode = new Node("START",0,0);
-		addNodeToTheNodeNetwork(startNode);
-
-		Node tmpN = new Node("First Node",0.8,10.0);
-		addNodeToTheNodeNetwork(tmpN);
-
-		previousNode = startNode;
-		previousNode.setNextNodeToTheNodeList(tmpN);
-
-		tmpN = new Node("Second Node",0.5,20.0);
-		addNodeToTheNodeNetwork(tmpN);
-
-		previousNode = tmpN;
-		previousNode.setNextNodeToTheNodeList(tmpN);
+	//create the network
+	public void createTheNetwork(ArrayList<Node> nl, ArrayList<Vehicle> vl, ArrayList<Terrain> tl){
 		
-		tmpN = new Node("Third Node",0.5,20.0);
-		addNodeToTheNodeNetwork(tmpN);
-
-		previousNode = tmpN;
-		previousNode.setNextNodeToTheNodeList(tmpN);
+		this.setNodeList(nl);
+		this.setVehicleList(vl);
+		this.setTerrainList(tl);
 		
-		Node endNode = new Node("END",0,0);
-		addNodeToTheNodeNetwork(endNode);  
-			
-		//previousNode = tmpN;
-		//addNodeToTheNodeNetwork(tmpN); //do a cycle from end to start again and again! :)
-
-	}
-
-	//This method adds ALL the objects to the Node Network!
-	public void addObjectsToTheNetwork() {
+		for (Vehicle v : vehicleList)
+			addANewVehicleToTheNetwork(v);
 		
-		addANewVehicleToTheNetwork(new Person("Person1", 10, false),"CAR");			
-		addANewVehicleToTheNetwork(new Person("Person2", 9, false),"CAR");
-		addANewTerrainToTheNetwork(new TrafficLights(),1);	//TL in Node = 1	//I have to and the option to stick the Terrain Class and not move it from Node to Node.
-		addANewTerrainToTheNetwork(new TrafficLights(),2);	//TL in Node = 2	//same as above...
-		addANewVehicleToTheNetwork(new Person("Person3", 9, false),"CAR");
-		addANewVehicleToTheNetwork(new Person("Person4", 9, false),"CAR");
-		addANewVehicleToTheNetwork(new Person("Person5", 9, false),"CAR");
-		addANewVehicleToTheNetwork(new Person("Person6", 9, false),"CAR");
-		addANewVehicleToTheNetwork(new Person("Person7", 9, false),"CAR");
-
+		for (Terrain t : terrainList)
+			addANewTerrainToTheNetwork(t,1);
 		
 	}
+	
+	public void setTerrainList(ArrayList<Terrain> tl){
+		this.terrainList = tl;
+	}
+	
+	public void setNodeList(ArrayList<Node> nl){
+		this.nodeList = nl;
+	}
+	
+	public void setVehicleList(ArrayList<Vehicle> vl){
+		this.vehicleList = vl;
+	}
+	
 }
