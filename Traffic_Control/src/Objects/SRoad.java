@@ -4,14 +4,14 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 
 //Straight Road
-public class SRoad {
+public class SRoad implements Terrain{
     // Variables declaration
     //Set size of straight road
     private int xStart,yStart, trafficlight, RGB, rotation;
     private final int road_length = 100;
     private final int road_width = 50;
 
-    SRoad(int x_Start, int y_Start, int trafficlight, int RGB, int rotation){
+    public SRoad(int x_Start, int y_Start, int trafficlight, int RGB, int rotation){
         this.trafficlight = trafficlight;
         this.rotation = rotation;
         this.xStart = x_Start;
@@ -19,7 +19,7 @@ public class SRoad {
         this.RGB = RGB;
     }   
     
-    protected void doDrawing(Graphics2D g){
+    public void doDrawing(Graphics2D g){
         Graphics2D road=(Graphics2D) g;
         Graphics2D lane_divider=(Graphics2D) g;
         Graphics2D sroad_border=(Graphics2D) g;
@@ -69,7 +69,31 @@ public class SRoad {
             TrafficLightGUI.doDrawing(g);
         }
         road.setTransform(old);
-    } 
+    }
+
+	@Override
+	public void setInWhichNodeLocated() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getInWhichNodeLocated() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getPerson() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setPerson() {
+		// TODO Auto-generated method stub
+		
+	} 
 }
 
 
