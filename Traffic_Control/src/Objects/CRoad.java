@@ -11,7 +11,7 @@ public class CRoad implements Terrain{
     private final int road_width = 100, arc_angle = 90;
     private int start_angle;
 
-    CRoad(int x_Start, int y_Start, int start_angle){
+    public CRoad(int x_Start, int y_Start, int start_angle){
         this.start_angle = start_angle;
         this.xStart = x_Start;
         this.yStart = y_Start;
