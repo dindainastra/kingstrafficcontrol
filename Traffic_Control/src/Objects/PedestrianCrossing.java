@@ -1,5 +1,6 @@
 package Objects;
 
+import java.awt.Graphics2D;
 
 // dummy comment
 
@@ -25,6 +26,12 @@ public class PedestrianCrossing implements Terrain{
 
 	@Override
 	public void setPerson() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void doDrawing(Graphics2D g) {
 		// TODO Auto-generated method stub
 		
 	}

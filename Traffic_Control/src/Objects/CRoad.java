@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.geom.Arc2D;
 
 //Curve Road
-public class CRoad {
+public class CRoad implements Terrain{
     // Variables declaration
     //Set size of straight road
     private int xStart,yStart;
@@ -17,7 +17,7 @@ public class CRoad {
         this.yStart = y_Start;
     }   
     
-    protected void doDrawing(Graphics2D g){
+    public void doDrawing(Graphics2D g){
         Graphics2D road=(Graphics2D) g;
         Graphics2D lane_divider=(Graphics2D) g;
         Graphics2D sroad_border=(Graphics2D) g;
@@ -41,7 +41,31 @@ public class CRoad {
         lane_divider.setStroke(bs1);
         lane_divider.setColor(Color.white);
         sroad_border.draw(new Arc2D.Double(xStart+25,yStart+25,road_width/2,road_width/2,start_angle,arc_angle,Arc2D.OPEN));
-    } 
+    }
+
+	@Override
+	public void setInWhichNodeLocated() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getInWhichNodeLocated() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getPerson() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void setPerson() {
+		// TODO Auto-generated method stub
+		
+	} 
 }
 
 
