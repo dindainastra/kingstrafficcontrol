@@ -37,19 +37,18 @@ public class TestingNodeNetwork {
 		
 		//add Persons
 		aPersonList.add(new Person("Person1", 10, false));
-		aPersonList.add(new Person("Person2", 10, false));
+		/*aPersonList.add(new Person("Person2", 10, false));
 		aPersonList.add(new Person("Person3", 10, false));
 		aPersonList.add(new Person("Person4", 10, false));
 		aPersonList.add(new Person("Person5", 10, false));
 		aPersonList.add(new Person("Person6", 10, false));
-		
+		*/
 		//Set Person to every Car and add the car in the road
 		for (Person p : aPersonList)
-			if (!p.isPedestrian())
-				aVehicleList.add(new Car(p,0,0));
-				
+			if (!p.isPedestrian()){
+                                aVehicleList.add(new Car(p,100,230));
+                        }
 		//add horizontal roads
-		//aTerrainList.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor(),getrotation());  
 		aTerrainList.add(new SRoad(100,225,00,2,0));
 		aTerrainList.add(new SRoad(200,225,01,3,0));
 		aTerrainList.add(new SRoad(350,225,10,3,0));
@@ -62,7 +61,7 @@ public class TestingNodeNetwork {
 		aTerrainList.add(new SRoad(350,125,01,2,90));
 		aTerrainList.add(new SRoad(300,325,01,2,90));
         
-        //add curved roads
+        //add corner roads
 		aTerrainList.add(new CRoad(500,75,360));
 		aTerrainList.add(new CRoad(500,175,270));
 		aTerrainList.add(new CRoad(250,225,270));
@@ -78,7 +77,7 @@ public class TestingNodeNetwork {
         
 		//add junctions
 		aTerrainList.add(new SquareJunction(300,225));
-        
+                
 //        //Draw traffic
 //        cars.add(new Car(p,210,230));
 //        motorbikes.add(new Motorbike(250,255));  
@@ -100,6 +99,7 @@ public class TestingNodeNetwork {
             public void run() {
                 frame = new JFrame();
                 frame.add(aDraw);
+                //frame.add(R)
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
                 frame.setSize(700, 700);
