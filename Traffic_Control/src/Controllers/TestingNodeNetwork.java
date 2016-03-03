@@ -24,7 +24,6 @@ public class TestingNodeNetwork {
 		aNodeList = new ArrayList<Node>();
 		aTerrainList = new ArrayList<Terrain>();
 		
-
 		//Declarations
 		aPersonList.add(new Person("Person1", 10, false));
 		aPersonList.add(new Person("Person2", 10, false));
