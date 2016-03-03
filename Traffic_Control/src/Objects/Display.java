@@ -11,7 +11,7 @@ public class Display {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 JFrame frame = new JFrame();
-                //frame.add(new Draw());
+                frame.add(new Draw());
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
                 frame.setSize(700, 700);
