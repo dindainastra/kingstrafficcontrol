@@ -35,18 +35,18 @@ public class TestingNodeNetwork {
 		
 		//Declarations of the Network
 		
-		//add Persons
+		//add Persons  new Person("Name", politenesslevel, isPedestrian)
 		aPersonList.add(new Person("Person1", 10, false));
-		aPersonList.add(new Person("Person2", 10, false));
-		aPersonList.add(new Person("Person3", 10, false));
-		aPersonList.add(new Person("Person4", 10, false));
-		aPersonList.add(new Person("Person5", 10, false));
-		aPersonList.add(new Person("Person6", 10, false));
-		
+//		aPersonList.add(new Person("Person2", 10, false));
+//		aPersonList.add(new Person("Person3", 10, false));
+//		aPersonList.add(new Person("Person4", 10, false));
+//		aPersonList.add(new Person("Person5", 10, false));
+//		aPersonList.add(new Person("Person6", 10, false));
+//		
 		//Set Person to every Car and add the car in the road
 		for (Person p : aPersonList)
 			if (!p.isPedestrian())
-				aVehicleList.add(new Car(p,0,0));
+				aVehicleList.add(new Car(p,100,225));
 				
 		//add horizontal roads
 		//aTerrainList.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor(),getrotation());  
@@ -125,7 +125,9 @@ public class TestingNodeNetwork {
 
 		nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
 		
-		
+		for (int i=0;i<10;i++)
+			nodeManager.addANewVehicleToTheNetwork(new Car(new Person("1",10,false),100,i++));
+		//random vehicle creation by time (RANDOM)
 	}
 
 	
