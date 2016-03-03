@@ -49,6 +49,13 @@ public class TestingNodeNetwork {
                                 aVehicleList.add(new Car(p,100,230));
                         }
 		//add horizontal roads
+/*=======
+			if (!p.isPedestrian())
+				aVehicleList.add(new Car(p,100,225));
+		
+				aVehicleList.add(new Car(p,0,0));
+		
+>>>>>>> 5ca9dc67e409273a37fe153a7da3f242c041c645*/
 		aTerrainList.add(new SRoad(100,225,00,2,0));
 		aTerrainList.add(new SRoad(200,225,01,3,0));
 		aTerrainList.add(new SRoad(350,225,10,3,0));
@@ -125,7 +132,9 @@ public class TestingNodeNetwork {
 
 		nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
 		
-		
+		for (int i=0;i<10;i++)
+			nodeManager.addANewVehicleToTheNetwork(new Car(new Person("1",10,false),100,i++));
+		//random vehicle creation by time (RANDOM)
 	}
 
 	
