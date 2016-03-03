@@ -34,6 +34,8 @@ public class TestingNodeNetwork {
 		
 		for (Person p : aPersonList)
 			if (!p.isPedestrian())
+				aVehicleList.add(new Car(p,100,225));
+		
 				aVehicleList.add(new Car(p,0,0));
 		
 		aTerrainList.add(new SRoad(100,225,00,2,0));
@@ -98,7 +100,9 @@ public class TestingNodeNetwork {
 
 		nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
 		
-		
+		for (int i=0;i<10;i++)
+			nodeManager.addANewVehicleToTheNetwork(new Car(new Person("1",10,false),100,i++));
+		//random vehicle creation by time (RANDOM)
 	}
 
 	
