@@ -2,7 +2,7 @@ package Objects;
 import java.awt.*;
 import javax.swing.*;
 
-public class SquareJunction implements Terrain{
+public class SquareJunction implements Terrain {
 
     // Variables declaration
     //Set size of road
@@ -12,8 +12,28 @@ public class SquareJunction implements Terrain{
     public SquareJunction(int x_Start, int y_Start){
         this.xStart = x_Start;
         this.yStart = y_Start;
-    }   
-    
+    }
+
+    @Override
+    public void setInWhichNodeLocated() {
+
+    }
+
+    @Override
+    public int getInWhichNodeLocated() {
+        return 0;
+    }
+
+    @Override
+    public int getPerson() {
+        return 0;
+    }
+
+    @Override
+    public void setPerson() {
+
+    }
+
     public void doDrawing(Graphics2D g){
         Graphics2D road=(Graphics2D) g;
         Graphics2D lane_divider=(Graphics2D) g;
@@ -41,29 +61,5 @@ public class SquareJunction implements Terrain{
         lane_divider.setColor(Color.white);
         lane_divider.drawLine(xStart+road_width/2,yStart,xStart+road_width/2,yStart+road_width-1);//horizontal
         lane_divider.drawLine(xStart,yStart+road_width/2,xStart+road_width,yStart+road_width/2);//vertical
-    }
-
-	@Override
-	public void setInWhichNodeLocated() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getInWhichNodeLocated() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getPerson() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setPerson() {
-		// TODO Auto-generated method stub
-		
-	}      
+    }      
 }
