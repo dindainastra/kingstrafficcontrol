@@ -66,6 +66,7 @@ public class Draw extends JPanel {
 //          lorries.add(new Lorry(240,230));
 //          bikes.add(new Bike(170,230));
 //          emergencies.add(new Emergency(120,230));
+    
     }
     
     @Override
