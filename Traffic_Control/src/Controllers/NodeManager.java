@@ -156,6 +156,7 @@ public class NodeManager{
 		for (Vehicle v : vehicleList) {
 			addANewVehicleToTheNetwork(v);
 			v.setCurrentNode(nl.get(0));
+			v.setNextNode(nl.get(1));  // do it random 
 		}
 
 		for (Terrain t : terrainList) {
