@@ -5,6 +5,8 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+//added library for Stopwatch
+import org.apache.commons.lang.time.StopWatch;
 
 import Objects.CRoad;
 import Objects.Car;
@@ -98,6 +100,10 @@ public class TestingNodeNetwork {
 		SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 frame = new JFrame();
+//				StopWatch stopWatch = new StopWatch();
+//				stopWatch.start();
+//
+				//System.out.println("Stopwatch time: " + stopWatch);
                 frame.add(aDraw);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
