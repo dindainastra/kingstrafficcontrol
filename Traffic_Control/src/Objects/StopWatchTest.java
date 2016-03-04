@@ -1,23 +1,21 @@
-package Objects;
-
-/**
- * Created by daniella on 04/03/2016.
- */
 /*****************************************************************/
 /* Copyright 2013 Code Strategies                                */
 /* This code may be freely used and distributed in any project.  */
 /* However, please do not remove this credit if you publish this */
 /* code in paper or electronic form, such as on a web site.      */
 /*****************************************************************/
+
+package Objects;
+
 import java.io.IOException;
 
 import org.apache.commons.lang.time.StopWatch;
 
-public class StopWatch {
+public class StopWatchTest {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args)  {
 
-        StopWatchTest stopWatch = new StopWatchTest();
+        StopWatch stopWatch = new StopWatch();
 
         System.out.println("STARTING STOPWATCH");
         stopWatch.start();
