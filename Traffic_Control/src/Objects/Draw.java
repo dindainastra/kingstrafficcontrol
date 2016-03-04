@@ -6,31 +6,15 @@ import java.util.ArrayList;
 
 public class Draw extends JPanel {
    
-    // Variables declaration
-    private Person p; //temp
-    
-    //Create arrays for each objects
-    ArrayList<SquareJunction> squarejuncions = new ArrayList<>();
-    ArrayList<SRoad> sroads = new ArrayList<>();
-    ArrayList<CRoad> croads = new ArrayList<>();
-    ArrayList<Car> cars=new ArrayList<>();
-    ArrayList<Emergency> emergencies =new ArrayList<>();
-    ArrayList<Motorbike> motorbikes=new ArrayList<>();
-    ArrayList<Bike> bikes=new ArrayList<>();
-    ArrayList<Lorry> lorries=new ArrayList<>();
-
-    
-    
     private ArrayList<Vehicle> vehicleList; 
     private ArrayList<Terrain> terrainList; 
 
-    
     //Draw cars, roads, traffic lights
     public Draw(ArrayList<Vehicle> aVehicleList, ArrayList<Terrain> aTerrainList) {
-    	
-    	this.vehicleList = aVehicleList;
-    	this.terrainList = aTerrainList;
-    	
+
+        this.vehicleList = aVehicleList;
+        this.terrainList = aTerrainList;
+
 //        //Draw horizontal roads
 //        //sroads.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor(),getrotation());  
 //          sroads.add(new SRoad(100,225,00,2,0));

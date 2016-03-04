@@ -84,10 +84,6 @@ public class Bike extends JPanel implements Vehicle{
 	public void setB(int b){
 		this.B = b;
 	}
-
-	public String getDriversName() {
-		return driver.getName();
-	}
 	
 	public int getDriversPolitenssLevel() {
 		return driver.getPolitenessLevel();
