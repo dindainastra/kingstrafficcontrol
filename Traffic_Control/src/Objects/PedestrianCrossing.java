@@ -2,10 +2,16 @@ package Objects;
 
 import java.awt.Graphics2D;
 
+import Controllers.Node;
+
 // dummy comment
 
 public class PedestrianCrossing implements Terrain{
 
+	private Node currentNode;
+	private Node nextNode;
+	private int lenght;
+	
 	@Override
 	public void setInWhichNodeLocated() {
 		// TODO Auto-generated method stub
@@ -36,4 +42,28 @@ public class PedestrianCrossing implements Terrain{
 		
 	}
 
+	@Override
+	public int getLenght() {
+		return this.lenght;
+	}
+
+	@Override
+	public Node getNextNode() {
+		return this.nextNode;
+	}
+
+	@Override
+	public void setNextNode(Node n) {
+		this.nextNode = n;
+	}
+
+	@Override
+	public Node getCurrentNode() {
+		return this.currentNode;
+	}
+
+	@Override
+	public void setCurrentNode(Node n) {
+		this.currentNode = n;
+	}
 }

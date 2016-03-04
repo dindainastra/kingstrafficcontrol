@@ -13,7 +13,7 @@ import Objects.Car;
 import Objects.Draw;
 import Objects.Person;
 import Objects.SRoad;
-import Objects.SquareJunction;
+import Objects.Junction;
 import Objects.Terrain;
 import Objects.TrafficLights;
 import Objects.Vehicle;
@@ -94,7 +94,7 @@ public class TestingNodeNetwork {
 		aTerrainList.add(new CRoad(250,500,50,360,0));
         
 		//add junctions
-		aTerrainList.add(new SquareJunction(300,225));
+		aTerrainList.add(new Junction(300,225));
         
 //        //Draw traffic
 //        cars.add(new Car(p,210,230));
