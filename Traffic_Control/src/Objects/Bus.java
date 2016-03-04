@@ -4,10 +4,14 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import Controllers.Node;
+
 public class Bus extends JPanel implements Vehicle {
 
 	private Person driver;
-
+	private Node currentNode;
+	private Node nextNode;
+	
 	@Override
 	public int getPriority() {
 		// TODO Auto-generated method stub
@@ -61,6 +65,24 @@ public class Bus extends JPanel implements Vehicle {
 		return 0;
 	}
 
-	
+	@Override
+	public Node getNextNode() {
+		return this.nextNode;
+	}
+
+	@Override
+	public void setNextNode(Node n) {
+		this.nextNode = n;
+	}
+
+	@Override
+	public Node getCurrentNode() {
+		return this.currentNode;
+	}
+
+	@Override
+	public void setCurrentNode(Node n) {
+		this.currentNode = n;
+	}
 	
 }

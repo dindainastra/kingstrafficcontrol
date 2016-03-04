@@ -1,46 +1,41 @@
 package Controllers;
 
+import Objects.Car;
 import java.util.ArrayList;
+import java.util.logging.Level;
 
 public class Node {
-
 	private ArrayList<Object> myStack = new ArrayList<Object>();
 	private ArrayList<Node> nextNodeList = new ArrayList<Node>(); //I will need probably to add an option to control the junctions... we'll see
 	private String nameOfNode;
 	private double weightOfDifficulty;
 	private double distranceOfNode;
 
-	public Node(String text, double text2, double text3) {
-		
-		this.nameOfNode = text;
-		this.weightOfDifficulty = text2;
-		this.distranceOfNode = text3;
-
+	public Node(String nodeName, double weight, double distance) {
+		this.nameOfNode = nodeName;
+		this.weightOfDifficulty = weight;
+		this.distranceOfNode = distance;
 	}
 
-	public Node(String text, double text2, double text3, ArrayList<Node> nextNodeList) {
-		
-		this.nameOfNode = text;
-		this.weightOfDifficulty = text2;
-		this.distranceOfNode = text3;
+	public Node(String nodeName, double weight, double distance, ArrayList<Node> nextNodeList) {
+		this.nameOfNode = nodeName;
+		this.weightOfDifficulty = weight;
+		this.distranceOfNode = distance;
 		this.nextNodeList = nextNodeList;
-
 	}
 
 	public boolean hasNext(){
-		
-		if (this.nextNodeList.get(0) instanceof Node)
+		if (this.nextNodeList.get(0) instanceof Node){
 			return true;
+		}
 		return false;
-		
 	}
 	
 	public boolean hasNodes(){
-		
-		if (!this.nextNodeList.isEmpty())
+		if (!this.nextNodeList.isEmpty()) {
 			return true;
+		}
 		return false;
-		
 	}
 	
 	public String toString () {
@@ -71,8 +66,7 @@ public class Node {
 		//degub method
 		for (Object item : myStack) {   
 		    System.out.println	(item);
-		}		
-		
+		}
 	}
 
 	public String getNameOfNode() {

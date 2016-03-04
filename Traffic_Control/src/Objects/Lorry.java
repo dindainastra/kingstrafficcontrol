@@ -3,8 +3,13 @@ import java.awt.*;
 
 import javax.swing.JPanel;
 
+import Controllers.Node;
+
 public class Lorry extends JPanel implements Vehicle {
-    // Variables declaration
+    
+	private Node currentNode;
+	private Node nextNode;
+	// Variables declaration
     private final int pos_x,pos_y;
     private final int R = 222, G = 184, B = 135;//pastel brown
     private final int length = 40 ,width = 17;
@@ -64,6 +69,26 @@ public class Lorry extends JPanel implements Vehicle {
 	public int getLength() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public Node getNextNode() {
+		return this.nextNode;
+	}
+
+	@Override
+	public void setNextNode(Node n) {
+		this.nextNode = n;
+	}
+
+	@Override
+	public Node getCurrentNode() {
+		return this.currentNode;
+	}
+
+	@Override
+	public void setCurrentNode(Node n) {
+		this.currentNode = n;
 	}
       
 }
