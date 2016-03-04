@@ -75,31 +75,6 @@ public class StraightRoad implements Terrain{
     }
 
     @Override
-    public int getLenght() {
-        return 0;
-    }
-
-    @Override
-    public Node getNextNode() {
-        return null;
-    }
-
-    @Override
-    public void setNextNode(Node n) {
-
-    }
-
-    @Override
-    public Node getCurrentNode() {
-        return null;
-    }
-
-    @Override
-    public void setCurrentNode(Node n) {
-
-    }
-
-    @Override
 	public void setInWhichNodeLocated() {
 		// TODO Auto-generated method stub
 		

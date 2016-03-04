@@ -46,7 +46,7 @@ public class CornerRoad implements Terrain{
         lane_divider.setColor(Color.white);
         sroad_border.draw(new Arc2D.Double(xStart+25,yStart+25,road_width/2,road_width/2,start_angle,arc_angle,Arc2D.OPEN));
     }
-	
+
 	@Override
 	public void setInWhichNodeLocated() {
 		// TODO Auto-generated method stub

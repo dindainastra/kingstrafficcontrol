@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import Objects.Bus;
 import Objects.Car;
 import Objects.Draw;
-import Objects.Junction;
 import Objects.Person;
 import Objects.Terrain;
 import Objects.TrafficLights;
