@@ -18,7 +18,7 @@ public class Draw extends JPanel {
     ArrayList<Motorbike> motorbikes=new ArrayList<>();
     ArrayList<Bike> bikes=new ArrayList<>();
     ArrayList<Lorry> lorries=new ArrayList<>();
-    
+
     
     
     private ArrayList<Vehicle> vehicleList; 

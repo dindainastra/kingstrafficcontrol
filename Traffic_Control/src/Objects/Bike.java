@@ -64,6 +64,10 @@ public class Bike extends JPanel implements Vehicle{
 	
 	public void checkEmergency(){
 		if (this.getPriority()==1){
+			//RGB=RED
+			this.setR(255);
+			this.setG(0);
+			this.setB(0);
             revalidate();
             repaint();
 		}
