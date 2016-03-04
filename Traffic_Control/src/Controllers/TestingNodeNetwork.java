@@ -71,12 +71,12 @@ public class TestingNodeNetwork {
 		aTerrainList.add(new CRoad(250,275,90));
         
 		aTerrainList.add(new CRoad(300,75,90));*/
-		aTerrainList.add(new CRoad(500,75,100,360));
-		aTerrainList.add(new CRoad(500,175,100,270));
-		aTerrainList.add(new CRoad(250,225,100,270));
-		aTerrainList.add(new CRoad(250,275,100,90));
+		aTerrainList.add(new CRoad(500,75,100,360,1));
+		aTerrainList.add(new CRoad(500,175,100,270,1));
+		aTerrainList.add(new CRoad(250,225,100,270,1));
+		aTerrainList.add(new CRoad(250,275,100,90,1));
 
-		aTerrainList.add(new CRoad(300,75,100,90));
+		aTerrainList.add(new CRoad(300,75,100,90,1));
         
         //add roundabout
 		//aTerrainList.add(new CRoad(225,400,90));
@@ -84,10 +84,14 @@ public class TestingNodeNetwork {
 		//aTerrainList.add(new CRoad(225,400,270));
 		//aTerrainList.add(new CRoad(225,400,360));
 
-		aTerrainList.add(new CRoad(225,400,100,90));
-		aTerrainList.add(new CRoad(225,400,100,180));
-		aTerrainList.add(new CRoad(225,400,100,270));
-		aTerrainList.add(new CRoad(225,400,100,360));
+		aTerrainList.add(new CRoad(175,425,200,90,1));
+		aTerrainList.add(new CRoad(175,425,200,180,1));
+		aTerrainList.add(new CRoad(175,425,200,270,1));
+		aTerrainList.add(new CRoad(175,425,200,360,1));
+		aTerrainList.add(new CRoad(250,500,50,90,0));
+		aTerrainList.add(new CRoad(250,500,50,180,0));
+		aTerrainList.add(new CRoad(250,500,50,270,0));
+		aTerrainList.add(new CRoad(250,500,50,360,0));
         
 		//add junctions
 		aTerrainList.add(new SquareJunction(300,225));
