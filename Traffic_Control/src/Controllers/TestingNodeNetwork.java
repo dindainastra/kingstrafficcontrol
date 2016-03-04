@@ -88,6 +88,8 @@ public class TestingNodeNetwork {
 //        bikes.add(new Bike(170,230));
 //        emergencies.add(new Emergency(120,230));
 
+		//Run traffic simulation forever
+
 		//add nodes
 		aNodeList.add(new Node("START",0,0));
 		aNodeList.add(new Node("First Node",0.8,10.0));

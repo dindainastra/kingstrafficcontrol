@@ -53,6 +53,8 @@ public class NodeManager{
 				System.out.println("Error: "+e.getLocalizedMessage());
 			}
 		}
+
+
 	}
 
 	//Return the nodeNetwork.
