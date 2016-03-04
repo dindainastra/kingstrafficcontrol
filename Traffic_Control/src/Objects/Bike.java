@@ -3,13 +3,8 @@ import java.awt.*;
 
 import javax.swing.JPanel;
 
-import Controllers.Node;
-
 public class Bike extends JPanel implements Vehicle{
-    
-	private Node currentNode;
-	private Node nextNode;
-	// Variables declaration
+    // Variables declaration
     private final int pos_x,pos_y;
     private final int R=128, G=0, B=128; //pastel purple
     private final int length = 10 ,width = 11;
@@ -80,24 +75,4 @@ public class Bike extends JPanel implements Vehicle{
 		// TODO Auto-generated method stub
 		return 0;
 	}  
-	
-	@Override
-	public Node getNextNode() {
-		return this.nextNode;
-	}
-
-	@Override
-	public void setNextNode(Node n) {
-		this.nextNode = n;
-	}
-
-	@Override
-	public Node getCurrentNode() {
-		return this.currentNode;
-	}
-
-	@Override
-	public void setCurrentNode(Node n) {
-		this.currentNode = n;
-	}
 }
