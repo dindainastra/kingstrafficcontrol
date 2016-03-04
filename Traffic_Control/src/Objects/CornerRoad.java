@@ -1,11 +1,15 @@
 
 package Objects;
+import Controllers.Node;
+
 import java.awt.*;
 import java.awt.geom.Arc2D;
 
 //Curve Road
 public class CornerRoad implements Terrain{
     // Variables declaration
+	private Node currentNode;
+	private Node nextNode;
     //Set size of straight road
     private int xStart,yStart;
     private final int road_width = 100, arc_angle = 90;
@@ -42,7 +46,7 @@ public class CornerRoad implements Terrain{
         lane_divider.setColor(Color.white);
         sroad_border.draw(new Arc2D.Double(xStart+25,yStart+25,road_width/2,road_width/2,start_angle,arc_angle,Arc2D.OPEN));
     }
-
+	
 	@Override
 	public void setInWhichNodeLocated() {
 		// TODO Auto-generated method stub

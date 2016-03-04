@@ -1,5 +1,7 @@
 
 package Objects;
+import Controllers.Node;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
@@ -72,7 +74,32 @@ public class StraightRoad implements Terrain{
         road.setTransform(old);
     }
 
-	@Override
+    @Override
+    public int getLenght() {
+        return 0;
+    }
+
+    @Override
+    public Node getNextNode() {
+        return null;
+    }
+
+    @Override
+    public void setNextNode(Node n) {
+
+    }
+
+    @Override
+    public Node getCurrentNode() {
+        return null;
+    }
+
+    @Override
+    public void setCurrentNode(Node n) {
+
+    }
+
+    @Override
 	public void setInWhichNodeLocated() {
 		// TODO Auto-generated method stub
 		
