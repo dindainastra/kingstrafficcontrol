@@ -47,19 +47,20 @@ public class TestingNodeNetwork {
 			}
 		}
 
-		//add horizontal roads
-		//aTerrainList.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor(),getrotation());  
-		aTerrainList.add(new SRoad(100,225,00,2,0));
-		aTerrainList.add(new SRoad(200,225,01,3,0));
-		aTerrainList.add(new SRoad(350,225,10,3,0));
-		aTerrainList.add(new SRoad(450,225,01,2,0));
-		aTerrainList.add(new SRoad(350,75,00,2,0));
-		aTerrainList.add(new SRoad(450,75,00,2,0));
+		//add horizontal road
+		//Added another traffic light color parameter to SRoad
+		//aTerrainList.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor1(),gettrafficcolor2(),getrotation());
+		aTerrainList.add(new SRoad(100,225,00,2,2,0));
+		aTerrainList.add(new SRoad(200,225,01,1,3,0));
+		aTerrainList.add(new SRoad(350,225,10,1,3,0));
+		aTerrainList.add(new SRoad(450,225,01,2,2,0));
+		aTerrainList.add(new SRoad(350,75,00,2,2,0));
+		aTerrainList.add(new SRoad(450,75,00,2,2,0));
         
 		//add vertical roads
-		aTerrainList.add(new SRoad(600,125,11,1,90)); 
-		aTerrainList.add(new SRoad(350,125,01,2,90));
-		aTerrainList.add(new SRoad(300,325,01,2,90));
+		aTerrainList.add(new SRoad(600,125,11,1,1,90));
+		aTerrainList.add(new SRoad(350,125,01,2,2,90));
+		aTerrainList.add(new SRoad(300,325,01,2,2,90));
         
         //add curved roads
 		aTerrainList.add(new CRoad(500,75,360));
