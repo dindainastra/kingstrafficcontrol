@@ -1,21 +1,17 @@
 package Controllers;
 
-import Objects.Car;
 import Objects.Draw;
+import Objects.Vehicle;
 
 public class CarFlow implements Runnable {
-    Car car;
     Draw map;
+    Vehicle vehicle;
 
-    public CarFlow(Car c){
-        this.car = c;
-    }
-
-    public CarFlow(Car c, Draw map){
-        this.car = c;
+    public CarFlow(Vehicle v, Draw map){
+        this.vehicle = v;
         this.map = map;
     }
-
+    
     /**
      * Resume the cars flow through the system
      * Repaint the map whilst moving
@@ -27,7 +23,7 @@ public class CarFlow implements Runnable {
                 //Could pass in the next node to the move method
                 //Move method carries the car all the way to the node
                 //Then on the next iteration we decide the next node (randomly) and pass it again to the move method
-                car.move();
+                this.vehicle.move();
                 map.revalidate();
                 map.repaint();
                 Thread.sleep(1000);

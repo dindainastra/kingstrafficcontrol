@@ -6,7 +6,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 //added library for Stopwatch
-import org.apache.commons.lang.time.StopWatch;
+//import org.apache.commons.lang.time.StopWatch;
 
 import Objects.CRoad;
 import Objects.Car;
