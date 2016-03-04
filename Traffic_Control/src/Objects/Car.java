@@ -5,12 +5,15 @@ package Objects;
 import java.awt.*;
 
 import javax.swing.JPanel;
+
+import Controllers.Node;
 public class Car extends JPanel implements Vehicle {
         
         // Variables declaration
 	private Person driver;
 	private int priorityLevel;
-	private int nodeID;
+	private Node currentNode;
+	private Node nextNode;
         private int pos_x;
 		private final int pos_y;
         private final int R = 173, G = 216, B=230; //pastel blue
@@ -79,6 +82,26 @@ public class Car extends JPanel implements Vehicle {
 		g.setColor(new Color (R,G,B));
         g.fillRect(pos_x, pos_y, length, width);
 		
+	}
+
+	@Override
+	public Node getNextNode() {
+		return this.nextNode;
+	}
+
+	@Override
+	public void setNextNode(Node n) {
+		this.nextNode = n;
+	}
+
+	@Override
+	public Node getCurrentNode() {
+		return this.currentNode;
+	}
+
+	@Override
+	public void setCurrentNode(Node n) {
+		this.currentNode = n;
 	}
 
 }

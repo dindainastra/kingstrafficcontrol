@@ -3,8 +3,13 @@ import java.awt.*;
 
 import javax.swing.JPanel;
 
+import Controllers.Node;
+
 public class Emergency extends JPanel implements Vehicle {
-    // Variables declaration
+    
+	private Node currentNode;
+	private Node nextNode;
+	// Variables declaration
     private final int pos_x,pos_y;
     private final int R = 255, G = 0, B=0; //Red
     private final int length = 20 ,width = 15;
@@ -75,4 +80,23 @@ public class Emergency extends JPanel implements Vehicle {
 		return 0;
 	}
       
+	@Override
+	public Node getNextNode() {
+		return this.nextNode;
+	}
+
+	@Override
+	public void setNextNode(Node n) {
+		this.nextNode = n;
+	}
+
+	@Override
+	public Node getCurrentNode() {
+		return this.currentNode;
+	}
+
+	@Override
+	public void setCurrentNode(Node n) {
+		this.currentNode = n;
+	}
 }
