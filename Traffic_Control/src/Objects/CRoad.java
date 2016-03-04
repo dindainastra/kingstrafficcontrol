@@ -8,15 +8,24 @@ public class CRoad implements Terrain{
     // Variables declaration
     //Set size of straight road
     private int xStart,yStart;
-    private final int road_width = 100, arc_angle = 90;
+    private final int arc_angle = 90;
+    private int road_width;
     private int start_angle;
 
-    public CRoad(int x_Start, int y_Start, int start_angle){
+   /* public CRoad(int x_Start, int y_Start, int start_angle){
         this.start_angle = start_angle;
         this.xStart = x_Start;
         this.yStart = y_Start;
-    }   
-    
+        //this.road_width=100;
+    }*/
+
+    public CRoad(int x_Start, int y_Start,int road_width, int start_angle){
+        this.start_angle = start_angle;
+        this.xStart = x_Start;
+        this.yStart = y_Start;
+        this.road_width=road_width;
+    }
+
     public void doDrawing(Graphics2D g){
         Graphics2D road=(Graphics2D) g;
         Graphics2D lane_divider=(Graphics2D) g;

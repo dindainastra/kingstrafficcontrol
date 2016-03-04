@@ -6,7 +6,7 @@ import java.util.Random;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 //added library for Stopwatch
-import org.apache.commons.lang.time.StopWatch;
+//import org.apache.commons.lang.time.StopWatch;
 
 import Objects.CRoad;
 import Objects.Car;
@@ -65,18 +65,29 @@ public class TestingNodeNetwork {
 		aTerrainList.add(new SRoad(300,325,01,2,2,90));
         
         //add curved roads
-		aTerrainList.add(new CRoad(500,75,360));
+		/*aTerrainList.add(new CRoad(500,75,360));
 		aTerrainList.add(new CRoad(500,175,270));
 		aTerrainList.add(new CRoad(250,225,270));
 		aTerrainList.add(new CRoad(250,275,90));
         
-		aTerrainList.add(new CRoad(300,75,90));
+		aTerrainList.add(new CRoad(300,75,90));*/
+		aTerrainList.add(new CRoad(500,75,100,360));
+		aTerrainList.add(new CRoad(500,175,100,270));
+		aTerrainList.add(new CRoad(250,225,100,270));
+		aTerrainList.add(new CRoad(250,275,100,90));
+
+		aTerrainList.add(new CRoad(300,75,100,90));
         
         //add roundabout
-		aTerrainList.add(new CRoad(225,400,90));
-		aTerrainList.add(new CRoad(225,400,180));
-		aTerrainList.add(new CRoad(225,400,270));
-		aTerrainList.add(new CRoad(225,400,360));
+		//aTerrainList.add(new CRoad(225,400,90));
+		//aTerrainList.add(new CRoad(225,400,180));
+		//aTerrainList.add(new CRoad(225,400,270));
+		//aTerrainList.add(new CRoad(225,400,360));
+
+		aTerrainList.add(new CRoad(225,400,100,90));
+		aTerrainList.add(new CRoad(225,400,100,180));
+		aTerrainList.add(new CRoad(225,400,100,270));
+		aTerrainList.add(new CRoad(225,400,100,360));
         
 		//add junctions
 		aTerrainList.add(new SquareJunction(300,225));
