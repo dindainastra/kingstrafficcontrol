@@ -1,6 +1,7 @@
 package Controllers;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -25,29 +26,28 @@ public class TestingNodeNetwork {
 	private static ArrayList<Node> aNodeList;
 	private static ArrayList<Terrain> aTerrainList;
 	private static JFrame frame;
-	
+	private static Random rand;
+
 	public static void main(String[] args) {
-		
+		rand = new Random();
 		aPersonList = new ArrayList<Person>();
 		aVehicleList = new ArrayList<Vehicle>();
 		aNodeList = new ArrayList<Node>();
 		aTerrainList = new ArrayList<Terrain>();
 		
 		//Declarations of the Network
-		
 		//add Persons  new Person("Name", politenesslevel, isPedestrian)
-		aPersonList.add(new Person("Person1", 10, false));
-//		aPersonList.add(new Person("Person2", 10, false));
-//		aPersonList.add(new Person("Person3", 10, false));
-//		aPersonList.add(new Person("Person4", 10, false));
-//		aPersonList.add(new Person("Person5", 10, false));
-//		aPersonList.add(new Person("Person6", 10, false));
-//		
+		for(int i=0; i<=2; i++){
+			aPersonList.add(new Person("Person"+i, rand.nextInt(10), false));
+		}
+
 		//Set Person to every Car and add the car in the road
-		for (Person p : aPersonList)
-			if (!p.isPedestrian())
-				aVehicleList.add(new Car(p,100,225));
-				
+		for (Person p : aPersonList) {
+			if (!p.isPedestrian()) {
+				aVehicleList.add(new Car(p, 80, 225));
+			}
+		}
+
 		//add horizontal roads
 		//aTerrainList.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor(),getrotation());  
 		aTerrainList.add(new SRoad(100,225,00,2,0));
@@ -85,8 +85,7 @@ public class TestingNodeNetwork {
 //        lorries.add(new Lorry(240,230));
 //        bikes.add(new Bike(170,230));
 //        emergencies.add(new Emergency(120,230));
-		
-		
+
 		//add nodes
 		aNodeList.add(new Node("START",0,0));
 		aNodeList.add(new Node("First Node",0.8,10.0));
@@ -113,22 +112,21 @@ public class TestingNodeNetwork {
 		
 		nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
 		
-		System.out.println("My network is like that:");
-		nodeManager.printMyNetwork();
-		nodeManager.vehicleFlow_version1();
+		//System.out.println("My network is like that:");
+		//nodeManager.printMyNetwork();
+		//nodeManager.vehicleFlow_version1();
+
+		//Create and move cars with different threads
 
 		nodeManager.start();
-		
 		nodeManager.vehicleFlow_version1();
-		
-//		nodeManager.resetNodeNetwork(); there is a bug now, but whatever
 
-		nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
+//		nodeManager.resetNodeNetwork(); there is a bug now, but whatever
+		//nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
 		
-		for (int i=0;i<10;i++)
-			nodeManager.addANewVehicleToTheNetwork(new Car(new Person("1",10,false),100,i++));
+		/*for (int i=0;i<10;i++) {
+			nodeManager.addANewVehicleToTheNetwork(new Car(new Person("1", 10, false), 100, i++));
+		}*/
 		//random vehicle creation by time (RANDOM)
 	}
-
-	
 }
