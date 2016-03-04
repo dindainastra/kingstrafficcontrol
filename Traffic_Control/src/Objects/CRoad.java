@@ -3,10 +3,15 @@ package Objects;
 import java.awt.*;
 import java.awt.geom.Arc2D;
 
+import Controllers.Node;
+
 //Curve Road
 public class CRoad implements Terrain{
-    // Variables declaration
-    //Set size of straight road
+    
+	// Variables declaration
+	private Node currentNode;
+	private Node nextNode;
+	//Set size of straight road
     private int xStart,yStart;
     private final int road_width = 100, arc_angle = 90;
     private int start_angle;
@@ -65,7 +70,32 @@ public class CRoad implements Terrain{
 	public void setPerson() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getLenght() {
+		return xStart;  // <--- lenght of the curves???? 
 	} 
+	
+	@Override
+	public Node getNextNode() {
+		return this.nextNode;
+	}
+
+	@Override
+	public void setNextNode(Node n) {
+		this.nextNode = n;
+	}
+
+	@Override
+	public Node getCurrentNode() {
+		return this.currentNode;
+	}
+
+	@Override
+	public void setCurrentNode(Node n) {
+		this.currentNode = n;
+	}
 }
 
 
