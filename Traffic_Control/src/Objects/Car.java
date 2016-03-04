@@ -8,34 +8,38 @@ import javax.swing.JPanel;
 
 import Controllers.Node;
 public class Car extends JPanel implements Vehicle {
-        
-        // Variables declaration
+
 	private Person driver;
 	private int priorityLevel;
 	private Node currentNode;
 	private Node nextNode;
-        private int pos_x;
-		private final int pos_y;
-        private final int R = 173, G = 216, B=230; //pastel blue
-        private final int length = 20 ,width = 15;
-        private JPanel myPanel;
-        private int tmp = 0;
-        private double distanceFromNodeToNode;
-    
-        public void move(){
-            this.set_pos_x(length + this.get_pos_x( ) + 5);
-			revalidate();
-        	repaint();
-        	
-        }
+    private int pos_x,pos_y;
+    private int R = 173, G = 216, B=230; //pastel blue
+    private final int length = 20 ,width = 15;
+    private JPanel myPanel;
+    private int tmp = 0;
+    private double distanceFromNodeToNode;
         
-        //set car position
-	public Car(Person p,int x_coordinate, int y_coordinate){
+	public void move(){
+		this.set_pos_x(length + this.get_pos_x( ) + 5);
+		revalidate();
+		repaint();
+	}
+
+	/**
+	 * Smoother movement of the car from one coordinate to another
+	 */
+	public void transition(int startX, int startY, int endX, int endY){
+
+	}
+        
+	//set car position
+	public Car(Person p, int x_coordinate, int y_coordinate){
 		driver = p;
 		priorityLevel = 0; //default no priority
-                this.pos_x = x_coordinate;
-                this.pos_y = y_coordinate;
-        }
+		this.pos_x = x_coordinate;
+		this.pos_y = y_coordinate;
+	}
 	
 	public void set_pos_x(int x){
 		this.pos_x = x;
@@ -43,6 +47,14 @@ public class Car extends JPanel implements Vehicle {
 	
 	public int get_pos_x(){
 		return this.pos_x;
+	}
+	
+	public void set_pos_y(int y){
+		this.pos_y = y;
+	}
+	
+	public int get_pos_y(){
+		return this.pos_y;
 	}
 	
 	public int getLength(){
@@ -55,6 +67,30 @@ public class Car extends JPanel implements Vehicle {
 
 	public void setPriority(int priority) {
 		this.priorityLevel = priority;
+		checkEmergency();
+	}
+	
+	public void checkEmergency(){
+		if (this.getPriority()==1){
+			//RGB=RED
+			this.setR(255);
+			this.setG(0);
+			this.setB(0);
+            revalidate();
+            repaint();
+		}
+	}
+	
+	public void setR(int r){
+		this.R = r;
+	}
+	
+	public void setG(int g){
+		this.G = g;
+	}
+	
+	public void setB(int b){
+		this.B = b;
 	}
 
 	public String getDriversName() {
@@ -81,7 +117,6 @@ public class Car extends JPanel implements Vehicle {
 	public void doDrawing(Graphics2D g) {
 		g.setColor(new Color (R,G,B));
         g.fillRect(pos_x, pos_y, length, width);
-		
 	}
 
 	@Override
