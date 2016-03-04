@@ -3,10 +3,15 @@ package Objects;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 
+import Controllers.Node;
+
 //Straight Road
 public class SRoad implements Terrain{
-    // Variables declaration
-    //Set size of straight road
+    
+	// Variables declaration
+	private Node currentNode;
+	private Node nextNode;
+	//Set size of straight road
     private int xStart,yStart, trafficlight, RGB1, RGB2, rotation;
     private final int road_length = 100;
     private final int road_width = 50;
@@ -94,7 +99,32 @@ public class SRoad implements Terrain{
 	public void setPerson() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public int getLenght() {
+		return this.road_length;
 	} 
+	
+	@Override
+	public Node getNextNode() {
+		return this.nextNode;
+	}
+
+	@Override
+	public void setNextNode(Node n) {
+		this.nextNode = n;
+	}
+
+	@Override
+	public Node getCurrentNode() {
+		return this.currentNode;
+	}
+
+	@Override
+	public void setCurrentNode(Node n) {
+		this.currentNode = n;
+	}
 }
 
 
