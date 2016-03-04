@@ -5,16 +5,14 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Draw extends JPanel {
-   
+
     private ArrayList<Vehicle> vehicleList; 
     private ArrayList<Terrain> terrainList; 
 
     //Draw cars, roads, traffic lights
     public Draw(ArrayList<Vehicle> aVehicleList, ArrayList<Terrain> aTerrainList) {
-
         this.vehicleList = aVehicleList;
         this.terrainList = aTerrainList;
-
     }
     
     @Override
@@ -29,14 +27,9 @@ public class Draw extends JPanel {
         	aTerrain.doDrawing(f);
         } 
 
-       
         for (Vehicle aVehicle : vehicleList) {
         	aVehicle.doDrawing(f);
         }
-       
     }
-    
-    
-    
 }
 
