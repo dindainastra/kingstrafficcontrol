@@ -8,7 +8,6 @@ import javax.swing.SwingUtilities;
 
 import Objects.CRoad;
 import Objects.Car;
-import Objects.Display;
 import Objects.Draw;
 import Objects.Person;
 import Objects.SRoad;
