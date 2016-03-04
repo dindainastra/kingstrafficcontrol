@@ -2,18 +2,14 @@ package Objects;
 import java.awt.*;
 import javax.swing.*;
 
-import Controllers.Node;
-
-public class Junction implements Terrain{
+public class SquareJunction implements Terrain{
 
     // Variables declaration
-	private Node currentNode;
-	private Node nextNode;
-	//Set size of road
+    //Set size of road
     private int xStart,yStart;
     private final int road_width = 50;
 
-    public Junction(int x_Start, int y_Start){
+    public SquareJunction(int x_Start, int y_Start){
         this.xStart = x_Start;
         this.yStart = y_Start;
     }   
@@ -69,30 +65,5 @@ public class Junction implements Terrain{
 	public void setPerson() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public int getLenght() {
-		return road_width;  // probably this is the lenght of this. dunno
-	} 
-	
-	@Override
-	public Node getNextNode() {
-		return this.nextNode;
-	}
-
-	@Override
-	public void setNextNode(Node n) {
-		this.nextNode = n;
-	}
-
-	@Override
-	public Node getCurrentNode() {
-		return this.currentNode;
-	}
-
-	@Override
-	public void setCurrentNode(Node n) {
-		this.currentNode = n;
-	}
+	}      
 }
