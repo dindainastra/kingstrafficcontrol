@@ -1,8 +1,11 @@
 package Controllers;
 
 import java.util.ArrayList;
+
+import Objects.Bus;
 import Objects.Car;
 import Objects.Draw;
+import Objects.Junction;
 import Objects.Person;
 import Objects.Terrain;
 import Objects.TrafficLights;
@@ -30,13 +33,16 @@ public class NodeManager{
 	 * For each car in the vehicle list, create a thread for the cars flow
 	 */
 	public void start(){
-		for(Vehicle c : vehicleList){
+		for(Vehicle v : vehicleList){
 			try {
-				Car car = (Car)c;
-				CarFlow cf = new CarFlow((Car)c, map);
+				CarFlow cf = null;
+				if (v instanceof Car)
+					cf = new CarFlow((Car)v, map);
+				else if (v instanceof Bus)
+					cf = new CarFlow((Bus)v, map);
 
 				//Create a thread with the name of the car driver
-				Thread t = new Thread(cf, "Thread-"+(car.getPerson().getName()));
+				Thread t = new Thread(cf, "Thread-"+(v.getPerson().getName()));
 				t.start();
 
 				//Pause the thread for 2 seconds before creating a new car
@@ -149,6 +155,7 @@ public class NodeManager{
 		
 		for (Vehicle v : vehicleList) {
 			addANewVehicleToTheNetwork(v);
+			v.setCurrentNode(nl.get(0));
 		}
 
 		for (Terrain t : terrainList) {

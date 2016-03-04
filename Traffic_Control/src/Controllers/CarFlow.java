@@ -2,10 +2,12 @@ package Controllers;
 
 import Objects.Car;
 import Objects.Draw;
+import Objects.Vehicle;
 
 public class CarFlow implements Runnable {
     Car car;
     Draw map;
+    Vehicle vehicle;
 
     public CarFlow(Car c){
         this.car = c;
@@ -16,6 +18,11 @@ public class CarFlow implements Runnable {
         this.map = map;
     }
 
+    public CarFlow(Vehicle v, Draw map){
+        this.vehicle = v;
+        this.map = map;
+    }
+    
     /**
      * Resume the cars flow through the system
      * Repaint the map whilst moving

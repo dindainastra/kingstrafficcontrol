@@ -8,14 +8,13 @@ import Controllers.Node;
 
 public class Motorbike extends JPanel implements Vehicle {
    
+	private Person driver;
+	private int priorityLevel;
 	private Node currentNode;
 	private Node nextNode;
-	
-	// Variables declaration
-    private final int pos_x,pos_y;
-    private final int R=221, G=160, B=221; //pastel purple
+    private int pos_x,pos_y;
+    private int R=221, G=160, B=221; //pastel purple
     private final int length = 10 ,width = 11;
-    private Person driver;
     
     //set Motorbike position
     Motorbike(int x_coordinate, int y_coordinate){
@@ -29,59 +28,78 @@ public class Motorbike extends JPanel implements Vehicle {
         g.fillRect(pos_x, pos_y, length, width);   
        // repaint(); 
     }
-    
-    @Override
-    public int getPriority() {
-            // TODO Auto-generated method stub
-            return 0;
-    }
-
-    @Override
-    public void setPriority(int priority) {
-            // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public Person getPerson() {
-            // TODO Auto-generated method stub
-            return this.driver;
-    }
-
-
-    @Override
-    public void setPerson(Person p) {
-    	this.driver = p;
-    }
 
 	@Override
 	public void doDrawing(Graphics2D g) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void set_pos_x(int x) {
-		// TODO Auto-generated method stub
-		
+	public void set_pos_x(int x){
+		this.pos_x = x;
+	}
+	
+	public int get_pos_x(){
+		return this.pos_x;
+	}
+	
+	public void set_pos_y(int y){
+		this.pos_y = y;
+	}
+	
+	public int get_pos_y(){
+		return this.pos_y;
+	}
+	
+	public int getLength(){
+		return this.length;
+	}
+	
+	public int getPriority() {
+		return this.priorityLevel;
 	}
 
-	@Override
-	public int get_pos_x() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setPriority(int priority) {
+		this.priorityLevel = priority;
+		checkEmergency();
+	}
+	
+	public void checkEmergency(){
+		if (this.getPriority()==1){
+            revalidate();
+            repaint();
+		}
 	}
 
-	@Override
-	public void move() {
-		// TODO Auto-generated method stub
-		
+	public void setR(int r){
+		this.R = r;
+	}
+	
+	public void setG(int g){
+		this.G = g;
+	}
+	
+	public void setB(int b){
+		this.B = b;
 	}
 
-	@Override
-	public int getLength() {
-		// TODO Auto-generated method stub
-		return 0;
+	public String getDriversName() {
+		return driver.getName();
+	}
+	
+	public int getDriversPolitenssLevel() {
+		return driver.getPolitenessLevel();
+	}
+	
+	public void setPerson(Person p) {
+		this.driver = p;
+	}
+
+	public Person getPerson() {
+		return this.driver;
+	}	
+	
+	public String toString(){
+		return this.driver.getName();
 	}
 	
 	@Override
@@ -102,5 +120,12 @@ public class Motorbike extends JPanel implements Vehicle {
 	@Override
 	public void setCurrentNode(Node n) {
 		this.currentNode = n;
+	}
+
+	@Override
+	public void move(){
+		this.set_pos_x(length + this.get_pos_x( ) + 5);
+		revalidate();
+		repaint();
 	}
 }
