@@ -74,27 +74,27 @@ public class StraightRoad implements Terrain{
         road.setTransform(old);
     }
 
-    @Override
+    //@Override
     public int getLenght() {
         return 0;
     }
 
-    @Override
+    //@Override
     public Node getNextNode() {
         return null;
     }
 
-    @Override
+    //@Override
     public void setNextNode(Node n) {
 
     }
 
-    @Override
+    //@Override
     public Node getCurrentNode() {
         return null;
     }
 
-    @Override
+    //@Override
     public void setCurrentNode(Node n) {
 
     }
