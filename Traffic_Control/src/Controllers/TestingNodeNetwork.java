@@ -8,12 +8,12 @@ import javax.swing.SwingUtilities;
 //added library for Stopwatch
 //import org.apache.commons.lang.time.StopWatch;
 
-import Objects.CRoad;
+import Objects.CornerRoad;
 import Objects.Car;
 import Objects.Draw;
 import Objects.Person;
-import Objects.SRoad;
-import Objects.Junction;
+import Objects.StraightRoad;
+import Objects.SquareJunction;
 import Objects.Terrain;
 import Objects.TrafficLights;
 import Objects.Vehicle;
@@ -52,34 +52,34 @@ public class TestingNodeNetwork {
 		//add horizontal road
 		//Added another traffic light color parameter to SRoad
 		//aTerrainList.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor1(),gettrafficcolor2(),getrotation());
-		aTerrainList.add(new SRoad(100,225,00,2,2,0));
-		aTerrainList.add(new SRoad(200,225,01,1,3,0));
-		aTerrainList.add(new SRoad(350,225,10,1,3,0));
-		aTerrainList.add(new SRoad(450,225,01,2,2,0));
-		aTerrainList.add(new SRoad(350,75,00,2,2,0));
-		aTerrainList.add(new SRoad(450,75,00,2,2,0));
+		aTerrainList.add(new StraightRoad(100,225,00,2,2,0));
+		aTerrainList.add(new StraightRoad(200,225,01,1,3,0));
+		aTerrainList.add(new StraightRoad(350,225,10,1,3,0));
+		aTerrainList.add(new StraightRoad(450,225,01,2,2,0));
+		aTerrainList.add(new StraightRoad(350,75,00,2,2,0));
+		aTerrainList.add(new StraightRoad(450,75,00,2,2,0));
         
 		//add vertical roads
-		aTerrainList.add(new SRoad(600,125,11,1,1,90));
-		aTerrainList.add(new SRoad(350,125,01,2,2,90));
-		aTerrainList.add(new SRoad(300,325,01,2,2,90));
+		aTerrainList.add(new StraightRoad(600,125,11,1,1,90));
+		aTerrainList.add(new StraightRoad(350,125,01,2,2,90));
+		aTerrainList.add(new StraightRoad(300,325,01,2,2,90));
         
         //add curved roads
-		aTerrainList.add(new CRoad(500,75,360));
-		aTerrainList.add(new CRoad(500,175,270));
-		aTerrainList.add(new CRoad(250,225,270));
-		aTerrainList.add(new CRoad(250,275,90));
+		aTerrainList.add(new CornerRoad(500,75,360));
+		aTerrainList.add(new CornerRoad(500,175,270));
+		aTerrainList.add(new CornerRoad(250,225,270));
+		aTerrainList.add(new CornerRoad(250,275,90));
         
-		aTerrainList.add(new CRoad(300,75,90));
+		aTerrainList.add(new CornerRoad(300,75,90));
         
         //add roundabout
-		aTerrainList.add(new CRoad(225,400,90));
-		aTerrainList.add(new CRoad(225,400,180));
-		aTerrainList.add(new CRoad(225,400,270));
-		aTerrainList.add(new CRoad(225,400,360));
+		aTerrainList.add(new CornerRoad(225,400,90));
+		aTerrainList.add(new CornerRoad(225,400,180));
+		aTerrainList.add(new CornerRoad(225,400,270));
+		aTerrainList.add(new CornerRoad(225,400,360));
         
 		//add junctions
-		aTerrainList.add(new Junction(300,225));
+		aTerrainList.add(new SquareJunction(300,225));
         
 //        //Draw traffic
 //        cars.add(new Car(p,210,230));
@@ -87,8 +87,6 @@ public class TestingNodeNetwork {
 //        lorries.add(new Lorry(240,230));
 //        bikes.add(new Bike(170,230));
 //        emergencies.add(new Emergency(120,230));
-
-		//Run traffic simulation forever
 
 		//add nodes
 		aNodeList.add(new Node("START",0,0));
