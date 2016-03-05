@@ -141,6 +141,10 @@ public class NodeManager{
 		getNodeList().get(whichNode).addToStack(t);
 	}
 	
+	public void addANewTerrainToTheNetwork(Terrain t, Node whichNode){
+		getNodeList().get(getNodeList().indexOf(whichNode)).addToStack(t);
+	}
+	
 	//Just reset the Node Network
 	public void resetNodeNetwork(){
 		nodeList.clear();
@@ -153,15 +157,16 @@ public class NodeManager{
 		this.setVehicleList(vl);
 		this.setTerrainList(tl);
 		
+		for (Terrain t : terrainList) {
+			addANewTerrainToTheNetwork(t,t.getCurrentNode());
+		}
+		
 		for (Vehicle v : vehicleList) {
 			addANewVehicleToTheNetwork(v);
 			v.setCurrentNode(nl.get(0));
 			v.setNextNode(nl.get(1));  // do it random 
 		}
 
-		for (Terrain t : terrainList) {
-			addANewTerrainToTheNetwork(t, 1);
-		}
 	}
 	
 	public void setTerrainList(ArrayList<Terrain> tl){

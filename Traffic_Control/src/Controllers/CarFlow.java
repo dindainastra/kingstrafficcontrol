@@ -1,12 +1,13 @@
 package Controllers;
 
 import Objects.Draw;
+import Objects.Terrain;
 import Objects.Vehicle;
 
 public class CarFlow implements Runnable {
-    Draw map;
-    Vehicle vehicle;
-
+    private Draw map;
+    private Vehicle vehicle;
+    
     public CarFlow(Vehicle v, Draw map){
         this.vehicle = v;
         this.map = map;
@@ -18,7 +19,9 @@ public class CarFlow implements Runnable {
      */
     private void startFlow(){
         //Move the car for for a set period of time?
-        for (int steps=7; steps>0; steps--) {
+    	Terrain t = (Terrain) vehicle.getCurrentNode().getNextNodeList().get(0).returnStack().get(0);  //fix that shit
+    	
+    	for (int steps= (t.getLenght()/vehicle.getLength()); steps>0; steps--) {
             try {
                 //Could pass in the next node to the move method
                 //Move method carries the car all the way to the node

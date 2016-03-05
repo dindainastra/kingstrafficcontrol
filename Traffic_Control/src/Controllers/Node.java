@@ -7,21 +7,18 @@ import java.util.logging.Level;
 public class Node {
 	private ArrayList<Object> myStack = new ArrayList<Object>();
 	private ArrayList<Node> nextNodeList = new ArrayList<Node>(); //I will need probably to add an option to control the junctions... we'll see
+	private ArrayList<Node> previousNodeList = new ArrayList<Node>(); 
+	private int directionOfNode = 0;  // 0 ->   and  1 <- 
 	private String nameOfNode;
-	private double weightOfDifficulty;
-	private double distranceOfNode;
 
-	public Node(String nodeName, double weight, double distance) {
+	public Node(String nodeName) {
 		this.nameOfNode = nodeName;
-		this.weightOfDifficulty = weight;
-		this.distranceOfNode = distance;
 	}
 
-	public Node(String nodeName, double weight, double distance, ArrayList<Node> nextNodeList) {
+	public Node(String nodeName, ArrayList<Node> nextNodeList, ArrayList<Node> previousNodeList) {
 		this.nameOfNode = nodeName;
-		this.weightOfDifficulty = weight;
-		this.distranceOfNode = distance;
 		this.nextNodeList = nextNodeList;
+		this.previousNodeList = previousNodeList;
 	}
 
 	public boolean hasNext(){
@@ -50,6 +47,14 @@ public class Node {
 		return this.nextNodeList;
 	}
 	
+	public void setPreviousNodeToTheNodeList(Node n){
+		this.previousNodeList.add(n);
+	}
+	
+	public ArrayList<Node> getPreviousNodeList(){
+		return this.previousNodeList;
+	}
+	
 	public ArrayList<Object> returnStack(){
 		return this.myStack;
 	}
@@ -76,21 +81,13 @@ public class Node {
 	public void setNameOfNode(String nameOfNode) {
 		this.nameOfNode = nameOfNode;
 	}
-
-	public double getWeightOfDifficulty() {
-		return weightOfDifficulty;
+	
+	public int getDirectionOfNode(){
+		return this.directionOfNode;
 	}
-
-	public void setWeightOfDifficulty(double weightOfDifficulty) {
-		this.weightOfDifficulty = weightOfDifficulty;
-	}
-
-	public double getTime() {
-		return distranceOfNode;
-	}
-
-	public void setTime(double time) {
-		this.distranceOfNode = time;
+	
+	public void getDirectionOfNode(int i){
+		this.directionOfNode = i;
 	}
 
 }

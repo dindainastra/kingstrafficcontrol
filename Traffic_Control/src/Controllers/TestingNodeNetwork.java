@@ -52,35 +52,36 @@ public class TestingNodeNetwork {
 		//add horizontal road
 		//Added another traffic light color parameter to SRoad
 		//aTerrainList.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor1(),gettrafficcolor2(),getrotation());
-		aTerrainList.add(new SRoad(100,225,00,2,2,0));
-		aTerrainList.add(new SRoad(200,225,01,1,3,0));
-		aTerrainList.add(new SRoad(350,225,10,1,3,0));
-		aTerrainList.add(new SRoad(450,225,01,2,2,0));
-		aTerrainList.add(new SRoad(350,75,00,2,2,0));
-		aTerrainList.add(new SRoad(450,75,00,2,2,0));
+		aTerrainList.add(new SRoad(100,225,00,2,2,0)); //1
+
+		aTerrainList.add(new SRoad(200,225,01,1,3,0)); //2
+		aTerrainList.add(new SRoad(350,225,10,1,3,0)); //3
+		aTerrainList.add(new SRoad(450,225,01,2,2,0)); //4
+		aTerrainList.add(new SRoad(350,75,00,2,2,0));  //5
+		aTerrainList.add(new SRoad(450,75,00,2,2,0));  //6
         
 		//add vertical roads
-		aTerrainList.add(new SRoad(600,125,11,1,1,90));
-		aTerrainList.add(new SRoad(350,125,01,2,2,90));
-		aTerrainList.add(new SRoad(300,325,01,2,2,90));
+		aTerrainList.add(new SRoad(600,125,11,1,1,90)); //7
+		aTerrainList.add(new SRoad(350,125,01,2,2,90)); //8
+		aTerrainList.add(new SRoad(300,325,01,2,2,90)); //9
         
         //add curved roads
-		aTerrainList.add(new CRoad(500,75,360));
-		aTerrainList.add(new CRoad(500,175,270));
-		aTerrainList.add(new CRoad(250,225,270));
-		aTerrainList.add(new CRoad(250,275,90));
+		aTerrainList.add(new CRoad(500,75,360)); //10
+		aTerrainList.add(new CRoad(500,175,270)); //11
+		aTerrainList.add(new CRoad(250,225,270)); //12
+		aTerrainList.add(new CRoad(250,275,90)); //13
         
-		aTerrainList.add(new CRoad(300,75,90));
+		aTerrainList.add(new CRoad(300,75,90)); //14
         
         //add roundabout
-		aTerrainList.add(new CRoad(225,400,90));
-		aTerrainList.add(new CRoad(225,400,180));
-		aTerrainList.add(new CRoad(225,400,270));
-		aTerrainList.add(new CRoad(225,400,360));
+		aTerrainList.add(new CRoad(225,400,90)); //15
+		aTerrainList.add(new CRoad(225,400,180)); //16
+		aTerrainList.add(new CRoad(225,400,270)); //17
+		aTerrainList.add(new CRoad(225,400,360)); //18
         
-		//add junctions
-		aTerrainList.add(new Junction(300,225));
-        
+//		//add junctions
+		aTerrainList.add(new Junction(300,225)); //19
+//        
 //        //Draw traffic
 //        cars.add(new Car(p,210,230));
 //        motorbikes.add(new Motorbike(250,255));  
@@ -89,12 +90,44 @@ public class TestingNodeNetwork {
 //        emergencies.add(new Emergency(120,230));
 
 		//add nodes
-		aNodeList.add(new Node("START",0,0));
-		aNodeList.add(new Node("First Node",0.8,10.0));
-		aNodeList.add(new Node("Second Node",0.5,20.0));
-		aNodeList.add(new Node("Third Node",0.5,20.0));
-		aNodeList.add(new Node("END",0,20.0));
+		int i=0;
+		for (Terrain t : aTerrainList){
+			Node n = new Node("Node "+ ++i);
+			aNodeList.add(n);
+			t.setCurrentNode(n);
+		}
+			
+		//Create my Network's Node Graph. So, this will add the nextNode for every node.
+		//Optionally, create a graph class that parses the "core" list, and the graph with AI select the 
+		//relations between each node.
 		
+		aNodeList.get(0).setNextNodeToTheNodeList(aNodeList.get(1));
+		aNodeList.get(1).setNextNodeToTheNodeList(aNodeList.get(18));
+		aNodeList.get(18).setNextNodeToTheNodeList(aNodeList.get(7));
+		aNodeList.get(18).setNextNodeToTheNodeList(aNodeList.get(2));
+		aNodeList.get(18).setNextNodeToTheNodeList(aNodeList.get(11));
+		aNodeList.get(2).setNextNodeToTheNodeList(aNodeList.get(3));
+		aNodeList.get(3).setNextNodeToTheNodeList(aNodeList.get(10));
+		aNodeList.get(10).setNextNodeToTheNodeList(aNodeList.get(6));
+		aNodeList.get(6).setNextNodeToTheNodeList(aNodeList.get(9));
+		aNodeList.get(9).setNextNodeToTheNodeList(aNodeList.get(5));
+		aNodeList.get(5).setNextNodeToTheNodeList(aNodeList.get(4));
+		aNodeList.get(4).setNextNodeToTheNodeList(aNodeList.get(13));
+		aNodeList.get(13).setNextNodeToTheNodeList(aNodeList.get(7));
+		aNodeList.get(11).setNextNodeToTheNodeList(aNodeList.get(12));
+		aNodeList.get(12).setNextNodeToTheNodeList(aNodeList.get(8));
+		aNodeList.get(8).setNextNodeToTheNodeList(aNodeList.get(14));
+		aNodeList.get(14).setNextNodeToTheNodeList(aNodeList.get(15));
+		aNodeList.get(15).setNextNodeToTheNodeList(aNodeList.get(16));
+		aNodeList.get(16).setNextNodeToTheNodeList(aNodeList.get(17));
+		
+		//System.out.println(aNodeList.get(18).getNextNodeList().toString()); correct result
+		
+		/*
+		//integrate TrafficLight with the nodes
+		if (aNodeList.get(0).getNextNodeList().get(0).returnStack().get(1) instanceof TrafficLights)
+			System.out.println("TR"); // write here the code
+		*/
 		aDraw = new Draw(aVehicleList,aTerrainList);
 		
 		SwingUtilities.invokeLater(new Runnable() {
@@ -119,13 +152,14 @@ public class TestingNodeNetwork {
 		nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
 		
 		//System.out.println("My network is like that:");
-		//nodeManager.printMyNetwork();
+		nodeManager.printMyNetwork();
 		//nodeManager.vehicleFlow_version1();
 
 		//Create and move cars with different threads
 
 		nodeManager.start();
-		nodeManager.vehicleFlow_version1();
+		nodeManager.printMyNetwork();   // this should be fixed - This should return a network with out Vehicles, or EVEN to print a movement of a Vehicle.
+		//nodeManager.vehicleFlow_version1();
 
 //		nodeManager.resetNodeNetwork(); there is a bug now, but whatever
 		//nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
