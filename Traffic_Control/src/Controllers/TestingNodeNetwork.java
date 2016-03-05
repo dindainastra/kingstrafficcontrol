@@ -35,7 +35,7 @@ public class TestingNodeNetwork {
 		aVehicleList = new ArrayList<Vehicle>();
 		aNodeList = new ArrayList<Node>();
 		aTerrainList = new ArrayList<Terrain>();
-		
+
 		//Declarations of the Network
 		//add Persons  new Person("Name", politenesslevel, isPedestrian)
 		for(int i=0; i<=2; i++){
@@ -58,29 +58,29 @@ public class TestingNodeNetwork {
 		aTerrainList.add(new StraightRoad(450,225,01,2,2,0));
 		aTerrainList.add(new StraightRoad(350,75,00,2,2,0));
 		aTerrainList.add(new StraightRoad(450,75,00,2,2,0));
-        
+
 		//add vertical roads
 		aTerrainList.add(new StraightRoad(600,125,11,1,1,90));
 		aTerrainList.add(new StraightRoad(350,125,01,2,2,90));
 		aTerrainList.add(new StraightRoad(300,325,01,2,2,90));
-        
-        //add curved roads
+
+		//add curved roads
 		aTerrainList.add(new CornerRoad(500,75,360));
 		aTerrainList.add(new CornerRoad(500,175,270));
 		aTerrainList.add(new CornerRoad(250,225,270));
 		aTerrainList.add(new CornerRoad(250,275,90));
-        
+
 		aTerrainList.add(new CornerRoad(300,75,90));
-        
-        //add roundabout
+
+		//add roundabout
 		aTerrainList.add(new CornerRoad(225,400,90));
 		aTerrainList.add(new CornerRoad(225,400,180));
 		aTerrainList.add(new CornerRoad(225,400,270));
 		aTerrainList.add(new CornerRoad(225,400,360));
-        
+
 		//add junctions
 		aTerrainList.add(new SquareJunction(300,225));
-        
+
 //        //Draw traffic
 //        cars.add(new Car(p,210,230));
 //        motorbikes.add(new Motorbike(250,255));  
@@ -88,36 +88,38 @@ public class TestingNodeNetwork {
 //        bikes.add(new Bike(170,230));
 //        emergencies.add(new Emergency(120,230));
 
+		//Run traffic simulation forever
+
 		//add nodes
 		aNodeList.add(new Node("START",0,0));
 		aNodeList.add(new Node("First Node",0.8,10.0));
 		aNodeList.add(new Node("Second Node",0.5,20.0));
 		aNodeList.add(new Node("Third Node",0.5,20.0));
 		aNodeList.add(new Node("END",0,20.0));
-		
+
 		aDraw = new Draw(aVehicleList,aTerrainList);
-		
+
 		SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                frame = new JFrame();
+			public void run() {
+				frame = new JFrame();
 //				StopWatch stopWatch = new StopWatch();
 //				stopWatch.start();
 //
 				//System.out.println("Stopwatch time: " + stopWatch);
-                frame.add(aDraw);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setVisible(true);
-                frame.setSize(700, 700);
-            }
-        });		
-		
+				frame.add(aDraw);
+				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				frame.setVisible(true);
+				frame.setSize(700, 700);
+			}
+		});
+
 		//create the node managers who has all the informations about the nodes, and he will change the vehicles from node to node upon each car request
 		System.out.println("Debug Draw: "+aDraw);
 		nodeManager = new NodeManager(aDraw);
 		//nodeManager.setMap(aDraw);
-		
+
 		nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
-		
+
 		//System.out.println("My network is like that:");
 		//nodeManager.printMyNetwork();
 		//nodeManager.vehicleFlow_version1();
