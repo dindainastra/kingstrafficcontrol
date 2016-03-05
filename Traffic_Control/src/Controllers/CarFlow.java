@@ -21,7 +21,9 @@ public class CarFlow implements Runnable {
         //Move the car for for a set period of time?
     	Terrain t = (Terrain) vehicle.getCurrentNode().getNextNodeList().get(0).returnStack().get(0);  //fix that shit
     	
-    	for (int steps= (t.getLenght()/vehicle.getLength()); steps>0; steps--) {
+    	// t.getLenght()/vehicle.getLength()-1
+    	// (lenght of the terrain    /   vehicle lenght      )   - 1 step.
+    	for (int steps= ((t.getLenght()/vehicle.getLength())-1); steps>0; steps--) {
             try {
                 //Check what the next node is
                 Node currentNode = vehicle.getNextNode();
