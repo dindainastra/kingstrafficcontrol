@@ -74,21 +74,21 @@ public class StraightRoad implements Terrain{
         if (trafficlight == 10) {//traffic lights on the left hand side of the road
             TrafficLightGUI.trafficlightgui(xStart, yStart, RGB1, rotation);
             TrafficLightGUI.doDrawing(g);
-            TrafficLightGUI.trafficlightgui(xStart, yStart + road_width / 2, RGB2, rotation);
+            TrafficLightGUI.trafficlightgui(xStart+3, yStart, RGB2, rotation);
             TrafficLightGUI.doDrawing(g);
         } else if (trafficlight == 01) {//traffic lights on the right hand side of the road
             TrafficLightGUI.trafficlightgui(xStart + road_length - 5, yStart, RGB1, rotation);
             TrafficLightGUI.doDrawing(g);
-            TrafficLightGUI.trafficlightgui(xStart + road_length - 5, yStart + road_width / 2, RGB2, rotation);
+            TrafficLightGUI.trafficlightgui(xStart + road_length - 2, yStart, RGB2, rotation);
             TrafficLightGUI.doDrawing(g);
         } else if (trafficlight == 11) {//traffic lights on both side of the road
             TrafficLightGUI.trafficlightgui(xStart, yStart, RGB1, rotation);
             TrafficLightGUI.doDrawing(g);
-            TrafficLightGUI.trafficlightgui(xStart, yStart + road_width / 2, RGB2, rotation);
+            TrafficLightGUI.trafficlightgui(xStart+3, yStart, RGB2, rotation);
             TrafficLightGUI.doDrawing(g);
             TrafficLightGUI.trafficlightgui(xStart + road_length - 5, yStart, RGB1, rotation);
             TrafficLightGUI.doDrawing(g);
-            TrafficLightGUI.trafficlightgui(xStart + road_length - 5, yStart + road_width / 2, RGB2, rotation);
+            TrafficLightGUI.trafficlightgui(xStart + road_length - 2, yStart, RGB2, rotation);
             TrafficLightGUI.doDrawing(g);
         }
 
