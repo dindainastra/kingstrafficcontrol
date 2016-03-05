@@ -23,6 +23,12 @@ public class CarFlow implements Runnable {
     	
     	for (int steps= (t.getLenght()/vehicle.getLength()); steps>0; steps--) {
             try {
+                //Check what the next node is
+                Node currentNode = vehicle.getNextNode();
+                Node nextNode = vehicle.getNextNode();
+                System.out.println("My current node is "+currentNode.toString());
+                System.out.println("My next node is "+nextNode.toString());
+
                 //Could pass in the next node to the move method
                 //Move method carries the car all the way to the node
                 //Then on the next iteration we decide the next node (randomly) and pass it again to the move method

@@ -8,45 +8,15 @@ import Controllers.Node;
 
 public class PedestrianCrossing implements Terrain{
 
-	private Node currentNode;
-	private Node nextNode;
 	private int lenght;
+	private Node nextNode;
+	private Node currentNode;
 	
 	@Override
-	public void setInWhichNodeLocated() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getInWhichNodeLocated() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getPerson() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setPerson() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void doDrawing(Graphics2D g) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public int getLenght() {
-		return this.lenght;
-	}
-
+		return lenght;  // probably this is the lenght of this. dunno
+	} 
+	
 	@Override
 	public Node getNextNode() {
 		return this.nextNode;
@@ -66,4 +36,11 @@ public class PedestrianCrossing implements Terrain{
 	public void setCurrentNode(Node n) {
 		this.currentNode = n;
 	}
+
+	@Override
+	public void doDrawing(Graphics2D g) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
