@@ -10,8 +10,8 @@ public class StraightRoad implements Terrain{
     // Variables declaration
     //Set size of straight road
     private int xStart,yStart, trafficlight, RGB1, RGB2, rotation;
-    private final int road_length = 100;
-    private final int road_width = 50;
+    private int road_length = 150;
+    private final int road_width =  100;
 
     public StraightRoad(int x_Start, int y_Start, int trafficlight, int RGB1, int RGB2, int rotation){
         this.trafficlight = trafficlight;
@@ -20,8 +20,19 @@ public class StraightRoad implements Terrain{
         this.yStart = y_Start;
         this.RGB1 = RGB1;
         this.RGB2 = RGB2;
-    }   
-    
+    }
+
+    // adding constructor to initialise road_length
+    public StraightRoad(int x_Start, int y_Start, int trafficlight, int RGB1, int RGB2, int rotation, int road_length){
+        this.trafficlight = trafficlight;
+        this.rotation = rotation;
+        this.xStart = x_Start;
+        this.yStart = y_Start;
+        this.road_length=road_length;
+        this.RGB1 = RGB1;
+        this.RGB2 = RGB2;
+    }
+
     public void doDrawing(Graphics2D g){
         Graphics2D road=(Graphics2D) g;
         Graphics2D lane_divider=(Graphics2D) g;
@@ -48,7 +59,17 @@ public class StraightRoad implements Terrain{
         //draw road lanes
         lane_divider.setStroke(bs1);
         lane_divider.setColor(Color.white);
+        int y=yStart+(road_width);
+        lane_divider.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
+
+        lane_divider.setStroke(bs2);
+        lane_divider.setColor(Color.white);
         lane_divider.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
+
+        lane_divider.setStroke(bs1);
+        lane_divider.setColor(Color.white);
+        lane_divider.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+
         
         //draw traffic lights
         if (trafficlight ==10){//traffic lights on the left hand side of the road
@@ -74,27 +95,27 @@ public class StraightRoad implements Terrain{
         road.setTransform(old);
     }
 
-    @Override
+    //@Override
     public int getLenght() {
         return 0;
     }
 
-    @Override
+    //@Override
     public Node getNextNode() {
         return null;
     }
 
-    @Override
+    //@Override
     public void setNextNode(Node n) {
 
     }
 
-    @Override
+    //@Override
     public Node getCurrentNode() {
         return null;
     }
 
-    @Override
+   // @Override
     public void setCurrentNode(Node n) {
 
     }
