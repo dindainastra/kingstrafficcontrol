@@ -33,10 +33,9 @@ public class NodeManager{
 	 * For each car in the vehicle list, create a thread for the cars flow
 	 */
 	public void start(){
-		Vehicle v2 = null;
+		int I =0;
 		for(Vehicle v : vehicleList){
 			try {
-				v2 = v;
 				CarFlow cf = null;
 				if (v instanceof Car)
 					cf = new CarFlow((Car)v, map);
@@ -55,26 +54,14 @@ public class NodeManager{
 				System.out.println("Error: "+e.getLocalizedMessage());
 			}
 			
-		//this method does the following:
-		/*
-		 *	Moves the car from the v.getCurrentNode() to the v.getNextNode()
-		 *  This should be done, because each vehicle should travel from Node to Node.
-		 *  
-		 */
-		
-		
+			System.out.println("I: "+I++);
+			this.printMyNetwork2();
 		}
-		this.moveVehicleToTheNextNode(v2);
+		
+		System.out.println("Screenshot of the NodeNetwork");
 		this.printMyNetwork2();
-//		this.printMyNetwork2();
-		start();
 	}
 
-	public void moveVehicleToTheNextNode(Vehicle v){
-		nodeList.get(nodeList.indexOf(v.getCurrentNode())).removeFromStack(v);
-		nodeList.get(nodeList.indexOf(v.getNextNode())).addToStack(v);
-	}
-	
 	//Return the nodeNetwork.
 	public ArrayList<Node> getNodeList(){
 		return nodeList;
@@ -119,12 +106,9 @@ public class NodeManager{
 
 	public void printMyNetwork2(){
 		for (Node n : getNodeList()) {
-			System.out.println("");
 			System.out.print("::: " + n.getNameOfNode() + " :::\t\t");
-			System.out.print(n.returnStack());
-			System.out.println("");
+			System.out.println(n.returnStack());
 		}
-
 	}
 
 

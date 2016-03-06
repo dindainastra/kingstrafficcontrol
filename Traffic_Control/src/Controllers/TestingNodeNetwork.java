@@ -101,9 +101,6 @@ public class TestingNodeNetwork {
 			t.setCurrentNode(n);
 		}
 			
-		
-		//There should be a graph. If it isn't vehicles can go only in one direction.
-		
 		//Create my Network's Node Graph. So, this will add the nextNode for every node.
 		//Optionally, create a graph class that parses the "core" list, and the graph with AI select the 
 		//relations between each node.
@@ -152,6 +149,10 @@ public class TestingNodeNetwork {
 		System.out.println("Debug Draw: "+aDraw);
 		nodeManager = new NodeManager(aDraw);
 		//nodeManager.setMap(aDraw);
+		
+		for (Person p : aPersonList){
+			p.setTheManager(nodeManager);
+		}
 
 		nodeManager.createTheNetwork(aNodeList,aVehicleList,aTerrainList);
 
@@ -162,7 +163,7 @@ public class TestingNodeNetwork {
 		//Create and move cars with different threads
 
 		nodeManager.start();
-		nodeManager.printMyNetwork();   // this should be fixed - This should return a network with out Vehicles, or EVEN to print a movement of a Vehicle.
+		
 		//nodeManager.vehicleFlow_version1();
 
 //		nodeManager.resetNodeNetwork(); there is a bug now, but whatever

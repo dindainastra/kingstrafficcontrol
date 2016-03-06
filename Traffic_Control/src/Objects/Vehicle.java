@@ -3,6 +3,7 @@ package Objects;
 import java.awt.Graphics2D;
 
 import Controllers.Node;
+import Controllers.NodeManager;
 
 public interface Vehicle {
 

@@ -4,7 +4,7 @@ import Objects.Car;
 import java.util.ArrayList;
 import java.util.logging.Level;
 
-public class Node {
+public class Node  implements Runnable{
 	private ArrayList<Object> myStack = new ArrayList<Object>();
 	private ArrayList<Node> nextNodeList = new ArrayList<Node>(); //I will need probably to add an option to control the junctions... we'll see
 	private ArrayList<Node> previousNodeList = new ArrayList<Node>(); 
@@ -88,6 +88,12 @@ public class Node {
 	
 	public void getDirectionOfNode(int i){
 		this.directionOfNode = i;
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
