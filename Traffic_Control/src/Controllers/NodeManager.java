@@ -97,6 +97,8 @@ public class NodeManager{
 		System.out.println("");
 	}
 
+
+
 	/*
 	* Version 1 - Every object moves from the one node to the other if the previous is empty!
 	* Future things to do:

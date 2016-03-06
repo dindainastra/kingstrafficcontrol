@@ -6,7 +6,7 @@ public class TrafficLightGUI {
     
     // Variables declaration for traffic light
     private static int pos_x, pos_y, rotates;
-    private static final int width = 5, length = 25;
+    private static final int width = 3, length = 50;
     private static int R,G,B;
     
     //set traffic light colour and shape
