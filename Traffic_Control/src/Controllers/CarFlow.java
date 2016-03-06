@@ -28,8 +28,8 @@ public class CarFlow implements Runnable {
                 //Check what the next node is
                 Node currentNode = vehicle.getNextNode();
                 Node nextNode = vehicle.getNextNode();
-                System.out.println("My current node is "+currentNode.toString());
-                System.out.println("My next node is "+nextNode.toString());
+//                System.out.println("My current node is "+currentNode.toString());
+//                System.out.println("My next node is "+nextNode.toString());
 
                 //Could pass in the next node to the move method
                 //Move method carries the car all the way to the node

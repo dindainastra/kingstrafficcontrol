@@ -60,7 +60,7 @@ public class StraightRoad implements Terrain{
         int ch =0;
         for(int i=0; i<=20; i++) {
             ch = tlr.getCurrentColour();
-            System.out.println("Current colour is " + ch);
+            //System.out.println("Current colour is " + ch);
         }
 
         if (ch ==4){
