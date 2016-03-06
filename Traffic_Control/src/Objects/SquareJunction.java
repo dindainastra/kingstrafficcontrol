@@ -7,7 +7,7 @@ public class SquareJunction implements Terrain{
     // Variables declaration
     //Set size of road
     private int xStart,yStart;
-    private final int road_width = 50;
+    private final int road_width = 100;
 
     public SquareJunction(int x_Start, int y_Start){
         this.xStart = x_Start;
