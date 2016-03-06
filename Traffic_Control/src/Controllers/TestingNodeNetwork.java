@@ -101,6 +101,9 @@ public class TestingNodeNetwork {
 			t.setCurrentNode(n);
 		}
 			
+		
+		//There should be a graph. If it isn't vehicles can go only in one direction.
+		
 		//Create my Network's Node Graph. So, this will add the nextNode for every node.
 		//Optionally, create a graph class that parses the "core" list, and the graph with AI select the 
 		//relations between each node.
