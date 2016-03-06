@@ -8,12 +8,12 @@ import javax.swing.SwingUtilities;
 //added library for Stopwatch
 //import org.apache.commons.lang.time.StopWatch;
 
-import Objects.CRoad;
+import Objects.CornerRoad;
 import Objects.Car;
 import Objects.Draw;
 import Objects.Person;
-import Objects.SRoad;
-import Objects.Junction;
+import Objects.StraightRoad;
+import Objects.SquareJunction;
 import Objects.Terrain;
 import Objects.TrafficLights;
 import Objects.Vehicle;
@@ -35,7 +35,7 @@ public class TestingNodeNetwork {
 		aVehicleList = new ArrayList<Vehicle>();
 		aNodeList = new ArrayList<Node>();
 		aTerrainList = new ArrayList<Terrain>();
-		
+
 		//Declarations of the Network
 		//add Persons  new Person("Name", politenesslevel, isPedestrian)
 		for(int i=0; i<=2; i++){
@@ -45,56 +45,50 @@ public class TestingNodeNetwork {
 		//Set Person to every Car and add the car in the road
 		for (Person p : aPersonList) {
 			if (!p.isPedestrian()) {
-				aVehicleList.add(new Car(p, 80, 225));
+				aVehicleList.add(new Car(p, 200, 330));
 			}
 		}
+
+
+		//add roundabout
+		aTerrainList.add(new CornerRoad(640,250,90,1));
+		aTerrainList.add(new CornerRoad(640,250,180,1));
+		aTerrainList.add(new CornerRoad(640,250,270,1));
+		aTerrainList.add(new CornerRoad(640,250,360,1));
 
 		//add horizontal road
 		//Added another traffic light color parameter to SRoad
 		//aTerrainList.add(new SRoad(getposx(),getposy(),gettraffic(),gettrafficcolor1(),gettrafficcolor2(),getrotation());
-		aTerrainList.add(new SRoad(100,225,00,2,2,0));
-		aTerrainList.add(new SRoad(200,225,01,1,3,0));
-		aTerrainList.add(new SRoad(350,225,10,1,3,0));
-		aTerrainList.add(new SRoad(450,225,01,2,2,0));
-		aTerrainList.add(new SRoad(350,75,00,2,2,0));
-		aTerrainList.add(new SRoad(450,75,00,2,2,0));
-        
+
+		aTerrainList.add(new StraightRoad(150,325,11,2,2,0,500));
+		aTerrainList.add(new StraightRoad(880,325,11,1,3,0,200));
+		aTerrainList.add(new StraightRoad(1180,325,10,1,3,0,170));//exit road
+		aTerrainList.add(new StraightRoad(150,10,01,2,2,0,565));
+		aTerrainList.add(new StraightRoad(150,590,01,2,2,0,565));
+		aTerrainList.add(new StraightRoad(10,325,01,2,2,0,40));//entry road
+		aTerrainList.add(new StraightRoad(815,590,10,2,2,0,265));
+		aTerrainList.add(new StraightRoad(815,10,10,2,2,0,265));
+
 		//add vertical roads
-		aTerrainList.add(new SRoad(600,125,11,1,1,90));
-		aTerrainList.add(new SRoad(350,125,01,2,2,90));
-		aTerrainList.add(new SRoad(300,325,01,2,2,90));
-        
+		aTerrainList.add(new StraightRoad(815,110,11,1,1,90));
+		aTerrainList.add(new StraightRoad(815,490,11,2,2,90,101));
+		aTerrainList.add(new StraightRoad(150,110,01,2,2,90,215));
+		aTerrainList.add(new StraightRoad(150,425,10,2,2,90,165));
+		aTerrainList.add(new StraightRoad(1180,425,10,2,2,90,165));
+		aTerrainList.add(new StraightRoad(1180,110,01,2,2,90,215));
+
         //add curved roads
-		/*aTerrainList.add(new CRoad(500,75,360));
-		aTerrainList.add(new CRoad(500,175,270));
-		aTerrainList.add(new CRoad(250,225,270));
-		aTerrainList.add(new CRoad(250,275,90));
-        
-		aTerrainList.add(new CRoad(300,75,90));*/
-		aTerrainList.add(new CRoad(500,75,100,360,1));
-		aTerrainList.add(new CRoad(500,175,100,270,1));
-		aTerrainList.add(new CRoad(250,225,100,270,1));
-		aTerrainList.add(new CRoad(250,275,100,90,1));
+		aTerrainList.add(new CornerRoad(980,10,360,0));
+		aTerrainList.add(new CornerRoad(980,490,270,0));
+		aTerrainList.add(new CornerRoad(50,10,90,0));
+		aTerrainList.add(new CornerRoad(50,490,180,0));
+		//aTerrainList.add(new CornerRoad(300,75,90));
 
-		aTerrainList.add(new CRoad(300,75,100,90,1));
-        
-        //add roundabout
-		//aTerrainList.add(new CRoad(225,400,90));
-		//aTerrainList.add(new CRoad(225,400,180));
-		//aTerrainList.add(new CRoad(225,400,270));
-		//aTerrainList.add(new CRoad(225,400,360));
-
-		aTerrainList.add(new CRoad(175,425,200,90,1));
-		aTerrainList.add(new CRoad(175,425,200,180,1));
-		aTerrainList.add(new CRoad(175,425,200,270,1));
-		aTerrainList.add(new CRoad(175,425,200,360,1));
-		aTerrainList.add(new CRoad(250,500,50,90,0));
-		aTerrainList.add(new CRoad(250,500,50,180,0));
-		aTerrainList.add(new CRoad(250,500,50,270,0));
-		aTerrainList.add(new CRoad(250,500,50,360,0));
-        
 		//add junctions
-		aTerrainList.add(new Junction(300,225));
+		aTerrainList.add(new SquareJunction(1080,325));
+		aTerrainList.add(new SquareJunction(50,325));
+		aTerrainList.add(new SquareJunction(715,590));
+		aTerrainList.add(new SquareJunction(715,10));
         
 //        //Draw traffic
 //        cars.add(new Car(p,210,230));
@@ -122,7 +116,7 @@ public class TestingNodeNetwork {
                 frame.add(aDraw);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
-                frame.setSize(700, 700);
+                frame.setSize(1500, 1000);
             }
         });		
 		
