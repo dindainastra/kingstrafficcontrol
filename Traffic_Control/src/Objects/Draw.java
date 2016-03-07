@@ -21,7 +21,7 @@ public class Draw extends JPanel {
         super.paintComponent(g);
         //draw background 
         g.setColor(new Color (50,150,50));
-        g.fillRect(0, 0, 700, 700);   
+        g.fillRect(0, 0, 1500, 1000);
         
         for(Terrain aTerrain : this.terrainList){
         	aTerrain.doDrawing(f);

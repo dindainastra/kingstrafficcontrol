@@ -7,12 +7,11 @@ import Controllers.Node;
 public class SquareJunction implements Terrain{
 
     // Variables declaration
+    private Node currentNode;
+    private Node nextNode;
     //Set size of road
     private int xStart,yStart;
-    private final int road_width = 50;
-    
-    private Node nextNode;
-    private Node currentNode;
+    private final int road_width = 100;
 
     public SquareJunction(int x_Start, int y_Start){
         this.xStart = x_Start;
@@ -48,29 +47,29 @@ public class SquareJunction implements Terrain{
         lane_divider.drawLine(xStart,yStart+road_width/2,xStart+road_width,yStart+road_width/2);//vertical
     }
 
-	@Override
-	public int getLenght() {
-		return road_width;  // probably this is the lenght of this. dunno
-	} 
-	
-	@Override
-	public Node getNextNode() {
-		return this.nextNode;
-	}
+    //@Override
+    public int getLenght() {
+        return this.road_width;
+    }
 
-	@Override
-	public void setNextNode(Node n) {
-		this.nextNode = n;
-	}
+//    @Override
+    public Node getNextNode() {
+        return this.nextNode;
+    }
 
-	@Override
-	public Node getCurrentNode() {
-		return this.currentNode;
-	}
+  //  @Override
+    public void setNextNode(Node n) {
+        this.nextNode = n;
+    }
 
-	@Override
-	public void setCurrentNode(Node n) {
-		this.currentNode = n;
-	}
-    
+    //@Override
+    public Node getCurrentNode() {
+        return this.currentNode;
+    }
+
+    //@Override
+    public void setCurrentNode(Node n) {
+        this.currentNode = n;
+    }
+     
 }

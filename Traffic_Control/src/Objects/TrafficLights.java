@@ -111,7 +111,6 @@ public class TrafficLights implements Runnable{
 //        a.run();
 //    }
 
-    @Override
     public void doDrawing(Graphics2D g) {
         // TODO Auto-generated method stub
 
