@@ -18,7 +18,7 @@ public class Car extends JPanel implements Vehicle {
     private JPanel myPanel;
     private int tmp = 0;
     private double distanceFromNodeToNode;
-    private int offset = 5;
+    private int offset = 0;
         
 	public void move(){
 		System.out.println("Next StackSize "+nextNode.returnStack().size()+" Driver: "+ driver.getName() + " X: " + (length + this.get_pos_x( ) + offset - ((nextNode.returnStack().size()-1) * this.length)));

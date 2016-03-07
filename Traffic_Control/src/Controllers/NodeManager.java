@@ -33,7 +33,6 @@ public class NodeManager{
 	 * For each car in the vehicle list, create a thread for the cars flow
 	 */
 	public void start(){
-		int I =0;
 		for(Vehicle v : vehicleList){
 			try {
 				CarFlow cf = null;
@@ -53,13 +52,7 @@ public class NodeManager{
 			} catch(NullPointerException e){
 				System.out.println("Error: "+e.getLocalizedMessage());
 			}
-			
-			System.out.println("I: "+I++);
-			this.printMyNetwork2();
 		}
-		
-		System.out.println("Screenshot of the NodeNetwork");
-		this.printMyNetwork2();
 	}
 
 	//Return the nodeNetwork.
@@ -179,7 +172,7 @@ public class NodeManager{
 		for (Vehicle v : vehicleList) {
 			addANewVehicleToTheNetwork(v);
 			v.setCurrentNode(nl.get(0));
-			v.setNextNode(nl.get(1));  // do it random 
+			v.setNextNode(nl.get(1));  // do it random or from the node-graph
 		}
 
 	}

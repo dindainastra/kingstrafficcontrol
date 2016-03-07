@@ -38,12 +38,18 @@ public class CarFlow implements Runnable {
                 System.out.println("Error: "+e.getLocalizedMessage());
             }
         }
+    	
+    	//remove this vehicle from the current node
     	vehicle.getPerson().getTheManager().getNodeList().get(
     			vehicle.getPerson().getTheManager().getNodeList().indexOf(vehicle.getCurrentNode())
     			).removeFromStack(vehicle);
+    	
+    	//add this vehicle to the next node    	
     	vehicle.getPerson().getTheManager().getNodeList().get(
-    			vehicle.getPerson().getTheManager().getNodeList().indexOf(vehicle.getCurrentNode())+1
+    			vehicle.getPerson().getTheManager().getNodeList().indexOf(vehicle.getNextNode())
     			).addToStack(vehicle);
+    	
+    	vehicle.getPerson().getTheManager().printMyNetwork2();
 
     }
 
