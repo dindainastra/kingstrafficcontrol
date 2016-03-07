@@ -1,17 +1,20 @@
-
 package Objects;
-import Controllers.Node;
-
 import java.awt.*;
+import Objects.TrafficLights;
 import java.awt.geom.AffineTransform;
+
+import Controllers.Node;
 
 //Straight Road
 public class StraightRoad implements Terrain{
+
     // Variables declaration
+    private Node currentNode;
+    private Node nextNode;
     //Set size of straight road
     private int xStart,yStart, trafficlight, RGB1, RGB2, rotation;
-    private int road_length = 150;
-    private final int road_width =  100;
+    private int road_length = 100;
+    private final int road_width = 100;
 
     public StraightRoad(int x_Start, int y_Start, int trafficlight, int RGB1, int RGB2, int rotation){
         this.trafficlight = trafficlight;
@@ -97,52 +100,26 @@ public class StraightRoad implements Terrain{
 
     //@Override
     public int getLenght() {
-        return 0;
+        return this.road_length;
     }
 
-    //@Override
+//    @Override
     public Node getNextNode() {
-        return null;
+        return this.nextNode;
     }
 
-    //@Override
+  //  @Override
     public void setNextNode(Node n) {
-
+        this.nextNode = n;
     }
 
     //@Override
     public Node getCurrentNode() {
-        return null;
+        return this.currentNode;
     }
 
-   // @Override
+    //@Override
     public void setCurrentNode(Node n) {
-
+        this.currentNode = n;
     }
-
-    @Override
-	public void setInWhichNodeLocated() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getInWhichNodeLocated() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getPerson() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setPerson() {
-		// TODO Auto-generated method stub
-		
-	} 
 }
-
-

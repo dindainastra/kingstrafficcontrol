@@ -5,7 +5,7 @@ import Controllers.Node;
 
 import java.awt.Graphics2D;
 
-public class TrafficLights implements Terrain, Runnable{
+public class TrafficLights implements Runnable{
 
     public static final int Red = 1;
     public static final int Yellow = 3;
@@ -106,37 +106,11 @@ public class TrafficLights implements Terrain, Runnable{
         }
     }
 
-
-    @Override
-    public void setInWhichNodeLocated() {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public int getInWhichNodeLocated() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getPerson() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public void setPerson() {
-        // TODO Auto-generated method stub
-
-    }
-
 //    public static void main(String[] args){
 //        TrafficLights a = new TrafficLights();
 //        a.run();
 //    }
 
-    @Override
     public void doDrawing(Graphics2D g) {
         // TODO Auto-generated method stub
 
@@ -168,7 +142,6 @@ public class TrafficLights implements Terrain, Runnable{
     }
 
 }
-
 
 
 

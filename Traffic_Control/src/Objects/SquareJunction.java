@@ -2,9 +2,13 @@ package Objects;
 import java.awt.*;
 import javax.swing.*;
 
+import Controllers.Node;
+
 public class SquareJunction implements Terrain{
 
     // Variables declaration
+    private Node currentNode;
+    private Node nextNode;
     //Set size of road
     private int xStart,yStart;
     private final int road_width = 100;
@@ -43,27 +47,29 @@ public class SquareJunction implements Terrain{
         lane_divider.drawLine(xStart,yStart+road_width/2,xStart+road_width,yStart+road_width/2);//vertical
     }
 
-	@Override
-	public void setInWhichNodeLocated() {
-		// TODO Auto-generated method stub
-		
-	}
+    //@Override
+    public int getLenght() {
+        return this.road_width;
+    }
 
-	@Override
-	public int getInWhichNodeLocated() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+//    @Override
+    public Node getNextNode() {
+        return this.nextNode;
+    }
 
-	@Override
-	public int getPerson() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+  //  @Override
+    public void setNextNode(Node n) {
+        this.nextNode = n;
+    }
 
-	@Override
-	public void setPerson() {
-		// TODO Auto-generated method stub
-		
-	}      
+    //@Override
+    public Node getCurrentNode() {
+        return this.currentNode;
+    }
+
+    //@Override
+    public void setCurrentNode(Node n) {
+        this.currentNode = n;
+    }
+     
 }

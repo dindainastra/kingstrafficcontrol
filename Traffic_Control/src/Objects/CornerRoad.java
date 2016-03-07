@@ -65,30 +65,31 @@ public class CornerRoad implements Terrain{
         //sroad_border.draw(new Arc2D.Double(xStart+75,yStart+35,road_width/2,road_width/2,start_angle,arc_angle,Arc2D.OPEN));
 
     }
+
+	@Override
+	public int getLenght() {
+		return road_width;  // probably this is the lenght of this. dunno
+	} 
 	
 	@Override
-	public void setInWhichNodeLocated() {
-		// TODO Auto-generated method stub
-		
+	public Node getNextNode() {
+		return this.nextNode;
 	}
 
 	@Override
-	public int getInWhichNodeLocated() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setNextNode(Node n) {
+		this.nextNode = n;
 	}
 
 	@Override
-	public int getPerson() {
-		// TODO Auto-generated method stub
-		return 0;
+	public Node getCurrentNode() {
+		return this.currentNode;
 	}
 
 	@Override
-	public void setPerson() {
-		// TODO Auto-generated method stub
-		
-	} 
+	public void setCurrentNode(Node n) {
+		this.currentNode = n;
+	}
 }
 
 
