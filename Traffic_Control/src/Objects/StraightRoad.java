@@ -73,7 +73,22 @@ public class StraightRoad implements Terrain{
         lane_divider.setColor(Color.white);
         lane_divider.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
 
-        
+        TrafficLights tlr = new TrafficLights();
+        Thread t = new Thread(tlr);
+        t.start();
+        int ch =0;
+        for(int i=0; i<=20; i++) {
+            ch = tlr.getCurrentColour();
+            System.out.println("Current colour is " + ch);
+        }
+
+        if (ch ==4){
+            RGB1 = 1;
+            RGB2 = 3;
+        }else {
+            RGB1 = ch;
+            RGB2 = ch;
+        }
         //draw traffic lights
         if (trafficlight ==10){//traffic lights on the left hand side of the road
             TrafficLightGUI.trafficlightgui(xStart, yStart,  RGB1, rotation);

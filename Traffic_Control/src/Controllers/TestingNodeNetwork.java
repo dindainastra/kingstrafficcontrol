@@ -137,10 +137,6 @@ public class TestingNodeNetwork {
 		SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 frame = new JFrame();
-//				StopWatch stopWatch = new StopWatch();
-//				stopWatch.start();
-//
-				//System.out.println("Stopwatch time: " + stopWatch);
                 frame.add(aDraw);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
