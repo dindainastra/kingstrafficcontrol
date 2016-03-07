@@ -14,7 +14,7 @@ public class StraightRoad implements Terrain{
     //Set size of straight road
     private int xStart,yStart, trafficlight, RGB1, RGB2, rotation;
     private int road_length = 100;
-    private final int road_width = 50;
+    private final int road_width = 100;
 
     public StraightRoad(int x_Start, int y_Start, int trafficlight, int RGB1, int RGB2, int rotation){
         this.trafficlight = trafficlight;

@@ -70,7 +70,7 @@ public class TestingNodeNetwork {
 		aTerrainList.add(new StraightRoad(815,10,10,2,2,0,265));
 
 		//add vertical roads
-		aTerrainList.add(new StraightRoad(815,110,11,1,1,90));
+		aTerrainList.add(new StraightRoad(815,110,11,1,1,90,150));
 		aTerrainList.add(new StraightRoad(815,490,11,2,2,90,101));
 		aTerrainList.add(new StraightRoad(150,110,01,2,2,90,215));
 		aTerrainList.add(new StraightRoad(150,425,10,2,2,90,165));
