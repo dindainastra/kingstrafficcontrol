@@ -102,7 +102,7 @@ public class TestingNodeNetwork {
 		//relations between each node.
 		
 		
-		//this is a graph for the only map.. shit.
+		//this was the graph for the previous map.. shit!
 		
 		aNodeList.get(0).setNextNodeToTheNodeList(aNodeList.get(1));
 		aNodeList.get(1).setNextNodeToTheNodeList(aNodeList.get(18));
