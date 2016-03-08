@@ -1,40 +1,88 @@
 package Objects;
 
 import java.awt.Graphics2D;
-
-import Controllers.Node;
+import java.util.ArrayList;
 
 // dummy comment
 
 public class PedestrianCrossing implements Terrain{
 
+	// Variables declaration
+	private ArrayList<Terrain> nextTerrainList;
+	private ArrayList<Terrain> previousTerrainList;
+	private ArrayList<Object> forwardListFlow;
+	private ArrayList<Object> backwardListFlow;
 	private int lenght;
-	private Node nextNode;
-	private Node currentNode;
-	
-	@Override
+
+	//@Override
 	public int getLenght() {
-		return lenght;  // probably this is the lenght of this. dunno
-	} 
-	
-	@Override
-	public Node getNextNode() {
-		return this.nextNode;
+		return this.lenght;
 	}
 
 	@Override
-	public void setNextNode(Node n) {
-		this.nextNode = n;
+	public void setForwardListFlow(ArrayList<Object> ol) {
+		this.forwardListFlow = ol;
 	}
 
 	@Override
-	public Node getCurrentNode() {
-		return this.currentNode;
+	public void setForwardListFlow(Object o) {
+		this.forwardListFlow.add(o);
 	}
 
 	@Override
-	public void setCurrentNode(Node n) {
-		this.currentNode = n;
+	public ArrayList<Object> getForwardListFlow() {
+		return this.forwardListFlow;
+	}
+
+	@Override
+	public void setBackwardListFlow(ArrayList<Object> ol) {
+		this.backwardListFlow = ol;
+	}
+
+	@Override
+	public void setBackwardListFlow(Object o) {
+		this.backwardListFlow.add(o);
+	}
+
+	@Override
+	public ArrayList<Object> getBackwardListFlow() {
+		return this.backwardListFlow;
+	}
+
+	@Override
+	public ArrayList<Terrain> getNextTerrainList() {
+		return this.nextTerrainList;
+	}
+
+	@Override
+	public ArrayList<Terrain> getPreviousTerrainList() {
+		return this.previousTerrainList;
+	}
+
+	@Override
+	public void setNextTerrainList(ArrayList<Terrain> tl) {
+		this.nextTerrainList = tl;
+	}
+
+	@Override
+	public void setPreviousTerrainList(ArrayList<Terrain> tl) {
+		this.previousTerrainList = tl;
+	}
+
+	@Override
+	public void setNextTerrainList(Terrain t) {
+		this.nextTerrainList.add(t);
+	}
+
+	@Override
+	public void setPreviousTerrainList(Terrain t) {
+		this.previousTerrainList.add(t);
+	}
+
+	@Override
+	public void removeVehicleFromList(Vehicle v) {
+		this.forwardListFlow.remove(v);  //if exists here it removes it from here
+		this.backwardListFlow.remove(v); //if not, the forwardListFlow is like it is, and the vehicle is removed from the second and vise versa
 	}
 
 	@Override

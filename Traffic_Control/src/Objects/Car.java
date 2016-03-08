@@ -4,14 +4,10 @@ import java.awt.*;
 
 import javax.swing.JPanel;
 
-import Controllers.Node;
-import Controllers.NodeManager;
 public class Car extends JPanel implements Vehicle {
 
 	private Person driver;
 	private int priorityLevel;
-	private Node currentNode;
-	private Node nextNode;
     private int pos_x,pos_y;
     private int R = 173, G = 216, B=230; //pastel blue
     private final int length = 20 ,width = 15;
@@ -21,8 +17,7 @@ public class Car extends JPanel implements Vehicle {
     private int offset = 0;
         
 	public void move(){
-		System.out.println("Next StackSize "+nextNode.returnStack().size()+" Driver: "+ driver.getName() + " X: " + (length + this.get_pos_x( ) + offset - ((nextNode.returnStack().size()-1) * this.length)));
-		this.set_pos_x(length + this.get_pos_x( ) + offset - ((nextNode.returnStack().size()-1) * this.length));
+		this.set_pos_x(length + this.get_pos_x( ) + offset);
 		revalidate();
 		repaint();
 	}
@@ -118,26 +113,6 @@ public class Car extends JPanel implements Vehicle {
 	public void doDrawing(Graphics2D g) {
 		g.setColor(new Color (R,G,B));
         g.fillRect(pos_x, pos_y, length, width);
-	}
-
-	@Override
-	public Node getNextNode() {
-		return this.nextNode;
-	}
-
-	@Override
-	public void setNextNode(Node n) {
-		this.nextNode = n;
-	}
-
-	@Override
-	public Node getCurrentNode() {
-		return this.currentNode;
-	}
-
-	@Override
-	public void setCurrentNode(Node n) {
-		this.currentNode = n;
 	}
 	
 }

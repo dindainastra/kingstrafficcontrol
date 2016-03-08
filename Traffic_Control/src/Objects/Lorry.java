@@ -3,14 +3,10 @@ import java.awt.*;
 
 import javax.swing.JPanel;
 
-import Controllers.Node;
-
 public class Lorry extends JPanel implements Vehicle {
     
 	private Person driver;
 	private int priorityLevel;
-	private Node currentNode;
-	private Node nextNode;
     private int pos_x,pos_y;
     private int R = 222, G = 184, B = 135;//pastel brown
     private final int length = 40 ,width = 17;
@@ -102,26 +98,6 @@ public class Lorry extends JPanel implements Vehicle {
 	
 	public String toString(){
 		return this.driver.getName();
-	}
-	
-	@Override
-	public Node getNextNode() {
-		return this.nextNode;
-	}
-
-	@Override
-	public void setNextNode(Node n) {
-		this.nextNode = n;
-	}
-
-	@Override
-	public Node getCurrentNode() {
-		return this.currentNode;
-	}
-
-	@Override
-	public void setCurrentNode(Node n) {
-		this.currentNode = n;
 	}
 
 	@Override

@@ -3,14 +3,23 @@ package Controllers;
 import Objects.Draw;
 import Objects.Terrain;
 import Objects.Vehicle;
+import Objects.TrafficLights;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class CarFlow implements Runnable {
+
     private Draw map;
-    private Vehicle vehicle;
-    
-    public CarFlow(Vehicle v, Draw map){
-        this.vehicle = v;
+    private Terrain aTerrain;
+    private int flowDirection;   // 0 <---   and 1 ---->
+
+    public CarFlow(Terrain t, Draw map, int direction){
+
+        this.aTerrain = t;
         this.map = map;
+        this.flowDirection = direction;
+
     }
     
     /**
@@ -18,40 +27,104 @@ public class CarFlow implements Runnable {
      * Repaint the map whilst moving
      */
     private void startFlow(){
-        //Move the car for for a set period of time?
-    	Terrain t = (Terrain) vehicle.getCurrentNode().getNextNodeList().get(0).returnStack().get(0);  //fix that shit
-    	
-    	// t.getLenght()/vehicle.getLength()-1
-    	// (lenght of the terrain    /   vehicle lenght      )   - 1 step.
-    	for (int steps= ((t.getLenght()/vehicle.getLength())-1); steps>0; steps--) {
-            try {
-                //Check what the next node is
-               
-                //Could pass in the next node to the move method
-                //Move method carries the car all the way to the node
-                //Then on the next iteration we decide the next node (randomly) and pass it again to the move method
-                this.vehicle.move();
-                map.revalidate();
-                map.repaint();
-                Thread.sleep(1000);
-            } catch(InterruptedException e) {
-                System.out.println("Error: "+e.getLocalizedMessage());
+
+        try {
+
+            while (this.isThisTerrainBusy()){}
+
+            if (this.flowDirection == 1) {
+
+                // here we have 2 options.
+                // Option 1: the Thread.Carflow will create a new thread-worker for each vehicle.
+                // Option 2: the Thread.Carflow will print each vehicle one by one.
+                // I will add a pseudocode the the 2nd option
+                if (isThereATrafficLight(this.aTerrain.getForwardListFlow()))
+                    while (checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))){}
+
+                for (Object o : this.aTerrain.getForwardListFlow()){
+
+                    if (o instanceof Vehicle){
+//move should probably have arguments.
+//moves also should check if there is a stopped vehicle in front of the current moving vehicle. If it is, just stop break the moving.
+                          ((Vehicle) o).move();
+                    }
+                }
+
             }
+            else {
+
+                // same as above
+                if (isThereATrafficLight(this.aTerrain.getBackwardListFlow()))
+                    while (checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))){}
+
+                for (Object o : this.aTerrain.getBackwardListFlow()){
+
+                    if (o instanceof Vehicle){
+                        ((Vehicle) o).move();
+                    }
+                }
+
+            }
+
+            map.revalidate();
+            map.repaint();
+            Thread.sleep(1000);
+
+        } catch(InterruptedException e) {
+            System.out.println("Error: "+e.getLocalizedMessage());
         }
-    	
-    	//remove this vehicle from the current node
-    	vehicle.getPerson().getTheManager().getNodeList().get(
-    			vehicle.getPerson().getTheManager().getNodeList().indexOf(vehicle.getCurrentNode())
-    			).removeFromStack(vehicle);
-    	
-    	//add this vehicle to the next node    	
-    	vehicle.getPerson().getTheManager().getNodeList().get(
-    			vehicle.getPerson().getTheManager().getNodeList().indexOf(vehicle.getNextNode())
-    			).addToStack(vehicle);
-    	
-    	vehicle.getPerson().getTheManager().printMyNetwork2();
 
     }
+
+    public boolean isThereATrafficLight(ArrayList<Object> objectArrayList){
+
+        for (Object o : objectArrayList)
+            if (o instanceof TrafficLights)
+                return true;
+        return false;
+
+    }
+
+    //policy
+    //and
+    //do the proper method inside the traffic light class
+    public boolean checkIfTrafficLightIsGreen(TrafficLights trafficLight){
+
+//        if (trafficLight.checkGreen())
+//            return true;
+        return false;
+
+    }
+
+    //policy
+    public boolean isThisTerrainBusy(){
+
+        int foo = 0;
+
+        if (this.flowDirection == 1) {
+            //put code for the forward  flow / 100
+            //Parse the aTerrain.getForwardListFlow() and find how many vehicles are in there
+            //and return the proper boolean statement
+
+            if (foo == 1)
+                return true;
+            else
+                return false;
+
+        }else{
+            //put code for the backward  flow / 100
+            //Parse the aTerrain.getBackwardListFlow() and find how many vehicles are in there
+            //and return the proper boolean statement
+
+            if (foo == 1)
+                return true;
+            else
+                return false;
+
+        }
+
+    }
+
 
     public void run(){
         startFlow();

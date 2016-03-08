@@ -6,12 +6,10 @@ import java.util.ArrayList;
 
 public class Draw extends JPanel {
 
-    private ArrayList<Vehicle> vehicleList; 
-    private ArrayList<Terrain> terrainList; 
+    private ArrayList<Terrain> terrainList = new ArrayList<Terrain>();
 
     //Draw cars, roads, traffic lights
-    public Draw(ArrayList<Vehicle> aVehicleList, ArrayList<Terrain> aTerrainList) {
-        this.vehicleList = aVehicleList;
+    public Draw(ArrayList<Terrain> aTerrainList) {
         this.terrainList = aTerrainList;
     }
     
@@ -23,13 +21,20 @@ public class Draw extends JPanel {
         g.setColor(new Color (50,150,50));
         g.fillRect(0, 0, 1500, 1000);
         
-        for(Terrain aTerrain : this.terrainList){
+        for (Terrain aTerrain : this.terrainList){
         	aTerrain.doDrawing(f);
+            for (Object v : aTerrain.getForwardListFlow())
+                if (v instanceof Vehicle)
+                    ((Vehicle) v).doDrawing(f);
+                else
+                    ((TrafficLights) v).doDrawing(f);
+            for (Object v : aTerrain.getBackwardListFlow())
+                if (v instanceof Vehicle)
+                    ((Vehicle) v).doDrawing(f);
+                else
+                    ((TrafficLights) v).doDrawing(f);
         } 
 
-        for (Vehicle aVehicle : vehicleList) {
-        	aVehicle.doDrawing(f);
-        }
     }
 }
 
