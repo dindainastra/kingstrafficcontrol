@@ -97,6 +97,12 @@ public class NodeManager{
 		System.out.println("");
 	}
 
+	public void printMyNetwork2(){
+		for (Node n : getNodeList()) {
+			System.out.print("::: " + n.getNameOfNode() + " :::\t\t");
+			System.out.println(n.returnStack());
+		}
+	}
 
 
 	/*
@@ -143,6 +149,10 @@ public class NodeManager{
 		getNodeList().get(whichNode).addToStack(t);
 	}
 	
+	public void addANewTerrainToTheNetwork(Terrain t, Node whichNode){
+		getNodeList().get(getNodeList().indexOf(whichNode)).addToStack(t);
+	}
+	
 	//Just reset the Node Network
 	public void resetNodeNetwork(){
 		nodeList.clear();
@@ -155,15 +165,16 @@ public class NodeManager{
 		this.setVehicleList(vl);
 		this.setTerrainList(tl);
 		
+		for (Terrain t : terrainList) {
+			addANewTerrainToTheNetwork(t,t.getCurrentNode());
+		}
+		
 		for (Vehicle v : vehicleList) {
 			addANewVehicleToTheNetwork(v);
 			v.setCurrentNode(nl.get(0));
-			v.setNextNode(nl.get(1));  // do it random 
+			v.setNextNode(nl.get(1));  // do it random or from the node-graph
 		}
 
-		for (Terrain t : terrainList) {
-			addANewTerrainToTheNetwork(t, 1);
-		}
 	}
 	
 	public void setTerrainList(ArrayList<Terrain> tl){

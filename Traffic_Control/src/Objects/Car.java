@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.JPanel;
 
 import Controllers.Node;
+import Controllers.NodeManager;
 public class Car extends JPanel implements Vehicle {
 
 	private Person driver;
@@ -17,9 +18,11 @@ public class Car extends JPanel implements Vehicle {
     private JPanel myPanel;
     private int tmp = 0;
     private double distanceFromNodeToNode;
+    private int offset = 0;
         
 	public void move(){
-		this.set_pos_x(length + this.get_pos_x( ) + 5);
+		System.out.println("Next StackSize "+nextNode.returnStack().size()+" Driver: "+ driver.getName() + " X: " + (length + this.get_pos_x( ) + offset - ((nextNode.returnStack().size()-1) * this.length)));
+		this.set_pos_x(length + this.get_pos_x( ) + offset - ((nextNode.returnStack().size()-1) * this.length));
 		revalidate();
 		repaint();
 	}
@@ -136,5 +139,5 @@ public class Car extends JPanel implements Vehicle {
 	public void setCurrentNode(Node n) {
 		this.currentNode = n;
 	}
-
+	
 }

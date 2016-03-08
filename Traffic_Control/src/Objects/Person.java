@@ -1,17 +1,20 @@
 package Objects;
 
+import Controllers.NodeManager;
 
 public class Person {
 
 	private String name; //Only for testing purpose
 	private int politenessLevel; //1-10 (10 max politeness)
 	private boolean pedestrian;
+	private NodeManager nodeManager;
 	
 	public Person(String name, int politenessLevel, boolean pedestrian) {
 		super();
 		this.name = name;
 		this.politenessLevel = politenessLevel;
 		this.pedestrian = pedestrian;
+		nodeManager = null;
 	}
 
 	public String getName() {
@@ -38,7 +41,12 @@ public class Person {
 		this.pedestrian = pedestrian;
 	}
 	
-	
-	
+	public void setTheManager(NodeManager nm){
+		this.nodeManager = nm;
+	}
+
+	public NodeManager getTheManager(){
+		return this.nodeManager;
+	}
 	
 }
