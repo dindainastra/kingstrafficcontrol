@@ -201,7 +201,7 @@ public class TrafficManagement {
 
     }
 
-    public void drawTheMap(Draw aDraw){
+    public void drawTheMap(final Draw aDraw){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 frame = new JFrame();
