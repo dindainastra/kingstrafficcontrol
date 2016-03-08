@@ -3,14 +3,10 @@ import java.awt.*;
 
 import javax.swing.JPanel;
 
-import Controllers.Node;
-
 public class Bike extends JPanel implements Vehicle{
     
 	private Person driver;
 	private int priorityLevel;
-	private Node currentNode;
-	private Node nextNode;
     private int pos_x,pos_y;
     private int R = 173, G = 216, B=230; //pastel blue   <---Change this color
     private final int length = 20 ,width = 15; //<---Change these variables
@@ -99,26 +95,6 @@ public class Bike extends JPanel implements Vehicle{
 	
 	public String toString(){
 		return this.driver.getName();
-	}
-	
-	@Override
-	public Node getNextNode() {
-		return this.nextNode;
-	}
-
-	@Override
-	public void setNextNode(Node n) {
-		this.nextNode = n;
-	}
-
-	@Override
-	public Node getCurrentNode() {
-		return this.currentNode;
-	}
-
-	@Override
-	public void setCurrentNode(Node n) {
-		this.currentNode = n;
 	}
 
 	@Override

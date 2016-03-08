@@ -1,15 +1,19 @@
 
 package Objects;
-import Controllers.Node;
 
 import java.awt.*;
 import java.awt.geom.Arc2D;
+import java.util.ArrayList;
 
 //Curve Road
 public class CornerRoad implements Terrain{
+
     // Variables declaration
-	private Node currentNode;
-	private Node nextNode;
+    private ArrayList<Terrain> nextTerrainList;
+    private ArrayList<Terrain> previousTerrainList;
+    private ArrayList<Object> forwardListFlow;
+    private ArrayList<Object> backwardListFlow;
+
     //Set size of straight road
     private int xStart,yStart;
     private final int arc_angle = 90;
@@ -22,6 +26,11 @@ public class CornerRoad implements Terrain{
         this.type=type;
         // for round about type=1
         //for curved road type=0
+
+        nextTerrainList = new ArrayList<Terrain>();
+        previousTerrainList  = new ArrayList<Terrain>();
+        forwardListFlow = new ArrayList<Object>();
+        backwardListFlow = new ArrayList<Object>();
     }
 
     public void doDrawing(Graphics2D g){
@@ -69,27 +78,74 @@ public class CornerRoad implements Terrain{
 	@Override
 	public int getLenght() {
 		return road_width;  // probably this is the lenght of this. dunno
-	} 
-	
-	@Override
-	public Node getNextNode() {
-		return this.nextNode;
 	}
 
-	@Override
-	public void setNextNode(Node n) {
-		this.nextNode = n;
-	}
 
-	@Override
-	public Node getCurrentNode() {
-		return this.currentNode;
-	}
+    @Override
+    public void setForwardListFlow(ArrayList<Object> ol) {
+        this.forwardListFlow = ol;
+    }
 
-	@Override
-	public void setCurrentNode(Node n) {
-		this.currentNode = n;
-	}
+    @Override
+    public void setForwardListFlow(Object o) {
+        this.forwardListFlow.add(o);
+    }
+
+    @Override
+    public ArrayList<Object> getForwardListFlow() {
+        return this.forwardListFlow;
+    }
+
+    @Override
+    public void setBackwardListFlow(ArrayList<Object> ol) {
+        this.backwardListFlow = ol;
+    }
+
+    @Override
+    public void setBackwardListFlow(Object o) {
+        this.backwardListFlow.add(o);
+    }
+
+    @Override
+    public ArrayList<Object> getBackwardListFlow() {
+        return this.backwardListFlow;
+    }
+
+    @Override
+    public ArrayList<Terrain> getNextTerrainList() {
+        return this.nextTerrainList;
+    }
+
+    @Override
+    public ArrayList<Terrain> getPreviousTerrainList() {
+        return this.previousTerrainList;
+    }
+
+    @Override
+    public void setNextTerrainList(ArrayList<Terrain> tl) {
+        this.nextTerrainList = tl;
+    }
+
+    @Override
+    public void setPreviousTerrainList(ArrayList<Terrain> tl) {
+        this.previousTerrainList = tl;
+    }
+
+    @Override
+    public void setNextTerrainList(Terrain t) {
+        this.nextTerrainList.add(t);
+    }
+
+    @Override
+    public void setPreviousTerrainList(Terrain t) {
+        this.previousTerrainList.add(t);
+    }
+
+    @Override
+    public void removeVehicleFromList(Vehicle v) {
+        this.forwardListFlow.remove(v);  //if exists here it removes it from here
+        this.backwardListFlow.remove(v); //if not, the forwardListFlow is like it is, and the vehicle is removed from the second and vise versa
+    }
 }
 
 

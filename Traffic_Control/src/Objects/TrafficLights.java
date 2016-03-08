@@ -1,8 +1,6 @@
 
 package Objects;
 
-import Controllers.Node;
-
 import java.awt.Graphics2D;
 
 public class TrafficLights implements Runnable{
@@ -113,31 +111,6 @@ public class TrafficLights implements Runnable{
 
     public void doDrawing(Graphics2D g) {
         // TODO Auto-generated method stub
-
-    }
-
-    // @Override
-    public int getLenght() {
-        return 0;
-    }
-
-    //@Override
-    public Node getNextNode() {
-        return null;
-    }
-
-    // @Override
-    public void setNextNode(Node n) {
-
-    }
-
-    //  @Override
-    public Node getCurrentNode() {
-        return null;
-    }
-
-    //   @Override
-    public void setCurrentNode(Node n) {
 
     }
 
