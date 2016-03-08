@@ -78,10 +78,13 @@ public class TrafficManagement {
             try {
 
                 if (t instanceof StraightRoad){
-                    new Thread(new CarFlow((StraightRoad) t, map, 1), "Thread-"+(t.getClass().toString())).start();  //Create thread for the ---> Direction of the Road
-                    new Thread(new CarFlow((StraightRoad) t, map, 0), "Thread-"+(t.getClass().toString())).start();  //Create thread for the <--- Direction of the Road
+                    //Create thread for the ---> Direction of the Road
+                    new Thread(new CarFlow((StraightRoad) t, map, 1), "Thread-"+(t.getClass().toString())).start();
+                    //Create thread for the <--- Direction of the Road
+                    new Thread(new CarFlow((StraightRoad) t, map, 0), "Thread-"+(t.getClass().toString())).start();
                 }
-                else if (t instanceof SquareJunction){  // (MAYBE) here we need 2 more threads.  one for the upper direction and one for the down direction.
+                // (MAYBE) here we need 2 more threads.  one for the upper direction and one for the down direction.
+                else if (t instanceof SquareJunction){
                     new Thread(new CarFlow((SquareJunction) t, map, 1), "Thread-"+(t.getClass().toString())).start();
                     new Thread(new CarFlow((SquareJunction) t, map, 0), "Thread-"+(t.getClass().toString())).start();
                 }
@@ -198,7 +201,7 @@ public class TrafficManagement {
 
     }
 
-    public void drawTheMap(final Draw aDraw){
+    public void drawTheMap(Draw aDraw){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 frame = new JFrame();

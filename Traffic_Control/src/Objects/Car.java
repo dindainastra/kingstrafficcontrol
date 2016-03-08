@@ -17,6 +17,8 @@ public class Car extends JPanel implements Vehicle {
     private int offset = 0;
         
 	public void move(){
+
+
 		this.set_pos_x(length + this.get_pos_x( ) + offset);
 		revalidate();
 		repaint();

@@ -35,8 +35,10 @@ public class CarFlow implements Runnable {
             if (this.flowDirection == 1) {
 
                 // here we have 2 options.
-                // Option 1: the Thread.Carflow will create a new thread-worker for each vehicle.
-                // Option 2: the Thread.Carflow will print each vehicle one by one.
+                // Option 1: the Thread.Carflow will create a new thread-worker for each vehicle and the Vehicle will
+                // print itself.
+                // Option 2: the Thread.Carflow will print each vehicle one by one and the Thread.Carflow will paint
+                // the car.
                 // I will add a pseudocode the the 2nd option
                 if (isThereATrafficLight(this.aTerrain.getForwardListFlow()))
                     while (checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))){}
@@ -45,8 +47,9 @@ public class CarFlow implements Runnable {
 
                     if (o instanceof Vehicle){
 //move should probably have arguments.
-//moves also should check if there is a stopped vehicle in front of the current moving vehicle. If it is, just stop break the moving.
-                          ((Vehicle) o).move();
+//moves also should check if there is a stopped vehicle in front of the current moving vehicle. If it is, just stop
+// break the moving.
+                          ((Vehicle) o).move();///arguments of posx and posy
                     }
                 }
 
@@ -88,6 +91,16 @@ public class CarFlow implements Runnable {
     //policy
     //and
     //do the proper method inside the traffic light class
+/*
+
+do the following method int, because if we  have a recless driver, the driver should speedup when we have YELLOW.
+So
+Red = 0
+Yellow = 1
+Green = 2
+Yellow = 3
+
+ */
     public boolean checkIfTrafficLightIsGreen(TrafficLights trafficLight){
 
 //        if (trafficLight.checkGreen())

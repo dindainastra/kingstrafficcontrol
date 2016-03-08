@@ -189,7 +189,8 @@ public class StraightRoad implements Terrain{
     @Override
     public void removeVehicleFromList(Vehicle v) {
         this.forwardListFlow.remove(v);  //if exists here it removes it from here
-        this.backwardListFlow.remove(v); //if not, the forwardListFlow is like it is, and the vehicle is removed from the second and vise versa
+        this.backwardListFlow.remove(v); //if not, the forwardListFlow is like it is, and the vehicle is removed from
+                                            // the second and vise versa
     }
 
 
