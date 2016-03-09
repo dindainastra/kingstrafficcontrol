@@ -48,6 +48,7 @@ public class StraightRoad implements Terrain{
         Graphics2D road=(Graphics2D) g;
         Graphics2D lane_divider=(Graphics2D) g;
         Graphics2D sroad_border=(Graphics2D) g;
+        Graphics2D arrows=(Graphics2D) g;
         
         //draw straight road
         AffineTransform old = road.getTransform();
@@ -81,6 +82,16 @@ public class StraightRoad implements Terrain{
         lane_divider.setColor(Color.white);
         lane_divider.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
 
+        // direction arrows
+        /*arrows.setStroke(bs2);
+        arrows.setColor(Color.black);
+        arrows.drawLine(xStart+10,yStart+road_width/8,xStart+40,yStart+road_width/8);
+        arrows.drawLine(xStart+10,(yStart+road_width/2)+road_width/8,xStart+40,(yStart+road_width/2)+road_width/8);
+        */
+        //arrows.fillPolygon(new int[]{xStart+10,xStart+20},new int[]{(yStart+road_width/8)-5,(yStart+road_width/8)-10},30);
+
+
+        // traffic lights
         TrafficLights tlr = new TrafficLights();
         Thread t = new Thread(tlr);
         t.start();
