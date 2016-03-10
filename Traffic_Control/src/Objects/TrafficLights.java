@@ -14,14 +14,22 @@ public class TrafficLights implements Runnable{
     public static final int YellowReverse = 4;
     private int currentColour = Red;
     private final static int RED_SECS = 30;
-    private final static int YELLOW_SECS = 35;
-    private final static int GREEN_SECS = 35;
+    private final static int YELLOW_SECS = 30;
+    private final static int GREEN_SECS = 30;
     private final static int YellowReverse_SECS = 30;
     private Thread runner;
 
     
   //set traffic light colour and shape
-    static void trafficlightgui(int x_coordinate, int y_coordinate, int RGB, int rotation){    
+    /**
+     * Constructor. Sets the position of the traffic light. 
+     * RGB values to be used for painting the GUI.
+     * @param x_coordinate
+     * @param y_coordinate
+     * @param RGB
+     * @param rotation
+     */
+    public TrafficLights(int x_coordinate, int y_coordinate, int RGB, int rotation){    
         TrafficLights.pos_x = x_coordinate;
         TrafficLights.pos_y = y_coordinate;
         rotates = rotation;
@@ -64,27 +72,22 @@ public class TrafficLights implements Runnable{
         return currentColour;
     }
     /**
-     *
+     * This method iterates the change of colours.
      */
 
     public void run() {
-        System.out.println("Red");
-
-//        while (this.currentColour != Red) {
-//            this.change();
-//        }
-
+    	System.out.println("Red");
+    	System.out.println(Red);
+        
         for (;;) {
-            ////System.out.println(this.currentColour);
-            //System.out.println(this.currentColour);
-            this.currentColour = change();
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 System.out.println("Error: "+e.getLocalizedMessage());
             }
 
-            this.change();
+            System.out.println(this.change());
+            
         }
     }
 
@@ -121,16 +124,19 @@ public class TrafficLights implements Runnable{
         if (runner != null) {
 
             runner.stop();
-            //runner = null;
+            
         }
     }
 
- //   public static void main(String[] args){
- //       TrafficLights a = new TrafficLights();
- //       a.run();
- //   }
+    public static void main(String[] args){
+        TrafficLights a = new TrafficLights();
+        a.run();
+    }
 
-  //draw traffic light
+ /**
+  * Draw of Traffic Light. RGB used.
+  * @param g
+  */
     protected static void doDrawing(Graphics2D g){
         //AffineTransform old3 = g.getTransform();
         //g.rotate(Math.toRadians(rotates),pos_x,pos_y);
