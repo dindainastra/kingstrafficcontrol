@@ -40,6 +40,10 @@ public class CornerRoad implements Terrain{
         
         //draw straight road
         road.setColor(Color.gray);
+        if (type==1){
+            road_width=250;
+
+        }
         road.fillArc(xStart, yStart, road_width ,road_width , start_angle, arc_angle);
         
         //draw road divider
@@ -55,20 +59,22 @@ public class CornerRoad implements Terrain{
 
         //draw road divider
         if (type==0){//curved road
-            road_width=200;
+            //road_width=200;
             sroad_border.setColor(Color.white);
             sroad_border.draw(new Arc2D.Double(xStart + 50, yStart + 50, road_width / 2, road_width / 2, start_angle, arc_angle, Arc2D.OPEN));
             lane_divider.setStroke(bs1);
             lane_divider.draw(new Arc2D.Double(xStart + 75,yStart + 75,road_width / 4,road_width / 4,start_angle,arc_angle,Arc2D.OPEN));
             lane_divider.draw(new Arc2D.Double(xStart + 25,yStart + 25,150, 150 , start_angle,arc_angle,Arc2D.OPEN));
         }else if (type==1) {//roundabout
-            road_width=250;
+            //road_width=250;
             sroad_border.setStroke(bs2);
             sroad_border.setColor(Color.black);
-            sroad_border.draw(new Arc2D.Double(xStart + 60, yStart + 60, road_width / 2, road_width / 2, start_angle, arc_angle, Arc2D.OPEN));
+            sroad_border.draw(new Arc2D.Double(xStart + 90, yStart + 90, road_width / 4, road_width /4, start_angle, arc_angle, Arc2D.OPEN));
+            road.setColor(Color.BLUE);
+            road.fillOval(xStart + 90, yStart + 90, road_width / 4, road_width /4);
             lane_divider.setStroke(bs1);
             lane_divider.setColor(Color.white);
-            lane_divider.draw(new Arc2D.Double(xStart+75,yStart+35,road_width/2,road_width/2,start_angle,arc_angle,Arc2D.OPEN));
+            lane_divider.draw(new Arc2D.Double(xStart+40,yStart+40,road_width-(road_width/3),road_width-(road_width/3),start_angle,arc_angle,Arc2D.OPEN));
         }
 
 
