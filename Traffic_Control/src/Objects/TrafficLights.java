@@ -1,20 +1,38 @@
 
 package Objects;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
 public class TrafficLights implements Runnable{
-
+	
+	private static int pos_x, pos_y, rotates;
+    private static final int width = 3, length = 50;
+    private static int R,G,B;
     public static final int Red = 1;
-    public static final int Yellow = 3;
-    public static final int Green = 2;
-    public static final int Orange = 4;
+    public static final int Yellow = 2;
+    public static final int Green = 3;
+    public static final int YellowReverse = 4;
     private int currentColour = Red;
-    private final static int RED_SECS = 15;
-    private final static int YELLOW_SECS = 5;
-    private final static int GREEN_SECS = 15;
+    private final static int RED_SECS = 30;
+    private final static int YELLOW_SECS = 35;
+    private final static int GREEN_SECS = 35;
+    private final static int YellowReverse_SECS = 30;
     private Thread runner;
 
+    
+  //set traffic light colour and shape
+    static void trafficlightgui(int x_coordinate, int y_coordinate, int RGB, int rotation){    
+        TrafficLights.pos_x = x_coordinate;
+        TrafficLights.pos_y = y_coordinate;
+        rotates = rotation;
+        if (RGB==1){//RED
+            R = 255; G=0; B=0;
+        }else if (RGB==2){//GREEN
+            R = 0; G=255; B=0;
+        }else if (RGB ==3){//AMBER
+            R = 255; G=215; B=0;
+        }
+    }
     /**
      * This method takes the initial state of the traffic lights (Red) and makes decisions accordingly
      * @return
@@ -22,20 +40,20 @@ public class TrafficLights implements Runnable{
     public int change() {
         switch (currentColour) {
             case Red:
-                currentColour = Orange;
-                System.out.println("Red and Yellow ");
+                currentColour = Yellow;
+                System.out.println("Yellow ");
                 break;
-            case Orange:
+            case Yellow:
                 currentColour = Green;
                 System.out.println("Green");
 
                 break;
             case Green:
-                currentColour = Yellow;
+                currentColour = YellowReverse;
                 System.out.println("Yellow");
 
                 break;
-            case Yellow:
+            case YellowReverse:
                 currentColour = Red;
                 System.out.println("Red");
         }
@@ -86,6 +104,9 @@ public class TrafficLights implements Runnable{
             case Green:
 
                 return GREEN_SECS * 100;
+                
+            case YellowReverse:
+            	return YellowReverse_SECS *100;
         }
     }
 
@@ -104,16 +125,19 @@ public class TrafficLights implements Runnable{
         }
     }
 
-//    public static void main(String[] args){
-//        TrafficLights a = new TrafficLights();
-//        a.run();
-//    }
+ //   public static void main(String[] args){
+ //       TrafficLights a = new TrafficLights();
+ //       a.run();
+ //   }
 
-    public void doDrawing(Graphics2D g) {
-        // TODO Auto-generated method stub
-
+  //draw traffic light
+    protected static void doDrawing(Graphics2D g){
+        //AffineTransform old3 = g.getTransform();
+        //g.rotate(Math.toRadians(rotates),pos_x,pos_y);
+        g.setColor(new Color (R,G,B));
+        g.fillRect(pos_x, pos_y, width, length); 
+        //g.setTransform(old3);
     }
-
 }
 
 
