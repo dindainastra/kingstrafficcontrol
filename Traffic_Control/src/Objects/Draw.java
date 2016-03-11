@@ -20,9 +20,13 @@ public class Draw extends JPanel {
         //draw background 
         g.setColor(new Color (50,150,50));
         g.fillRect(0, 0, 1500, 1000);
-        
+
+        //Draw all the terrains
         for (Terrain aTerrain : this.terrainList){
-        	aTerrain.doDrawing(f);
+            aTerrain.doDrawing(f);
+        }
+
+        for (Terrain aTerrain : this.terrainList){
             for (Object v : aTerrain.getForwardListFlow())
                 if (v instanceof Vehicle)
                     ((Vehicle) v).doDrawing(f);
