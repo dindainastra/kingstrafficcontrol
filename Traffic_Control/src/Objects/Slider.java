@@ -116,9 +116,54 @@ public class Slider extends JPanel {
         //add();
        // );
         //pack();
+        //slider interface for time interval and congestion rate
+        timeIntervalSlider.setMajorTickSpacing(20);
+        timeIntervalSlider.setMinorTickSpacing(10);
+        timeIntervalSlider.setPaintLabels(true);
+        timeIntervalSlider.setPaintTicks(true);
+        timeIntervalSlider.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
+                timeIntervalSliderMousePressed(evt);
+            }
+        });
+        speedLimitSlider.setMajorTickSpacing(20);
+        speedLimitSlider.setMinorTickSpacing(10);
+        speedLimitSlider.setPaintLabels(true);
+        speedLimitSlider.setPaintTicks(true);
+        speedLimitSlider.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
+                speedLimitSliderMousePressed(evt);
+            }
+        });
+        congestionSlider.setMajorTickSpacing(20);
+        congestionSlider.setMinorTickSpacing(10);
+        congestionSlider.setPaintLabels(true);
+        congestionSlider.setPaintTicks(true);
+        congestionSlider.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent evt) {
+                congestionSliderMousePressed(evt);
+            }
+        });
     }// </editor-fold>
 
+    private void weatherComboBoxActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+    }
 
+    private void emergencyComboBoxActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+    private void timeIntervalSliderMousePressed(MouseEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void congestionSliderMousePressed(MouseEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void speedLimitSliderMousePressed(MouseEvent evt) {
+        // TODO add your handling code here:
+    }
 
 
 }
