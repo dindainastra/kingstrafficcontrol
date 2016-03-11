@@ -141,7 +141,7 @@ public class TrafficManagement extends JFrame {
                     new Thread(new CarFlow((SquareJunction) t, map, 1), "Thread-"+(t.getClass().toString())).start();
                     new Thread(new CarFlow((SquareJunction) t, map, 0), "Thread-"+(t.getClass().toString())).start();
                 }
-
+            }
             catch(NullPointerException e){
                 System.out.println("Error: "+e.getLocalizedMessage());
             }
