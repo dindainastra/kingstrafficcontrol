@@ -1,7 +1,15 @@
 package Objects;
 
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -49,8 +57,47 @@ public class Buttons extends JPanel {
         add(replayButton);
         add(stopButton, BorderLayout.SOUTH);
 
+        //set play, pause, stop and replay button icon and ActionListener
+        replayButton.setIcon(new ImageIcon(rewindURL)); // NOI18N
+        replayButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                replayButtonActionPerformed(evt);
+            }
+        });
+        playButton.setIcon(new ImageIcon(playURL)); // NOI18N
+        playButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                playButtonActionPerformed(evt);
+            }
+        });
+        pauseButton.setIcon(new ImageIcon(pauseURL)); // NOI18N
+        pauseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                pauseButtonActionPerformed(evt);
+            }
+        });
 
+        stopButton.setIcon(new ImageIcon(stopURL)); // NOI18N
+        stopButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                stopButtonActionPerformed(evt);
+            }
+        });
     }
 
+    private void replayButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+    }
 
+    private void playButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void pauseButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
+    private void stopButtonActionPerformed(ActionEvent evt) {
+        // TODO add your handling code here:
+    }
 }
