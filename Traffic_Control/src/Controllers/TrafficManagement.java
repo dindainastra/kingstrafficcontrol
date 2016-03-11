@@ -84,9 +84,7 @@ public class TrafficManagement {
                     new Thread(new CarFlow((SquareJunction) t, map, 0), "Thread-"+(t.getClass().toString())).start();
                 }
 
-                Thread.sleep(2000);
-            } catch(InterruptedException e) {
-                System.out.println("Error with threads: "+e.getLocalizedMessage());
+                //Thread.sleep(1);
             } catch(NullPointerException e){
                 System.out.println("Error: "+e.getLocalizedMessage());
             }

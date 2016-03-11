@@ -88,8 +88,8 @@ public class TrafficLights implements Runnable{
      */
 
     public void run() {
-    	System.out.println("Red");
-    	System.out.println(Red);
+    	//System.out.println("Red");
+    	//System.out.println(Red);
         
         for (;;) {
             try {
