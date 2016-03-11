@@ -46,6 +46,5 @@ public class Person {
 	public int getDecision(){
 		return decision;
 	}
-	}
 
 }

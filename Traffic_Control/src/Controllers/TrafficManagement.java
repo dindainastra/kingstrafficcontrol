@@ -141,15 +141,7 @@ public class TrafficManagement extends JFrame {
                     new Thread(new CarFlow((SquareJunction) t, map, 1), "Thread-"+(t.getClass().toString())).start();
                     new Thread(new CarFlow((SquareJunction) t, map, 0), "Thread-"+(t.getClass().toString())).start();
                 }
-
-<<<<<<< HEAD
-                //Thread.sleep(1);
-=======
-                Thread.sleep(2000);
-
-            } catch(InterruptedException e) {
-                System.out.println("Error with threads: "+e.getLocalizedMessage());
->>>>>>> working
+                
             } catch(NullPointerException e){
                 System.out.println("Error: "+e.getLocalizedMessage());
             }
