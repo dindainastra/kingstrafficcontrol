@@ -61,21 +61,21 @@ public class TrafficLights implements Runnable{
         switch (currentColour) {
             case Red:
                 currentColour = Yellow;
-                System.out.println("Yellow ");
+                //System.out.println("Yellow ");
                 break;
             case Yellow:
                 currentColour = Green;
-                System.out.println("Green");
+                //System.out.println("Green");
 
                 break;
             case Green:
                 currentColour = YellowReverse;
-                System.out.println("Yellow");
+                //System.out.println("Yellow");
 
                 break;
             case YellowReverse:
                 currentColour = Red;
-                System.out.println("Red");
+                //System.out.println("Red");
         }
         return currentColour;
     }
