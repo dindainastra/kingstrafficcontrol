@@ -206,6 +206,7 @@ public class TrafficManagement {
                 frame = new JFrame();
                 frame.add(aDraw);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.pack();
                 frame.setVisible(true);
                 frame.setSize(1500, 1000);
             }

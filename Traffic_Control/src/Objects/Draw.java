@@ -20,9 +20,9 @@ public class Draw extends JPanel {
         //draw background 
         g.setColor(new Color (50,150,50));
         g.fillRect(0, 0, 1500, 1000);
+        ((Graphics2D) g).scale(0.8,0.8);
 
-        //Draw all the terrains
-        for (Terrain aTerrain : this.terrainList){
+        for (Terrain aTerrain : this.terrainList) {
             aTerrain.doDrawing(f);
         }
 
