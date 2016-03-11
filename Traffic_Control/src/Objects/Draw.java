@@ -21,9 +21,12 @@ public class Draw extends JPanel {
         g.setColor(new Color (50,150,50));
         g.fillRect(0, 0, 1500, 1000);
         ((Graphics2D) g).scale(0.8,0.8);
-        
+
+        for (Terrain aTerrain : this.terrainList) {
+            aTerrain.doDrawing(f);
+        }
+
         for (Terrain aTerrain : this.terrainList){
-        	aTerrain.doDrawing(f);
             for (Object v : aTerrain.getForwardListFlow())
                 if (v instanceof Vehicle)
                     ((Vehicle) v).doDrawing(f);
