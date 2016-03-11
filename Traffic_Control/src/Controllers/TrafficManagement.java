@@ -4,10 +4,16 @@ package Controllers;
 import Objects.*;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class TrafficManagement {
+public class TrafficManagement extends JFrame {
 
     private ArrayList<Person>  aPersonList;
     private ArrayList<Vehicle> aVehicleList;
@@ -16,22 +22,72 @@ public class TrafficManagement {
     private JFrame frame;
     private Draw map;
 
+    GridLayout gd=new GridLayout(0,2);
+
+    //buttons
+    private JButton pauseButton, playButton, replayButton, stopButton;
+    /*private Container contentPane = getContentPane();
+    JPanel jPanel = new JPanel();
+    JPanel panel = new JPanel();
+    GroupLayout jPanelLayout = new GroupLayout(jPanel);
+    GroupLayout layout = new GroupLayout(contentPane);
+*/
 
     public TrafficManagement(){
+
         rand = new Random();
 
         aPersonList = new ArrayList<Person>();
         aVehicleList = new ArrayList<Vehicle>();
         aTerrainList = new ArrayList<Terrain>();
 
+        //for buttons
+        //
+        //
+        // initComponents();
+
         run();
+
     }
 
+
+    private void initComponents() {
+        //Create JButton
+        replayButton = new JButton();
+        pauseButton = new JButton();
+        playButton = new JButton();
+        stopButton = new JButton();
+        //Create JLabel
+        //
+
+        URL stopURL = getClass().getResource("../Resources/stop.PNG");
+        URL rewindURL = getClass().getResource("../Resources/rewind.PNG");
+        URL playURL = getClass().getResource("../Resources/play.PNG");
+        URL pauseURL = getClass().getResource("../Resources/pause.PNG");
+
+        //set play, pause, stop and replay button icon and ActionListener
+        replayButton.setIcon(new ImageIcon(rewindURL));
+        playButton.setIcon(new ImageIcon(playURL));
+        pauseButton.setIcon(new ImageIcon(pauseURL));
+        stopButton.setIcon(new ImageIcon(stopURL));
+
+        //contentPane.setLayout(new FlowLayout());
+        //contentPane.add(replayButton);
+
+
+        //setLayout(new FlowLayout());
+
+    }
+
+
     public void run(){
-        createPersons(1);
+
+        createPersons(20);
+
         createVehicles();
 
         staticMapCreator();
+        //initComponents();
 
         //first init the trafficlights to have the firsts position in the Collection
         initializeStaticTrafficLights();
@@ -40,9 +96,10 @@ public class TrafficManagement {
         initializeForwardAndBackwardLists();
 
         map = new Draw(aTerrainList);
+
+
         drawTheMap(map);
 
-        start();
     }
 
     public void run(int foo){
@@ -72,9 +129,10 @@ public class TrafficManagement {
     public void start(){
         for(Terrain t : aTerrainList){
             try {
+
                 if (t instanceof StraightRoad){
                     //Create thread for the ---> Direction of the Road
-                    new Thread( new CarFlow((StraightRoad) t, map, 1), "Thread-"+(t.getClass().toString())).start();
+                    new Thread(new CarFlow((StraightRoad) t, map, 1), "Thread-"+(t.getClass().toString())).start();
                     //Create thread for the <--- Direction of the Road
                     new Thread(new CarFlow((StraightRoad) t, map, 0), "Thread-"+(t.getClass().toString())).start();
                 }
@@ -84,7 +142,14 @@ public class TrafficManagement {
                     new Thread(new CarFlow((SquareJunction) t, map, 0), "Thread-"+(t.getClass().toString())).start();
                 }
 
+<<<<<<< HEAD
                 //Thread.sleep(1);
+=======
+                Thread.sleep(2000);
+
+            } catch(InterruptedException e) {
+                System.out.println("Error with threads: "+e.getLocalizedMessage());
+>>>>>>> working
             } catch(NullPointerException e){
                 System.out.println("Error: "+e.getLocalizedMessage());
             }
@@ -95,11 +160,10 @@ public class TrafficManagement {
     public void createVehicles(){
         for (Person p : aPersonList) {
             if (!p.isPedestrian()) {
-                //if (new Random().nextBoolean()) {
-                    aVehicleList.add(new Car(p, 150, 330));
-                //} else {
-                //    aVehicleList.add(new Car(p, 1180, 330));
-                //}
+                if (new Random().nextBoolean())
+                    aVehicleList.add(new Car(p, 0, 330));
+                else
+                    aVehicleList.add(new Car(p, 1180, 330));
             }
         }
     }
@@ -110,16 +174,12 @@ public class TrafficManagement {
         }
     }
 
-    //Why are we doing this?
     public void initializeForwardAndBackwardLists(){
-        for (Vehicle v : this.aVehicleList) {
-            if (v.get_pos_x() == 150) {
-                //System.out.println("called "+v.get_pos_x());
-                this.aTerrainList.get(6).setForwardListFlow(v);  //insert vehicle in the enter node direction list -->
-            } else {
+        for (Vehicle v : this.aVehicleList)
+            if (v.get_pos_x()==0)
+                this.aTerrainList.get(0).setForwardListFlow(v);  //insert vehicle in the enter node direction list -->
+            else
                 this.aTerrainList.get(1).setBackwardListFlow(v);  //insert vehicle in the exit node direction list <--
-            }
-        }
     }
 
     public void initializeStaticTrafficLights(){
@@ -202,7 +262,14 @@ public class TrafficManagement {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 frame = new JFrame();
-                frame.add(aDraw);
+
+                frame.setLayout(new BorderLayout());
+                frame.add(new Buttons(), BorderLayout.PAGE_END);
+                frame.add(new Slider(), BorderLayout.EAST);
+                frame.add(aDraw, BorderLayout.CENTER);
+
+                //frame.add();
+                //frame.setLayout(gd);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.pack();
                 frame.setVisible(true);

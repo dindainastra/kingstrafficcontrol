@@ -255,7 +255,7 @@ public class RoadNetworks extends JFrame {
                     .addGroup(jPanelLayout.createSequentialGroup()
                         .addComponent(emergencyLabel)
                         .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(emergencyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))    
+                        .addComponent(emergencyComboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
                     .addComponent(congestionSlider, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
                     .addComponent(speedLimitSlider, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -346,7 +346,7 @@ public class RoadNetworks extends JFrame {
                     .addComponent(stopButton)))
         );
         //pack();
-    }// </editor-fold>                        
+    }// </editor-fold>
 
     private void replayButtonActionPerformed(ActionEvent evt) {                                             
       InputStream music;

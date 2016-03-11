@@ -76,6 +76,20 @@ public class CarFlow implements Runnable {
                                 if(sRoad.getxStart()+sRoad.getLenght() == c.get_pos_x() ) {
                                     System.out.println("Timer stopped.");
                                     timer.stop();
+                                    
+//  do the moving for the vehicles in the each stack from road to road
+                                   
+                                    
+//                                    int dec = 0;
+                                    
+/*
+ * 
+ * if a decision ifmore than 1, do random() and take one of the 3 decisions
+ * if not, set the only one decision and move the car
+ * 
+ */
+                                    	//check the next road and return a random decision if it needs to decide
+//                                    c.getPerson().setDecision(dec);
                                 }
                             }
                         });
