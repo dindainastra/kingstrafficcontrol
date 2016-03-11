@@ -93,7 +93,7 @@ public class StraightRoad implements Terrain {
 
         // traffic lights
         TrafficLights tl = new TrafficLights (xStart,  yStart+road_width/2,  RGB2, rotation);
-        //TrafficLights tlr = new TrafficLights();
+        
         Thread t = new Thread(tl);
         t.start();
         int ch =0;
