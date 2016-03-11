@@ -29,8 +29,16 @@ public class TrafficLights implements Runnable{
      * @param RGB
      * @param rotation
      */
-    public TrafficLights(int x_coordinate, int y_coordinate, int RGB, int rotation){    
-        TrafficLights.pos_x = x_coordinate;
+    public TrafficLights(int x_coordinate, int y_coordinate, int RGB, int rotation){  
+    	super();
+        this.pos_x = x_coordinate;
+        this.pos_y = y_coordinate;
+        this.R = R;
+        this.G = G;
+        this.B = B;
+    }
+    static void trafficlightgui(int x_coordinate, int y_coordinate, int RGB, int rotation){
+    	TrafficLights.pos_x = x_coordinate;
         TrafficLights.pos_y = y_coordinate;
         rotates = rotation;
         if (RGB==1){//RED
@@ -40,6 +48,7 @@ public class TrafficLights implements Runnable{
         }else if (RGB ==3){//AMBER
             R = 255; G=215; B=0;
         }
+    	
     }
     public TrafficLights(){
     	

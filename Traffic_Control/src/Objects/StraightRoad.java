@@ -4,7 +4,7 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 //Straight Road
-public class StraightRoad implements Terrain{
+public class StraightRoad implements Terrain {
 
     // Variables declaration
 
@@ -92,12 +92,13 @@ public class StraightRoad implements Terrain{
 
 
         // traffic lights
-        TrafficLights tlr = new TrafficLights();
-        Thread t = new Thread(tlr);
+        TrafficLights tl = new TrafficLights (xStart,  yStart+road_width/2,  RGB2, rotation);
+        //TrafficLights tlr = new TrafficLights();
+        Thread t = new Thread(tl);
         t.start();
         int ch =0;
         for(int i=0; i<=20; i++) {
-            ch = tlr.getCurrentColour();
+            ch = tl.getCurrentColour();
             System.out.println("Current colour is " + ch);
         }
 
