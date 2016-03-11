@@ -37,7 +37,7 @@ public class TrafficLights implements Runnable{
         this.G = G;
         this.B = B;
     }
-    static void trafficlightgui(int x_coordinate, int y_coordinate, int RGB, int rotation){
+    public void trafficlightgui(int x_coordinate, int y_coordinate, int RGB, int rotation){
     	TrafficLights.pos_x = x_coordinate;
         TrafficLights.pos_y = y_coordinate;
         rotates = rotation;
@@ -131,15 +131,10 @@ public class TrafficLights implements Runnable{
         runner.start();
     }
 
-    public void stop() {
-
-        if (runner != null) {
-
-            runner.stop();
-            
-        }
-    }
-
+    /**
+     * used for testing the sequence
+     * @param args
+     */
     public static void main(String[] args){
         TrafficLights a = new TrafficLights();
         a.run();
