@@ -100,7 +100,6 @@ public class Slider extends JPanel {
         gd.setVgap(15);
 
         add(timeIntervalLabel);
-
         add(timeIntervalSlider);
         add(timeIntervalValue);
         add(congestionLabel);
@@ -108,15 +107,12 @@ public class Slider extends JPanel {
         add(congestionValue);
         add(speedLimitLabel);
         add(speedLimitSlider);
-
         add(weatherLabel);
         add(weatherComboBox);
         add(emergencyLabel);
         add(emergencyComboBox);
-        //add();
-       // );
-        //pack();
-    }// </editor-fold>
+
+    }
 
 
 
