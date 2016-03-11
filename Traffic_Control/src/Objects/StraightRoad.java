@@ -191,5 +191,6 @@ public class StraightRoad implements Terrain{
                                             // the second and vise versa
     }
 
-
+    public int getxStart(){ return xStart; }
+    public int getYStart(){ return yStart; }
 }
