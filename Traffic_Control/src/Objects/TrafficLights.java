@@ -41,6 +41,9 @@ public class TrafficLights implements Runnable{
             R = 255; G=215; B=0;
         }
     }
+    public TrafficLights(){
+    	
+    }
     /**
      * This method takes the initial state of the traffic lights (Red) and makes decisions accordingly
      * @return
