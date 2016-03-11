@@ -99,7 +99,7 @@ public class TrafficManagement extends JFrame {
 
 
         drawTheMap(map);
-
+        start();
     }
 
     public void run(int foo){
@@ -142,11 +142,13 @@ public class TrafficManagement extends JFrame {
                     new Thread(new CarFlow((SquareJunction) t, map, 0), "Thread-"+(t.getClass().toString())).start();
                 }
 
-                Thread.sleep(2000);
+               // Thread.sleep(1);
 
-            } catch(InterruptedException e) {
-                System.out.println("Error with threads: "+e.getLocalizedMessage());
-            } catch(NullPointerException e){
+            } 
+//            catch(InterruptedException e) {
+//                System.out.println("Error with threads: "+e.getLocalizedMessage());
+//            } 
+            catch(NullPointerException e){
                 System.out.println("Error: "+e.getLocalizedMessage());
             }
         }
