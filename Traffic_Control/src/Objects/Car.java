@@ -1,44 +1,41 @@
 package Objects;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class Car extends JPanel implements Vehicle {
 
 	private Person driver;
 	private int priorityLevel;
-    private int pos_x,pos_y;
+    private int pos_x, pos_y;
     private int R = 173, G = 216, B=230; //pastel blue
     private final int length = 20 ,width = 15;
     private JPanel myPanel;
     private int tmp = 0;
     private double distanceFromNodeToNode;
     private int offset = 0;
-        
-	public void move(){
+	private static final int INCREMENT_BY = 5;
+	private Timer timer = null;
+	private final int delay = 20;
 
+	public static Boolean draw = false;
 
-		this.set_pos_x(length + this.get_pos_x( ) + offset);
-		revalidate();
-		repaint();
-	}
-
-	/**
-	 * Smoother movement of the car from one coordinate to another
-	 */
-	public void transition(int startX, int startY, int endX, int endY){
-
-	}
-        
-	//set car position
 	public Car(Person p, int x_coordinate, int y_coordinate){
 		driver = p;
 		priorityLevel = 0; //default no priority
 		this.pos_x = x_coordinate;
 		this.pos_y = y_coordinate;
+
+		timer = new Timer(delay, null);
 	}
-	
+
+	public void move(){
+		this.pos_x += 2;
+	}
+
 	public void set_pos_x(int x){
 		this.pos_x = x;
 	}
@@ -74,8 +71,8 @@ public class Car extends JPanel implements Vehicle {
 			this.setR(255);
 			this.setG(0);
 			this.setB(0);
-            revalidate();
-            repaint();
+            //revalidate();
+            //repaint();
 		}
 	}
 	

@@ -4,7 +4,7 @@ import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 //Straight Road
-public class StraightRoad implements Terrain{
+public class StraightRoad implements Terrain {
 
     // Variables declaration
 
@@ -92,29 +92,30 @@ public class StraightRoad implements Terrain{
 
 
         // traffic lights
-        TrafficLights tlr = new TrafficLights();
-        Thread t = new Thread(tlr);
+        TrafficLights tl = new TrafficLights (xStart,  yStart+road_width/2,  RGB2, rotation);
+        
+        Thread t = new Thread(tl);
         t.start();
         int ch =0;
         for(int i=0; i<=20; i++) {
-            ch = tlr.getCurrentColour();
+            ch = tl.getCurrentColour();
             System.out.println("Current colour is " + ch);
         }
 
         //draw traffic lights
         if (trafficlight ==10){//traffic lights on the left hand side of the road
-            TrafficLightGUI.trafficlightgui(xStart,  yStart+road_width/2,  RGB2, rotation);
-            TrafficLightGUI.doDrawing(g);
+            tl.trafficlightgui(xStart,  yStart+road_width/2,  RGB2, rotation);
+            TrafficLights.doDrawing(g);
         }
         else if (trafficlight ==01){//traffic lights on the right hand side of the road
-            TrafficLightGUI.trafficlightgui(xStart+road_length-5, yStart,RGB1,rotation);
-            TrafficLightGUI.doDrawing(g);
+            tl.trafficlightgui(xStart+road_length-5, yStart,RGB1,rotation);
+            TrafficLights.doDrawing(g);
         }
  else if (trafficlight ==11){//traffic lights on both side of the road
-            TrafficLightGUI.trafficlightgui(xStart,  yStart+road_width/2,  RGB2, rotation);
-            TrafficLightGUI.doDrawing(g);
-            TrafficLightGUI.trafficlightgui(xStart+road_length-5, yStart,RGB1,rotation);
-            TrafficLightGUI.doDrawing(g);
+            tl.trafficlightgui(xStart,  yStart+road_width/2,  RGB2, rotation);
+            TrafficLights.doDrawing(g);
+            tl.trafficlightgui(xStart+road_length-5, yStart,RGB1,rotation);
+            TrafficLights.doDrawing(g);
         }
         road.setTransform(old);
     }
@@ -191,5 +192,6 @@ public class StraightRoad implements Terrain{
                                             // the second and vise versa
     }
 
-
+    public int getxStart(){ return xStart; }
+    public int getYStart(){ return yStart; }
 }
