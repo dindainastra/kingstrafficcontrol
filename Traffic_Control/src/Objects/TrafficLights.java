@@ -4,8 +4,8 @@ package Objects;
 import java.awt.*;
 
 public class TrafficLights implements Runnable{
-	
-	private static int pos_x, pos_y, rotates;
+
+    private static int pos_x, pos_y, rotates;
     private static final int width = 3, length = 50;
     private static int R,G,B;
     public static final int Red = 1;
@@ -19,8 +19,8 @@ public class TrafficLights implements Runnable{
     private final static int YellowReverse_SECS = 30;
     private Thread runner;
 
-    
-  //set traffic light colour and shape
+
+    //set traffic light colour and shape
     /**
      * Constructor. Sets the position of the traffic light. 
      * RGB values to be used for painting the GUI.
@@ -29,8 +29,8 @@ public class TrafficLights implements Runnable{
      * @param RGB
      * @param rotation
      */
-    public TrafficLights(int x_coordinate, int y_coordinate, int RGB, int rotation){  
-    	super();
+    public TrafficLights(int x_coordinate, int y_coordinate, int RGB, int rotation){
+        super();
         this.pos_x = x_coordinate;
         this.pos_y = y_coordinate;
         this.R = R;
@@ -38,7 +38,7 @@ public class TrafficLights implements Runnable{
         this.B = B;
     }
     public void trafficlightgui(int x_coordinate, int y_coordinate, int RGB, int rotation){
-    	TrafficLights.pos_x = x_coordinate;
+        TrafficLights.pos_x = x_coordinate;
         TrafficLights.pos_y = y_coordinate;
         rotates = rotation;
         if (RGB==1){//RED
@@ -48,10 +48,10 @@ public class TrafficLights implements Runnable{
         }else if (RGB ==3){//AMBER
             R = 255; G=215; B=0;
         }
-    	
+
     }
     public TrafficLights(){
-    	
+
     }
     /**
      * This method takes the initial state of the traffic lights (Red) and makes decisions accordingly
@@ -88,9 +88,9 @@ public class TrafficLights implements Runnable{
      */
 
     public void run() {
-    	System.out.println("Red");
-    	System.out.println(Red);
-        
+//    	System.out.println("Red");
+//    	System.out.println(Red);
+
         for (;;) {
             try {
                 Thread.sleep(2000);
@@ -98,8 +98,7 @@ public class TrafficLights implements Runnable{
                 System.out.println("Error: "+e.getLocalizedMessage());
             }
 
-            System.out.println(this.change());
-            
+            //System.out.println(this.change());
         }
     }
 
@@ -119,9 +118,9 @@ public class TrafficLights implements Runnable{
             case Green:
 
                 return GREEN_SECS * 100;
-                
+
             case YellowReverse:
-            	return YellowReverse_SECS *100;
+                return YellowReverse_SECS *100;
         }
     }
 
@@ -140,15 +139,15 @@ public class TrafficLights implements Runnable{
         a.run();
     }
 
- /**
-  * Draw of Traffic Light. RGB used.
-  * @param g
-  */
+    /**
+     * Draw of Traffic Light. RGB used.
+     * @param g
+     */
     protected static void doDrawing(Graphics2D g){
         //AffineTransform old3 = g.getTransform();
         //g.rotate(Math.toRadians(rotates),pos_x,pos_y);
         g.setColor(new Color (R,G,B));
-        g.fillRect(pos_x, pos_y, width, length); 
+        g.fillRect(pos_x, pos_y, width, length);
         //g.setTransform(old3);
     }
 }
