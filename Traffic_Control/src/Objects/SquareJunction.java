@@ -58,6 +58,8 @@ public class SquareJunction extends JPanel implements Terrain{
         super.paintComponent(g);
         doDrawing((Graphics2D)g);
     }
+
+
     //@Override
     public int getLenght() {
         return this.road_width;
@@ -94,7 +96,7 @@ public class SquareJunction extends JPanel implements Terrain{
     }
 
     @Override
-    public ArrayList<Terrain> getNextTerrainList() {
+    public ArrayList<Terrain> getNeighboursTerrainList() {
         return this.nextTerrainList;
     }
 
@@ -103,8 +105,7 @@ public class SquareJunction extends JPanel implements Terrain{
         return this.previousTerrainList;
     }
 
-    @Override
-    public void setNextTerrainList(ArrayList<Terrain> tl) {
+    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
         this.nextTerrainList = tl;
     }
 
@@ -114,7 +115,7 @@ public class SquareJunction extends JPanel implements Terrain{
     }
 
     @Override
-    public void setNextTerrainList(Terrain t) {
+    public void setNeighboursTerrainList(Terrain t) {
         this.nextTerrainList.add(t);
     }
 

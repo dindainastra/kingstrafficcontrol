@@ -18,13 +18,13 @@ public interface Terrain {
     public void setBackwardListFlow(Object o);
     public ArrayList<Object> getBackwardListFlow();
 
-    public ArrayList<Terrain> getNextTerrainList();
+    public ArrayList<Terrain> getNeighboursTerrainList();
     public ArrayList<Terrain> getPreviousTerrainList();
 
-    public void setNextTerrainList(ArrayList<Terrain> tl);
+    public void setNeighboursTerrainList(ArrayList<Terrain> tl);
     public void setPreviousTerrainList(ArrayList<Terrain> tl);
 
-    public void setNextTerrainList(Terrain t);
+    public void setNeighboursTerrainList(Terrain t);
     public void setPreviousTerrainList(Terrain t);
 
     public void removeVehicleFromList(Vehicle v);

@@ -123,6 +123,7 @@ public class CornerRoad extends JPanel implements Terrain{
         }
     }
 
+
 	@Override
 	public int getLenght() {
 		return road_width;  // probably this is the lenght of this. dunno
@@ -160,7 +161,7 @@ public class CornerRoad extends JPanel implements Terrain{
     }
 
     @Override
-    public ArrayList<Terrain> getNextTerrainList() {
+    public ArrayList<Terrain> getNeighboursTerrainList() {
         return this.nextTerrainList;
     }
 
@@ -169,8 +170,7 @@ public class CornerRoad extends JPanel implements Terrain{
         return this.previousTerrainList;
     }
 
-    @Override
-    public void setNextTerrainList(ArrayList<Terrain> tl) {
+    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
         this.nextTerrainList = tl;
     }
 
@@ -180,7 +180,7 @@ public class CornerRoad extends JPanel implements Terrain{
     }
 
     @Override
-    public void setNextTerrainList(Terrain t) {
+    public void setNeighboursTerrainList(Terrain t) {
         this.nextTerrainList.add(t);
     }
 
@@ -197,12 +197,12 @@ public class CornerRoad extends JPanel implements Terrain{
 
     @Override
     public int getxStart() {
-        return xStart;
+        return 0;
     }
 
     @Override
     public int getYStart() {
-        return yStart;
+        return 0;
     }
 
     public int getcornerLength(){

@@ -23,12 +23,26 @@ public class CarFlow implements Runnable {
     private Timer timer = null;
     private final int delay = 30;
     public enum Direction{LEFT, RIGHT, UP, DOWN};
+    private ArrayList<Object> currectFlowList;
+    private TrafficManagement trafficManagement;
 
     public CarFlow(Terrain t, Draw map, int direction){
         this.aTerrain = t;
         this.map = map;
         this.flowDirection = direction;
         timer = new Timer(delay, null);
+    }
+    
+    public CarFlow(Terrain t, Draw map, int direction, TrafficManagement trafficManagement){
+        this.aTerrain = t;
+        this.map = map;
+        this.flowDirection = direction;
+        timer = new Timer(delay, null);
+        if (flowDirection == 1)
+            currectFlowList = this.aTerrain.getForwardListFlow();
+        else
+            currectFlowList = this.aTerrain.getBackwardListFlow();
+        this.trafficManagement = trafficManagement;
     }
     
     /**
@@ -40,25 +54,15 @@ public class CarFlow implements Runnable {
             //while (this.isThisTerrainBusy()){}
 
             if (this.flowDirection == 1) {
-                // here we have 2 options.
-                // Option 1: the Thread.Carflow will create a new thread-worker for each vehicle and the Vehicle will
-                // print itself.
-                // Option 2: the Thread.Carflow will print each vehicle one by one and the Thread.Carflow will paint
-                // the car.
-                // I will add a pseudocode the the 2nd option
 
-                /*if (isThereATrafficLight(this.aTerrain.getForwardListFlow())) {
-                    while (checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {
-                    }
-                }*/
+                if (isThereATrafficLight(this.aTerrain.getForwardListFlow()))
+                    while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {}
 
-
-                ArrayList<Object> terrainList = this.aTerrain.getForwardListFlow();
-                for (Object o : terrainList) {
+                for (Object o : currectFlowList) {
                     if (o instanceof Vehicle) {
-                        //move should probably have arguments.
-                        //moves also should check if there is a stopped vehicle in front of the current moving vehicle. If it is, just stop
-                        // break the moving.
+                    	 
+                    	moveThisVehicleToTheNextCorrectStack((Vehicle) o);
+                    	
                         System.out.println("Runner");
 
                         //int len = this.aTerrain.getLenght();
@@ -86,23 +90,19 @@ public class CarFlow implements Runnable {
                     }
                 }
             } else {
-                ArrayList<Object> terrainList = this.aTerrain.getBackwardListFlow();
-                for (Object o : terrainList) {
+                if (isThereATrafficLight(this.aTerrain.getBackwardListFlow()))
+                    while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))) {}
+
+                for (Object o : currectFlowList) {
                     if (o instanceof Vehicle) {
+
+                        // TODO: 16/03/2016 here should be the timer, and when timer stops run the following
+                        moveThisVehicleToTheNextCorrectStack((Vehicle) o);
                         System.out.println("Runner vehicle Backwards");
+                    } else {
+
                     }
                 }
-                // same as above
-//                    if (isThereATrafficLight(this.aTerrain.getBackwardListFlow())) {
-//                        while (checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))) {
-//                        }
-//                    }
-
-                //for (Object o : this.aTerrain.getBackwardListFlow()) {
-//                        if (o instanceof Vehicle) {
-//                            ((Vehicle) o).move();
-//                        }
-                //}
             }
 //            map.revalidate();
 //            map.repaint();
@@ -113,6 +113,53 @@ public class CarFlow implements Runnable {
         }
     }
 
+    public void moveThisVehicleToTheNextCorrectStack(Vehicle v){
+
+        String threadName  = Thread.currentThread().getName();
+
+        if (
+                (trafficManagement.getTerrainList().indexOf(this.aTerrain) != 1 && this.flowDirection == 1)
+                ||
+                (trafficManagement.getTerrainList().indexOf(this.aTerrain) != 0 && this.flowDirection == 0)
+
+                )
+        { //exit node on flow -> and  <-
+
+            v.getPerson().decide(this.aTerrain.getNeighboursTerrainList());
+            int decision = v.getPerson().getDecision();
+
+            if (this.aTerrain instanceof SquareJunction)
+                //move car to end of this.aTerrain and into decision
+                if (decision%2 ==0)
+                    this.aTerrain.getNeighboursTerrainList().get(decision).getForwardListFlow().add(v);
+                else
+                    this.aTerrain.getNeighboursTerrainList().get(decision).getBackwardListFlow().add(v);
+            else{
+                if (this.flowDirection == 1)
+                    this.aTerrain.getNeighboursTerrainList().get(decision).getForwardListFlow().add(v);
+                else
+                    this.aTerrain.getNeighboursTerrainList().get(decision).getBackwardListFlow().add(v);
+            }
+
+            try {
+                v.getPerson().setMyPreviousTerrainPosition(this.aTerrain);
+                System.out.println("Flow: " +this.flowDirection + " Delete "+v.toString()
+                            + " from Node: " + trafficManagement.getTerrainList().indexOf(this.aTerrain)
+                            + " and move to Node: " + this.trafficManagement.getTerrainList().indexOf(aTerrain.getNeighboursTerrainList().get(decision))
+                            + " and worker is: " + threadName);
+            } catch (Exception e){
+                System.out.println("Thread: "+ threadName + " cant removed!");
+            }
+
+        }else
+            System.out.println("EXIT NODE: Delete "+v.toString() + " and worker is: "+threadName);
+        this.currectFlowList.remove(v);
+    }
+
+    public void printALL(){
+        System.out.println(Thread.currentThread().getName());
+    }    
+    
     private void objectStraightRoad(final Car car, final StraightRoad road){
         final int roadLength = road.getLenght();
         final Direction directionPath = getDirection(car, road);
@@ -259,10 +306,10 @@ Yellow = 3
  */
     public boolean checkIfTrafficLightIsGreen(TrafficLights trafficLight){
 
-//        if (trafficLight.checkGreen())
-//            return true;
-        return false;
-
+        if (trafficLight.getCurrentColour() == 3) //green color = 3
+            return true;
+//        return false;
+        return true; //debug to have only true everywhere
     }
 
     //policy
@@ -295,7 +342,20 @@ Yellow = 3
     }
 
 
-    public void run(){
-        startFlow();
-    }
+    public void run() {
+
+//      System.out.println(Thread.currentThread().getName() + " Started");
+
+//      while (!cancelled) {
+          try {
+              startFlow();
+              Thread.sleep(1000);
+          } catch (Exception e) {
+              e.printStackTrace();
+              System.out.println("here I am");
+          }
+//      }
+//      System.out.println(Thread.currentThread().getName() + " Ended");
+
+  }
 }
