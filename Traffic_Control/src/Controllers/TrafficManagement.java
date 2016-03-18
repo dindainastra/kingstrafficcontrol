@@ -253,24 +253,24 @@ public class TrafficManagement extends JFrame {
 
         int whichRoad = 0;
         // direction ---->
-        aTerrainList.get(whichRoad).setForwardListFlow(firstTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(secondTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(thirdTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(fourthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(fifthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(sixthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(seventhTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(eighthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(ninthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(tenthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(eleventhTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(twelfthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(thirteenthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(fourteenthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(fifteenTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(sixteenthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(seventeenthTL);
-        aTerrainList.get(whichRoad).setForwardListFlow(eighteenthTL);
+        aTerrainList.get(6).setBackwardListFlow(firstTL);
+        aTerrainList.get(0).setForwardListFlow(secondTL);
+        aTerrainList.get(14).setBackwardListFlow(thirdTL); //down
+        aTerrainList.get(15).setForwardListFlow(fourthTL);
+        aTerrainList.get(6).setForwardListFlow(fifthTL);
+        aTerrainList.get(7).setForwardListFlow(sixthTL);
+        aTerrainList.get(1).setForwardListFlow(seventhTL);
+        aTerrainList.get(7).setBackwardListFlow(eighthTL);
+        aTerrainList.get(8).setForwardListFlow(ninthTL);
+        aTerrainList.get(9).setForwardListFlow(tenthTL);
+        aTerrainList.get(10).setBackwardListFlow(eleventhTL);
+        aTerrainList.get(11).setBackwardListFlow(twelfthTL);
+        aTerrainList.get(17).setForwardListFlow(thirteenthTL); //down
+        aTerrainList.get(16).setForwardListFlow(fourteenthTL); //up
+        aTerrainList.get(12).setForwardListFlow(fifteenTL);//down
+        aTerrainList.get(13).setForwardListFlow(sixteenthTL);//up
+        aTerrainList.get(13).setBackwardListFlow(seventeenthTL);//down
+        aTerrainList.get(12).setBackwardListFlow(eighteenthTL);//up
 
 
 
