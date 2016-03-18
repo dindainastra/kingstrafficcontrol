@@ -29,4 +29,6 @@ public interface Terrain {
 
     public void removeVehicleFromList(Vehicle v);
 
+    public int getxStart();
+    public int getYStart();
 }

@@ -86,6 +86,16 @@ public class PedestrianCrossing implements Terrain{
 	}
 
 	@Override
+	public int getxStart() {
+		return 0;
+	}
+
+	@Override
+	public int getYStart() {
+		return 0;
+	}
+
+	@Override
 	public void doDrawing(Graphics2D g) {
 		// TODO Auto-generated method stub
 		
