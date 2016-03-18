@@ -129,6 +129,7 @@ public class CarFlow implements Runnable {
             int decision = v.getPerson().getDecision();
 
             if (this.aTerrain instanceof SquareJunction)
+                //move car to end of this.aTerrain and into decision
                 if (decision%2 ==0)
                     this.aTerrain.getNeighboursTerrainList().get(decision).getForwardListFlow().add(v);
                 else
