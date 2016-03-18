@@ -6,6 +6,8 @@ import Objects.Vehicle;
 import Objects.TrafficLights;
 import Objects.Car;
 import Objects.StraightRoad;
+import Objects.CornerRoad;
+import Objects.SquareJunction;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -20,6 +22,7 @@ public class CarFlow implements Runnable {
     private int flowDirection;   // 0 <---   and 1 ---->
     private Timer timer = null;
     private final int delay = 30;
+    public enum Direction{LEFT, RIGHT, UP, DOWN};
 
     public CarFlow(Terrain t, Draw map, int direction){
         this.aTerrain = t;
@@ -49,56 +52,46 @@ public class CarFlow implements Runnable {
                     }
                 }*/
 
-                ArrayList<Object> list = this.aTerrain.getForwardListFlow();
-                for (Object o : list) {
+
+                ArrayList<Object> terrainList = this.aTerrain.getForwardListFlow();
+                for (Object o : terrainList) {
                     if (o instanceof Vehicle) {
                         //move should probably have arguments.
                         //moves also should check if there is a stopped vehicle in front of the current moving vehicle. If it is, just stop
                         // break the moving.
                         System.out.println("Runner");
-                        final Car c = (Car)o;
-                        System.out.println("Move car. - "+c.getPerson().getName());
 
                         //int len = this.aTerrain.getLenght();
-                        final StraightRoad sRoad = (StraightRoad)this.aTerrain;
-                        final int roadSteps = this.aTerrain.getLenght() / c.getLength();
+                        //final int roadSteps = this.aTerrain.getLenght() / c.getLength();
+                        Terrain terrain = null;
+
+                        if(this.aTerrain instanceof CornerRoad){
+                            System.out.println("Corner");
+                            terrain = (CornerRoad)this.aTerrain;
+
+                            moveObject((Car)o, terrain);
+                        }else if(this.aTerrain instanceof StraightRoad){
+                            objectStraightRoad((Car)o, (StraightRoad)this.aTerrain);
+                        }else if(this.aTerrain instanceof SquareJunction){
+                            System.out.println("SquareJunction");
+                            terrain = (SquareJunction)this.aTerrain;
+
+                            //MAYBE CREATE THREAD POOL TO FIX OUR OF MEMORY ISSUE
+                            moveObject((Car)o, terrain);
+                        }
 
                         //c.move(sRoad.getxStart(), sRoad.getYStart(), roadSteps);
-
-                        timer.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                c.move();
-                                //SET DELAY BEFORE NEXT CAR STARTS
-                                map.repaint();
-
-                                //Stop timer when the car is JUST past the end of the road
-                                if(sRoad.getxStart()+sRoad.getLenght() == c.get_pos_x() ) {
-                                    System.out.println("Timer stopped.");
-                                    timer.stop();
-                                    
-//  do the moving for the vehicles in the each stack from road to road
-                                   
-                                    
-//                                    int dec = 0;
-                                    
-/*
- * 
- * if a decision ifmore than 1, do random() and take one of the 3 decisions
- * if not, set the only one decision and move the car
- * 
- */
-                                    	//check the next road and return a random decision if it needs to decide
-//                                    c.getPerson().setDecision(dec);
-                                }
-                            }
-                        });
-                        timer.start();
                     } else {
-                        System.out.println("Else");
+                        System.out.println("Else "+o.toString());
                     }
                 }
             } else {
+                ArrayList<Object> terrainList = this.aTerrain.getBackwardListFlow();
+                for (Object o : terrainList) {
+                    if (o instanceof Vehicle) {
+                        System.out.println("Runner vehicle Backwards");
+                    }
+                }
                 // same as above
 //                    if (isThereATrafficLight(this.aTerrain.getBackwardListFlow())) {
 //                        while (checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))) {
@@ -118,6 +111,124 @@ public class CarFlow implements Runnable {
         } catch(Exception e) {
             System.out.println("Error: "+e.getLocalizedMessage());
         }
+    }
+
+    private void objectStraightRoad(final Car car, final StraightRoad road){
+        final int roadLength = road.getLenght();
+        final Direction directionPath = getDirection(car, road);
+
+        timer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Boolean stop = false;
+                System.out.println("Straight road. Direction is "+directionPath);
+
+                //Road should say if Y++ of X
+                car.move(directionPath);
+                if(roadLength == car.get_pos_x()) { stop = true; }
+
+                //SET DELAY BEFORE NEXT CAR STARTS
+                map.repaint();
+
+                if(stop) {
+                    timer.stop();
+                }
+            }
+        });
+        timer.start();
+    }
+
+    //Possibly create this for each road so the if..else isnt checked every time the timer is ran
+    private void moveObject(final Car car, final Terrain terrain){
+        final int roadLength = terrain.getLenght();
+        final Direction directionPath = getDirection(car, terrain);
+
+        //MAYBE CREATE THREAD POOL TO FIX OUR OF MEMORY ISSUE
+        timer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Boolean stop = false;
+
+                if(terrain instanceof CornerRoad) {
+                    System.out.println("Corner road");
+                    car.turn("Left"); //Pass in direction path
+                    //car.turn("Right");
+                }else{ //Square junction
+                    System.out.println("Square junction");
+
+                    //Scenario 1 - Turn left
+                    //Turn
+                    if(car.rotate == 0) {
+                        car.turn("Left");
+                    }
+
+                    //Check the car has turned and move into the next road
+                    if(car.rotate != 0) {
+                        car.move(directionPath);
+                    }
+
+                    //Scenario 2 - Turn right
+
+
+                    //If the carX is not the roadLenght + carLenght - keep moving
+//                    if(car.get_pos_x() != (roadLength) ){
+//                        System.out.println("Move ahead abit");
+//                        car.move();
+//                    }else{
+//                        //Turn left and add to the next road
+//                        System.out.println("Turn car");
+//                        car.turn("Left");
+//                        stop = true;
+//                    }
+                }
+
+                //SET DELAY BEFORE NEXT CAR STARTS
+                map.repaint();
+
+                //Stop timer when the car is JUST past the end of the road
+                //terrain.getxStart()+terrain.getLenght()
+                //if(terrain.getNextTerrainList().get(0).getYStart() == car.get_pos_x() ) {
+                //if(roadLenght == car.get_pos_x()) {
+
+                //If the car is at the end of the road
+                if(stop) {
+                    //reset the rotation
+                    car.rotate = 0;
+
+                    System.out.println("Timer stopped.");
+                    timer.stop();
+                }
+            }
+        });
+        timer.start();
+    }
+
+    /**
+     * Work out the direction the car needs to move
+     * @param c
+     * @param t
+     * @return
+     */
+    private Direction getDirection(Car c, Terrain t){
+        Direction dir = null;
+        System.out.println("Terrain x "+t.getxStart());
+        System.out.println("Terrain y "+t.getYStart());
+
+        if(c.get_pos_x() == t.getxStart()){
+            if(t.getxStart() < c.get_pos_x()){
+                dir = Direction.LEFT;
+            }else {
+                dir = Direction.RIGHT;
+            }
+        }else if(c.get_pos_y() == t.getYStart()){
+            if(t.getYStart() < c.get_pos_y()){
+                dir = Direction.UP;
+            }else {
+                dir = Direction.DOWN;
+            }
+        }
+
+        return dir;
     }
 
     public boolean isThereATrafficLight(ArrayList<Object> objectArrayList){

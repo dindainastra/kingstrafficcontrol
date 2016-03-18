@@ -82,7 +82,7 @@ public class TrafficManagement extends JFrame {
 
     public void run(){
 
-        createPersons(20);
+        createPersons(1);
 
         createVehicles();
 
@@ -129,7 +129,6 @@ public class TrafficManagement extends JFrame {
     public void start(){
         for(Terrain t : aTerrainList){
             try {
-
                 if (t instanceof StraightRoad){
                     //Create thread for the ---> Direction of the Road
                     new Thread(new CarFlow((StraightRoad) t, map, 1), "Thread-"+(t.getClass().toString())).start();
@@ -140,8 +139,15 @@ public class TrafficManagement extends JFrame {
                 else if (t instanceof SquareJunction){
                     new Thread(new CarFlow((SquareJunction) t, map, 1), "Thread-"+(t.getClass().toString())).start();
                     new Thread(new CarFlow((SquareJunction) t, map, 0), "Thread-"+(t.getClass().toString())).start();
+                }else if (t instanceof CornerRoad){
+                    new Thread(new CarFlow((CornerRoad) t, map, 1), "Thread-"+(t.getClass().toString())).start();
+                    new Thread(new CarFlow((CornerRoad) t, map, 0), "Thread-"+(t.getClass().toString())).start();
                 }
-            }
+               // Thread.sleep(1);
+            } 
+//            catch(InterruptedException e) {
+//                System.out.println("Error with threads: "+e.getLocalizedMessage());
+//            } 
             catch(NullPointerException e){
                 System.out.println("Error: "+e.getLocalizedMessage());
             }
@@ -151,27 +157,31 @@ public class TrafficManagement extends JFrame {
 
     public void createVehicles(){
         for (Person p : aPersonList) {
-            if (!p.isPedestrian()) {
-                if (new Random().nextBoolean())
-                    aVehicleList.add(new Car(p, 0, 330));
-                else
-                    aVehicleList.add(new Car(p, 1180, 330));
-            }
+//            if (!p.isPedestrian()) {
+//                if (new Random().nextBoolean())
+                    aVehicleList.add(new Car(p, 150, 110));
+//                else
+//                    aVehicleList.add(new Car(p, 1180, 330));
+//            }
         }
     }
 
     public void createPersons(int aNumber){
         for(int i=0; i<aNumber; i++){
-            aPersonList.add(new Person("Person "+i, rand.nextInt(10), false));
+            aPersonList.add(new Person("Person "+i, rand.nextInt(25), false));
         }
     }
 
     public void initializeForwardAndBackwardLists(){
-        for (Vehicle v : this.aVehicleList)
-            if (v.get_pos_x()==0)
-                this.aTerrainList.get(0).setForwardListFlow(v);  //insert vehicle in the enter node direction list -->
-            else
-                this.aTerrainList.get(1).setBackwardListFlow(v);  //insert vehicle in the exit node direction list <--
+        for (Vehicle v : this.aVehicleList) {
+            this.aTerrainList.get(14).setForwardListFlow(v);  //insert vehicle in the enter node direction list -->
+
+//            if (v.get_pos_x()==0) {
+//                this.aTerrainList.get(0).setForwardListFlow(v);  //insert vehicle in the enter node direction list -->
+//            }else {
+//                this.aTerrainList.get(1).setBackwardListFlow(v);  //insert vehicle in the exit node direction list <--
+//            }
+        }
     }
 
     public void initializeStaticTrafficLights(){
@@ -224,9 +234,9 @@ public class TrafficManagement extends JFrame {
         aTerrainList.add(new StraightRoad(815,10,10,2,2,0,265));
 
         //add vertical roads
-        aTerrainList.add(new StraightRoad(815,110,11,1,1,90,150));
+        aTerrainList.add(new StraightRoad(815,110,11,1,1,90,150));              //12
         aTerrainList.add(new StraightRoad(815,490,11,2,2,90,101));
-        aTerrainList.add(new StraightRoad(150,110,01,2,2,90,215));
+        aTerrainList.add(new StraightRoad(150,110,01,2,2,90,215));              //14
         aTerrainList.add(new StraightRoad(150,425,10,2,2,90,165));
         aTerrainList.add(new StraightRoad(1180,425,10,2,2,90,165));
         aTerrainList.add(new StraightRoad(1180,110,01,2,2,90,215));

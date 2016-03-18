@@ -90,4 +90,14 @@ public class Bridge implements Terrain{
 		this.backwardListFlow.remove(v); //if not, the forwardListFlow is like it is, and the vehicle is removed from the second and vise versa
 	}
 
+	@Override
+	public int getxStart() {
+		return 0;
+	}
+
+	@Override
+	public int getYStart() {
+		return 0;
+	}
+
 }
