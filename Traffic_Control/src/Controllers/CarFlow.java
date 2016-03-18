@@ -21,7 +21,10 @@ public class CarFlow implements Runnable {
     private Terrain aTerrain;
     private int flowDirection;   // 0 <---   and 1 ---->
     private Timer timer = null;
+    private Timer timerTraffic = null;
     private final int delay = 30;
+
+    private int delay2 = 1000;
     public enum Direction{LEFT, RIGHT, UP, DOWN};
     private ArrayList<Object> currectFlowList;
     private TrafficManagement trafficManagement;
@@ -31,20 +34,23 @@ public class CarFlow implements Runnable {
         this.map = map;
         this.flowDirection = direction;
         timer = new Timer(delay, null);
+        timerTraffic = new Timer(delay2, null);
+
     }
-    
+
     public CarFlow(Terrain t, Draw map, int direction, TrafficManagement trafficManagement){
         this.aTerrain = t;
         this.map = map;
         this.flowDirection = direction;
         timer = new Timer(delay, null);
+        timerTraffic = new Timer(delay2, null);
         if (flowDirection == 1)
             currectFlowList = this.aTerrain.getForwardListFlow();
         else
             currectFlowList = this.aTerrain.getBackwardListFlow();
         this.trafficManagement = trafficManagement;
     }
-    
+
     /**
      * Resume the cars flow through the system
      * Repaint the map whilst moving
@@ -72,7 +78,21 @@ public class CarFlow implements Runnable {
                         if(this.aTerrain instanceof CornerRoad){
                             System.out.println("Corner");
                             terrain = (CornerRoad)this.aTerrain;
-
+//                        timer.addActionListener(new ActionListener() {
+//                            @Override
+//                            public void actionPerformed(ActionEvent e) {
+//                                c.move();
+//                                //SET DELAY BEFORE NEXT CAR STARTS
+//                                map.repaint();
+//
+//                                //Stop timer when the car is JUST past the end of the road
+//                                if(sRoad.getxStart()+sRoad.getLenght() == c.get_pos_x() ) {
+//                                    System.out.println("Timer stopped.");
+//                                    timer.stop();
+//                                }
+//                            }
+//                        });
+//                        timer.start();
                             moveObject((Car)o, terrain);
                         }else if(this.aTerrain instanceof StraightRoad){
                             objectStraightRoad((Car)o, (StraightRoad)this.aTerrain);
@@ -87,6 +107,20 @@ public class CarFlow implements Runnable {
                         //c.move(sRoad.getxStart(), sRoad.getYStart(), roadSteps);
                     } else {
                         System.out.println("Else "+o.toString());
+                        final TrafficLights tLOne = (TrafficLights)o;
+//                        Thread t = new Thread(tLOne);
+//                        t.start();
+
+                        timerTraffic.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                tLOne.change();
+                                //SET DELAY BEFORE NEXT CAR STARTS
+                                map.repaint();
+
+                            }
+                        });
+                        timerTraffic.start();
                     }
                 }
             } else {
@@ -341,6 +375,12 @@ Yellow = 3
 
     }
 
+    public void startTraffic(){
+        final TrafficLights tLOne = (TrafficLights)this.aTerrain.getForwardListFlow().get(0);
+        Thread t = new Thread(tLOne);
+        t.start();
+
+    }
 
     public void run() {
 

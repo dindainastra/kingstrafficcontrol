@@ -1,23 +1,26 @@
 
 package Objects;
 
+import org.junit.internal.runners.statements.RunAfters;
+
+import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
-public class TrafficLights implements Runnable{
+public class TrafficLights extends JPanel implements Runnable{
 
-    private static int pos_x, pos_y, rotates;
-    private static final int width = 3, length = 50;
-    private static int R,G,B;
-    public static final int Red = 1;
-    public static final int Yellow = 2;
-    public static final int Green = 3;
-    public static final int YellowReverse = 4;
+    private int pos_x, pos_y, rotates;
+    private final int width = 3, length = 50;
+    public final int Red = 1;
+    public final int Yellow = 2;
+    public final int Green = 3;
+    public final int YellowReverse = 4;
     private int currentColour = Red;
-    private final static int RED_SECS = 30;
-    private final static int YELLOW_SECS = 30;
-    private final static int GREEN_SECS = 30;
-    private final static int YellowReverse_SECS = 30;
-    private Thread runner;
+    private final int RED_SECS = 30;
+    private final int YELLOW_SECS = 30;
+    private final int GREEN_SECS = 30;
+    private final int YellowReverse_SECS = 30;
+    private TrafficLights resumeNextLight;
 
 
     //set traffic light colour and shape
@@ -30,29 +33,15 @@ public class TrafficLights implements Runnable{
      * @param rotation
      */
     public TrafficLights(int x_coordinate, int y_coordinate, int RGB, int rotation){
-        super();
         this.pos_x = x_coordinate;
         this.pos_y = y_coordinate;
-        this.R = R;
-        this.G = G;
-        this.B = B;
+        this.rotates = rotation;
+        this.currentColour = RGB;
     }
-    public void trafficlightgui(int x_coordinate, int y_coordinate, int RGB, int rotation){
-        TrafficLights.pos_x = x_coordinate;
-        TrafficLights.pos_y = y_coordinate;
-        rotates = rotation;
-        if (RGB==1){//RED
-            R = 255; G=0; B=0;
-        }else if (RGB==2){//GREEN
-            R = 0; G=255; B=0;
-        }else if (RGB ==3){//AMBER
-            R = 255; G=215; B=0;
-        }
 
-    }
-    public TrafficLights(){
-
-    }
+    public void setNextLight(TrafficLights NextLight) {
+        resumeNextLight = NextLight;
+    } // end setOtherLight.
     /**
      * This method takes the initial state of the traffic lights (Red) and makes decisions accordingly
      * @return
@@ -87,6 +76,8 @@ public class TrafficLights implements Runnable{
      * This method iterates the change of colours.
      */
 
+
+/*
     public void run() {
 //    	System.out.println("Red");
 //    	System.out.println(Red);
@@ -100,7 +91,7 @@ public class TrafficLights implements Runnable{
 
             //System.out.println(this.change());
         }
-    }
+    }*/
 
     private int getSecs() {
 
@@ -124,31 +115,68 @@ public class TrafficLights implements Runnable{
         }
     }
 
+    /*
+
     public void start() {
 
         runner = new Thread((Runnable) this);
         runner.start();
-    }
+    }*/
 
     /**
      * used for testing the sequence
      * @param args
      */
+    /*
     public static void main(String[] args){
         TrafficLights a = new TrafficLights();
         a.run();
-    }
+    }*/
 
-    /**
-     * Draw of Traffic Light. RGB used.
-     * @param g
-     */
-    protected static void doDrawing(Graphics2D g){
-        //AffineTransform old3 = g.getTransform();
-        //g.rotate(Math.toRadians(rotates),pos_x,pos_y);
+
+ /**
+  * Draw of Traffic Light. RGB used.
+  * @param g
+  */
+ public void doDrawing(Graphics2D g){
+        AffineTransform old3 = g.getTransform();
+        g.rotate(Math.toRadians(rotates),pos_x,pos_y);
+     int R, G, B;
+     if (currentColour==Red){
+         R = 255; G=0; B=0;
+     }else if (currentColour==Green){
+         R = 0; G=255; B=0;
+     }else {//Yellow
+         R = 255; G=215; B=0;
+     }
+
         g.setColor(new Color (R,G,B));
         g.fillRect(pos_x, pos_y, width, length);
-        //g.setTransform(old3);
+     System.out.format("masuk sini woy %d %d %d %d %d %d %d %n", pos_x, pos_y, width, length,R,G,B);
+        g.setTransform(old3);
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+        doDrawing((Graphics2D)g);
+    }
+
+
+    @Override
+    public void run() {
+        for (;;) {
+            try {
+                this.currentColour = change();
+                System.out.println("Changing to -"+currentColour);
+                repaint();
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                System.out.println("Error: "+e.getLocalizedMessage());
+            }
+
+            System.out.println(this.change());
+
+        }
     }
 }
 
