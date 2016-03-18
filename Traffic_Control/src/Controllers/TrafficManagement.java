@@ -12,15 +12,19 @@ import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class TrafficManagement extends JFrame {
 
-    private ArrayList<Person>  aPersonList;
-    private ArrayList<Vehicle> aVehicleList;
-    private ArrayList<Terrain> aTerrainList;
+    private volatile ArrayList<Person>  aPersonList;
+    private volatile ArrayList<Vehicle> aVehicleList;
+    private volatile ArrayList<Terrain> aTerrainList;
     private Random rand;
     private JFrame frame;
     private Draw map;
+    private ExecutorService executor;
+    private ArrayList<Runnable> runnableArrayList = new ArrayList<Runnable>();
 
     GridLayout gd=new GridLayout(0,2);
 
@@ -79,10 +83,25 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    public ArrayList<Terrain> getTerrainList(){
+        return this.aTerrainList;
+    }
 
+    public void printNetwork(){
+
+        int counter = 0;
+        for(Terrain terrain : this.aTerrainList){
+            System.out.println(counter++);
+            System.out.println("Road: " + terrain.toString());
+            System.out.println("Forward list: " + terrain.getForwardListFlow());
+            System.out.println("Backward list" + terrain.getBackwardListFlow());
+        }
+
+    }
+    
     public void run(){
 
-        createPersons(20);
+        createPersons(1);
 
         createVehicles();
 
@@ -95,6 +114,9 @@ public class TrafficManagement extends JFrame {
         //init all the vehicles
         initializeForwardAndBackwardLists();
 
+        //do the graph to know every node their closest nodes
+        initializeNeighboursTerrainLists();
+        
         map = new Draw(aTerrainList);
 
 
@@ -122,36 +144,40 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    public ArrayList<Runnable> getRunnableArrayList() {
+        return runnableArrayList;
+    }
+
+    public void runExcectutor(Runnable worker){
+        executor.execute(worker);
+    }
+
+    
     /**
      * Start the flow of cars in the node system
      * For each car in the vehicle list, create a thread for the cars flow
      */
     public void start(){
+
+        executor = Executors.newFixedThreadPool(aTerrainList.size()*2);
         for(Terrain t : aTerrainList){
             try {
-
-                if (t instanceof StraightRoad){
-                    //Create thread for the ---> Direction of the Road
-                    new Thread(new CarFlow((StraightRoad) t, map, 1), "Thread-"+(t.getClass().toString())).start();
-                    //Create thread for the <--- Direction of the Road
-                    new Thread(new CarFlow((StraightRoad) t, map, 0), "Thread-"+(t.getClass().toString())).start();
-                }
-                // (MAYBE) here we need 2 more threads.  one for the upper direction and one for the down direction.
-                else if (t instanceof SquareJunction){
-                    new Thread(new CarFlow((SquareJunction) t, map, 1), "Thread-"+(t.getClass().toString())).start();
-                    new Thread(new CarFlow((SquareJunction) t, map, 0), "Thread-"+(t.getClass().toString())).start();
-                }
-
-               // Thread.sleep(1);
-
-            } 
-//            catch(InterruptedException e) {
-//                System.out.println("Error with threads: "+e.getLocalizedMessage());
-//            } 
-            catch(NullPointerException e){
-                System.out.println("Error: "+e.getLocalizedMessage());
+                runnableArrayList.add(new CarFlow(t, map, 1,this));
+                runnableArrayList.add(new CarFlow(t, map, 0,this));
+            } catch(NullPointerException e){
+                 System.out.println("Error: "+e.getLocalizedMessage());
             }
         }
+
+        for (int i=0; i<(aTerrainList.size()*2);i++) {
+            System.out.println("step "+i);
+            for (Runnable worker : runnableArrayList)
+                executor.execute(worker);
+
+        }
+        
+        System.out.println("Finished all threads");
+    	
     }
 
 
@@ -168,7 +194,7 @@ public class TrafficManagement extends JFrame {
 
     public void createPersons(int aNumber){
         for(int i=0; i<aNumber; i++){
-            aPersonList.add(new Person("Person "+i, rand.nextInt(10), false));
+            aPersonList.add(new Person("Person "+i, rand.nextInt(10), false, null));
         }
     }
 
@@ -266,6 +292,93 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    public void initializeNeighboursTerrainLists(){
+
+        //Graph
+        this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(23));
+
+        this.aTerrainList.get(1).setNeighboursTerrainList(this.aTerrainList.get(22));
+
+        this.aTerrainList.get(2).setNeighboursTerrainList(this.aTerrainList.get(12));
+        this.aTerrainList.get(2).setNeighboursTerrainList(this.aTerrainList.get(5));
+
+        this.aTerrainList.get(3).setNeighboursTerrainList(this.aTerrainList.get(6));
+        this.aTerrainList.get(3).setNeighboursTerrainList(this.aTerrainList.get(2));
+
+        this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(13));
+        this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(3));
+
+        this.aTerrainList.get(5).setNeighboursTerrainList(this.aTerrainList.get(7));
+        this.aTerrainList.get(5).setNeighboursTerrainList(this.aTerrainList.get(4));
+
+        this.aTerrainList.get(6).setNeighboursTerrainList(this.aTerrainList.get(23));
+        this.aTerrainList.get(6).setNeighboursTerrainList(this.aTerrainList.get(2));
+
+        this.aTerrainList.get(7).setNeighboursTerrainList(this.aTerrainList.get(22));
+        this.aTerrainList.get(7).setNeighboursTerrainList(this.aTerrainList.get(4));
+
+        this.aTerrainList.get(8).setNeighboursTerrainList(this.aTerrainList.get(25));
+        this.aTerrainList.get(8).setNeighboursTerrainList(this.aTerrainList.get(20));
+
+        this.aTerrainList.get(9).setNeighboursTerrainList(this.aTerrainList.get(24));
+        this.aTerrainList.get(9).setNeighboursTerrainList(this.aTerrainList.get(21));
+
+        this.aTerrainList.get(10).setNeighboursTerrainList(this.aTerrainList.get(19));
+        this.aTerrainList.get(10).setNeighboursTerrainList(this.aTerrainList.get(24));
+
+        this.aTerrainList.get(11).setNeighboursTerrainList(this.aTerrainList.get(18));
+        this.aTerrainList.get(11).setNeighboursTerrainList(this.aTerrainList.get(25));
+
+        this.aTerrainList.get(12).setNeighboursTerrainList(this.aTerrainList.get(25));
+        this.aTerrainList.get(12).setNeighboursTerrainList(this.aTerrainList.get(5));
+
+        this.aTerrainList.get(13).setNeighboursTerrainList(this.aTerrainList.get(3));
+        this.aTerrainList.get(13).setNeighboursTerrainList(this.aTerrainList.get(24));
+
+        this.aTerrainList.get(14).setNeighboursTerrainList(this.aTerrainList.get(20));
+        this.aTerrainList.get(14).setNeighboursTerrainList(this.aTerrainList.get(23));
+
+        this.aTerrainList.get(15).setNeighboursTerrainList(this.aTerrainList.get(23));
+        this.aTerrainList.get(15).setNeighboursTerrainList(this.aTerrainList.get(21));
+
+        this.aTerrainList.get(16).setNeighboursTerrainList(this.aTerrainList.get(22));
+        this.aTerrainList.get(16).setNeighboursTerrainList(this.aTerrainList.get(19));
+
+        this.aTerrainList.get(17).setNeighboursTerrainList(this.aTerrainList.get(18));
+        this.aTerrainList.get(17).setNeighboursTerrainList(this.aTerrainList.get(22));
+
+        this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(11));
+        this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(17));
+
+        this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(16));
+        this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(10));
+
+        this.aTerrainList.get(20).setNeighboursTerrainList(this.aTerrainList.get(8));
+        this.aTerrainList.get(20).setNeighboursTerrainList(this.aTerrainList.get(14));
+
+        this.aTerrainList.get(21).setNeighboursTerrainList(this.aTerrainList.get(9));
+        this.aTerrainList.get(21).setNeighboursTerrainList(this.aTerrainList.get(15));
+
+        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(1));
+        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(7));
+        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(17));
+        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(16));
+
+        this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(6));
+        this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(0));
+        this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(14));
+        this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(15));
+
+        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(10));
+        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(9));
+        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(13));
+
+        this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(11));
+        this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(12));
+        this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(8));
+
+    }
+    
     public void initializeRandomTrafficLights(){
 
     }
@@ -294,9 +407,9 @@ public class TrafficManagement extends JFrame {
         aTerrainList.add(new StraightRoad(815,10,10,2,2,0,265));
 
         //add vertical roads
-        aTerrainList.add(new StraightRoad(815,110,11,1,1,90,150));
+        aTerrainList.add(new StraightRoad(815,110,11,1,1,90,150));              //12
         aTerrainList.add(new StraightRoad(815,490,11,2,2,90,101));
-        aTerrainList.add(new StraightRoad(150,110,01,2,2,90,215));
+        aTerrainList.add(new StraightRoad(150,110,01,2,2,90,215));              //14
         aTerrainList.add(new StraightRoad(150,425,10,2,2,90,165));
         aTerrainList.add(new StraightRoad(1180,425,10,2,2,90,165));
         aTerrainList.add(new StraightRoad(1180,110,01,2,2,90,215));

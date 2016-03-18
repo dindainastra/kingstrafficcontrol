@@ -1,8 +1,9 @@
 package Objects;
+import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class SquareJunction implements Terrain{
+public class SquareJunction extends JPanel implements Terrain{
 
     // Variables declaration
     private ArrayList<Terrain> nextTerrainList;
@@ -53,6 +54,12 @@ public class SquareJunction implements Terrain{
         lane_divider.drawLine(xStart,yStart+road_width/2,xStart+road_width,yStart+road_width/2);//vertical
     }
 
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        doDrawing((Graphics2D)g);
+    }
+
+
     //@Override
     public int getLenght() {
         return this.road_width;
@@ -89,7 +96,7 @@ public class SquareJunction implements Terrain{
     }
 
     @Override
-    public ArrayList<Terrain> getNextTerrainList() {
+    public ArrayList<Terrain> getNeighboursTerrainList() {
         return this.nextTerrainList;
     }
 
@@ -98,8 +105,7 @@ public class SquareJunction implements Terrain{
         return this.previousTerrainList;
     }
 
-    @Override
-    public void setNextTerrainList(ArrayList<Terrain> tl) {
+    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
         this.nextTerrainList = tl;
     }
 
@@ -109,7 +115,7 @@ public class SquareJunction implements Terrain{
     }
 
     @Override
-    public void setNextTerrainList(Terrain t) {
+    public void setNeighboursTerrainList(Terrain t) {
         this.nextTerrainList.add(t);
     }
 
@@ -122,6 +128,16 @@ public class SquareJunction implements Terrain{
     public void removeVehicleFromList(Vehicle v) {
         this.forwardListFlow.remove(v);  //if exists here it removes it from here
         this.backwardListFlow.remove(v); //if not, the forwardListFlow is like it is, and the vehicle is removed from the second and vise versa
+    }
+
+    @Override
+    public int getxStart() {
+        return 0;
+    }
+
+    @Override
+    public int getYStart() {
+        return 0;
     }
 
 

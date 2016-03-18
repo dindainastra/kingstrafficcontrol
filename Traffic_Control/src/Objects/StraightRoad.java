@@ -1,14 +1,15 @@
 package Objects;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 
 //Straight Road
-public class StraightRoad implements Terrain {
+public class StraightRoad extends JPanel implements Terrain {
 
     // Variables declaration
 
-    private ArrayList<Terrain> nextTerrainList;
+    private ArrayList<Terrain> neighboursTerrainList;
     private ArrayList<Terrain> previousTerrainList;
     private ArrayList<Object> forwardListFlow;
     private ArrayList<Object> backwardListFlow;
@@ -20,7 +21,7 @@ public class StraightRoad implements Terrain {
     private int road_length = 100;
     private final int road_width = 100;
 
-    private final TrafficLights trafficLight0, trafficLight1;
+    //private final TrafficLights trafficLight0, trafficLight1;
 
     // adding constructor to initialise road_length
     public StraightRoad(int x_Start, int y_Start, int trafficlight, int RGB1, int RGB2, int rotation, int road_length){
@@ -30,10 +31,10 @@ public class StraightRoad implements Terrain {
         this.yStart = y_Start;
         this.road_length=road_length;
 
-        this.trafficLight0 = new TrafficLights(xStart, yStart+road_width/2, RGB2, rotation);
-        this.trafficLight1 = new TrafficLights(xStart+road_length-5, yStart, RGB1, rotation);
+        //this.trafficLight0 = new TrafficLights(xStart, yStart+road_width/2, RGB2, rotation);
+        //this.trafficLight1 = new TrafficLights(xStart+road_length-5, yStart, RGB1, rotation);
 
-        nextTerrainList = new ArrayList<Terrain>();
+        neighboursTerrainList = new ArrayList<Terrain>();
         previousTerrainList  = new ArrayList<Terrain>();
         forwardListFlow = new ArrayList<Object>();
         backwardListFlow = new ArrayList<Object>();
@@ -98,6 +99,7 @@ public class StraightRoad implements Terrain {
             System.out.println("Current colour is " + ch);
         }*/
 
+
         //draw traffic lights
         /*if (trafficlight ==10){//traffic lights on the left hand side of the road
             tl.trafficlightgui(xStart,  yStart+road_width/2,  RGB2, rotation);
@@ -113,7 +115,7 @@ public class StraightRoad implements Terrain {
             tl.trafficlightgui(xStart+road_length-5, yStart,RGB1,rotation);
             TrafficLights.doDrawing(g);
         }
- else if (trafficlight ==11){//traffic lights on both side of the road
+        else if (trafficlight ==11){//traffic lights on both side of the road
             tl.trafficlightgui(xStart,  yStart+road_width/2,  RGB2, rotation);
             TrafficLights.doDrawing(g);
             tl.trafficlightgui(xStart+road_length-5, yStart,RGB1,rotation);
@@ -125,6 +127,56 @@ public class StraightRoad implements Terrain {
         }*/
         road.setTransform(old);
     }
+
+    public void paintComponent(Graphics gr){
+        Graphics2D g = (Graphics2D)gr;
+        Graphics2D road=(Graphics2D) g;
+        Graphics2D lane_divider=(Graphics2D) g;
+        Graphics2D sroad_border=(Graphics2D) g;
+        Graphics2D arrows=(Graphics2D) g;
+
+        //draw straight road
+        AffineTransform old = road.getTransform();
+        road.rotate(Math.toRadians(rotation),xStart,yStart);
+        road.setColor(Color.gray);
+        road.fillRect(xStart, yStart, road_length , road_width);
+
+        //draw road divider
+        float[] dash1 = {4f, 0f, 2f};
+        float[] dash2 = {100f,0f};
+        BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
+        BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
+
+        //draw road border
+        sroad_border.setStroke(bs2);
+        sroad_border.setColor(Color.black);
+        sroad_border.drawLine(xStart,yStart,xStart+road_length-1,yStart);
+        sroad_border.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
+
+        //draw road lanes
+        lane_divider.setStroke(bs1);
+        lane_divider.setColor(Color.white);
+        int y=yStart+(road_width);
+        lane_divider.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
+
+        lane_divider.setStroke(bs2);
+        lane_divider.setColor(Color.white);
+        lane_divider.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
+
+        lane_divider.setStroke(bs1);
+        lane_divider.setColor(Color.white);
+        lane_divider.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+
+        // direction arrows
+        /*arrows.setStroke(bs2);
+        arrows.setColor(Color.black);
+        arrows.drawLine(xStart+10,yStart+road_width/8,xStart+40,yStart+road_width/8);
+        arrows.drawLine(xStart+10,(yStart+road_width/2)+road_width/8,xStart+40,(yStart+road_width/2)+road_width/8);
+        */
+        //arrows.fillPolygon(new int[]{xStart+10,xStart+20},new int[]{(yStart+road_width/8)-5,(yStart+road_width/8)-10},30);
+        road.setTransform(old);
+    }
+
 
     //@Override
     public int getLenght() {
@@ -162,8 +214,8 @@ public class StraightRoad implements Terrain {
     }
 
     @Override
-    public ArrayList<Terrain> getNextTerrainList() {
-        return this.nextTerrainList;
+    public ArrayList<Terrain> getNeighboursTerrainList() {
+        return this.neighboursTerrainList;
     }
 
     @Override
@@ -171,9 +223,8 @@ public class StraightRoad implements Terrain {
         return this.previousTerrainList;
     }
 
-    @Override
-    public void setNextTerrainList(ArrayList<Terrain> tl) {
-        this.nextTerrainList = tl;
+    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
+        this.neighboursTerrainList = tl;
     }
 
     @Override
@@ -182,8 +233,8 @@ public class StraightRoad implements Terrain {
     }
 
     @Override
-    public void setNextTerrainList(Terrain t) {
-        this.nextTerrainList.add(t);
+    public void setNeighboursTerrainList(Terrain t) {
+        this.neighboursTerrainList.add(t);
     }
 
     @Override
@@ -200,24 +251,4 @@ public class StraightRoad implements Terrain {
 
     public int getxStart(){ return xStart; }
     public int getYStart(){ return yStart; }
-
-    private static void activateTrafficLights(TrafficLights trafficLight, Graphics2D g) {
-            trafficLight.doDrawing(g);
-
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-    //
-    //                //for (;;) {
-    //                    try {
-    //                        Thread.sleep(2000);
-    //                    } catch (InterruptedException e) {
-    //                        System.out.println("Error: "+e.getLocalizedMessage());
-    //                    }
-    //                    trafficLight.change();
-    //                //}
-               }
-            });
-           thread.start();
-    }
 }

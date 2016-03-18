@@ -10,11 +10,15 @@ public class Draw extends JPanel {
 
     //Draw cars, roads, traffic lights
     public Draw(ArrayList<Terrain> aTerrainList) {
+
         this.terrainList = aTerrainList;
     }
     
     @Override
     protected void paintComponent(Graphics g){
+        //NOT OPTIMAL - EVERYTHING IS REPAINTED ON EVERY REPAINT CALL
+        //System.out.println("Repaint called?");
+
         Graphics2D f = (Graphics2D) g;
         super.paintComponent(g);
         //draw background 
@@ -23,14 +27,21 @@ public class Draw extends JPanel {
         ((Graphics2D) g).scale(0.8,0.8);
 
         for (Terrain aTerrain : this.terrainList) {
-            aTerrain.doDrawing(f);
+            //aTerrain.doDrawing(f);
+            if (aTerrain instanceof StraightRoad) {
+                ((StraightRoad) aTerrain).paintComponent(g);
+            }else if (aTerrain instanceof CornerRoad){
+                ((CornerRoad) aTerrain).paintComponent(g);
+            }else if (aTerrain instanceof SquareJunction){
+                ((SquareJunction) aTerrain).paintComponent(g);
+            }
         }
 
         for (Terrain aTerrain : this.terrainList){
             for (Object v : aTerrain.getForwardListFlow())
-                if (v instanceof Vehicle)
-                    ((Vehicle) v).doDrawing(f);
-                else {
+                if (v instanceof Car) {
+                    ((Car) v).paintComponent(g);
+                }else {
                     //((TrafficLights) v).doDrawing(f);
                     ((TrafficLights) v).paintComponent(g);
                 }

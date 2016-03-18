@@ -22,8 +22,8 @@ public class TrafficLights extends JPanel implements Runnable{
     private final int YellowReverse_SECS = 30;
     private TrafficLights resumeNextLight;
 
-    
-  //set traffic light colour and shape
+
+    //set traffic light colour and shape
     /**
      * Constructor. Sets the position of the traffic light. 
      * RGB values to be used for painting the GUI.
@@ -79,9 +79,9 @@ public class TrafficLights extends JPanel implements Runnable{
 
 /*
     public void run() {
-    	System.out.println("Red");
-    	System.out.println(Red);
-        
+//    	System.out.println("Red");
+//    	System.out.println(Red);
+
         for (;;) {
             try {
                 Thread.sleep(2000);
@@ -89,8 +89,7 @@ public class TrafficLights extends JPanel implements Runnable{
                 System.out.println("Error: "+e.getLocalizedMessage());
             }
 
-            System.out.println(this.change());
-            
+            //System.out.println(this.change());
         }
     }*/
 
@@ -110,9 +109,9 @@ public class TrafficLights extends JPanel implements Runnable{
             case Green:
 
                 return GREEN_SECS * 100;
-                
+
             case YellowReverse:
-            	return YellowReverse_SECS *100;
+                return YellowReverse_SECS *100;
         }
     }
 

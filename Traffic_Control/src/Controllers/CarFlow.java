@@ -6,6 +6,8 @@ import Objects.Vehicle;
 import Objects.TrafficLights;
 import Objects.Car;
 import Objects.StraightRoad;
+import Objects.CornerRoad;
+import Objects.SquareJunction;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,13 +21,34 @@ public class CarFlow implements Runnable {
     private Terrain aTerrain;
     private int flowDirection;   // 0 <---   and 1 ---->
     private Timer timer = null;
-    private final int delay = 2000;
+    private Timer timerTraffic = null;
+    private final int delay = 30;
+
+    private int delay2 = 1000;
+    public enum Direction{LEFT, RIGHT, UP, DOWN};
+    private ArrayList<Object> currectFlowList;
+    private TrafficManagement trafficManagement;
 
     public CarFlow(Terrain t, Draw map, int direction){
         this.aTerrain = t;
         this.map = map;
         this.flowDirection = direction;
         timer = new Timer(delay, null);
+        timerTraffic = new Timer(delay2, null);
+
+    }
+
+    public CarFlow(Terrain t, Draw map, int direction, TrafficManagement trafficManagement){
+        this.aTerrain = t;
+        this.map = map;
+        this.flowDirection = direction;
+        timer = new Timer(delay, null);
+        timerTraffic = new Timer(delay2, null);
+        if (flowDirection == 1)
+            currectFlowList = this.aTerrain.getForwardListFlow();
+        else
+            currectFlowList = this.aTerrain.getBackwardListFlow();
+        this.trafficManagement = trafficManagement;
     }
 
     /**
@@ -37,36 +60,24 @@ public class CarFlow implements Runnable {
             //while (this.isThisTerrainBusy()){}
 
             if (this.flowDirection == 1) {
-                // here we have 2 options.
-                // Option 1: the Thread.Carflow will create a new thread-worker for each vehicle and the Vehicle will
-                // print itself.
-                // Option 2: the Thread.Carflow will print each vehicle one by one and the Thread.Carflow will paint
-                // the car.
-                // I will add a pseudocode the the 2nd option
 
-//                if (isThereATrafficLight(this.aTerrain.getForwardListFlow())) {
-//
-////                    while (checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {
-////
-////                    }
-//                }
+                if (isThereATrafficLight(this.aTerrain.getForwardListFlow()))
+                    while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {}
 
-                ArrayList<Object> list = this.aTerrain.getForwardListFlow();
-                for (Object o : list) {
+                for (Object o : currectFlowList) {
                     if (o instanceof Vehicle) {
-                        //move should probably have arguments.
-                        //moves also should check if there is a stopped vehicle in front of the current moving vehicle. If it is, just stop
-                        // break the moving.
+                    	 
+                    	moveThisVehicleToTheNextCorrectStack((Vehicle) o);
+                    	
                         System.out.println("Runner");
-                        final Car c = (Car)o;
-                        System.out.println("Move car. - "+c.getPerson().getName());
 
                         //int len = this.aTerrain.getLenght();
-                        final StraightRoad sRoad = (StraightRoad)this.aTerrain;
-                        final int roadSteps = this.aTerrain.getLenght() / c.getLength();
+                        //final int roadSteps = this.aTerrain.getLenght() / c.getLength();
+                        Terrain terrain = null;
 
-                        //c.move(sRoad.getxStart(), sRoad.getYStart(), roadSteps);
-
+                        if(this.aTerrain instanceof CornerRoad){
+                            System.out.println("Corner");
+                            terrain = (CornerRoad)this.aTerrain;
 //                        timer.addActionListener(new ActionListener() {
 //                            @Override
 //                            public void actionPerformed(ActionEvent e) {
@@ -82,14 +93,25 @@ public class CarFlow implements Runnable {
 //                            }
 //                        });
 //                        timer.start();
+                            moveObject((Car)o, terrain);
+                        }else if(this.aTerrain instanceof StraightRoad){
+                            objectStraightRoad((Car)o, (StraightRoad)this.aTerrain);
+                        }else if(this.aTerrain instanceof SquareJunction){
+                            System.out.println("SquareJunction");
+                            terrain = (SquareJunction)this.aTerrain;
+
+                            //MAYBE CREATE THREAD POOL TO FIX OUR OF MEMORY ISSUE
+                            moveObject((Car)o, terrain);
+                        }
+
+                        //c.move(sRoad.getxStart(), sRoad.getYStart(), roadSteps);
                     } else {
-                        System.out.println("Traffic Light!!!!!!!!!!!");
-                        //Start traffic
+                        System.out.println("Else "+o.toString());
                         final TrafficLights tLOne = (TrafficLights)o;
 //                        Thread t = new Thread(tLOne);
 //                        t.start();
 
-                        timer.addActionListener(new ActionListener() {
+                        timerTraffic.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
                                 tLOne.change();
@@ -98,21 +120,23 @@ public class CarFlow implements Runnable {
 
                             }
                         });
-                        timer.start();
+                        timerTraffic.start();
                     }
                 }
             } else {
-                // same as above
-//                    if (isThereATrafficLight(this.aTerrain.getBackwardListFlow())) {
-//                        while (checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))) {
-//                        }
-//                    }
+                if (isThereATrafficLight(this.aTerrain.getBackwardListFlow()))
+                    while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))) {}
 
-                //for (Object o : this.aTerrain.getBackwardListFlow()) {
-//                        if (o instanceof Vehicle) {
-//                            ((Vehicle) o).move();
-//                        }
-                //}
+                for (Object o : currectFlowList) {
+                    if (o instanceof Vehicle) {
+
+                        // TODO: 16/03/2016 here should be the timer, and when timer stops run the following
+                        moveThisVehicleToTheNextCorrectStack((Vehicle) o);
+                        System.out.println("Runner vehicle Backwards");
+                    } else {
+
+                    }
+                }
             }
 //            map.revalidate();
 //            map.repaint();
@@ -121,6 +145,171 @@ public class CarFlow implements Runnable {
         } catch(Exception e) {
             System.out.println("Error: "+e.getLocalizedMessage());
         }
+    }
+
+    public void moveThisVehicleToTheNextCorrectStack(Vehicle v){
+
+        String threadName  = Thread.currentThread().getName();
+
+        if (
+                (trafficManagement.getTerrainList().indexOf(this.aTerrain) != 1 && this.flowDirection == 1)
+                ||
+                (trafficManagement.getTerrainList().indexOf(this.aTerrain) != 0 && this.flowDirection == 0)
+
+                )
+        { //exit node on flow -> and  <-
+
+            v.getPerson().decide(this.aTerrain.getNeighboursTerrainList());
+            int decision = v.getPerson().getDecision();
+
+            if (this.aTerrain instanceof SquareJunction)
+                //move car to end of this.aTerrain and into decision
+                if (decision%2 ==0)
+                    this.aTerrain.getNeighboursTerrainList().get(decision).getForwardListFlow().add(v);
+                else
+                    this.aTerrain.getNeighboursTerrainList().get(decision).getBackwardListFlow().add(v);
+            else{
+                if (this.flowDirection == 1)
+                    this.aTerrain.getNeighboursTerrainList().get(decision).getForwardListFlow().add(v);
+                else
+                    this.aTerrain.getNeighboursTerrainList().get(decision).getBackwardListFlow().add(v);
+            }
+
+            try {
+                v.getPerson().setMyPreviousTerrainPosition(this.aTerrain);
+                System.out.println("Flow: " +this.flowDirection + " Delete "+v.toString()
+                            + " from Node: " + trafficManagement.getTerrainList().indexOf(this.aTerrain)
+                            + " and move to Node: " + this.trafficManagement.getTerrainList().indexOf(aTerrain.getNeighboursTerrainList().get(decision))
+                            + " and worker is: " + threadName);
+            } catch (Exception e){
+                System.out.println("Thread: "+ threadName + " cant removed!");
+            }
+
+        }else
+            System.out.println("EXIT NODE: Delete "+v.toString() + " and worker is: "+threadName);
+        this.currectFlowList.remove(v);
+    }
+
+    public void printALL(){
+        System.out.println(Thread.currentThread().getName());
+    }    
+    
+    private void objectStraightRoad(final Car car, final StraightRoad road){
+        final int roadLength = road.getLenght();
+        final Direction directionPath = getDirection(car, road);
+
+        timer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Boolean stop = false;
+                System.out.println("Straight road. Direction is "+directionPath);
+
+                //Road should say if Y++ of X
+                car.move(directionPath);
+                if(roadLength == car.get_pos_x()) { stop = true; }
+
+                //SET DELAY BEFORE NEXT CAR STARTS
+                map.repaint();
+
+                if(stop) {
+                    timer.stop();
+                }
+            }
+        });
+        timer.start();
+    }
+
+    //Possibly create this for each road so the if..else isnt checked every time the timer is ran
+    private void moveObject(final Car car, final Terrain terrain){
+        final int roadLength = terrain.getLenght();
+        final Direction directionPath = getDirection(car, terrain);
+
+        //MAYBE CREATE THREAD POOL TO FIX OUR OF MEMORY ISSUE
+        timer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Boolean stop = false;
+
+                if(terrain instanceof CornerRoad) {
+                    System.out.println("Corner road");
+                    car.turn("Left"); //Pass in direction path
+                    //car.turn("Right");
+                }else{ //Square junction
+                    System.out.println("Square junction");
+
+                    //Scenario 1 - Turn left
+                    //Turn
+                    if(car.rotate == 0) {
+                        car.turn("Left");
+                    }
+
+                    //Check the car has turned and move into the next road
+                    if(car.rotate != 0) {
+                        car.move(directionPath);
+                    }
+
+                    //Scenario 2 - Turn right
+
+
+                    //If the carX is not the roadLenght + carLenght - keep moving
+//                    if(car.get_pos_x() != (roadLength) ){
+//                        System.out.println("Move ahead abit");
+//                        car.move();
+//                    }else{
+//                        //Turn left and add to the next road
+//                        System.out.println("Turn car");
+//                        car.turn("Left");
+//                        stop = true;
+//                    }
+                }
+
+                //SET DELAY BEFORE NEXT CAR STARTS
+                map.repaint();
+
+                //Stop timer when the car is JUST past the end of the road
+                //terrain.getxStart()+terrain.getLenght()
+                //if(terrain.getNextTerrainList().get(0).getYStart() == car.get_pos_x() ) {
+                //if(roadLenght == car.get_pos_x()) {
+
+                //If the car is at the end of the road
+                if(stop) {
+                    //reset the rotation
+                    car.rotate = 0;
+
+                    System.out.println("Timer stopped.");
+                    timer.stop();
+                }
+            }
+        });
+        timer.start();
+    }
+
+    /**
+     * Work out the direction the car needs to move
+     * @param c
+     * @param t
+     * @return
+     */
+    private Direction getDirection(Car c, Terrain t){
+        Direction dir = null;
+        System.out.println("Terrain x "+t.getxStart());
+        System.out.println("Terrain y "+t.getYStart());
+
+        if(c.get_pos_x() == t.getxStart()){
+            if(t.getxStart() < c.get_pos_x()){
+                dir = Direction.LEFT;
+            }else {
+                dir = Direction.RIGHT;
+            }
+        }else if(c.get_pos_y() == t.getYStart()){
+            if(t.getYStart() < c.get_pos_y()){
+                dir = Direction.UP;
+            }else {
+                dir = Direction.DOWN;
+            }
+        }
+
+        return dir;
     }
 
     public boolean isThereATrafficLight(ArrayList<Object> objectArrayList){
@@ -151,10 +340,10 @@ Yellow = 3
  */
     public boolean checkIfTrafficLightIsGreen(TrafficLights trafficLight){
 
-//        if (trafficLight.checkGreen())
-//            return true;
-        return false;
-
+        if (trafficLight.getCurrentColour() == 3) //green color = 3
+            return true;
+//        return false;
+        return true; //debug to have only true everywhere
     }
 
     //policy
@@ -193,8 +382,20 @@ Yellow = 3
 
     }
 
-    public void run(){
-        startFlow();
+    public void run() {
 
-    }
+//      System.out.println(Thread.currentThread().getName() + " Started");
+
+//      while (!cancelled) {
+          try {
+              startFlow();
+              Thread.sleep(1000);
+          } catch (Exception e) {
+              e.printStackTrace();
+              System.out.println("here I am");
+          }
+//      }
+//      System.out.println(Thread.currentThread().getName() + " Ended");
+
+  }
 }
