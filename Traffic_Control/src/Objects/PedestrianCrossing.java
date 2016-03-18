@@ -50,28 +50,13 @@ public class PedestrianCrossing implements Terrain{
 	}
 
 	@Override
-	public ArrayList<Terrain> getNextTerrainList() {
-		return this.nextTerrainList;
-	}
-
-	@Override
 	public ArrayList<Terrain> getPreviousTerrainList() {
 		return this.previousTerrainList;
 	}
 
 	@Override
-	public void setNextTerrainList(ArrayList<Terrain> tl) {
-		this.nextTerrainList = tl;
-	}
-
-	@Override
 	public void setPreviousTerrainList(ArrayList<Terrain> tl) {
 		this.previousTerrainList = tl;
-	}
-
-	@Override
-	public void setNextTerrainList(Terrain t) {
-		this.nextTerrainList.add(t);
 	}
 
 	@Override
@@ -86,7 +71,35 @@ public class PedestrianCrossing implements Terrain{
 	}
 
 	@Override
+	public int getxStart() {
+		return 0;
+	}
+
+	@Override
+	public int getYStart() {
+		return 0;
+	}
+
+	@Override
 	public void doDrawing(Graphics2D g) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public ArrayList<Terrain> getNeighboursTerrainList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setNeighboursTerrainList(Terrain t) {
 		// TODO Auto-generated method stub
 		
 	}
