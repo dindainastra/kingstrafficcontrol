@@ -181,13 +181,77 @@ public class TrafficManagement extends JFrame {
     }
 
     public void initializeStaticTrafficLights(){
+        TrafficLights firstTL = new TrafficLights(150,375,1,0);
+        TrafficLights secondTL = new TrafficLights(50,325,2,0);
+        TrafficLights thirdTL = new TrafficLights(150,325,3,90);
+        TrafficLights fourthTL = new TrafficLights(100,425,4,90);
+        TrafficLights fifthTL = new TrafficLights(650,325,3,0);
+        TrafficLights sixthTL = new TrafficLights(1080,325,1,0);
+        TrafficLights seventhTL = new TrafficLights(1180,375,2,0);
+        TrafficLights eighthTL = new TrafficLights(880,375,3,0);
+        TrafficLights ninthTL = new TrafficLights(715,10,1,0);
+        TrafficLights tenthTL = new TrafficLights(715,590,2,0);
+        TrafficLights eleventhTL = new TrafficLights(815,640,3,0);
+        TrafficLights twelfthTL = new TrafficLights(815,60,1,0);
+        TrafficLights thirteenthTL = new TrafficLights(1180,325,1,90);
+        TrafficLights fourteenthTL = new TrafficLights(1130,425,2,90);
+        TrafficLights fifteenTL = new TrafficLights(815,260,3,90);
+        TrafficLights sixteenthTL = new TrafficLights(765,490,1,90);
+        TrafficLights seventeenthTL = new TrafficLights(815,590,2,90);
+        TrafficLights eighteenthTL = new TrafficLights(765,110,3,90);
+        //TrafficLights secondTL = new TrafficLights(880,375,1,1);
+        //TrafficLights thirdTL = new TrafficLights(245,10,2,1);
+        //aTerrainList.add(new StraightRoad(150,10,01,2,2,0,565));
+        //aTerrainList.add(new StraightRoad(150,590,01,2,2,0,565));
+        //aTerrainList.add(new StraightRoad(815,590,10,2,2,0,265));
+        //aTerrainList.add(new StraightRoad(815,10,10,2,2,0,265));
+
+        /*
+        * Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                //
+                //                //for (;;) {
+                //                    try {
+                //                        Thread.sleep(2000);
+                //                    } catch (InterruptedException e) {
+                //                        System.out.println("Error: "+e.getLocalizedMessage());
+                //                    }
+                //                    trafficLight.change();
+                //                //}
+            }
+        });
+        thread.start();
+        *
+        * */
 
         int whichRoad = 0;
         // direction ---->
-        aTerrainList.get(whichRoad).setForwardListFlow(new TrafficLights());
+        aTerrainList.get(whichRoad).setForwardListFlow(firstTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(secondTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(thirdTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(fourthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(fifthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(sixthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(seventhTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(eighthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(ninthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(tenthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(eleventhTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(twelfthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(thirteenthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(fourteenthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(fifteenTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(sixteenthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(seventeenthTL);
+        aTerrainList.get(whichRoad).setForwardListFlow(eighteenthTL);
+
+
+
+
         //or
         // direction <----
-        aTerrainList.get(whichRoad).setBackwardListFlow(new TrafficLights());
+        //aTerrainList.get(whichRoad).setBackwardListFlow(new TrafficLights());
 
         /*
         the whichRoad variable is actually the road by the static network

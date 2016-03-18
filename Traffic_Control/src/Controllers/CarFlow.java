@@ -19,7 +19,7 @@ public class CarFlow implements Runnable {
     private Terrain aTerrain;
     private int flowDirection;   // 0 <---   and 1 ---->
     private Timer timer = null;
-    private final int delay = 30;
+    private final int delay = 2000;
 
     public CarFlow(Terrain t, Draw map, int direction){
         this.aTerrain = t;
@@ -27,7 +27,7 @@ public class CarFlow implements Runnable {
         this.flowDirection = direction;
         timer = new Timer(delay, null);
     }
-    
+
     /**
      * Resume the cars flow through the system
      * Repaint the map whilst moving
@@ -44,10 +44,12 @@ public class CarFlow implements Runnable {
                 // the car.
                 // I will add a pseudocode the the 2nd option
 
-                /*if (isThereATrafficLight(this.aTerrain.getForwardListFlow())) {
-                    while (checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {
-                    }
-                }*/
+//                if (isThereATrafficLight(this.aTerrain.getForwardListFlow())) {
+//
+////                    while (checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {
+////
+////                    }
+//                }
 
                 ArrayList<Object> list = this.aTerrain.getForwardListFlow();
                 for (Object o : list) {
@@ -65,23 +67,38 @@ public class CarFlow implements Runnable {
 
                         //c.move(sRoad.getxStart(), sRoad.getYStart(), roadSteps);
 
+//                        timer.addActionListener(new ActionListener() {
+//                            @Override
+//                            public void actionPerformed(ActionEvent e) {
+//                                c.move();
+//                                //SET DELAY BEFORE NEXT CAR STARTS
+//                                map.repaint();
+//
+//                                //Stop timer when the car is JUST past the end of the road
+//                                if(sRoad.getxStart()+sRoad.getLenght() == c.get_pos_x() ) {
+//                                    System.out.println("Timer stopped.");
+//                                    timer.stop();
+//                                }
+//                            }
+//                        });
+//                        timer.start();
+                    } else {
+                        System.out.println("Traffic Light!!!!!!!!!!!");
+                        //Start traffic
+                        final TrafficLights tLOne = (TrafficLights)o;
+//                        Thread t = new Thread(tLOne);
+//                        t.start();
+
                         timer.addActionListener(new ActionListener() {
                             @Override
                             public void actionPerformed(ActionEvent e) {
-                                c.move();
+                                tLOne.change();
                                 //SET DELAY BEFORE NEXT CAR STARTS
                                 map.repaint();
 
-                                //Stop timer when the car is JUST past the end of the road
-                                if(sRoad.getxStart()+sRoad.getLenght() == c.get_pos_x() ) {
-                                    System.out.println("Timer stopped.");
-                                    timer.stop();
-                                }
                             }
                         });
                         timer.start();
-                    } else {
-                        System.out.println("Else");
                     }
                 }
             } else {
@@ -169,8 +186,15 @@ Yellow = 3
 
     }
 
+    public void startTraffic(){
+        final TrafficLights tLOne = (TrafficLights)this.aTerrain.getForwardListFlow().get(0);
+        Thread t = new Thread(tLOne);
+        t.start();
+
+    }
 
     public void run(){
         startFlow();
+
     }
 }

@@ -15,18 +15,12 @@ public class StraightRoad implements Terrain {
 
 
     //Set size of straight road
-    private int xStart,yStart, trafficlight, RGB1, RGB2, rotation;
+    //private int xStart,yStart, trafficlight, RGB1, RGB2, rotation;
+    private int xStart,yStart, trafficlight, rotation;
     private int road_length = 100;
     private final int road_width = 100;
 
-    public StraightRoad(int x_Start, int y_Start, int trafficlight, int RGB1, int RGB2, int rotation){
-        this.trafficlight = trafficlight;
-        this.rotation = rotation;
-        this.xStart = x_Start;
-        this.yStart = y_Start;
-        this.RGB1 = RGB1;
-        this.RGB2 = RGB2;
-    }
+    private final TrafficLights trafficLight0, trafficLight1;
 
     // adding constructor to initialise road_length
     public StraightRoad(int x_Start, int y_Start, int trafficlight, int RGB1, int RGB2, int rotation, int road_length){
@@ -35,8 +29,9 @@ public class StraightRoad implements Terrain {
         this.xStart = x_Start;
         this.yStart = y_Start;
         this.road_length=road_length;
-        this.RGB1 = RGB1;
-        this.RGB2 = RGB2;
+
+        this.trafficLight0 = new TrafficLights(xStart, yStart+road_width/2, RGB2, rotation);
+        this.trafficLight1 = new TrafficLights(xStart+road_length-5, yStart, RGB1, rotation);
 
         nextTerrainList = new ArrayList<Terrain>();
         previousTerrainList  = new ArrayList<Terrain>();
@@ -92,6 +87,7 @@ public class StraightRoad implements Terrain {
 
 
         // traffic lights
+        /*
         TrafficLights tl = new TrafficLights (xStart,  yStart+road_width/2,  RGB2, rotation);
         
         Thread t = new Thread(tl);
@@ -100,13 +96,19 @@ public class StraightRoad implements Terrain {
         for(int i=0; i<=20; i++) {
             ch = tl.getCurrentColour();
             System.out.println("Current colour is " + ch);
-        }
+        }*/
 
         //draw traffic lights
-        if (trafficlight ==10){//traffic lights on the left hand side of the road
+        /*if (trafficlight ==10){//traffic lights on the left hand side of the road
             tl.trafficlightgui(xStart,  yStart+road_width/2,  RGB2, rotation);
             TrafficLights.doDrawing(g);
-        }
+        }*/
+
+        /*
+        if (trafficlight ==10 || trafficlight ==11){//traffic lights on the left hand side of the road
+            activateTrafficLights(trafficLight0, g);
+        }*/
+        /*
         else if (trafficlight ==01){//traffic lights on the right hand side of the road
             tl.trafficlightgui(xStart+road_length-5, yStart,RGB1,rotation);
             TrafficLights.doDrawing(g);
@@ -116,7 +118,11 @@ public class StraightRoad implements Terrain {
             TrafficLights.doDrawing(g);
             tl.trafficlightgui(xStart+road_length-5, yStart,RGB1,rotation);
             TrafficLights.doDrawing(g);
-        }
+        }*/
+        /*
+        if (trafficlight ==01 || trafficlight ==11){//traffic lights on the right hand side of the road
+            activateTrafficLights(trafficLight1, g);
+        }*/
         road.setTransform(old);
     }
 
@@ -194,4 +200,24 @@ public class StraightRoad implements Terrain {
 
     public int getxStart(){ return xStart; }
     public int getYStart(){ return yStart; }
+
+    private static void activateTrafficLights(TrafficLights trafficLight, Graphics2D g) {
+            trafficLight.doDrawing(g);
+
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+    //
+    //                //for (;;) {
+    //                    try {
+    //                        Thread.sleep(2000);
+    //                    } catch (InterruptedException e) {
+    //                        System.out.println("Error: "+e.getLocalizedMessage());
+    //                    }
+    //                    trafficLight.change();
+    //                //}
+               }
+            });
+           thread.start();
+    }
 }
