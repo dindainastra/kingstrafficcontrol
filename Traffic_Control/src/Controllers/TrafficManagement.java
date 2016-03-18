@@ -297,22 +297,22 @@ public class TrafficManagement extends JFrame {
 
         this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(1));
         this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(7));
-        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(17));
         this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(16));
+        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(17));
 
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(6));
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(0));
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(14));
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(15));
 
-        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(10));
         this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(9));
+        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(10));
         this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(13));
 
         this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(11));
         this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(12));
         this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(8));
-
+        
     }
     
     public void initializeRandomTrafficLights(){
