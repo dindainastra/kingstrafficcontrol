@@ -101,10 +101,8 @@ public class TrafficManagement extends JFrame {
     
     public void run(){
 
-        createPersons(1);
-
+        createPersons(2);
         createVehicles();
-
         staticMapCreator();
         //initComponents();
 
@@ -184,10 +182,10 @@ public class TrafficManagement extends JFrame {
     public void createVehicles(){
         for (Person p : aPersonList) {
             if (!p.isPedestrian()) {
-                if (new Random().nextBoolean())
+                //if (new Random().nextBoolean())
                     aVehicleList.add(new Car(p, 0, 330));
-                else
-                    aVehicleList.add(new Car(p, 1180, 330));
+               // else
+               //     aVehicleList.add(new Car(p, 1180, 330));
             }
         }
     }
@@ -200,10 +198,10 @@ public class TrafficManagement extends JFrame {
 
     public void initializeForwardAndBackwardLists(){
         for (Vehicle v : this.aVehicleList)
-            if (v.get_pos_x()==0)
+           // if (v.get_pos_x()==0)
                 this.aTerrainList.get(0).setForwardListFlow(v);  //insert vehicle in the enter node direction list -->
-            else
-                this.aTerrainList.get(1).setBackwardListFlow(v);  //insert vehicle in the exit node direction list <--
+            //else
+              //  this.aTerrainList.get(1).setBackwardListFlow(v);  //insert vehicle in the exit node direction list <--
     }
 
     public void initializeStaticTrafficLights(){

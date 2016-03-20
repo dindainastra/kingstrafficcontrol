@@ -272,4 +272,9 @@ public class StraightRoad extends JPanel implements Terrain {
 
     public int getxStart(){ return xStart; }
     public int getYStart(){ return yStart; }
+
+    @Override
+    public int getRotation() {
+        return rotation;
+    }
 }

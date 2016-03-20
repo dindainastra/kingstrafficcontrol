@@ -31,4 +31,5 @@ public interface Terrain {
 
     public int getxStart();
     public int getYStart();
+    public int getRotation();
 }

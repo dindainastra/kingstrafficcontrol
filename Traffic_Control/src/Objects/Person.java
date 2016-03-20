@@ -35,6 +35,10 @@ public class Person {
 		this.myPreviousTerrainPosition = terrainPosition;
 	}
 
+	public Terrain getMyPreviousTerrainPosition(){
+		return this.myPreviousTerrainPosition;
+	}
+
 	public void decide(ArrayList<Terrain> terrainArrayList) {
 
 		this.decision = new Random().nextInt(terrainArrayList.size());

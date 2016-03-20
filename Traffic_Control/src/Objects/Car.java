@@ -54,10 +54,10 @@ public class Car extends JPanel implements Vehicle {
 		}
 	}
 
-	public void turn(String direction){
+	public void turn(CarFlow.Direction d){
 		Double turnDir = Math.PI/2;
 
-		if(direction.equals("Left")) {
+		if(d == CarFlow.Direction.LEFT || d == CarFlow.Direction.UP) {
 			rotate = -turnDir;
 		}else {
 			rotate = turnDir;

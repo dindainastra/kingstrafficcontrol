@@ -205,6 +205,11 @@ public class CornerRoad extends JPanel implements Terrain{
         return 0;
     }
 
+    @Override
+    public int getRotation() {
+        return 0;
+    }
+
     public int getcornerLength(){
         return 0;
     }

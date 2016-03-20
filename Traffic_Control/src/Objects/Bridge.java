@@ -86,6 +86,11 @@ public class Bridge implements Terrain{
 	}
 
 	@Override
+	public int getRotation() {
+		return 0;
+	}
+
+	@Override
 	public ArrayList<Terrain> getNeighboursTerrainList() {
 		// TODO Auto-generated method stub
 		return null;
