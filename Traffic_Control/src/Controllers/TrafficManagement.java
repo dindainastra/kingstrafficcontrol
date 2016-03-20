@@ -397,18 +397,23 @@ public class TrafficManagement extends JFrame {
         aTerrainList.add(new CornerRoad(640,250,270,1));                        //4
         aTerrainList.add(new CornerRoad(640,250,360,1));                        //5
 
+
         //add horizontal road
         //Added another traffic light color parameter to SRoad
         aTerrainList.add(new StraightRoad(150,325,11,2,2,0,500));               //6   <-----
-        aTerrainList.add(new StraightRoad(880,325,11,1,3,0,200));
+        //aTerrainList.add(new StraightRoad(150,325,11,2,2,0,565));                 //6 with changed length according to junction in the center
+        aTerrainList.add(new StraightRoad(880,325,11,1,3,0,200));               // for round about
+        //aTerrainList.add(new StraightRoad(817,325,11,1,3,0,265));                 // for square junction
         aTerrainList.add(new StraightRoad(150,10,01,2,2,0,565));
         aTerrainList.add(new StraightRoad(150,590,01,2,2,0,565));
         aTerrainList.add(new StraightRoad(815,590,10,2,2,0,265));
         aTerrainList.add(new StraightRoad(815,10,10,2,2,0,265));
 
         //add vertical roads
-        aTerrainList.add(new StraightRoad(815,110,11,1,1,90,150));              //12
-        aTerrainList.add(new StraightRoad(815,490,11,2,2,90,101));
+        aTerrainList.add(new StraightRoad(815,110,11,1,1,90,150));              //12 for round about
+        //aTerrainList.add(new StraightRoad(815,110,11,1,1,90,215));                // 12 for square junction
+        aTerrainList.add(new StraightRoad(815,490,11,2,2,90,101));              //for round about
+        //aTerrainList.add(new StraightRoad(815,426,11,2,2,90,165));                // for sqaure junction
         aTerrainList.add(new StraightRoad(150,110,01,2,2,90,215));              //14
         aTerrainList.add(new StraightRoad(150,425,10,2,2,90,165));
         aTerrainList.add(new StraightRoad(1180,425,10,2,2,90,165));
@@ -426,6 +431,10 @@ public class TrafficManagement extends JFrame {
         aTerrainList.add(new SquareJunction(50,325));
         aTerrainList.add(new SquareJunction(715,590));
         aTerrainList.add(new SquareJunction(715,10));
+
+        //square junction in the center
+        //aTerrainList.add(new SquareJunction(715,325));
+
 
     }
 
