@@ -24,7 +24,8 @@ public class StraightRoad extends JPanel implements Terrain {
     //private final TrafficLights trafficLight0, trafficLight1;
 
     // adding constructor to initialise road_length
-    public StraightRoad(int x_Start, int y_Start, int trafficlight, int RGB1, int RGB2, int rotation, int road_length){
+    public StraightRoad(int x_Start, int y_Start, int rotation, int road_length){
+        //public StraightRoad(int x_Start, int y_Start, int trafficlight, int RGB1, int RGB2, int rotation, int road_length){
         this.trafficlight = trafficlight;
         this.rotation = rotation;
         this.xStart = x_Start;
@@ -131,9 +132,9 @@ public class StraightRoad extends JPanel implements Terrain {
     public void paintComponent(Graphics gr){
         Graphics2D g = (Graphics2D)gr;
         Graphics2D road=(Graphics2D) g;
-        Graphics2D lane_divider=(Graphics2D) g;
-        Graphics2D sroad_border=(Graphics2D) g;
-        Graphics2D arrows=(Graphics2D) g;
+       // Graphics2D lane_divider=(Graphics2D) g;
+       // Graphics2D sroad_border=(Graphics2D) g;
+        //Graphics2D arrows=(Graphics2D) g;
 
         //draw straight road
         AffineTransform old = road.getTransform();
@@ -148,24 +149,24 @@ public class StraightRoad extends JPanel implements Terrain {
         BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
 
         //draw road border
-        sroad_border.setStroke(bs2);
-        sroad_border.setColor(Color.black);
-        sroad_border.drawLine(xStart,yStart,xStart+road_length-1,yStart);
-        sroad_border.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
+        road.setStroke(bs2);
+        road.setColor(Color.black);
+        road.drawLine(xStart,yStart,xStart+road_length-1,yStart);
+        road.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
 
         //draw road lanes
-        lane_divider.setStroke(bs1);
-        lane_divider.setColor(Color.white);
+        road.setStroke(bs1);
+        road.setColor(Color.white);
         int y=yStart+(road_width);
-        lane_divider.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
+        road.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
 
-        lane_divider.setStroke(bs2);
-        lane_divider.setColor(Color.white);
-        lane_divider.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
+        road.setStroke(bs2);
+        road.setColor(Color.white);
+        road.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
 
-        lane_divider.setStroke(bs1);
-        lane_divider.setColor(Color.white);
-        lane_divider.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+        road.setStroke(bs1);
+        road.setColor(Color.white);
+        road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
 
         // direction arrows
         /*arrows.setStroke(bs2);
