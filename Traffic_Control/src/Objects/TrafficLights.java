@@ -21,6 +21,8 @@ public class TrafficLights extends JPanel implements Runnable{
     private final int GREEN_SECS = 30;
     private final int YellowReverse_SECS = 30;
     private TrafficLights resumeNextLight;
+    private boolean suspendRequest;
+    private int checkFirst;
 
 
     //set traffic light colour and shape
@@ -39,8 +41,10 @@ public class TrafficLights extends JPanel implements Runnable{
         this.currentColour = RGB;
     }
 
-    public void setNextLight(TrafficLights NextLight) {
+    public void setNextLight(TrafficLights NextLight, int first) {
+        this.checkFirst = first;
         resumeNextLight = NextLight;
+        System.out.println("Check Next Light sini "+resumeNextLight);
     } // end setOtherLight.
     /**
      * This method takes the initial state of the traffic lights (Red) and makes decisions accordingly
@@ -50,6 +54,7 @@ public class TrafficLights extends JPanel implements Runnable{
         switch (currentColour) {
             case Red:
                 currentColour = Yellow;
+                this.checkSuspended();
                 //System.out.println("Yellow ");
                 break;
             case Yellow:
@@ -64,9 +69,35 @@ public class TrafficLights extends JPanel implements Runnable{
                 break;
             case YellowReverse:
                 currentColour = Red;
-                //System.out.println("Red");
+                resumeNextLight.requestResume();
+                this.requestSuspended();
         }
         return currentColour;
+    }
+
+    public void requestSuspended(){
+        suspendRequest = true;
+    }
+
+    private synchronized void checkSuspended()
+    {
+        if (!(checkFirst == 1)){
+            while (suspendRequest)
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+        }
+        //System.out.println(check + " Hi " + suspendRequest+ " Changing to "+currentColour + " while check: " + checkFirst);
+
+        checkFirst = 0;
+    }
+
+    public synchronized void requestResume()
+    {
+        suspendRequest = false;
+        notify();
     }
 
     public int getCurrentColour() {
@@ -152,7 +183,7 @@ public class TrafficLights extends JPanel implements Runnable{
 
         g.setColor(new Color (R,G,B));
         g.fillRect(pos_x, pos_y, width, length);
-     System.out.format("masuk sini woy %d %d %d %d %d %d %d %n", pos_x, pos_y, width, length,R,G,B);
+     //System.out.format("masuk sini woy %d %d %d %d %d %d %d %n", pos_x, pos_y, width, length,R,G,B);
         g.setTransform(old3);
     }
 
@@ -164,11 +195,11 @@ public class TrafficLights extends JPanel implements Runnable{
 
     @Override
     public void run() {
-        for (;;) {
+        //for (;;) {
             try {
                 this.currentColour = change();
                 System.out.println("Changing to -"+currentColour);
-                repaint();
+                //repaint();
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 System.out.println("Error: "+e.getLocalizedMessage());
@@ -176,7 +207,7 @@ public class TrafficLights extends JPanel implements Runnable{
 
             System.out.println(this.change());
 
-        }
+        //}
     }
 }
 

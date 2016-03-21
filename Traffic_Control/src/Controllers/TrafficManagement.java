@@ -91,10 +91,10 @@ public class TrafficManagement extends JFrame {
 
         int counter = 0;
         for(Terrain terrain : this.aTerrainList){
-            System.out.println(counter++);
-            System.out.println("Road: " + terrain.toString());
-            System.out.println("Forward list: " + terrain.getForwardListFlow());
-            System.out.println("Backward list" + terrain.getBackwardListFlow());
+            //System.out.println(counter++);
+            //System.out.println("Road: " + terrain.toString());
+            //System.out.println("Forward list: " + terrain.getForwardListFlow());
+            //System.out.println("Backward list" + terrain.getBackwardListFlow());
         }
 
     }
@@ -170,7 +170,7 @@ public class TrafficManagement extends JFrame {
         }
 
         for (int i=0; i<(aTerrainList.size()*2);i++) {
-            System.out.println("step "+i);
+            //System.out.println("step "+i);
             for (Runnable worker : runnableArrayList)
                 executor.execute(worker);
 
@@ -207,24 +207,44 @@ public class TrafficManagement extends JFrame {
     }
 
     public void initializeStaticTrafficLights(){
+
+        //junction25
+        TrafficLights ninthTL = new TrafficLights(715,10,1,0);
+        TrafficLights twelfthTL = new TrafficLights(815,60,1,0);
+        TrafficLights eighteenthTL = new TrafficLights(765,110,3,90);
+
+        //junction 23
         TrafficLights firstTL = new TrafficLights(150,375,1,0);
         TrafficLights secondTL = new TrafficLights(50,325,2,0);
         TrafficLights thirdTL = new TrafficLights(150,325,3,90);
         TrafficLights fourthTL = new TrafficLights(100,425,4,90);
+
+
+        //roundabout
         TrafficLights fifthTL = new TrafficLights(650,325,3,0);
-        TrafficLights sixthTL = new TrafficLights(1080,325,1,0);
-        TrafficLights seventhTL = new TrafficLights(1180,375,2,0);
         TrafficLights eighthTL = new TrafficLights(880,375,3,0);
-        TrafficLights ninthTL = new TrafficLights(715,10,1,0);
-        TrafficLights tenthTL = new TrafficLights(715,590,2,0);
-        TrafficLights eleventhTL = new TrafficLights(815,640,3,0);
-        TrafficLights twelfthTL = new TrafficLights(815,60,1,0);
-        TrafficLights thirteenthTL = new TrafficLights(1180,325,1,90);
-        TrafficLights fourteenthTL = new TrafficLights(1130,425,2,90);
         TrafficLights fifteenTL = new TrafficLights(815,260,3,90);
         TrafficLights sixteenthTL = new TrafficLights(765,490,1,90);
+
+
+        //junction22
+        TrafficLights sixthTL = new TrafficLights(1080,325,1,0);
+        TrafficLights seventhTL = new TrafficLights(1180,375,2,0);
+        TrafficLights thirteenthTL = new TrafficLights(1180,325,1,90);
+        TrafficLights fourteenthTL = new TrafficLights(1130,425,2,90);
+        sixthTL.setNextLight( seventhTL, 1);
+        seventhTL.setNextLight(   thirteenthTL, 0);
+        thirteenthTL.setNextLight(fourteenthTL, 0);
+        fourteenthTL.setNextLight(sixthTL, 0);
+        new Thread(sixthTL).start();
+        new Thread(seventhTL).start();
+        new Thread(thirteenthTL).start();
+        new Thread(fourteenthTL).start();
+
+        //junction24
+        TrafficLights tenthTL = new TrafficLights(715,590,2,0);
+        TrafficLights eleventhTL = new TrafficLights(815,640,3,0);
         TrafficLights seventeenthTL = new TrafficLights(815,590,2,90);
-        TrafficLights eighteenthTL = new TrafficLights(765,110,3,90);
         //TrafficLights secondTL = new TrafficLights(880,375,1,1);
         //TrafficLights thirdTL = new TrafficLights(245,10,2,1);
         //aTerrainList.add(new StraightRoad(150,10,01,2,2,0,565));
@@ -253,24 +273,37 @@ public class TrafficManagement extends JFrame {
 
         int whichRoad = 0;
         // direction ---->
+
+        //junction25
+        aTerrainList.get(8).setForwardListFlow(ninthTL);
+        aTerrainList.get(11).setBackwardListFlow(twelfthTL);
+        aTerrainList.get(12).setBackwardListFlow(eighteenthTL);//up
+
+        //junction23
         aTerrainList.get(6).setBackwardListFlow(firstTL);
         aTerrainList.get(0).setForwardListFlow(secondTL);
         aTerrainList.get(14).setBackwardListFlow(thirdTL); //down
         aTerrainList.get(15).setForwardListFlow(fourthTL);
+
+        //roundabout
         aTerrainList.get(6).setForwardListFlow(fifthTL);
-        aTerrainList.get(7).setForwardListFlow(sixthTL);
-        aTerrainList.get(1).setForwardListFlow(seventhTL);
         aTerrainList.get(7).setBackwardListFlow(eighthTL);
-        aTerrainList.get(8).setForwardListFlow(ninthTL);
-        aTerrainList.get(9).setForwardListFlow(tenthTL);
-        aTerrainList.get(10).setBackwardListFlow(eleventhTL);
-        aTerrainList.get(11).setBackwardListFlow(twelfthTL);
-        aTerrainList.get(17).setForwardListFlow(thirteenthTL); //down
-        aTerrainList.get(16).setForwardListFlow(fourteenthTL); //up
         aTerrainList.get(12).setForwardListFlow(fifteenTL);//down
         aTerrainList.get(13).setForwardListFlow(sixteenthTL);//up
+
+        //junction22
+        aTerrainList.get(7).setForwardListFlow(sixthTL);
+        aTerrainList.get(1).setForwardListFlow(seventhTL);
+        aTerrainList.get(17).setForwardListFlow(thirteenthTL); //down
+        aTerrainList.get(16).setForwardListFlow(fourteenthTL); //up
+
+        //junction24
+        aTerrainList.get(9).setForwardListFlow(tenthTL);
+        aTerrainList.get(10).setBackwardListFlow(eleventhTL);
         aTerrainList.get(13).setBackwardListFlow(seventeenthTL);//down
-        aTerrainList.get(12).setBackwardListFlow(eighteenthTL);//up
+
+
+
 
 
 

@@ -106,7 +106,7 @@ public class CarFlow implements Runnable {
 
                         //c.move(sRoad.getxStart(), sRoad.getYStart(), roadSteps);
                     } else {
-                        System.out.println("Else "+o.toString());
+                        //System.out.println("Else "+o.toString());
                         final TrafficLights tLOne = (TrafficLights)o;
 //                        Thread t = new Thread(tLOne);
 //                        t.start();
@@ -231,11 +231,11 @@ public class CarFlow implements Runnable {
                 Boolean stop = false;
 
                 if(terrain instanceof CornerRoad) {
-                    System.out.println("Corner road");
+                    //System.out.println("Corner road");
                     car.turn("Left"); //Pass in direction path
                     //car.turn("Right");
                 }else{ //Square junction
-                    System.out.println("Square junction");
+                    //System.out.println("Square junction");
 
                     //Scenario 1 - Turn left
                     //Turn
