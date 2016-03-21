@@ -24,6 +24,7 @@ public class Car extends JPanel implements Vehicle {
 	private static final int INCREMENT_BY = 5;
 	public static Boolean draw = false;
 	public double rotate;
+	public int rotateInt = 0;
 
 	public Car(Person p, int x_coordinate, int y_coordinate){
 		driver = p;
@@ -40,6 +41,14 @@ public class Car extends JPanel implements Vehicle {
 //		if() {
 //			this.pos_x += 2;
 //		}else{}
+	}
+
+	public void setRotate(int i){
+		rotateInt = i;
+	}
+
+	public int getRotate(){
+		return rotateInt;
 	}
 
 	public void move(CarFlow.Direction d){
@@ -164,7 +173,7 @@ public class Car extends JPanel implements Vehicle {
 
 	@Override
 	public void paintComponent(Graphics g){
-		System.out.println("Repainting car object - turn is "+rotate);
+		//System.out.println("Repainting car object - turn is "+rotate);
 		super.paintComponent(g);
 
 		Graphics2D gd = (Graphics2D) g;

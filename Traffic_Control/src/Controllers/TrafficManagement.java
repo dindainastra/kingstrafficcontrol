@@ -101,8 +101,9 @@ public class TrafficManagement extends JFrame {
     
     public void run(){
 
-        createPersons(2);
+        createPersons(1);
         createVehicles();
+
         staticMapCreator();
         //initComponents();
 
@@ -357,7 +358,7 @@ public class TrafficManagement extends JFrame {
 
         //add junctions
         aTerrainList.add(new SquareJunction(1080,325));
-        aTerrainList.add(new SquareJunction(50,325));
+        aTerrainList.add(new SquareJunction(50,325));                           //23
         aTerrainList.add(new SquareJunction(715,590));
         aTerrainList.add(new SquareJunction(715,10));
 
