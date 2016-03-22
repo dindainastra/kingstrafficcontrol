@@ -1,135 +1,160 @@
-\documentclass{article} 
+\documentclass{article}[11pt,Tahoma]
 \usepackage{graphicx} 
 \usepackage{amsmath}
 \usepackage{color,soul}
 \usepackage{lastpage}
 \usepackage{enumitem}
+\newenvironment{bottompar}{\par\vspace*{\fill}}{\clearpage}
 
 \begin{document}
 	\title{Final Report\\ Group Project 7CCSMGPR} 	
-    	\author{King's Traffic Control}
+    \author{King's Traffic Control TEAM}
 	\maketitle
-	
+	\vspace
+	\begin{abstract}
+		This report documents the process of which a Traffic Simulation was developed over the course of one term.
+	\end{abstract}
+	\clearpage
+	\tableofcontents
 	\section{Introduction}
 		Purpose of the simulation
 	\section{Review}
 		Related work, research conducted, etc.
 	\section{Requirements and Design}
-			The basic requirements of the system where to have a road network with different types of roads such as straights roads, turnings, junctions and traffic lights and cars running on the road networks responding to the traffic lights.
+		\noindent The basic requirements of the system where to have a road network with different types of roads such as straights roads, turnings, junctions and traffic lights and cars running on the road networks responding to the traffic lights.
 			 The tasks where divided into three levels:
-			 \begin{itemize}[noitemsep]
-			 
+		\begin{itemize}[noitemsep]
 			 \item Level 1: These are the mandatory requirements that have been included in the system. These include:
-			 \begin{enumerate}[noitemsep]
-			 	\item Road network including traffic lights.
-			 	\item Vehicles which includes Cars, Lorries, Buses, Motorbikes. This also includes the behaviour of the driver (reckless, normal, careful).
-			 	\item Entry and exit to the road network
-			 	\item Timing of journeys (Rush hours)
-			 	\item Emergency services which include police cars, ambulances and fire trucks
-			 	\item Management policies which is roadworks, diverting the traffic --NOT IMPLEMENTED
-			 	\item Time granularity (meaning: 1 sec of our time is equivalent to 1 min in the simulation )
-			 \end{enumerate}
-			 
+			 	\begin{enumerate}[noitemsep]
+			 		\item Road network including traffic lights.
+			 		\item Vehicles which includes Cars, Lorries, Buses, Motorbikes. This also includes the behaviour of the driver (reckless, normal, careful).
+			 		\item Entry and exit to the road network
+			 		\item Timing of journeys (Rush hours)
+			 		\item Emergency services which include police cars, ambulances and fire trucks
+			 		\item Management policies which is roadworks, diverting the traffic --NOT IMPLEMENTED
+			 		\item Time granularity (meaning: 1 sec of our time is equivalent to 1 min in the simulation )
+			 	\end{enumerate}
 			 \item Level 2: These are optional specifications including:
-			 \begin{enumerate}[noitemsep]
-			 	\item Politeness level of the drivers
-			 	\item People crossing
-			 	\item Map scale user interface 
-			 	\item Congestion rate user interface
-			 	\item Pause, Stop, Resume, Play options
-			 	\item Speed limit options
-			 	\item Scenery
-			 \end{enumerate}
-			 
+			 	\begin{enumerate}[noitemsep]
+			 		\item Politeness level of the drivers
+			 		\item People crossing
+			 		\item Map scale user interface 
+			 		\item Congestion rate user interface
+			 		\item Pause, Stop, Resume, Play options
+			 		\item Speed limit options
+			 		\item Scenery
+				 \end{enumerate}
 			 \item Level 3: These are optional specifications. At least one of these is to be implemented:
-			 \begin{enumerate}[noitemsep]
-			 	\item Configurable map
-			 	\item Road types (Crossings, Traffic lights mechanism, Junctions, two-lane roads, four-lane roads, toll gates, up-hill/down-hill, Ramps)
-			 	\item Parking
-			 	\item Changing lanes (in a four-lane road)
-			 	\item Weather conditions
-			 \end{enumerate}			 
-			 			 
-			 \end{itemize}
+				 \begin{enumerate}[noitemsep]
+				 	\item Configurable map
+				 	\item Road types (Crossings, Traffic lights mechanism, Junctions, two-lane roads, four-lane roads, toll gates, up-hill/down-hill, Ramps)
+				 	\item Parking
+			 		\item Changing lanes (in a four-lane road)
+				 	\item Weather conditions
+			 \end{enumerate}			 		 
+		 \end{itemize}
 			 
-		\subsection{Design}
-		 We decided to use Scrum methodology for our implementing our project. Scrum is a management framework for incremental product development using one or more cross-functional, self-organising teams. 
-		 We divided ourselves into three teams of two members each. Each team was responsible for for developing a different part of the system. We helped each other as and when required.
-		  We started by just displaying a single road with a moving car on the road. then we implemented the traffic lights and got the car to respond to the traffic lights. These were the basics we started with and built our system on top of this. We made modifications to our system as we progressed. 	 
+		 \subsection{Initial Design and Development}
+		  	We decided to use Scrum methodology for our implementing our project. Scrum is a management framework for incremental product development using one or more cross-functional, self-organising teams. We divided ourselves into three teams of two members each. Each team was responsible for for developing a different part of the system. We helped each other as and when required.We started by just displaying a single road with a moving car on the road. then we implemented the traffic lights and got the car to respond to the traffic lights. These were the basics we started with and built our system on top of this. We made modifications to our system as we progressed. \\
+		 
+		 \underline{ TODO: write about :}\\
+		 	How we did this his suggestion: make an initial plan fairly quickly, and be prepared to iterate on it. You are unlikely to get everything right upfront, and working on the problem will change your understanding of it.\\
+		 
+			Large systems development: understand and experience the challenges in developing and maintaining software too big for any one person to fully understand.\\
+		 
+		 	Development craft: utilise the tools and techniques that form the craft of working on a multi-person large system.\\
+		 
+		 	Formulate an outline approach to tackling the problem (a traffic simulator). \\
+		 
+		 	The Initial design of the project and how it came about\\
+		 
+		 	Focus on: an outline of what the project aims to succeed; a description of the final system (including its internals!) and any interesting details about it.
 		 \subsection{Meeting the Project Objectives} 
 		 	Figure 1: GANTT Chart
+%		 	TASKS:
+%		 	Develop a simulation engine for testing traffic management policies
+% 			Should simulate individual vehicles (cars, coaches, buses etc.) operating in different parts of a road network (e.g. roundabouts, multi-lane junctions).
+% 			Consider where vehicles enter road network and where they leave it.
+% 			Consider individual behaviours (e.g. reckless, cautious, normal).
+%			Consider timing of journeys (based on purpose and patterns of use).
+%			Consider support for emergency services (e.g. prioritise ambulances at traffic lights).
+%			Allow different traffic management policies to be plugged in and compared.
+%			Decide on a time granularity for the simulation (e.g. 10 seconds).
+%			Each tick of the simulation clock will require all parts of the simulation to update.
+%			The simulation engine will record vehicle positions, new entries and exits and any other data and then update the state before moving to the next tick.
+
+%			OPTIONAL TASK:
+%			GUI for visualisation of initial maps and/or the moving simulation or command-line?
+%			User configurable maps?
+%			How does the scale of the map affect your choices?
+%			How to report sensible numbers of the success/failure of different policies? e.g. average speed, congestion rate etc.
 	\section{Implementation}
 		TO DO: Describe the most significant implementation details, focussing on those where unusual or detailed solutions were required. Quote code fragments where necessary, but remember that the full source code will be included as an appendix. Ex- plain how you tested your software (e.g. unit testing) and the extent to which you tested it. If relevant to your project, explain performance issues and how you tackled them.
 		\subsection{Code}
-			TO DO: Explain the code, its purpose and how it functions
-			\subsubsection{Design}
+			**Coding standards:ADD MORE and compare to the main code
+			TO DO: Explain the code, its purpose and how it functions....
+		\subsubsection{Design}
 			 	Figure 2: Initial Design image (with the buttons)
 				Figure 3: UML - from eclipse
 		\subsection{JUnit Testing}
 	 	\subsection{Code patterns}
 		\subsection{Scrum Process}
+			ADD: GANTT Chart
 			TO DO: what were met at each scrum, what were pulled back, what effects did unfinished scrum task have on the overall project.
 			%have the GANTT chart here - finalise with tasks that was pulled back
 	\section{Team Work}
 		This section of the report underlines the collaboration process implemented for the traffic simulation project.
 		\subsection{Division of code}
 			As mentioned in the initial report, the project is split into three separate sections: Nodal Algorithm and Thread, GUI and report, and Policy Management.  The group is split into groups of two and is assigned to a section according to their capabilities.  This system was kept throughout the project with the exception that all members have the flexibility to go into different group and help with the code.  
-			
 			\begin{enumerate}[noitemsep]
                 \item GUI, Objects and Report: Sai Kurdukar and Daniella Bacud
                 \item Algorithms: Patrick Martins - Yedenu and Grigorios Pavlidis
                 \item Management Policies: Dyah Damapuspita and Constantinos Hasikos
             \end{enumerate}
-			
 		\subsection{Meetings}
 			For each week of the project, a member is selected to become the mediator for that meeting.  The mediator ensures that all members are informed of the time, date and location of their respective meeting.  They lead the meeting, ensure all required topics are discussed e.g. issues that arise, sprint review and allocation, and .  The mediator selects another member to take the meetings of the meeting to be documented on google drive for all members to view.  Feedback of each respective meeting is then filled by all members by the next meet.  Agenda of the following meeting is usually made and confirmed by the whole group at the end of each meeting.  This process is done to keep everyone informed of their task and other's progress thus far.
-			
 		\subsection{Communications}
 			The communication of the group is centred around the Whatsapp. It was found to be the quickest way to exchange notifications and arrangement of meeting dates with the rest of the group. Other tools such as Trello and Google Docs were employed to keep track of the project's progress, scrum review (get screen shot) and other documents. Both tools are easily accessible to all members simultaneously and thus, allows easy visibility of tasks that are lagging behind. Such tasks were rises in the groups priority list. Google Docs in particular was the opted means to document the meetings, agenda, memo and feedback from previous weeks (including scrum reviews)\\
-			
-			GitHub is an amazing tool that allowed us to coding simultaneously. Notification of changes and pull request made encouraged the evaluation of other's code and thus helped improve the overall quality of the code.
+				GitHub is an amazing tool that allowed us to coding simultaneously. Notification of changes and pull request made encouraged the evaluation of other's code and thus helped improve the overall quality of the code.
+				ADD:Trello example
+		\subsection{Conflicts and Solutions}
+		TODO: Team working: understand and experience the advantages, challenges, and strategies for working in a group of people on software.
 	\section{Evaluation}
-	This section of the report covers the evaluation of our group project.  With what went well and why, and what didn't go well and the solutions to cover come it.
-	
-		\subsection{What didn't go well. How we overcome difficulties. how did your team work together? what changes were the result of improved thinking }
-			
-		Initially, the group worked in one branch, the working branch, which was merged to the master branch at the end of each week. This was later found to be fatal as it was very prone to conflicts.  Instead, each group member created their own branch which created a pull request to the main branch each time they want to commit a code to the main source code. This was very helpful as other members can analyse and view individual pull request and comment on the quality of the code.  Conflicts in this case was often easy to resolve.\\ 
-		\\The major issue encountered in the project was in regards to the integration of the code with other group members. Once the Scrum commences each Friday fortnight, each member works on their own task.  Whilst a meeting was held each week, the communication level was found lacking as faults in linking the programme together were often identified nearing the end of the sprint.\\
-\\Upon encountering this problem the first sprint, our group remodelled our working patterns to encourage all of the team members to constantly work as a whole.  An eight-hour Hackaton was arranged for Fridays of each week.  This strategy was found to be very effective; coding was done at a higher phase and end task of each Hackaton session was met.  Due to its success, our group opted to hold two sets of compulsory Hackaton sessions each week, Wednesday and Friday respectively.  Hackatons were very helpful as it kept everyone informed of each individual's progress. Any questions and issues were quickly resolved and thus preventing a conflict with our code occurring.\\
-\\Whilst the Wednesday Hackaton is designed to keep the code integrated with each other and to insure that each sprint tasks is met, the Friday Hackatons were implemented to combine each group's sprint together. Both Hackatons acted as our informal meeting periods whereby any issues can be discussed and progress of our sprints can be evaluated.
+		This section of the report covers the evaluation of our group project.  With what went well and why, and what didn't go well and the solutions to cover come it.
+		\underline{TODO:}
+		Finish by critically evaluating your work: what worked well, and what didn’t; how did you do relative to your plan? Note: an easy way to do badly here is to say “everything I did was brilliant.” Critical evaluation means you also have to show you understand all of the weaknesses in your work as well as its strengths.
+		\subsection{What didn't go well. How we overcome difficulties. how did your team work together? what changes were the result of improved thinking }	
+			Initially, the group worked in one branch, the working branch, which was merged to the master branch at the end of each week. This was later found to be fatal as it was very prone to conflicts.  Instead, each group member created their own branch which created a pull request to the main branch each time they want to commit a code to the main source code. This was very helpful as other members can analyse and view individual pull request and comment on the quality of the code.  Conflicts in this case was often easy to resolve.\\ 
+			The major issue encountered in the project was in regards to the integration of the code with other group members. Once the Scrum commences each Friday fortnight, each member works on their own task.  Whilst a meeting was held each week, the communication level was found lacking as faults in linking the programme together were often identified nearing the end of the sprint.\\
+			Upon encountering this problem the first sprint, our group remodelled our working patterns to encourage all of the team members to constantly work as a whole.  An eight-hour Hackaton was arranged for Fridays of each week.  This strategy was found to be very effective; coding was done at a higher phase and end task of each Hackaton session was met.  Due to its success, our group opted to hold two sets of compulsory Hackaton sessions each week, Wednesday and Friday respectively.  Hackatons were very helpful as it kept everyone informed of each individual's progress. Any questions and issues were quickly resolved and thus preventing a conflict with our code occurring.\\
+			Whilst the Wednesday Hackaton is designed to keep the code integrated with each other and to insure that each sprint tasks is met, the Friday Hackatons were implemented to combine each group's sprint together. Both Hackatons acted as our informal meeting periods whereby any issues can be discussed and progress of our sprints can be evaluated.
 		\subsection{what changes were forced upon you? }
-		Unfortunately, now closing in at the end of the project, it has become clear that our lack of time management was a major issue we should have identified and resolved early in the project's life time. There were some instances where the sprint task were not met, which in turn pushed back the whole project. This was often caused by  unforeseen problems arising in the code. What the group lack overall is a grace period (an allotted time) in each sprint which allows such occurrences to be resolved. Because of this, some optional tasks we planned to execute were not included. Such features is the random map generation option.  We have nevertheless, methods that can be implement a random map if a button is clicked. \\
-		The decision of how the group was split was not ideal. We should have split the group such that more experienced members were grouped with the less experienced members.  This would mean that simple  coding would have been completed sooner and thus, more members would have been made available to help with the other tasks
-			
+			Unfortunately, now closing in at the end of the project, it has become clear that our lack of time management was a major issue we should have identified and resolved early in the project's life time. There were some instances where the sprint task were not met, which in turn pushed back the whole project. This was often caused by  unforeseen problems arising in the code. What the group lack overall is a grace period (an allotted time) in each sprint which allows such occurrences to be resolved. Because of this, some optional tasks we planned to execute were not included. Such features is the random map generation option.  We have nevertheless, methods that can be implement a random map if a button is clicked. \\
+			The decision of how the group was split was not ideal. We should have split the group such that more experienced members were grouped with the less experienced members.  This would mean that simple  coding would have been completed sooner and thus, more members would have been made available to help with the other tasks
 		\subsection{What went well.  How did you do relative to your plan?}
 		The meeting 	
-		
 	\section{Relevant further work}  
 			Map configuration (from static to dynamic) and changing of lanes. Pedestrian crossing
-		
 	\section{Peer Assessment}
 		As a group, we have surmised at the beginning of the project that the project will be split into three groups.  Marks have been distributed equally between the three groups. In cases where a group has failed to complete their task, the marks allocated to them will be deducted and is given to whichever the team that took up the task for them.
-
-\begin{table}[h]
-	\centering
-    \begin{tabular}{|l|l|}
-    \hline
-    \textbf{Members}                   & \textbf{Marks} \\ \hline
-    Hasikos, Constantinos     & 16.6  \\ \hline
-    Pavlidis, Grigorios       & 16.6  \\ \hline
-    Martins-Yedenu, Patrick   & 16.6  \\ \hline
-    Kurdukar, Sai             & 16.6  \\ \hline
-    Bacud, Daniella Nashelsky & 16.6  \\ \hline
-    Damapuspita, Dyah Inastra & 16.6  \\ \hline
-    \end{tabular}
-    \caption {Peer Marking}
-\end{table}
-
+		\begin{table}[h]
+		\centering
+    	\begin{tabular}{|l|l|}
+    		\hline
+    		\textbf{Members}                   & \textbf{Marks} \\ \hline
+    		Hasikos, Constantinos     & 16.6  \\ \hline
+    		Pavlidis, Grigorios       & 16.6  \\ \hline
+    		Martins-Yedenu, Patrick   & 16.6  \\ \hline
+    		Kurdukar, Sai             & 16.6  \\ \hline
+    		Bacud, Daniella Nashelsky & 16.6  \\ \hline
+    		Damapuspita, Dyah Inastra & 16.6  \\ \hline
+    	\end{tabular}
+    	\caption {Peer Marking}
+		\end{table}
 	\section{Appendix}
 		The external libraries used for the project:  
 		JUnit
-	\section{References}	
-
+	\section{References}	~
 \end{document} 
 
 
@@ -138,4 +163,8 @@
 %README file at the top
 %		-installation instructions
 %		-instructions on how to run the software
-		 
+%Attach your git log to the PDF in a suitable format (e.g. output from gitlog2latex.sh or latex-git-log). Include author, date, and 1 line commit message at a minimum.
+%Attach your source code to the end of the PDF using a2ps.
+%Max 12000 words / 35 pages (whichever is less).
+
+
