@@ -46,18 +46,13 @@ public class Buttons extends JPanel {
         pauseButton.setIcon(new ImageIcon(pauseURL));
         stopButton.setIcon(new ImageIcon(stopURL));
 
-
         //setLayout(new FlowLayout());
-
         playButton.setBounds(200,200,50,40);
         replayButton.setBounds(300,200,50,40);
         pauseButton.setBounds(400,200,50,40);
         stopButton.setBounds(500,200,50,40);
 
-        this.add(playButton);
-
-        //this.setOpaque(true);
-        //this.add(playButton,1);
+        add(playButton);
         add(pauseButton);
         add(replayButton);
         add(stopButton, BorderLayout.SOUTH);
