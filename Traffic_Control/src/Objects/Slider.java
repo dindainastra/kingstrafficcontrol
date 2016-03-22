@@ -1,6 +1,9 @@
 package Objects;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -49,9 +52,9 @@ public class Slider extends JPanel{
         timeIntervalSlider.setPaintLabels(true);
         timeIntervalSlider.setPaintTicks(true);
         timeIntervalSlider.setBorder(BorderFactory.createEmptyBorder(0,10,0,10));
-        timeIntervalSlider.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent evt) {
-                timeIntervalSliderMousePressed(evt);
+        timeIntervalSlider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent evt) {
+                timeIntervalStateChanges(evt);
             }
         });
         speedLimitSlider.setMajorTickSpacing(20);
@@ -154,9 +157,14 @@ public class Slider extends JPanel{
         // TODO add your handling code here:
     }
 
-    private void timeIntervalSliderMousePressed(MouseEvent evt) {
-        // TODO add your handling code here:
+    private void timeIntervalStateChanges(ChangeEvent evt) {
+     /*if (timeIntervalSlider.getValueIsAdjusting())
+       {
+         System.out.println("The value is"+timeIntervalSlider.getValue());
+       }*/
+     //System.out.println(timeIntervalSlider.getValue());
     }
+  
 
     private void congestionSliderMousePressed(MouseEvent evt) {
         // TODO add your handling code here:
