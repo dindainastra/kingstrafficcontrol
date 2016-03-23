@@ -124,7 +124,7 @@ public class CornerRoad extends JPanel implements Terrain{
             int xPoly[] = {xStart+40, xStart+30, xStart+50};
             int yPoly[] = {yStart+110, yStart+125,yStart+125 };
             poly = new Polygon(xPoly, yPoly, 3);
-            road.fillPolygon(poly);
+            road.drawPolygon(poly);
         }
     }
 

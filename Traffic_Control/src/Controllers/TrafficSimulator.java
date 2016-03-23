@@ -1,7 +1,5 @@
 package Controllers;
 
-import Objects.RoadNetworks;
-
 public class TrafficSimulator {
 
 
