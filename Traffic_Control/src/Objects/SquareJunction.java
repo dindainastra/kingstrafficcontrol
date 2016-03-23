@@ -1,5 +1,8 @@
 package Objects;
 import javax.swing.*;
+
+import Controllers.TrafficManagement;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -10,12 +13,13 @@ public class SquareJunction extends JPanel implements Terrain{
     private ArrayList<Terrain> previousTerrainList;
     private ArrayList<Object> forwardListFlow;
     private ArrayList<Object> backwardListFlow;
+    private TrafficManagement trafficManagement;
 
     //Set size of road
     private int xStart,yStart, close;
     private final int road_width = 100;
 
-    public SquareJunction(int x_Start, int y_Start){
+    public SquareJunction(int x_Start, int y_Start, TrafficManagement trafficManagement){
         this.xStart = x_Start;
         this.yStart = y_Start;
 
@@ -23,6 +27,7 @@ public class SquareJunction extends JPanel implements Terrain{
         previousTerrainList  = new ArrayList<Terrain>();
         forwardListFlow = new ArrayList<Object>();
         backwardListFlow = new ArrayList<Object>();
+        this.trafficManagement = trafficManagement;
     }
 
     public SquareJunction(int x_Start, int y_Start, int close){
@@ -87,6 +92,11 @@ public class SquareJunction extends JPanel implements Terrain{
         road.drawLine(xStart+road_width/2,yStart,xStart+road_width/2,yStart+road_width-1);//horizontal
         road.drawLine(xStart,yStart+road_width/2,xStart+road_width,yStart+road_width/2);//vertical
 
+        Color textColor = Color.YELLOW;
+        g.setColor(textColor);  //greg
+
+        g.drawString(String.valueOf(this.trafficManagement.getTerrainList().indexOf(this)), xStart, yStart); //greg
+        
     }
 
     public void paintComponent(Graphics g) {
@@ -175,5 +185,8 @@ public class SquareJunction extends JPanel implements Terrain{
         return 0;
     }
 
-
+	@Override
+	public int getRotation() {
+        return 0;
+    }
 }

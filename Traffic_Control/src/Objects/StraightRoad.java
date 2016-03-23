@@ -1,5 +1,8 @@
 package Objects;
 import javax.swing.*;
+
+import Controllers.TrafficManagement;
+
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ public class StraightRoad extends JPanel implements Terrain {
     private ArrayList<Terrain> previousTerrainList;
     private ArrayList<Object> forwardListFlow;
     private ArrayList<Object> backwardListFlow;
+    private TrafficManagement trafficManagement;
 
 
     //Set size of straight road
@@ -25,7 +29,7 @@ public class StraightRoad extends JPanel implements Terrain {
     //private final TrafficLights trafficLight0, trafficLight1;
 
     // adding constructor to initialise road_length
-    public StraightRoad(int x_Start, int y_Start, int rotation, int road_length){
+    public StraightRoad(int x_Start, int y_Start, int rotation, int road_length, TrafficManagement trafficManagement){
         this.rotation = rotation;
         this.xStart = x_Start;
         this.yStart = y_Start;
@@ -38,6 +42,7 @@ public class StraightRoad extends JPanel implements Terrain {
         previousTerrainList  = new ArrayList<Terrain>();
         forwardListFlow = new ArrayList<Object>();
         backwardListFlow = new ArrayList<Object>();
+        this.trafficManagement = trafficManagement;
     }
 
     public void doDrawing(Graphics2D g){
@@ -75,61 +80,6 @@ public class StraightRoad extends JPanel implements Terrain {
         road.setColor(Color.white);
         road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
 
-//        int xPoly[] = {xStart+5, xStart+2, xStart+2};
-//        int yPoly[] = {yStart+road_width/2, yStart+road_width-5, yStart+5};
-
-//        if(road_end==10){
-  //      }
-
-
-
-        // direction arrows
-        /*arrows.setStroke(bs2);
-        arrows.setColor(Color.black);
-        arrows.drawLine(xStart+10,yStart+road_width/8,xStart+40,yStart+road_width/8);
-        arrows.drawLine(xStart+10,(yStart+road_width/2)+road_width/8,xStart+40,(yStart+road_width/2)+road_width/8);
-        */
-        //arrows.fillPolygon(new int[]{xStart+10,xStart+20},new int[]{(yStart+road_width/8)-5,(yStart+road_width/8)-10},30);
-
-
-        // traffic lights
-        /*
-        TrafficLights tl = new TrafficLights (xStart,  yStart+road_width/2,  RGB2, rotation);
-
-        Thread t = new Thread(tl);
-        t.start();
-        int ch =0;
-        for(int i=0; i<=20; i++) {
-            ch = tl.getCurrentColour();
-            System.out.println("Current colour is " + ch);
-        }*/
-
-
-        //draw traffic lights
-        /*if (trafficlight ==10){//traffic lights on the left hand side of the road
-            tl.trafficlightgui(xStart,  yStart+road_width/2,  RGB2, rotation);
-            TrafficLights.doDrawing(g);
-        }*/
-
-        /*
-        if (trafficlight ==10 || trafficlight ==11){//traffic lights on the left hand side of the road
-            activateTrafficLights(trafficLight0, g);
-        }*/
-        /*
-        else if (trafficlight ==01){//traffic lights on the right hand side of the road
-            tl.trafficlightgui(xStart+road_length-5, yStart,RGB1,rotation);
-            TrafficLights.doDrawing(g);
-        }
-        else if (trafficlight ==11){//traffic lights on both side of the road
-            tl.trafficlightgui(xStart,  yStart+road_width/2,  RGB2, rotation);
-            TrafficLights.doDrawing(g);
-            tl.trafficlightgui(xStart+road_length-5, yStart,RGB1,rotation);
-            TrafficLights.doDrawing(g);
-        }*/
-        /*
-        if (trafficlight ==01 || trafficlight ==11){//traffic lights on the right hand side of the road
-            activateTrafficLights(trafficLight1, g);
-        }*/
         road.setTransform(old);
     }
 
@@ -187,6 +137,11 @@ public class StraightRoad extends JPanel implements Terrain {
         */
         //arrows.fillPolygon(new int[]{xStart+10,xStart+20},new int[]{(yStart+road_width/8)-5,(yStart+road_width/8)-10},30);
         road.setTransform(old);
+        
+        Color textColor = Color.RED;
+        g.setColor(textColor);  //greg
+
+        g.drawString(String.valueOf(this.trafficManagement.getTerrainList().indexOf(this)), xStart, yStart); //greg
     }
 
 
@@ -263,4 +218,9 @@ public class StraightRoad extends JPanel implements Terrain {
 
     public int getxStart(){ return xStart; }
     public int getYStart(){ return yStart; }
+
+    @Override
+    public int getRotation() {
+        return rotation;
+    }
 }

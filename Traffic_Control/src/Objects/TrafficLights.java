@@ -1,8 +1,5 @@
 
 package Objects;
-
-//import org.junit.internal.runners.statements.RunAfters;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -11,10 +8,11 @@ public class TrafficLights extends JPanel implements Runnable{
 
     private int pos_x, pos_y, rotates;
     private final int width = 3, length = 50;
-    public final int Red = 1;
-    public final int Yellow = 2;
-    public final int Green = 3;
-    public final int YellowReverse = 4;
+    private int R,G,B;
+    private final int Red = 1;
+    private final int Yellow = 2;
+    private final int Green = 3;
+    private final int YellowReverse = 4;
     private int currentColour = Red;
     private final int RED_SECS = 30;
     private final int YELLOW_SECS = 30;
@@ -26,7 +24,6 @@ public class TrafficLights extends JPanel implements Runnable{
     private long delay;
     private int signal;
     private int numberOfWays;
-
 
     //set traffic light colour and shape
     /**
@@ -46,11 +43,6 @@ public class TrafficLights extends JPanel implements Runnable{
         //this.currentColour = RGB;
     }
 
-    public void setNextLight(TrafficLights NextLight, int first) {
-        this.checkFirst = first;
-        resumeNextLight = NextLight;
-        System.out.println("Check Next Light sini "+resumeNextLight);
-    } // end setOtherLight.
     /**
      * This method takes the initial state of the traffic lights (Red) and makes decisions accordingly
      * @return
@@ -80,54 +72,12 @@ public class TrafficLights extends JPanel implements Runnable{
         return currentColour;
     }
 
-    public void requestSuspended(){
-        suspendRequest = true;
-    }
-
-    private synchronized void checkSuspended()
-    {
-        if (!(checkFirst == 1)){
-            while (suspendRequest)
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-        }
-        //System.out.println(check + " Hi " + suspendRequest+ " Changing to "+currentColour + " while check: " + checkFirst);
-
-        checkFirst = 0;
-    }
-
-    public synchronized void requestResume()
-    {
-        suspendRequest = false;
-        notify();
-    }
-
     public int getCurrentColour() {
         return currentColour;
     }
     /**
      * This method iterates the change of colours.
      */
-
-
-/*
-    public void run() {
-//    	System.out.println("Red");
-//    	System.out.println(Red);
-
-        for (;;) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                System.out.println("Error: "+e.getLocalizedMessage());
-            }
-
-            //System.out.println(this.change());
-        }
-    }*/
 
     private int getSecs() {
 
@@ -151,25 +101,6 @@ public class TrafficLights extends JPanel implements Runnable{
         }
     }
 
-    /*
-
-    public void start() {
-
-        runner = new Thread((Runnable) this);
-        runner.start();
-    }*/
-
-    /**
-     * used for testing the sequence
-     * @param args
-     */
-    /*
-    public static void main(String[] args){
-        TrafficLights a = new TrafficLights();
-        a.run();
-    }*/
-
-
  /**
   * Draw of Traffic Light. RGB used.
   * @param g
@@ -187,8 +118,8 @@ public class TrafficLights extends JPanel implements Runnable{
          R = 255; G=215; B=0;
      }
 
-        g.setColor(new Color (R,G,B));
-        g.fillRect(pos_x, pos_y, width, length);
+     	g.setColor(new Color (R,G,B));
+  		g.fillRect(pos_x, pos_y, width, length);
         g.setTransform(old3);
     }
 

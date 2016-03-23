@@ -1,7 +1,5 @@
 package Objects;
 
-import sun.audio.AudioPlayer;
-import sun.audio.AudioStream;
 
 import javax.swing.*;
 import java.awt.*;

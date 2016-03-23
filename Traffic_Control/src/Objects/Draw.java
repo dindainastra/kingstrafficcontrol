@@ -39,35 +39,16 @@ public class Draw extends JPanel {
 
         for (Terrain aTerrain : this.terrainList){
             for (Object v : aTerrain.getForwardListFlow())
-                if (v instanceof Car) {
+                if (v instanceof Vehicle) {
                     ((Car) v).paintComponent(g);
                 }else {
-                    //((TrafficLights) v).doDrawing(f);
-                    ((TrafficLights) v).paintComponent(g);
+                	((TrafficLights) v).paintComponent(g);
                 }
             for (Object v : aTerrain.getBackwardListFlow())
                 if (v instanceof Vehicle)
                     ((Vehicle) v).doDrawing(f);
-                else {
+                else
                     ((TrafficLights) v).paintComponent(g);
-                    //((TrafficLights) v).doDrawing(f);
-                    /*
-                    Thread thread = new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            //
-                            //                //for (;;) {
-                            //                    try {
-                            //                        Thread.sleep(2000);
-                            //                    } catch (InterruptedException e) {
-                            //                        System.out.println("Error: "+e.getLocalizedMessage());
-                            //                    }
-                            //                    trafficLight.change();
-                            //                //}
-                        }
-                    });
-                    thread.start();*/
-                }
         } 
 
     }

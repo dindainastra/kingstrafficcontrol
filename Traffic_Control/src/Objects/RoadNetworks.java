@@ -69,8 +69,8 @@ public class RoadNetworks extends JFrame {
         bridgeCheckBox = new JCheckBox();
         tollGateCheckBox = new JCheckBox();
         //Create JComboBox
-        weatherComboBox = new JComboBox<>();
-        emergencyComboBox = new JComboBox<>();
+        weatherComboBox = new JComboBox();
+        emergencyComboBox = new JComboBox();
         
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -199,13 +199,13 @@ public class RoadNetworks extends JFrame {
                 tollGateCheckBoxActionPerformed(evt);
             }
         });
-        weatherComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "Normal", "Hazardous", "Night", "Day" }));
+        weatherComboBox.setModel(new DefaultComboBoxModel(new String[] { "Normal", "Hazardous", "Night", "Day" }));
         weatherComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 weatherComboBoxActionPerformed(evt);
             }
         });
-        emergencyComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3" }));
+        emergencyComboBox.setModel(new DefaultComboBoxModel(new String[] { "0", "1", "2", "3" }));
         emergencyComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 emergencyComboBoxActionPerformed(evt);

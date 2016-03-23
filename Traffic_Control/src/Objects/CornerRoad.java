@@ -1,7 +1,9 @@
-
 package Objects;
 
 import javax.swing.*;
+
+import Controllers.TrafficManagement;
+
 import java.awt.*;
 import java.awt.geom.Arc2D;
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ public class CornerRoad extends JPanel implements Terrain{
     private ArrayList<Terrain> previousTerrainList;
     private ArrayList<Object> forwardListFlow;
     private ArrayList<Object> backwardListFlow;
+    private TrafficManagement trafficManagement;
 
     //Set size of straight road
     private int xStart,yStart;
@@ -21,7 +24,7 @@ public class CornerRoad extends JPanel implements Terrain{
     private int start_angle, road_width = 200, type;
     private Polygon poly;
 
-    public CornerRoad(int x_Start, int y_Start, int start_angle, int type){
+    public CornerRoad(int x_Start, int y_Start, int start_angle, int type, TrafficManagement trafficManagement){
         this.start_angle = start_angle;
         this.xStart = x_Start;
         this.yStart = y_Start;
@@ -33,6 +36,8 @@ public class CornerRoad extends JPanel implements Terrain{
         previousTerrainList  = new ArrayList<Terrain>();
         forwardListFlow = new ArrayList<Object>();
         backwardListFlow = new ArrayList<Object>();
+        this.trafficManagement = trafficManagement;
+
     }
 
     public void doDrawing(Graphics2D g){
@@ -126,6 +131,11 @@ public class CornerRoad extends JPanel implements Terrain{
             poly = new Polygon(xPoly, yPoly, 3);
             road.drawPolygon(poly);
         }
+        
+        Color textColor = Color.PINK;
+        g.setColor(textColor);  
+
+        g.drawString(String.valueOf(this.trafficManagement.getTerrainList().indexOf(this)), xStart, yStart); 
     }
 
 
@@ -213,6 +223,10 @@ public class CornerRoad extends JPanel implements Terrain{
     public int getcornerLength(){
         return 0;
     }
-}
 
+	@Override
+	public int getRotation() {
+        return this.arc_angle;
+    }
+}
 
