@@ -16,42 +16,52 @@
 	\tableofcontents
 	\section{Introduction}
 		Purpose of the simulation
+		As cities across the world continue to grow bigger and better traffic management becomes an increasing problem. Traffic simulation has received increasing attention as a solution to help solve the problems of traffic congestion and accidents. In this project we have tried to build a simple traffic simulation system consisting of a road network with different types of roads and vehicles following traffic policies.
 	\section{Review}
 		Related work, research conducted, etc.
 	\section{Requirements and Design}
-		\noindent The basic requirements of the system where to have a road network with different types of roads such as straights roads, turnings, junctions and traffic lights and cars running on the road networks responding to the traffic lights.
+		TO DO: Describe the requirements you set for your project at the beginning and the design you have taken for your project. Focus on why you decided to tackle the problem in the way you did, and what effects that had on the design. You may also wish to mention the impact of team-working on your requirements and design.
+			\subsection{Requirements}
+			The requirements that we set for the system were as follows: 
+			\\A road network with different types of roads such as straights roads, turnings, junctions along with traffic lights and vehicles following traffic policies.
 			 The tasks where divided into three levels:
-		\begin{itemize}[noitemsep]
-			 \item Level 1: These are the mandatory requirements that have been included in the system. These include:
-			 	\begin{enumerate}[noitemsep]
-			 		\item Road network including traffic lights.
-			 		\item Vehicles which includes Cars, Lorries, Buses, Motorbikes. This also includes the behaviour of the driver (reckless, normal, careful).
-			 		\item Entry and exit to the road network
-			 		\item Timing of journeys (Rush hours)
-			 		\item Emergency services which include police cars, ambulances and fire trucks
-			 		\item Management policies which is roadworks, diverting the traffic --NOT IMPLEMENTED
-			 		\item Time granularity (meaning: 1 sec of our time is equivalent to 1 min in the simulation )
-			 	\end{enumerate}
-			 \item Level 2: These are optional specifications including:
-			 	\begin{enumerate}[noitemsep]
-			 		\item Politeness level of the drivers
-			 		\item People crossing
-			 		\item Map scale user interface 
-			 		\item Congestion rate user interface
-			 		\item Pause, Stop, Resume, Play options
-			 		\item Speed limit options
-			 		\item Scenery
-				 \end{enumerate}
-			 \item Level 3: These are optional specifications. At least one of these is to be implemented:
-				 \begin{enumerate}[noitemsep]
-				 	\item Configurable map
-				 	\item Road types (Crossings, Traffic lights mechanism, Junctions, two-lane roads, four-lane roads, toll gates, up-hill/down-hill, Ramps)
-				 	\item Parking
-			 		\item Changing lanes (in a four-lane road)
-				 	\item Weather conditions
-			 \end{enumerate}			 		 
-		 \end{itemize}
+			
+			 \begin{itemize}
 			 
+			 \item Level 1: These are the mandatory requirements that have been included in the system. These include:
+			 \begin{enumerate}
+			 	\item Road network including traffic lights.
+			 	\item Vehicles which includes Cars, Lorries, Buses, Motorbikes. This also includes the behaviour of the driver (reckless, normal, careful).
+			 	\item Entry and exit to the road network
+			 	\item Timing of journeys (Rush hours)
+			 	\item Emergency services which include police cars, ambulances and fire trucks
+			 	\item Management policies which is roadworks, diverting the traffic --NOT IMPLEMENTED
+			 	\item Time granularity (meaning: 1 sec of our time is equivalent to 1 min in the simulation )
+			 \end{enumerate}
+			 
+			 \item Level 2: These are optional specifications including:
+			 \begin{enumerate}
+			 	\item Politeness level of the drivers
+			 	\item People crossing
+			 	\item Map scale user interface 
+			 	\item Congestion rate user interface
+			 	\item Pause, Stop, Resume, Play options
+			 	\item Speed limit options
+			 	\item Scenery
+			 \end{enumerate}
+			 
+			 \item Level 3: These are optional specifications. At least one of these is to be implemented:
+			 \begin{enumerate}
+			 	\item Configurable map
+			 	\item Road types (Crossings, Traffic lights mechanism, Junctions, two-lane roads, four-lane roads, toll gates, up-hill/down-hill, Ramps)
+			 	\item Parking
+			 	\item Changing lanes (in a four-lane road)
+			 	\item Weather conditions
+			 \end{enumerate}			 
+			 			 
+			 \end{itemize}
+				
+			 Dividing the requirements into different levels clarified which requirements were necessary and had to be completed and which requirements were secondary and could be implemented once the level one requirements were implemented. It helped us prioritise our tasks. It also helped us keep a track on what was completed and what was pending. We completed the level 1 tasks first and the proceeded to level two and three tasks. 	 
 		 \subsection{Initial Design and Development}
 		  	We decided to use Scrum methodology for our implementing our project. Scrum is a management framework for incremental product development using one or more cross-functional, self-organising teams. We divided ourselves into three teams of two members each. Each team was responsible for for developing a different part of the system. We helped each other as and when required.We started by just displaying a single road with a moving car on the road. then we implemented the traffic lights and got the car to respond to the traffic lights. These were the basics we started with and built our system on top of this. We made modifications to our system as we progressed. \\
 		 
