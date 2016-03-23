@@ -1,6 +1,7 @@
 package Objects;
 
 import Controllers.CarFlow;
+import Controllers.TrafficManagement;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +11,7 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
-public class Car extends JPanel implements Vehicle {
+public class Car extends JPanel implements Vehicle{
 
 	private Person driver;
 	private int priorityLevel;
@@ -25,6 +26,9 @@ public class Car extends JPanel implements Vehicle {
 	public static Boolean draw = false;
 	public double rotate;
 	public int rotateInt = 0;
+	volatile Boolean destination = false;
+
+	public CarFlow.Direction currentDirection = CarFlow.Direction.RIGHT;
 
 	public Car(Person p, int x_coordinate, int y_coordinate){
 		driver = p;
@@ -43,6 +47,14 @@ public class Car extends JPanel implements Vehicle {
 //		}else{}
 	}
 
+	public void setDestination(Boolean des){
+		this.destination = des;
+	}
+
+	public Boolean getDestination(){
+		return destination;
+	}
+
 	public void setRotate(int i){
 		rotateInt = i;
 	}
@@ -51,15 +63,23 @@ public class Car extends JPanel implements Vehicle {
 		return rotateInt;
 	}
 
+	public void setCurrentDirection(CarFlow.Direction dir){
+		currentDirection = dir;
+	}
+
+	public CarFlow.Direction getCurrentDirection(){
+		return currentDirection;
+	}
+
 	public void move(CarFlow.Direction d){
 		if(d == CarFlow.Direction.LEFT){
-			this.pos_x -= 2;
+			this.pos_x -= 1;
 		}else if(d == CarFlow.Direction.RIGHT){
-			this.pos_x += 2;
+			this.pos_x += 1;
 		}else if(d == CarFlow.Direction.DOWN){
-			this.pos_y += 2;
+			this.pos_y += 1;
 		}else if(d == CarFlow.Direction.UP){
-			this.pos_y -= 2;
+			this.pos_y -= 1;
 		}
 	}
 
@@ -167,13 +187,24 @@ public class Car extends JPanel implements Vehicle {
 
 	@Override
 	public void doDrawing(Graphics2D g) {
+
+
+
 		g.setColor(new Color(R, G, B));
 		g.fillRect(pos_x, pos_y, length, width);
+
+
+		Color textColor = Color.BLACK;
+		g.setColor(textColor);  //greg
+		g.drawString(this.getPerson().getName().substring("Person".length()), pos_x, pos_y+width); //greg
 	}
 
+
+	//WHAT IS THIS ???? THIS IS NOT PAINT!!!
+	//YOU PAINT WITH doDrawing Method!
 	@Override
 	public void paintComponent(Graphics g){
-		//System.out.println("Repainting car object - turn is "+rotate);
+		System.out.println("Repainting car object - turn is "+rotate);
 		super.paintComponent(g);
 
 		Graphics2D gd = (Graphics2D) g;
@@ -185,5 +216,28 @@ public class Car extends JPanel implements Vehicle {
 		//gd.translate(this.getWidth()/2, this.getHeight()/2);
 
 		gd.setTransform(at);
-	}
+
+
+
+        Color textColor = Color.BLACK;
+        g.setColor(textColor);  //greg
+        g.drawString(this.getPerson().getName().substring("Person".length()), pos_x, pos_y+width); //greg
+    }
+
+//	public void simulate(){
+//		TrafficManagement tm = new TrafficManagement();
+//		Terrain t = tm.getTerrainList().get(0);
+//
+//
+//		CarFlow.Direction dir = cf.getDirection(this, t);
+//
+//		cf.moveToDestinationTimer(this, dir);
+//
+//
+//	}
+
+//	@Override
+//	public void run() {
+//		simulate();
+//	}
 }

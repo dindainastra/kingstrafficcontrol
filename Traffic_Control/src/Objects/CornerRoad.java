@@ -1,7 +1,9 @@
-
 package Objects;
 
 import javax.swing.*;
+
+import Controllers.TrafficManagement;
+
 import java.awt.*;
 import java.awt.geom.Arc2D;
 import java.util.ArrayList;
@@ -14,13 +16,15 @@ public class CornerRoad extends JPanel implements Terrain{
     private ArrayList<Terrain> previousTerrainList;
     private ArrayList<Object> forwardListFlow;
     private ArrayList<Object> backwardListFlow;
+    private TrafficManagement trafficManagement;
 
     //Set size of straight road
     private int xStart,yStart;
     private final int arc_angle = 90;
     private int start_angle, road_width = 200, type;
+    private Polygon poly;
 
-    public CornerRoad(int x_Start, int y_Start, int start_angle, int type){
+    public CornerRoad(int x_Start, int y_Start, int start_angle, int type, TrafficManagement trafficManagement){
         this.start_angle = start_angle;
         this.xStart = x_Start;
         this.yStart = y_Start;
@@ -32,6 +36,8 @@ public class CornerRoad extends JPanel implements Terrain{
         previousTerrainList  = new ArrayList<Terrain>();
         forwardListFlow = new ArrayList<Object>();
         backwardListFlow = new ArrayList<Object>();
+        this.trafficManagement = trafficManagement;
+
     }
 
     public void doDrawing(Graphics2D g){
@@ -81,8 +87,8 @@ public class CornerRoad extends JPanel implements Terrain{
     public void paintComponent(Graphics gr){
         Graphics2D g = (Graphics2D) gr;
         Graphics2D road=(Graphics2D) g;
-        Graphics2D lane_divider=(Graphics2D) g;
-        Graphics2D sroad_border=(Graphics2D) g;
+        //Graphics2D lane_divider=(Graphics2D) g;
+        //Graphics2D sroad_border=(Graphics2D) g;
 
         //draw straight road
         road.setColor(Color.gray);
@@ -98,29 +104,38 @@ public class CornerRoad extends JPanel implements Terrain{
         BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
 
         //draw road border
-        sroad_border.setStroke(bs2);
-        sroad_border.setColor(Color.black);
-        sroad_border.draw(new Arc2D.Double(xStart,yStart,road_width,road_width,start_angle,arc_angle,Arc2D.OPEN));
+        road.setStroke(bs2);
+        road.setColor(Color.black);
+        road.draw(new Arc2D.Double(xStart,yStart,road_width,road_width,start_angle,arc_angle,Arc2D.OPEN));
 
         //draw road divider
         if (type==0){//curved road
             //road_width=200;
-            sroad_border.setColor(Color.white);
-            sroad_border.draw(new Arc2D.Double(xStart + 50, yStart + 50, road_width / 2, road_width / 2, start_angle, arc_angle, Arc2D.OPEN));
-            lane_divider.setStroke(bs1);
-            lane_divider.draw(new Arc2D.Double(xStart + 75,yStart + 75,road_width / 4,road_width / 4,start_angle,arc_angle,Arc2D.OPEN));
-            lane_divider.draw(new Arc2D.Double(xStart + 25,yStart + 25,150, 150 , start_angle,arc_angle,Arc2D.OPEN));
+            road.setColor(Color.white);
+            road.draw(new Arc2D.Double(xStart + 50, yStart + 50, road_width / 2, road_width / 2, start_angle, arc_angle, Arc2D.OPEN));
+            road.setStroke(bs1);
+            road.draw(new Arc2D.Double(xStart + 75,yStart + 75,road_width / 4,road_width / 4,start_angle,arc_angle,Arc2D.OPEN));
+            road.draw(new Arc2D.Double(xStart + 25,yStart + 25,150, 150 , start_angle,arc_angle,Arc2D.OPEN));
         }else if (type==1){//roundabout
             //road_width=250;
-            sroad_border.setStroke(bs2);
-            sroad_border.setColor(Color.black);
-            sroad_border.draw(new Arc2D.Double(xStart + 90, yStart + 90, road_width / 4, road_width /4, start_angle, arc_angle, Arc2D.OPEN));
+            road.setStroke(bs2);
+            road.setColor(Color.black);
+            road.draw(new Arc2D.Double(xStart + 90, yStart + 90, road_width / 4, road_width /4, start_angle, arc_angle, Arc2D.OPEN));
             road.setColor(Color.BLUE);
             road.fillOval(xStart + 90, yStart + 90, road_width / 4, road_width /4);
-            lane_divider.setStroke(bs1);
-            lane_divider.setColor(Color.white);
-            lane_divider.draw(new Arc2D.Double(xStart+40,yStart+40,road_width-(road_width/3),road_width-(road_width/3),start_angle,arc_angle,Arc2D.OPEN));
+            road.setStroke(bs1);
+            road.setColor(Color.white);
+            road.draw(new Arc2D.Double(xStart+40,yStart+40,road_width-(road_width/3),road_width-(road_width/3),start_angle,arc_angle,Arc2D.OPEN));
+            int xPoly[] = {xStart+40, xStart+30, xStart+50};
+            int yPoly[] = {yStart+110, yStart+125,yStart+125 };
+            poly = new Polygon(xPoly, yPoly, 3);
+            road.drawPolygon(poly);
         }
+        
+        Color textColor = Color.PINK;
+        g.setColor(textColor);  
+
+        g.drawString(String.valueOf(this.trafficManagement.getTerrainList().indexOf(this)), xStart, yStart); 
     }
 
 
@@ -205,14 +220,13 @@ public class CornerRoad extends JPanel implements Terrain{
         return 0;
     }
 
-    @Override
-    public int getRotation() {
-        return 0;
-    }
-
     public int getcornerLength(){
         return 0;
     }
-}
 
+	@Override
+	public int getRotation() {
+        return this.arc_angle;
+    }
+}
 
