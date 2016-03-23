@@ -389,7 +389,8 @@ Yellow = 3
 //      while (!cancelled) {
           try {
               startFlow();
-              Thread.sleep(1000);
+              Thread.sleep(trafficManagement.getTimeGranularity());
+              System.out.println("THE TIME GRANULARITY IS "+trafficManagement.getTimeGranularity());
           } catch (Exception e) {
               e.printStackTrace();
               System.out.println("here I am");
