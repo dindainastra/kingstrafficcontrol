@@ -96,6 +96,6 @@ public class Buttons extends JPanel {
     }
 
     private void stopButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+       System.exit(0);
     }
 }

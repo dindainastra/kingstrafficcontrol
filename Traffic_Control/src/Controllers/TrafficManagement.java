@@ -25,6 +25,10 @@ public class TrafficManagement extends JFrame {
     private Draw map;
     private ExecutorService executor;
     private ArrayList<Runnable> runnableArrayList = new ArrayList<Runnable>();
+    private int timeGranularity;
+    private int congestionIsNormal;
+    private int congestionIsLow;
+    private int congestionIsHigh;
 
     GridLayout gd=new GridLayout(0,2);
 
@@ -468,6 +472,10 @@ public class TrafficManagement extends JFrame {
             public void run() {
                 frame = new JFrame();
                 frame.setLayout(new BorderLayout());
+<<<<<<< HEAD
+                frame.add(new Buttons(), BorderLayout.PAGE_END);
+                frame.add(new Slider(TrafficManagement.this), BorderLayout.EAST);
+=======
                 //frame.add(new Buttons(), BorderLayout.PAGE_END);
                 Buttons buttons=new Buttons();
                 buttons.setPreferredSize(new Dimension(100,50));
@@ -476,6 +484,7 @@ public class TrafficManagement extends JFrame {
                 slider.setPreferredSize(new Dimension(250,0));
                 frame.add(slider,BorderLayout.EAST);
                 //frame.pack();
+>>>>>>> working
                 frame.add(aDraw, BorderLayout.CENTER);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
@@ -486,4 +495,15 @@ public class TrafficManagement extends JFrame {
         });
     }
 
+    //this for how fast or how slow the system goes
+	public int getTimeGranularity() {
+		return timeGranularity;
+	}
+
+
+	public void setTimeGranularity(int timeGranularity) {
+		this.timeGranularity = timeGranularity;
+	}
+
+	
 }
