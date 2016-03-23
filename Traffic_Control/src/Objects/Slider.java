@@ -4,6 +4,8 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import Controllers.TrafficManagement;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,15 +22,19 @@ public class Slider extends JPanel{
     private JSlider congestionSlider,timeIntervalSlider,speedLimitSlider;
     private JComboBox<String> weatherComboBox, emergencyComboBox,congestionComboBox;
     GridLayout gd;
+    private TrafficManagement trafficManagement;
+
+    
+
+    public Slider(TrafficManagement trafficManagement) {
+    	initComponents();
+        this.trafficManagement = trafficManagement;	}
 
 
-    public Slider(){
-        initComponents();
-
-    }
+	
 
 
-    private void initComponents() {
+	private void initComponents() {
 
         //Create JLabel
         weatherLabel = new JLabel();
@@ -62,9 +68,9 @@ public class Slider extends JPanel{
         speedLimitSlider.setPaintLabels(true);
         speedLimitSlider.setPaintTicks(true);
         speedLimitSlider.setBorder(BorderFactory.createEmptyBorder(0,10,0,10));
-        speedLimitSlider.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent evt) {
-                speedLimitSliderMousePressed(evt);
+        speedLimitSlider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent evt) {
+                speedLimitStateChanges(evt);
             }
         });
 
@@ -154,7 +160,19 @@ public class Slider extends JPanel{
     }
 
     private void congestionComboBoxActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+    	if (congestionComboBox.getSelectedItem()=="Normal"){
+    		congestionComboBox.getSelectedIndex();
+    		
+    	}
+    	else if(congestionComboBox.getSelectedItem() == "High"){
+    		congestionComboBox.getSelectedIndex();
+    		
+    	}
+    	else if(congestionComboBox.getSelectedItem() =="Low"){
+    		congestionComboBox.getSelectedIndex();
+    		
+    	}
+        
     }
 
     private void timeIntervalStateChanges(ChangeEvent evt) {
@@ -163,14 +181,15 @@ public class Slider extends JPanel{
          System.out.println("The value is"+timeIntervalSlider.getValue());
        }*/
      //System.out.println(timeIntervalSlider.getValue());
+    	trafficManagement.setTimeGranularity(timeIntervalSlider.getValue());
+    	
+    	
+    	
     }
   
 
-    private void congestionSliderMousePressed(MouseEvent evt) {
-        // TODO add your handling code here:
-    }
-
-    private void speedLimitSliderMousePressed(MouseEvent evt) {
+    
+    private void speedLimitStateChanges(ChangeEvent evt) {
         // TODO add your handling code here:
     }
 
