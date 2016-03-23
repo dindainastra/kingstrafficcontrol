@@ -1,31 +1,19 @@
 
 package Objects;
-
-<<<<<<< HEAD
-=======
-//import org.junit.internal.runners.statements.RunAfters;
-
 import javax.swing.*;
->>>>>>> working
 import java.awt.*;
+import java.awt.geom.AffineTransform;
 
-public class TrafficLights implements Runnable{
+public class TrafficLights extends JPanel implements Runnable{
 
-    private static int pos_x, pos_y, rotates;
-    private static final int width = 3, length = 50;
-    private static int R,G,B;
-    public static final int Red = 1;
-    public static final int Yellow = 2;
-    public static final int Green = 3;
-    public static final int YellowReverse = 4;
+    private int pos_x, pos_y, rotates;
+    private final int width = 3, length = 50;
+    private int R,G,B;
+    private final int Red = 1;
+    private final int Yellow = 2;
+    private final int Green = 3;
+    private final int YellowReverse = 4;
     private int currentColour = Red;
-<<<<<<< HEAD
-    private final static int RED_SECS = 30;
-    private final static int YELLOW_SECS = 30;
-    private final static int GREEN_SECS = 30;
-    private final static int YellowReverse_SECS = 30;
-    private Thread runner;
-=======
     private final int RED_SECS = 30;
     private final int YELLOW_SECS = 30;
     private final int GREEN_SECS = 30;
@@ -36,8 +24,6 @@ public class TrafficLights implements Runnable{
     private long delay;
     private int signal;
     private int numberOfWays;
->>>>>>> working
-
 
     //set traffic light colour and shape
     /**
@@ -47,28 +33,6 @@ public class TrafficLights implements Runnable{
      * @param y_coordinate
      * @param rotation
      */
-<<<<<<< HEAD
-    public TrafficLights(int x_coordinate, int y_coordinate, int RGB, int rotation){
-        super();
-        this.pos_x = x_coordinate;
-        this.pos_y = y_coordinate;
-        this.R = R;
-        this.G = G;
-        this.B = B;
-    }
-    public void trafficlightgui(int x_coordinate, int y_coordinate, int RGB, int rotation){
-        TrafficLights.pos_x = x_coordinate;
-        TrafficLights.pos_y = y_coordinate;
-        rotates = rotation;
-        if (RGB==1){//RED
-            R = 255; G=0; B=0;
-        }else if (RGB==2){//GREEN
-            R = 0; G=255; B=0;
-        }else if (RGB ==3){//AMBER
-            R = 255; G=215; B=0;
-        }
-
-=======
     public TrafficLights(int x_coordinate, int y_coordinate, int numberOfWays, int signal, int rotation, long delay){
         this.pos_x = x_coordinate;
         this.pos_y = y_coordinate;
@@ -77,19 +41,8 @@ public class TrafficLights implements Runnable{
         this.delay = delay;
         this.numberOfWays = numberOfWays;
         //this.currentColour = RGB;
->>>>>>> working
     }
-    public TrafficLights(){
 
-<<<<<<< HEAD
-    }
-=======
-    public void setNextLight(TrafficLights NextLight, int first) {
-        this.checkFirst = first;
-        resumeNextLight = NextLight;
-        System.out.println("Check Next Light sini "+resumeNextLight);
-    } // end setOtherLight.
->>>>>>> working
     /**
      * This method takes the initial state of the traffic lights (Red) and makes decisions accordingly
      * @return
@@ -119,52 +72,12 @@ public class TrafficLights implements Runnable{
         return currentColour;
     }
 
-    public void requestSuspended(){
-        suspendRequest = true;
-    }
-
-    private synchronized void checkSuspended()
-    {
-        if (!(checkFirst == 1)){
-            while (suspendRequest)
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-        }
-        //System.out.println(check + " Hi " + suspendRequest+ " Changing to "+currentColour + " while check: " + checkFirst);
-
-        checkFirst = 0;
-    }
-
-    public synchronized void requestResume()
-    {
-        suspendRequest = false;
-        notify();
-    }
-
     public int getCurrentColour() {
         return currentColour;
     }
     /**
      * This method iterates the change of colours.
      */
-
-    public void run() {
-//    	System.out.println("Red");
-//    	System.out.println(Red);
-
-        for (;;) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                System.out.println("Error: "+e.getLocalizedMessage());
-            }
-
-            //System.out.println(this.change());
-        }
-    }
 
     private int getSecs() {
 
@@ -188,25 +101,6 @@ public class TrafficLights implements Runnable{
         }
     }
 
-    public void start() {
-
-        runner = new Thread((Runnable) this);
-        runner.start();
-    }
-
-    /**
-     * used for testing the sequence
-     * @param args
-     */
-    public static void main(String[] args){
-        TrafficLights a = new TrafficLights();
-        a.run();
-<<<<<<< HEAD
-    }
-=======
-    }*/
-
-
  /**
   * Draw of Traffic Light. RGB used.
   * @param g
@@ -223,20 +117,9 @@ public class TrafficLights implements Runnable{
      }else {//Yellow
          R = 255; G=215; B=0;
      }
->>>>>>> working
 
-    /**
-     * Draw of Traffic Light. RGB used.
-     * @param g
-     */
-    protected static void doDrawing(Graphics2D g){
-        //AffineTransform old3 = g.getTransform();
-        //g.rotate(Math.toRadians(rotates),pos_x,pos_y);
-        g.setColor(new Color (R,G,B));
-        g.fillRect(pos_x, pos_y, width, length);
-<<<<<<< HEAD
-        //g.setTransform(old3);
-=======
+     	g.setColor(new Color (R,G,B));
+  		g.fillRect(pos_x, pos_y, width, length);
         g.setTransform(old3);
     }
 
@@ -287,7 +170,6 @@ public class TrafficLights implements Runnable{
 
     private long getDelay() {
         return delay;
->>>>>>> working
     }
 }
 
