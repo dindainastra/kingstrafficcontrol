@@ -21,6 +21,11 @@ public class TrafficLights extends JPanel implements Runnable{
     private final int GREEN_SECS = 30;
     private final int YellowReverse_SECS = 30;
     private TrafficLights resumeNextLight;
+    private boolean suspendRequest;
+    private int checkFirst;
+    private long delay;
+    private int signal;
+    private int numberOfWays;
 
 
     //set traffic light colour and shape
@@ -29,18 +34,22 @@ public class TrafficLights extends JPanel implements Runnable{
      * RGB values to be used for painting the GUI.
      * @param x_coordinate
      * @param y_coordinate
-     * @param RGB
      * @param rotation
      */
-    public TrafficLights(int x_coordinate, int y_coordinate, int RGB, int rotation){
+    public TrafficLights(int x_coordinate, int y_coordinate, int numberOfWays, int signal, int rotation, long delay){
         this.pos_x = x_coordinate;
         this.pos_y = y_coordinate;
         this.rotates = rotation;
-        this.currentColour = RGB;
+        this.signal = signal;
+        this.delay = delay;
+        this.numberOfWays = numberOfWays;
+        //this.currentColour = RGB;
     }
 
-    public void setNextLight(TrafficLights NextLight) {
+    public void setNextLight(TrafficLights NextLight, int first) {
+        this.checkFirst = first;
         resumeNextLight = NextLight;
+        System.out.println("Check Next Light sini "+resumeNextLight);
     } // end setOtherLight.
     /**
      * This method takes the initial state of the traffic lights (Red) and makes decisions accordingly
@@ -50,6 +59,7 @@ public class TrafficLights extends JPanel implements Runnable{
         switch (currentColour) {
             case Red:
                 currentColour = Yellow;
+                //this.checkSuspended();
                 //System.out.println("Yellow ");
                 break;
             case Yellow:
@@ -64,9 +74,35 @@ public class TrafficLights extends JPanel implements Runnable{
                 break;
             case YellowReverse:
                 currentColour = Red;
-                //System.out.println("Red");
+                //resumeNextLight.requestResume();
+                //this.requestSuspended();
         }
         return currentColour;
+    }
+
+    public void requestSuspended(){
+        suspendRequest = true;
+    }
+
+    private synchronized void checkSuspended()
+    {
+        if (!(checkFirst == 1)){
+            while (suspendRequest)
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+        }
+        //System.out.println(check + " Hi " + suspendRequest+ " Changing to "+currentColour + " while check: " + checkFirst);
+
+        checkFirst = 0;
+    }
+
+    public synchronized void requestResume()
+    {
+        suspendRequest = false;
+        notify();
     }
 
     public int getCurrentColour() {
@@ -141,6 +177,7 @@ public class TrafficLights extends JPanel implements Runnable{
  public void doDrawing(Graphics2D g){
         AffineTransform old3 = g.getTransform();
         g.rotate(Math.toRadians(rotates),pos_x,pos_y);
+
      int R, G, B;
      if (currentColour==Red){
          R = 255; G=0; B=0;
@@ -152,7 +189,6 @@ public class TrafficLights extends JPanel implements Runnable{
 
         g.setColor(new Color (R,G,B));
         g.fillRect(pos_x, pos_y, width, length);
-     System.out.format("masuk sini woy %d %d %d %d %d %d %d %n", pos_x, pos_y, width, length,R,G,B);
         g.setTransform(old3);
     }
 
@@ -164,19 +200,45 @@ public class TrafficLights extends JPanel implements Runnable{
 
     @Override
     public void run() {
-        for (;;) {
             try {
-                this.currentColour = change();
-                System.out.println("Changing to -"+currentColour);
-                repaint();
-                Thread.sleep(2000);
+                if(numberOfWays == 4){
+                    //signal will change after 16 if the traffic light is in a junction
+                    if(signal ==1){
+                        this.currentColour = 3;
+                    } else if(signal ==5 || signal ==9 || signal ==13){
+                        this.currentColour = 1;
+                    } else if(signal==3 || signal == 4 || signal ==16 || signal == 1){
+                        this.currentColour = change();
+                    }
+                    Thread.sleep(getDelay());
+                    if(signal == 16){
+                        signal = 1;
+                    } else {
+                        signal++;
+                    }
+                } else if (numberOfWays == 3) {
+                    //signal will change after 12 if the traffic light is in a three-way junction
+                    if(signal ==1){
+                        this.currentColour = 3;
+                    } else if(signal ==5 ||signal ==9){
+                        this.currentColour = 1;
+                    } else if(signal==3 || signal == 4 || signal ==12 || signal == 1){
+                        this.currentColour = change();
+                    }
+                    Thread.sleep(getDelay());
+                    if(signal == 12){
+                        signal = 1;
+                    } else {
+                        signal++;
+                    }
+                }
             } catch (InterruptedException e) {
                 System.out.println("Error: "+e.getLocalizedMessage());
             }
+    }
 
-            System.out.println(this.change());
-
-        }
+    private long getDelay() {
+        return delay;
     }
 }
 
