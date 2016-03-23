@@ -17,16 +17,15 @@ public class StraightRoad extends JPanel implements Terrain {
 
     //Set size of straight road
     //private int xStart,yStart, trafficlight, RGB1, RGB2, rotation;
-    private int xStart,yStart, trafficlight, rotation;
+    private int xStart,yStart, rotation;
     private int road_length = 100;
     private final int road_width = 100;
+    private Polygon poly,poly2;
 
     //private final TrafficLights trafficLight0, trafficLight1;
 
     // adding constructor to initialise road_length
     public StraightRoad(int x_Start, int y_Start, int rotation, int road_length){
-        //public StraightRoad(int x_Start, int y_Start, int trafficlight, int RGB1, int RGB2, int rotation, int road_length){
-        this.trafficlight = trafficlight;
         this.rotation = rotation;
         this.xStart = x_Start;
         this.yStart = y_Start;
@@ -43,41 +42,46 @@ public class StraightRoad extends JPanel implements Terrain {
 
     public void doDrawing(Graphics2D g){
         Graphics2D road=(Graphics2D) g;
-        Graphics2D lane_divider=(Graphics2D) g;
-        Graphics2D sroad_border=(Graphics2D) g;
-        Graphics2D arrows=(Graphics2D) g;
-        
+
         //draw straight road
         AffineTransform old = road.getTransform();
         road.rotate(Math.toRadians(rotation),xStart,yStart);
         road.setColor(Color.gray);
         road.fillRect(xStart, yStart, road_length , road_width);
-        
+
         //draw road divider
         float[] dash1 = {4f, 0f, 2f};
         float[] dash2 = {100f,0f};
         BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
         BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
-        
+
         //draw road border
-        sroad_border.setStroke(bs2);
-        sroad_border.setColor(Color.black);
-        sroad_border.drawLine(xStart,yStart,xStart+road_length-1,yStart);
-        sroad_border.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
-                
+        road.setStroke(bs2);
+        road.setColor(Color.black);
+        road.drawLine(xStart,yStart,xStart+road_length-1,yStart);
+        road.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
+
         //draw road lanes
-        lane_divider.setStroke(bs1);
-        lane_divider.setColor(Color.white);
+        road.setStroke(bs1);
+        road.setColor(Color.white);
         int y=yStart+(road_width);
-        lane_divider.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
+        road.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
 
-        lane_divider.setStroke(bs2);
-        lane_divider.setColor(Color.white);
-        lane_divider.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
+        road.setStroke(bs2);
+        road.setColor(Color.white);
+        road.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
 
-        lane_divider.setStroke(bs1);
-        lane_divider.setColor(Color.white);
-        lane_divider.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+        road.setStroke(bs1);
+        road.setColor(Color.white);
+        road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+
+//        int xPoly[] = {xStart+5, xStart+2, xStart+2};
+//        int yPoly[] = {yStart+road_width/2, yStart+road_width-5, yStart+5};
+
+//        if(road_end==10){
+  //      }
+
+
 
         // direction arrows
         /*arrows.setStroke(bs2);
@@ -91,7 +95,7 @@ public class StraightRoad extends JPanel implements Terrain {
         // traffic lights
         /*
         TrafficLights tl = new TrafficLights (xStart,  yStart+road_width/2,  RGB2, rotation);
-        
+
         Thread t = new Thread(tl);
         t.start();
         int ch =0;
@@ -157,7 +161,6 @@ public class StraightRoad extends JPanel implements Terrain {
         //draw road lanes
         road.setStroke(bs1);
         road.setColor(Color.white);
-        int y=yStart+(road_width);
         road.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
 
         road.setStroke(bs2);
@@ -169,6 +172,14 @@ public class StraightRoad extends JPanel implements Terrain {
         road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
 
         // direction arrows
+        int xPoly[] = {xStart+road_length-5, xStart+road_length-20, xStart+road_length-20};
+        int yPoly[] = {yStart+road_width/4, (yStart+road_width/4)+10, (yStart+road_width/4)-10};
+        int xPoly2[] = {xStart+5, xStart+20, xStart+20};
+        int yPoly2[] = {50+yStart+road_width/4, (yStart+road_width/4)+60, (yStart+road_width/4)+40};
+        poly = new Polygon(xPoly, yPoly, 3);
+        road.fillPolygon(poly);
+        poly2 = new Polygon(xPoly2, yPoly2, 3);
+        road.fillPolygon(poly2);
         /*arrows.setStroke(bs2);
         arrows.setColor(Color.black);
         arrows.drawLine(xStart+10,yStart+road_width/8,xStart+40,yStart+road_width/8);
