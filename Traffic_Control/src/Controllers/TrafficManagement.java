@@ -407,8 +407,8 @@ public class TrafficManagement extends JFrame {
     public void staticMapCreator(){
 
         //create FIRSTLY the entry and exit roads
-        aTerrainList.add(new StraightRoad(10,325,01,2,2,0,40));//entry road    //0
-        aTerrainList.add(new StraightRoad(1180,325,10,1,3,0,170));//exit road  //1
+        aTerrainList.add(new StraightRoad(10,325,0,40));//entry road    //0
+        aTerrainList.add(new StraightRoad(1180,325,0,170));//exit road  //1
 
         //next, create the rest map
 
@@ -418,22 +418,27 @@ public class TrafficManagement extends JFrame {
         aTerrainList.add(new CornerRoad(640,250,270,1));                        //4
         aTerrainList.add(new CornerRoad(640,250,360,1));                        //5
 
+
         //add horizontal road
         //Added another traffic light color parameter to SRoad
-        aTerrainList.add(new StraightRoad(150,325,11,2,2,0,500));               //6   <-----
-        aTerrainList.add(new StraightRoad(880,325,11,1,3,0,200));
-        aTerrainList.add(new StraightRoad(150,10,01,2,2,0,565));
-        aTerrainList.add(new StraightRoad(150,590,01,2,2,0,565));
-        aTerrainList.add(new StraightRoad(815,590,10,2,2,0,265));
-        aTerrainList.add(new StraightRoad(815,10,10,2,2,0,265));
+        aTerrainList.add(new StraightRoad(150,325,0,500));               //6   <-----
+        //aTerrainList.add(new StraightRoad(150,325,11,2,2,0,565));                 //6 with changed length according to junction in the center
+        aTerrainList.add(new StraightRoad(880,325,0,200));               // for round about
+        //aTerrainList.add(new StraightRoad(817,325,11,1,3,0,265));                 // for square junction
+        aTerrainList.add(new StraightRoad(150,10,0,565));
+        aTerrainList.add(new StraightRoad(150,590,0,565));
+        aTerrainList.add(new StraightRoad(815,590,0,265));
+        aTerrainList.add(new StraightRoad(815,10,0,265));
 
         //add vertical roads
-        aTerrainList.add(new StraightRoad(815,110,11,1,1,90,150));              //12
-        aTerrainList.add(new StraightRoad(815,490,11,2,2,90,101));
-        aTerrainList.add(new StraightRoad(150,110,01,2,2,90,215));              //14
-        aTerrainList.add(new StraightRoad(150,425,10,2,2,90,165));
-        aTerrainList.add(new StraightRoad(1180,425,10,2,2,90,165));
-        aTerrainList.add(new StraightRoad(1180,110,01,2,2,90,215));
+        aTerrainList.add(new StraightRoad(815,110,90,150));              //12 for round about
+        //aTerrainList.add(new StraightRoad(815,110,11,1,1,90,215));                // 12 for square junction
+        aTerrainList.add(new StraightRoad(815,490,90,101));              //for round about
+        //aTerrainList.add(new StraightRoad(815,426,11,2,2,90,165));                // for sqaure junction
+        aTerrainList.add(new StraightRoad(150,110,90,215));              //14
+        aTerrainList.add(new StraightRoad(150,425,90,165));
+        aTerrainList.add(new StraightRoad(1180,425,90,165));
+        aTerrainList.add(new StraightRoad(1180,110,90,215));
 
         //add curved roads
         aTerrainList.add(new CornerRoad(980,10,360,0));
@@ -445,8 +450,12 @@ public class TrafficManagement extends JFrame {
         //add junctions
         aTerrainList.add(new SquareJunction(1080,325));
         aTerrainList.add(new SquareJunction(50,325));
-        aTerrainList.add(new SquareJunction(715,590));
-        aTerrainList.add(new SquareJunction(715,10));
+        aTerrainList.add(new SquareJunction(715,590,4));
+        aTerrainList.add(new SquareJunction(715,10,3));
+
+        //square junction in the center
+        //aTerrainList.add(new SquareJunction(715,325));
+
 
     }
 
@@ -458,18 +467,21 @@ public class TrafficManagement extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 frame = new JFrame();
-
                 frame.setLayout(new BorderLayout());
-                frame.add(new Buttons(), BorderLayout.PAGE_END);
-                frame.add(new Slider(), BorderLayout.EAST);
+                //frame.add(new Buttons(), BorderLayout.PAGE_END);
+                Buttons buttons=new Buttons();
+                buttons.setPreferredSize(new Dimension(100,50));
+                frame.add(buttons,BorderLayout.SOUTH);
+                Slider slider=new Slider();
+                slider.setPreferredSize(new Dimension(250,0));
+                frame.add(slider,BorderLayout.EAST);
+                //frame.pack();
                 frame.add(aDraw, BorderLayout.CENTER);
-
-                //frame.add();
-                //frame.setLayout(gd);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.pack();
                 frame.setVisible(true);
-                frame.setSize(1500, 1000);
+                /*frame.setSize(1500, 1000);*/
+                frame.setSize(1400, 700);
+                frame.setResizable ( false );
             }
         });
     }
