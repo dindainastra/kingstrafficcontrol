@@ -1,6 +1,12 @@
 
 package Objects;
 
+<<<<<<< HEAD
+=======
+//import org.junit.internal.runners.statements.RunAfters;
+
+import javax.swing.*;
+>>>>>>> working
 import java.awt.*;
 
 public class TrafficLights implements Runnable{
@@ -13,11 +19,24 @@ public class TrafficLights implements Runnable{
     public static final int Green = 3;
     public static final int YellowReverse = 4;
     private int currentColour = Red;
+<<<<<<< HEAD
     private final static int RED_SECS = 30;
     private final static int YELLOW_SECS = 30;
     private final static int GREEN_SECS = 30;
     private final static int YellowReverse_SECS = 30;
     private Thread runner;
+=======
+    private final int RED_SECS = 30;
+    private final int YELLOW_SECS = 30;
+    private final int GREEN_SECS = 30;
+    private final int YellowReverse_SECS = 30;
+    private TrafficLights resumeNextLight;
+    private boolean suspendRequest;
+    private int checkFirst;
+    private long delay;
+    private int signal;
+    private int numberOfWays;
+>>>>>>> working
 
 
     //set traffic light colour and shape
@@ -26,9 +45,9 @@ public class TrafficLights implements Runnable{
      * RGB values to be used for painting the GUI.
      * @param x_coordinate
      * @param y_coordinate
-     * @param RGB
      * @param rotation
      */
+<<<<<<< HEAD
     public TrafficLights(int x_coordinate, int y_coordinate, int RGB, int rotation){
         super();
         this.pos_x = x_coordinate;
@@ -49,10 +68,28 @@ public class TrafficLights implements Runnable{
             R = 255; G=215; B=0;
         }
 
+=======
+    public TrafficLights(int x_coordinate, int y_coordinate, int numberOfWays, int signal, int rotation, long delay){
+        this.pos_x = x_coordinate;
+        this.pos_y = y_coordinate;
+        this.rotates = rotation;
+        this.signal = signal;
+        this.delay = delay;
+        this.numberOfWays = numberOfWays;
+        //this.currentColour = RGB;
+>>>>>>> working
     }
     public TrafficLights(){
 
+<<<<<<< HEAD
     }
+=======
+    public void setNextLight(TrafficLights NextLight, int first) {
+        this.checkFirst = first;
+        resumeNextLight = NextLight;
+        System.out.println("Check Next Light sini "+resumeNextLight);
+    } // end setOtherLight.
+>>>>>>> working
     /**
      * This method takes the initial state of the traffic lights (Red) and makes decisions accordingly
      * @return
@@ -61,6 +98,7 @@ public class TrafficLights implements Runnable{
         switch (currentColour) {
             case Red:
                 currentColour = Yellow;
+                //this.checkSuspended();
                 //System.out.println("Yellow ");
                 break;
             case Yellow:
@@ -75,9 +113,35 @@ public class TrafficLights implements Runnable{
                 break;
             case YellowReverse:
                 currentColour = Red;
-                //System.out.println("Red");
+                //resumeNextLight.requestResume();
+                //this.requestSuspended();
         }
         return currentColour;
+    }
+
+    public void requestSuspended(){
+        suspendRequest = true;
+    }
+
+    private synchronized void checkSuspended()
+    {
+        if (!(checkFirst == 1)){
+            while (suspendRequest)
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+        }
+        //System.out.println(check + " Hi " + suspendRequest+ " Changing to "+currentColour + " while check: " + checkFirst);
+
+        checkFirst = 0;
+    }
+
+    public synchronized void requestResume()
+    {
+        suspendRequest = false;
+        notify();
     }
 
     public int getCurrentColour() {
@@ -137,7 +201,29 @@ public class TrafficLights implements Runnable{
     public static void main(String[] args){
         TrafficLights a = new TrafficLights();
         a.run();
+<<<<<<< HEAD
     }
+=======
+    }*/
+
+
+ /**
+  * Draw of Traffic Light. RGB used.
+  * @param g
+  */
+ public void doDrawing(Graphics2D g){
+        AffineTransform old3 = g.getTransform();
+        g.rotate(Math.toRadians(rotates),pos_x,pos_y);
+
+     int R, G, B;
+     if (currentColour==Red){
+         R = 255; G=0; B=0;
+     }else if (currentColour==Green){
+         R = 0; G=255; B=0;
+     }else {//Yellow
+         R = 255; G=215; B=0;
+     }
+>>>>>>> working
 
     /**
      * Draw of Traffic Light. RGB used.
@@ -148,7 +234,60 @@ public class TrafficLights implements Runnable{
         //g.rotate(Math.toRadians(rotates),pos_x,pos_y);
         g.setColor(new Color (R,G,B));
         g.fillRect(pos_x, pos_y, width, length);
+<<<<<<< HEAD
         //g.setTransform(old3);
+=======
+        g.setTransform(old3);
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+        doDrawing((Graphics2D)g);
+    }
+
+
+    @Override
+    public void run() {
+            try {
+                if(numberOfWays == 4){
+                    //signal will change after 16 if the traffic light is in a junction
+                    if(signal ==1){
+                        this.currentColour = 3;
+                    } else if(signal ==5 || signal ==9 || signal ==13){
+                        this.currentColour = 1;
+                    } else if(signal==3 || signal == 4 || signal ==16 || signal == 1){
+                        this.currentColour = change();
+                    }
+                    Thread.sleep(getDelay());
+                    if(signal == 16){
+                        signal = 1;
+                    } else {
+                        signal++;
+                    }
+                } else if (numberOfWays == 3) {
+                    //signal will change after 12 if the traffic light is in a three-way junction
+                    if(signal ==1){
+                        this.currentColour = 3;
+                    } else if(signal ==5 ||signal ==9){
+                        this.currentColour = 1;
+                    } else if(signal==3 || signal == 4 || signal ==12 || signal == 1){
+                        this.currentColour = change();
+                    }
+                    Thread.sleep(getDelay());
+                    if(signal == 12){
+                        signal = 1;
+                    } else {
+                        signal++;
+                    }
+                }
+            } catch (InterruptedException e) {
+                System.out.println("Error: "+e.getLocalizedMessage());
+            }
+    }
+
+    private long getDelay() {
+        return delay;
+>>>>>>> working
     }
 }
 
