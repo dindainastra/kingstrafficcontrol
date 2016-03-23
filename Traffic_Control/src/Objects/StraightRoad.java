@@ -177,9 +177,9 @@ public class StraightRoad extends JPanel implements Terrain {
         int xPoly2[] = {xStart+5, xStart+20, xStart+20};
         int yPoly2[] = {50+yStart+road_width/4, (yStart+road_width/4)+60, (yStart+road_width/4)+40};
         poly = new Polygon(xPoly, yPoly, 3);
-        road.fillPolygon(poly);
+        road.drawPolygon(poly);
         poly2 = new Polygon(xPoly2, yPoly2, 3);
-        road.fillPolygon(poly2);
+        road.drawPolygon(poly2);
         /*arrows.setStroke(bs2);
         arrows.setColor(Color.black);
         arrows.drawLine(xStart+10,yStart+road_width/8,xStart+40,yStart+road_width/8);
