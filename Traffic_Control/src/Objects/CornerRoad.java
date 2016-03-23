@@ -1,6 +1,8 @@
 
 package Objects;
 
+import Controllers.TrafficManagement;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Arc2D;
@@ -14,13 +16,14 @@ public class CornerRoad extends JPanel implements Terrain{
     private ArrayList<Terrain> previousTerrainList;
     private ArrayList<Object> forwardListFlow;
     private ArrayList<Object> backwardListFlow;
+    private TrafficManagement trafficManagement;
 
     //Set size of straight road
     private int xStart,yStart;
     private final int arc_angle = 90;
     private int start_angle, road_width = 200, type;
 
-    public CornerRoad(int x_Start, int y_Start, int start_angle, int type){
+    public CornerRoad(int x_Start, int y_Start, int start_angle, int type, TrafficManagement trafficManagement){
         this.start_angle = start_angle;
         this.xStart = x_Start;
         this.yStart = y_Start;
@@ -32,6 +35,7 @@ public class CornerRoad extends JPanel implements Terrain{
         previousTerrainList  = new ArrayList<Terrain>();
         forwardListFlow = new ArrayList<Object>();
         backwardListFlow = new ArrayList<Object>();
+        this.trafficManagement = trafficManagement;
     }
 
     public void doDrawing(Graphics2D g){
@@ -76,6 +80,7 @@ public class CornerRoad extends JPanel implements Terrain{
             lane_divider.setColor(Color.white);
             lane_divider.draw(new Arc2D.Double(xStart+40,yStart+40,road_width-(road_width/3),road_width-(road_width/3),start_angle,arc_angle,Arc2D.OPEN));
         }
+
     }
 
     public void paintComponent(Graphics gr){
@@ -121,6 +126,13 @@ public class CornerRoad extends JPanel implements Terrain{
             lane_divider.setColor(Color.white);
             lane_divider.draw(new Arc2D.Double(xStart+40,yStart+40,road_width-(road_width/3),road_width-(road_width/3),start_angle,arc_angle,Arc2D.OPEN));
         }
+
+
+        Color textColor = Color.PINK;
+        g.setColor(textColor);  //greg
+
+        g.drawString(String.valueOf(this.trafficManagement.getTerrainList().indexOf(this)), xStart, yStart); //greg
+
     }
 
 
@@ -191,8 +203,9 @@ public class CornerRoad extends JPanel implements Terrain{
 
     @Override
     public void removeVehicleFromList(Vehicle v) {
-        this.forwardListFlow.remove(v);  //if exists here it removes it from here
-        this.backwardListFlow.remove(v); //if not, the forwardListFlow is like it is, and the vehicle is removed from the second and vise versa
+        this.forwardListFlow.remove(v);     //if exists here it removes it from here
+        this.backwardListFlow.remove(v);    //if not, the forwardListFlow is like it is, and the vehicle is removed
+                                            //from the second and vise versa
     }
 
     @Override
@@ -203,6 +216,11 @@ public class CornerRoad extends JPanel implements Terrain{
     @Override
     public int getYStart() {
         return 0;
+    }
+
+    @Override
+    public int getRotation() {
+        return this.arc_angle;
     }
 
     public int getcornerLength(){

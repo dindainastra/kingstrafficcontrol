@@ -42,8 +42,8 @@ public class Slider extends JPanel {
         congestionSlider = new JSlider();
         speedLimitSlider = new JSlider();
         //Create JComboBox
-        weatherComboBox = new JComboBox<>();
-        emergencyComboBox = new JComboBox<>();
+        weatherComboBox = new JComboBox();
+        emergencyComboBox = new JComboBox();
 
         //create temp time text for later use (real time)
         time.setText("time");
@@ -92,8 +92,8 @@ public class Slider extends JPanel {
         speedLimitLabel.setText("Speed Limit Option:");
 
         //add(congestionLabel);
-        weatherComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "Normal", "Hazardous", "Night", "Day" }));
-        emergencyComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3" }));
+        weatherComboBox.setModel(new DefaultComboBoxModel(new String[] { "Normal", "Hazardous", "Night", "Day" }));
+        emergencyComboBox.setModel(new DefaultComboBoxModel(new String[] { "0", "1", "2", "3" }));
 
         gd=new GridLayout(12,0);
         this.setLayout(gd);

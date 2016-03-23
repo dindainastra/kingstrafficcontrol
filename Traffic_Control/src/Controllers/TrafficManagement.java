@@ -50,7 +50,7 @@ public class TrafficManagement extends JFrame {
         //
         // initComponents();
 
-        run();
+
 
     }
 
@@ -101,8 +101,7 @@ public class TrafficManagement extends JFrame {
     
     public void run(){
 
-        createPersons(1);
-
+        createPersons(10);
         createVehicles();
 
         staticMapCreator();
@@ -126,7 +125,7 @@ public class TrafficManagement extends JFrame {
 
     public void run(int foo){
 
-        createPersons(20);
+        createPersons(foo);
 
         createVehicles();
 
@@ -159,25 +158,12 @@ public class TrafficManagement extends JFrame {
      */
     public void start(){
 
-        executor = Executors.newFixedThreadPool(aTerrainList.size()*2);
-        for(Terrain t : aTerrainList){
-            try {
-                runnableArrayList.add(new CarFlow(t, map, 1,this));
-                runnableArrayList.add(new CarFlow(t, map, 0,this));
-            } catch(NullPointerException e){
-                 System.out.println("Error: "+e.getLocalizedMessage());
-            }
+        for (Terrain t : aTerrainList){
+            new Thread(new CarFlow(t,map,1,this)).start();
+            new Thread(new CarFlow(t,map,0,this)).start();
         }
-
-        for (int i=0; i<(aTerrainList.size()*2);i++) {
-            System.out.println("step "+i);
-            for (Runnable worker : runnableArrayList)
-                executor.execute(worker);
-
-        }
-        
         System.out.println("Finished all threads");
-    	
+
     }
 
 
@@ -185,9 +171,9 @@ public class TrafficManagement extends JFrame {
         for (Person p : aPersonList) {
             if (!p.isPedestrian()) {
                 if (new Random().nextBoolean())
-                    aVehicleList.add(new Car(p, 0, 330));
+                    aVehicleList.add(new Car(p, 0,330));
                 else
-                    aVehicleList.add(new Car(p, 1180, 330));
+                    aVehicleList.add(new Car(p, 1350, 405));
             }
         }
     }
@@ -207,77 +193,13 @@ public class TrafficManagement extends JFrame {
     }
 
     public void initializeStaticTrafficLights(){
-        TrafficLights firstTL = new TrafficLights(150,375,1,0);
-        TrafficLights secondTL = new TrafficLights(50,325,2,0);
-        TrafficLights thirdTL = new TrafficLights(150,325,3,90);
-        TrafficLights fourthTL = new TrafficLights(100,425,4,90);
-        TrafficLights fifthTL = new TrafficLights(650,325,3,0);
-        TrafficLights sixthTL = new TrafficLights(1080,325,1,0);
-        TrafficLights seventhTL = new TrafficLights(1180,375,2,0);
-        TrafficLights eighthTL = new TrafficLights(880,375,3,0);
-        TrafficLights ninthTL = new TrafficLights(715,10,1,0);
-        TrafficLights tenthTL = new TrafficLights(715,590,2,0);
-        TrafficLights eleventhTL = new TrafficLights(815,640,3,0);
-        TrafficLights twelfthTL = new TrafficLights(815,60,1,0);
-        TrafficLights thirteenthTL = new TrafficLights(1180,325,1,90);
-        TrafficLights fourteenthTL = new TrafficLights(1130,425,2,90);
-        TrafficLights fifteenTL = new TrafficLights(815,260,3,90);
-        TrafficLights sixteenthTL = new TrafficLights(765,490,1,90);
-        TrafficLights seventeenthTL = new TrafficLights(815,590,2,90);
-        TrafficLights eighteenthTL = new TrafficLights(765,110,3,90);
-        //TrafficLights secondTL = new TrafficLights(880,375,1,1);
-        //TrafficLights thirdTL = new TrafficLights(245,10,2,1);
-        //aTerrainList.add(new StraightRoad(150,10,01,2,2,0,565));
-        //aTerrainList.add(new StraightRoad(150,590,01,2,2,0,565));
-        //aTerrainList.add(new StraightRoad(815,590,10,2,2,0,265));
-        //aTerrainList.add(new StraightRoad(815,10,10,2,2,0,265));
-
-        /*
-        * Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                //
-                //                //for (;;) {
-                //                    try {
-                //                        Thread.sleep(2000);
-                //                    } catch (InterruptedException e) {
-                //                        System.out.println("Error: "+e.getLocalizedMessage());
-                //                    }
-                //                    trafficLight.change();
-                //                //}
-            }
-        });
-        thread.start();
-        *
-        * */
 
         int whichRoad = 0;
         // direction ---->
-        aTerrainList.get(6).setBackwardListFlow(firstTL);
-        aTerrainList.get(0).setForwardListFlow(secondTL);
-        aTerrainList.get(14).setBackwardListFlow(thirdTL); //down
-        aTerrainList.get(15).setForwardListFlow(fourthTL);
-        aTerrainList.get(6).setForwardListFlow(fifthTL);
-        aTerrainList.get(7).setForwardListFlow(sixthTL);
-        aTerrainList.get(1).setForwardListFlow(seventhTL);
-        aTerrainList.get(7).setBackwardListFlow(eighthTL);
-        aTerrainList.get(8).setForwardListFlow(ninthTL);
-        aTerrainList.get(9).setForwardListFlow(tenthTL);
-        aTerrainList.get(10).setBackwardListFlow(eleventhTL);
-        aTerrainList.get(11).setBackwardListFlow(twelfthTL);
-        aTerrainList.get(17).setForwardListFlow(thirteenthTL); //down
-        aTerrainList.get(16).setForwardListFlow(fourteenthTL); //up
-        aTerrainList.get(12).setForwardListFlow(fifteenTL);//down
-        aTerrainList.get(13).setForwardListFlow(sixteenthTL);//up
-        aTerrainList.get(13).setBackwardListFlow(seventeenthTL);//down
-        aTerrainList.get(12).setBackwardListFlow(eighteenthTL);//up
-
-
-
-
+        aTerrainList.get(whichRoad).setForwardListFlow(new TrafficLights());
         //or
         // direction <----
-        //aTerrainList.get(whichRoad).setBackwardListFlow(new TrafficLights());
+        aTerrainList.get(whichRoad).setBackwardListFlow(new TrafficLights());
 
         /*
         the whichRoad variable is actually the road by the static network
@@ -361,22 +283,22 @@ public class TrafficManagement extends JFrame {
 
         this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(1));
         this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(7));
-        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(16));
         this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(17));
+        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(16));
 
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(6));
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(0));
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(14));
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(15));
 
-        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(9));
         this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(10));
+        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(9));
         this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(13));
 
         this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(11));
         this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(12));
         this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(8));
-        
+
     }
     
     public void initializeRandomTrafficLights(){
@@ -386,46 +308,46 @@ public class TrafficManagement extends JFrame {
     public void staticMapCreator(){
 
         //create FIRSTLY the entry and exit roads
-        aTerrainList.add(new StraightRoad(10,325,01,2,2,0,40));//entry road    //0
-        aTerrainList.add(new StraightRoad(1180,325,10,1,3,0,170));//exit road  //1
+        aTerrainList.add(new StraightRoad(10,325,01,2,2,0,40,this));//entry road    //0
+        aTerrainList.add(new StraightRoad(1180,325,10,1,3,0,170,this));//exit road  //1
 
         //next, create the rest map
 
         //add roundabout
-        aTerrainList.add(new CornerRoad(640,250,90,1));                         //2
-        aTerrainList.add(new CornerRoad(640,250,180,1));                        //3
-        aTerrainList.add(new CornerRoad(640,250,270,1));                        //4
-        aTerrainList.add(new CornerRoad(640,250,360,1));                        //5
+        aTerrainList.add(new CornerRoad(640,250,90,1,this));                         //2
+        aTerrainList.add(new CornerRoad(640,250,180,1,this));                        //3
+        aTerrainList.add(new CornerRoad(640,250,270,1,this));                        //4
+        aTerrainList.add(new CornerRoad(640,250,360,1,this));                        //5
 
         //add horizontal road
         //Added another traffic light color parameter to SRoad
-        aTerrainList.add(new StraightRoad(150,325,11,2,2,0,500));               //6   <-----
-        aTerrainList.add(new StraightRoad(880,325,11,1,3,0,200));
-        aTerrainList.add(new StraightRoad(150,10,01,2,2,0,565));
-        aTerrainList.add(new StraightRoad(150,590,01,2,2,0,565));
-        aTerrainList.add(new StraightRoad(815,590,10,2,2,0,265));
-        aTerrainList.add(new StraightRoad(815,10,10,2,2,0,265));
+        aTerrainList.add(new StraightRoad(150,325,11,2,2,0,500,this));               //6   <-----
+        aTerrainList.add(new StraightRoad(880,325,11,1,3,0,200,this));
+        aTerrainList.add(new StraightRoad(150,10,01,2,2,0,565,this));
+        aTerrainList.add(new StraightRoad(150,590,01,2,2,0,565,this));
+        aTerrainList.add(new StraightRoad(815,590,10,2,2,0,265,this));
+        aTerrainList.add(new StraightRoad(815,10,10,2,2,0,265,this));
 
         //add vertical roads
-        aTerrainList.add(new StraightRoad(815,110,11,1,1,90,150));              //12
-        aTerrainList.add(new StraightRoad(815,490,11,2,2,90,101));
-        aTerrainList.add(new StraightRoad(150,110,01,2,2,90,215));              //14
-        aTerrainList.add(new StraightRoad(150,425,10,2,2,90,165));
-        aTerrainList.add(new StraightRoad(1180,425,10,2,2,90,165));
-        aTerrainList.add(new StraightRoad(1180,110,01,2,2,90,215));
+        aTerrainList.add(new StraightRoad(815,110,11,1,1,90,150,this));              //12
+        aTerrainList.add(new StraightRoad(815,490,11,2,2,90,101,this));
+        aTerrainList.add(new StraightRoad(150,110,01,2,2,90,215,this));              //14
+        aTerrainList.add(new StraightRoad(150,425,10,2,2,90,165,this));
+        aTerrainList.add(new StraightRoad(1180,425,10,2,2,90,165,this));
+        aTerrainList.add(new StraightRoad(1180,110,01,2,2,90,215,this));
 
         //add curved roads
-        aTerrainList.add(new CornerRoad(980,10,360,0));
-        aTerrainList.add(new CornerRoad(980,490,270,0));
-        aTerrainList.add(new CornerRoad(50,10,90,0));
-        aTerrainList.add(new CornerRoad(50,490,180,0));
+        aTerrainList.add(new CornerRoad(980,10,360,0,this));                         //18
+        aTerrainList.add(new CornerRoad(980,490,270,0,this));                        //19
+        aTerrainList.add(new CornerRoad(50,10,90,0,this));                           //20
+        aTerrainList.add(new CornerRoad(50,490,180,0,this));                         //21
         //aTerrainList.add(new CornerRoad(300,75,90));
 
         //add junctions
-        aTerrainList.add(new SquareJunction(1080,325));
-        aTerrainList.add(new SquareJunction(50,325));
-        aTerrainList.add(new SquareJunction(715,590));
-        aTerrainList.add(new SquareJunction(715,10));
+        aTerrainList.add(new SquareJunction(1080,325,this));
+        aTerrainList.add(new SquareJunction(50,325,this));                           //23
+        aTerrainList.add(new SquareJunction(715,590,this));
+        aTerrainList.add(new SquareJunction(715,10,this));
 
     }
 
@@ -453,4 +375,9 @@ public class TrafficManagement extends JFrame {
         });
     }
 
+    public Terrain yourTerrain(Car car){
+
+
+        return null;
+    }
 }
