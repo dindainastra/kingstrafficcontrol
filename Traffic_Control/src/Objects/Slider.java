@@ -38,7 +38,7 @@ public class Slider extends JPanel{
         roadNetworkLabel = new JLabel();
         speedLimitLabel = new JLabel();
         //Create JSlider
-        timeIntervalSlider = new JSlider();
+        timeIntervalSlider = new JSlider(0,5000);
         congestionSlider = new JSlider();
         speedLimitSlider = new JSlider();
         //Create JComboBox
@@ -47,8 +47,8 @@ public class Slider extends JPanel{
         congestionComboBox = new JComboBox<>();
 
         //slider interface for time interval and congestion rate
-        timeIntervalSlider.setMajorTickSpacing(20);
-        timeIntervalSlider.setMinorTickSpacing(10);
+        timeIntervalSlider.setMajorTickSpacing(1000);
+        timeIntervalSlider.setMinorTickSpacing(500);
         timeIntervalSlider.setPaintLabels(true);
         timeIntervalSlider.setPaintTicks(true);
         timeIntervalSlider.setBorder(BorderFactory.createEmptyBorder(0,10,0,10));

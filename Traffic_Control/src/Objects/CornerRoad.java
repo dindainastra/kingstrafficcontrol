@@ -19,6 +19,7 @@ public class CornerRoad extends JPanel implements Terrain{
     private int xStart,yStart;
     private final int arc_angle = 90;
     private int start_angle, road_width = 200, type;
+    private Polygon poly;
 
     public CornerRoad(int x_Start, int y_Start, int start_angle, int type){
         this.start_angle = start_angle;
@@ -120,6 +121,10 @@ public class CornerRoad extends JPanel implements Terrain{
             road.setStroke(bs1);
             road.setColor(Color.white);
             road.draw(new Arc2D.Double(xStart+40,yStart+40,road_width-(road_width/3),road_width-(road_width/3),start_angle,arc_angle,Arc2D.OPEN));
+            int xPoly[] = {xStart+40, xStart+30, xStart+50};
+            int yPoly[] = {yStart+110, yStart+125,yStart+125 };
+            poly = new Polygon(xPoly, yPoly, 3);
+            road.fillPolygon(poly);
         }
     }
 
