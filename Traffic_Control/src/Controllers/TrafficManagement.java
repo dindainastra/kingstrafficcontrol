@@ -472,19 +472,18 @@ public class TrafficManagement extends JFrame {
             public void run() {
                 frame = new JFrame();
                 frame.setLayout(new BorderLayout());
-<<<<<<< HEAD
+
                 frame.add(new Buttons(), BorderLayout.PAGE_END);
                 frame.add(new Slider(TrafficManagement.this), BorderLayout.EAST);
-=======
+
                 //frame.add(new Buttons(), BorderLayout.PAGE_END);
                 Buttons buttons=new Buttons();
                 buttons.setPreferredSize(new Dimension(100,50));
                 frame.add(buttons,BorderLayout.SOUTH);
-                Slider slider=new Slider();
+                Slider slider=new Slider(TrafficManagement.this);
                 slider.setPreferredSize(new Dimension(250,0));
                 frame.add(slider,BorderLayout.EAST);
                 //frame.pack();
->>>>>>> working
                 frame.add(aDraw, BorderLayout.CENTER);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
