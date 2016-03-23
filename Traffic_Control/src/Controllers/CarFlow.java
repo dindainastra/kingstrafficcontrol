@@ -106,21 +106,21 @@ public class CarFlow implements Runnable {
 
                         //c.move(sRoad.getxStart(), sRoad.getYStart(), roadSteps);
                     } else {
-                        System.out.println("Else "+o.toString());
+                        //System.out.println("Else "+o.toString());
                         final TrafficLights tLOne = (TrafficLights)o;
-//                        Thread t = new Thread(tLOne);
-//                        t.start();
+                        Thread t = new Thread(tLOne);
+                        t.start();
 
-                        timerTraffic.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                tLOne.change();
-                                //SET DELAY BEFORE NEXT CAR STARTS
-                                map.repaint();
-
-                            }
-                        });
-                        timerTraffic.start();
+//                        timerTraffic.addActionListener(new ActionListener() {
+//                            @Override
+//                            public void actionPerformed(ActionEvent e) {
+//                                tLOne.change();
+//                                //SET DELAY BEFORE NEXT CAR STARTS
+//                                map.repaint();
+//
+//                            }
+//                        });
+//                        timerTraffic.start();
                     }
                 }
             } else {
@@ -132,7 +132,7 @@ public class CarFlow implements Runnable {
 
                         // TODO: 16/03/2016 here should be the timer, and when timer stops run the following
                         moveThisVehicleToTheNextCorrectStack((Vehicle) o);
-                        System.out.println("Runner vehicle Backwards");
+                        //System.out.println("Runner vehicle Backwards");
                     } else {
 
                     }
@@ -177,10 +177,10 @@ public class CarFlow implements Runnable {
 
             try {
                 v.getPerson().setMyPreviousTerrainPosition(this.aTerrain);
-                System.out.println("Flow: " +this.flowDirection + " Delete "+v.toString()
+                /*System.out.println("Flow: " +this.flowDirection + " Delete "+v.toString()
                             + " from Node: " + trafficManagement.getTerrainList().indexOf(this.aTerrain)
                             + " and move to Node: " + this.trafficManagement.getTerrainList().indexOf(aTerrain.getNeighboursTerrainList().get(decision))
-                            + " and worker is: " + threadName);
+                            + " and worker is: " + threadName);*/
             } catch (Exception e){
                 System.out.println("Thread: "+ threadName + " cant removed!");
             }
@@ -191,7 +191,7 @@ public class CarFlow implements Runnable {
     }
 
     public void printALL(){
-        System.out.println(Thread.currentThread().getName());
+        //System.out.println(Thread.currentThread().getName());
     }    
     
     private void objectStraightRoad(final Car car, final StraightRoad road){
@@ -202,7 +202,7 @@ public class CarFlow implements Runnable {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Boolean stop = false;
-                System.out.println("Straight road. Direction is "+directionPath);
+                //System.out.println("Straight road. Direction is "+directionPath);
 
                 //Road should say if Y++ of X
                 car.move(directionPath);
@@ -231,11 +231,11 @@ public class CarFlow implements Runnable {
                 Boolean stop = false;
 
                 if(terrain instanceof CornerRoad) {
-                    System.out.println("Corner road");
+                    //System.out.println("Corner road");
                     car.turn("Left"); //Pass in direction path
                     //car.turn("Right");
                 }else{ //Square junction
-                    System.out.println("Square junction");
+                    //System.out.println("Square junction");
 
                     //Scenario 1 - Turn left
                     //Turn
@@ -372,13 +372,6 @@ Yellow = 3
                 return false;
 
         }
-
-    }
-
-    public void startTraffic(){
-        final TrafficLights tLOne = (TrafficLights)this.aTerrain.getForwardListFlow().get(0);
-        Thread t = new Thread(tLOne);
-        t.start();
 
     }
 
