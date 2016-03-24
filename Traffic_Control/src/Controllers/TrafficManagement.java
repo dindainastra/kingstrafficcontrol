@@ -444,4 +444,5 @@ public class TrafficManagement extends JFrame {
         this.timeGranularity = timeGranularity;
     }
 
+
 }
