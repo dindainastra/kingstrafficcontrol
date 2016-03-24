@@ -26,6 +26,7 @@ public class TrafficManagement extends JFrame {
     private ExecutorService executor;
     private ArrayList<Runnable> runnableArrayList = new ArrayList<Runnable>();
     private int timeGranularity;
+    private int trafficLightsDelay;
 
     GridLayout gd=new GridLayout(0,2);
 
@@ -196,7 +197,7 @@ public class TrafficManagement extends JFrame {
     }
 
     public void initializeStaticTrafficLights(){
-
+    	//normal delay of trafficlights is 3000
         //junction25
         TrafficLights ninthTL = new TrafficLights(715,10,3,1,0,3000);
         TrafficLights twelfthTL = new TrafficLights(815,60,3,9,0,3000);
@@ -443,5 +444,15 @@ public class TrafficManagement extends JFrame {
     public void setTimeGranularity(int timeGranularity) {
         this.timeGranularity = timeGranularity;
     }
+
+
+	public int getTrafficLightsDelay() {
+		return trafficLightsDelay;
+	}
+
+
+	public void setTrafficLightsDelay(int trafficLightsDelay) {
+		this.trafficLightsDelay = trafficLightsDelay;
+	}
 
 }
