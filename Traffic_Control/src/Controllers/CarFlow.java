@@ -1,3 +1,4 @@
+
 package Controllers;
 
 import Objects.Draw;
@@ -64,7 +65,7 @@ public class CarFlow implements Runnable {
             car.move(dir);
             map.repaint();
             try {
-                Thread.sleep(trafficManagement.getTimeGranularity());
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -77,7 +78,7 @@ public class CarFlow implements Runnable {
             car.move(dir);
             map.repaint();
             try {
-                Thread.sleep(trafficManagement.getTimeGranularity());
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -586,7 +587,7 @@ public class CarFlow implements Runnable {
             map.repaint();
             System.out.println("moving dirJunction: "+dirJunction);
             try {
-                Thread.sleep(trafficManagement.getTimeGranularity());
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -602,7 +603,7 @@ public class CarFlow implements Runnable {
             map.repaint();
             System.out.println("moving dir: "+dir);
             try {
-                Thread.sleep(trafficManagement.getTimeGranularity());
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -625,7 +626,7 @@ public class CarFlow implements Runnable {
             map.repaint();
             System.out.println("moving dirJunction: "+dirJunction);
             try {
-                Thread.sleep(trafficManagement.getTimeGranularity());
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -641,7 +642,7 @@ public class CarFlow implements Runnable {
             map.repaint();
             System.out.println("moving dir: "+dir);
             try {
-                Thread.sleep(trafficManagement.getTimeGranularity());
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -899,4 +900,5 @@ Yellow = 3
 //      System.out.println(Thread.currentThread().getName() + " Ended");
 
     }
+
 }
