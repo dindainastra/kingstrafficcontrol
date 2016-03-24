@@ -375,12 +375,12 @@ public class TrafficManagement extends JFrame {
         aTerrainList.add(new StraightRoad(815,10,0,265,this));
 
         //add vertical roads
-        aTerrainList.add(new StraightRoad(815,110,90,150,this));              //12
-        aTerrainList.add(new StraightRoad(815,490,90,101,this));
-        aTerrainList.add(new StraightRoad(150,110,90,215,this));              //14
-        aTerrainList.add(new StraightRoad(150,425,90,165,this));
-        aTerrainList.add(new StraightRoad(1180,425,90,165,this));
-        aTerrainList.add(new StraightRoad(1180,110,90,215,this));
+        aTerrainList.add(new StraightRoad(715,110,90,150,this));              //12
+        aTerrainList.add(new StraightRoad(715,490,90,101,this));
+        aTerrainList.add(new StraightRoad(50,110,90,215,this));              //14
+        aTerrainList.add(new StraightRoad(50,425,90,165,this));
+        aTerrainList.add(new StraightRoad(1080,425,90,165,this));
+        aTerrainList.add(new StraightRoad(1080,110,90,215,this));
 
         //add curved roads
         aTerrainList.add(new CornerRoad(980,10,360,0,this));                         //18
