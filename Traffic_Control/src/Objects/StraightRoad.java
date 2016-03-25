@@ -49,38 +49,101 @@ public class StraightRoad extends JPanel implements Terrain {
         Graphics2D road=(Graphics2D) g;
 
         //draw straight road
-        AffineTransform old = road.getTransform();
-        road.rotate(Math.toRadians(rotation),xStart,yStart);
-        road.setColor(Color.gray);
-        road.fillRect(xStart, yStart, road_length , road_width);
+//        AffineTransform old = road.getTransform();
+//        road.rotate(Math.toRadians(rotation),xStart,yStart);
+//        road.setColor(Color.gray);
+//        road.fillRect(xStart, yStart, road_length , road_width);
+//
+//        //draw road divider
+//        float[] dash1 = {4f, 0f, 2f};
+//        float[] dash2 = {100f,0f};
+//        BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
+//        BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
+//
+//        //draw road border
+//        road.setStroke(bs2);
+//        road.setColor(Color.black);
+//        road.drawLine(xStart,yStart,xStart+road_length-1,yStart);
+//        road.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
+//
+//        //draw road lanes
+//        road.setStroke(bs1);
+//        road.setColor(Color.white);
+//        int y=yStart+(road_width);
+//        road.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
+//
+//        road.setStroke(bs2);
+//        road.setColor(Color.white);
+//        road.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
+//
+//        road.setStroke(bs1);
+//        road.setColor(Color.white);
+//        road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+//
+//        road.setTransform(old);
 
-        //draw road divider
-        float[] dash1 = {4f, 0f, 2f};
-        float[] dash2 = {100f,0f};
-        BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
-        BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
+        if(rotation==0)
+        {
+            road.setColor(Color.gray);
+            road.fillRect(xStart, yStart, road_length , road_width);
 
-        //draw road border
-        road.setStroke(bs2);
-        road.setColor(Color.black);
-        road.drawLine(xStart,yStart,xStart+road_length-1,yStart);
-        road.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
+            //draw road divider
+            float[] dash1 = {4f, 0f, 2f};
+            float[] dash2 = {100f,0f};
+            BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
+            BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
 
-        //draw road lanes
-        road.setStroke(bs1);
-        road.setColor(Color.white);
-        int y=yStart+(road_width);
-        road.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
+            //draw road border
+            road.setStroke(bs2);
+            road.setColor(Color.black);
+            road.drawLine(xStart,yStart,xStart+road_length-1,yStart);
+            road.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
 
-        road.setStroke(bs2);
-        road.setColor(Color.white);
-        road.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
+            //draw road lanes
+            road.setStroke(bs1);
+            road.setColor(Color.white);
+            int y=yStart+(road_width);
+            road.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
 
-        road.setStroke(bs1);
-        road.setColor(Color.white);
-        road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+            road.setStroke(bs2);
+            road.setColor(Color.white);
+            road.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
 
-        road.setTransform(old);
+            road.setStroke(bs1);
+            road.setColor(Color.white);
+            road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+        }
+        else
+        {
+            road.setColor(Color.gray);
+            road.fillRect(xStart, yStart, road_width , road_length );
+
+            //draw road divider
+            float[] dash1 = {4f, 0f, 2f};
+            float[] dash2 = {100f,0f};
+            BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
+            BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
+
+            //draw road border
+            road.setStroke(bs2);
+            road.setColor(Color.black);
+            road.drawLine(xStart,yStart,xStart+road_length-1,yStart);
+            road.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
+
+            //draw road lanes
+            road.setStroke(bs1);
+            road.setColor(Color.white);
+            int y=yStart+(road_width);
+            road.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
+
+            road.setStroke(bs2);
+            road.setColor(Color.white);
+            road.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
+
+            road.setStroke(bs1);
+            road.setColor(Color.white);
+            road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+        }
     }
 
     public void paintComponent(Graphics gr){
@@ -91,53 +154,146 @@ public class StraightRoad extends JPanel implements Terrain {
         //Graphics2D arrows=(Graphics2D) g;
 
         //draw straight road
-        AffineTransform old = road.getTransform();
-        road.rotate(Math.toRadians(rotation),xStart,yStart);
-        road.setColor(Color.gray);
-        road.fillRect(xStart, yStart, road_length , road_width);
+//        AffineTransform old = road.getTransform();
+//        road.rotate(Math.toRadians(rotation),xStart,yStart);
+//        road.setColor(Color.gray);
+//        road.fillRect(xStart, yStart, road_length , road_width);
+//
+//        //draw road divider
+//        float[] dash1 = {4f, 0f, 2f};
+//        float[] dash2 = {100f,0f};
+//        BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
+//        BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
+//
+//        //draw road border
+//        road.setStroke(bs2);
+//        road.setColor(Color.black);
+//        road.drawLine(xStart,yStart,xStart+road_length-1,yStart);
+//        road.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
+//
+//        //draw road lanes
+//        road.setStroke(bs1);
+//        road.setColor(Color.white);
+//        road.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
+//
+//        road.setStroke(bs2);
+//        road.setColor(Color.white);
+//        road.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
+//
+//        road.setStroke(bs1);
+//        road.setColor(Color.white);
+//        road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+//
+//        // direction arrows
+//        int xPoly[] = {xStart+road_length-5, xStart+road_length-20, xStart+road_length-20};
+//        int yPoly[] = {yStart+road_width/4, (yStart+road_width/4)+10, (yStart+road_width/4)-10};
+//        int xPoly2[] = {xStart+5, xStart+20, xStart+20};
+//        int yPoly2[] = {50+yStart+road_width/4, (yStart+road_width/4)+60, (yStart+road_width/4)+40};
+//        poly = new Polygon(xPoly, yPoly, 3);
+//        road.drawPolygon(poly);
+//        poly2 = new Polygon(xPoly2, yPoly2, 3);
+//        road.drawPolygon(poly2);
+//        /*arrows.setStroke(bs2);
+//        arrows.setColor(Color.black);
+//        arrows.drawLine(xStart+10,yStart+road_width/8,xStart+40,yStart+road_width/8);
+//        arrows.drawLine(xStart+10,(yStart+road_width/2)+road_width/8,xStart+40,(yStart+road_width/2)+road_width/8);
+//        */
+//        //arrows.fillPolygon(new int[]{xStart+10,xStart+20},new int[]{(yStart+road_width/8)-5,(yStart+road_width/8)-10},30);
+//        road.setTransform(old);
 
-        //draw road divider
+        //Road divider
         float[] dash1 = {4f, 0f, 2f};
         float[] dash2 = {100f,0f};
         BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
         BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
 
-        //draw road border
-        road.setStroke(bs2);
-        road.setColor(Color.black);
-        road.drawLine(xStart,yStart,xStart+road_length-1,yStart);
-        road.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
+        if(rotation==0)
+        {
+            road.setColor(Color.gray);
+            road.fillRect(xStart, yStart, road_length , road_width);
 
-        //draw road lanes
-        road.setStroke(bs1);
-        road.setColor(Color.white);
-        road.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
+            //draw road divider
+//            float[] dash1 = {4f, 0f, 2f};
+//            float[] dash2 = {100f,0f};
+//            BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
+//            BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
 
-        road.setStroke(bs2);
-        road.setColor(Color.white);
-        road.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
+            //draw road border
+            road.setStroke(bs2);
+            road.setColor(Color.black);
+            road.drawLine(xStart,yStart,xStart+road_length-1,yStart);
+            road.drawLine(xStart,yStart+road_width,xStart+road_length-1,yStart+road_width);
 
-        road.setStroke(bs1);
-        road.setColor(Color.white);
-        road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+            //draw road lanes
+            road.setStroke(bs1);
+            road.setColor(Color.white);
+            road.drawLine(xStart,yStart+road_width/4,xStart+road_length,yStart+road_width/4);
 
-        // direction arrows
-        int xPoly[] = {xStart+road_length-5, xStart+road_length-20, xStart+road_length-20};
-        int yPoly[] = {yStart+road_width/4, (yStart+road_width/4)+10, (yStart+road_width/4)-10};
-        int xPoly2[] = {xStart+5, xStart+20, xStart+20};
-        int yPoly2[] = {50+yStart+road_width/4, (yStart+road_width/4)+60, (yStart+road_width/4)+40};
-        poly = new Polygon(xPoly, yPoly, 3);
-        road.drawPolygon(poly);
-        poly2 = new Polygon(xPoly2, yPoly2, 3);
-        road.drawPolygon(poly2);
-        /*arrows.setStroke(bs2);
-        arrows.setColor(Color.black);
-        arrows.drawLine(xStart+10,yStart+road_width/8,xStart+40,yStart+road_width/8);
-        arrows.drawLine(xStart+10,(yStart+road_width/2)+road_width/8,xStart+40,(yStart+road_width/2)+road_width/8);
-        */
-        //arrows.fillPolygon(new int[]{xStart+10,xStart+20},new int[]{(yStart+road_width/8)-5,(yStart+road_width/8)-10},30);
-        road.setTransform(old);
-        
+            road.setStroke(bs2);
+            road.setColor(Color.white);
+            road.drawLine(xStart,yStart+road_width/2,xStart+road_length,yStart+road_width/2);
+
+            road.setStroke(bs1);
+            road.setColor(Color.white);
+            road.drawLine(xStart,(yStart+road_width/2)+road_width/4,xStart+road_length,(yStart+road_width/2)+road_width/4);
+
+            // direction arrows
+            int xPoly[] = {xStart+road_length-5, xStart+road_length-20, xStart+road_length-20};
+            int yPoly[] = {yStart+road_width/4, (yStart+road_width/4)+10, (yStart+road_width/4)-10};
+            int xPoly2[] = {xStart+5, xStart+20, xStart+20};
+            int yPoly2[] = {50+yStart+road_width/4, (yStart+road_width/4)+60, (yStart+road_width/4)+40};
+            poly = new Polygon(xPoly, yPoly, 3);
+            road.drawPolygon(poly);
+            poly2 = new Polygon(xPoly2, yPoly2, 3);
+            road.drawPolygon(poly2);
+        }else{
+            road.setColor(Color.gray);
+            road.fillRect(xStart, yStart, road_width , road_length);
+
+//            //draw road divider
+//            float[] dash1 = {4f, 0f, 2f};
+//            float[] dash2 = {100f,0f};
+//            BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
+//            BasicStroke bs2 = new BasicStroke(1, BasicStroke.CAP_BUTT,BasicStroke.JOIN_ROUND, 1.0f, dash2, 0f);
+
+            //draw road border
+            road.setStroke(bs2);
+            road.setColor(Color.black);
+            road.drawLine(xStart,yStart,xStart,yStart+road_length);
+            road.drawLine(xStart+road_width,yStart,xStart+road_width,yStart+road_length);
+
+            //draw road lanes
+            road.setStroke(bs1);
+            road.setColor(Color.white);
+            road.drawLine(xStart+road_width/4,yStart,xStart+road_width/4,yStart+road_length);
+            road.setStroke(bs2);
+            road.setColor(Color.white);
+            road.drawLine(xStart+road_width/2,yStart,xStart+road_width/2,yStart+road_length);
+            road.setStroke(bs1);
+            road.setColor(Color.white);
+            road.drawLine((xStart+road_width/2)+road_width/4,yStart,(xStart+road_width/2)+road_width/4,yStart+road_length);
+
+            // direction arrows
+//            int xPoly[] = {xStart+road_length-5, xStart+road_length-20, xStart+road_length-20};
+//            int yPoly[] = {yStart+road_width/4, (yStart+road_width/4)+10, (yStart+road_width/4)-10};
+
+            int xPoly[] = {xStart+road_width-25, xStart+road_width-15, xStart+road_width-35};
+            int yPoly[] = {yStart+road_length-5, yStart+road_length-20, yStart+road_length-20};
+
+//            int xPoly2[] = {xStart+5, xStart+20, xStart+20};
+//            int yPoly2[] = {50+yStart+road_width/4, (yStart+road_width/4)+60, (yStart+road_width/4)+40};
+
+            int xPoly2[] = {xStart+25, xStart+15, xStart+35};
+            int yPoly2[] = {yStart+5, yStart+20, yStart+20};
+
+            poly = new Polygon(xPoly, yPoly, 3);
+            road.drawPolygon(poly);
+            poly2 = new Polygon(xPoly2, yPoly2, 3);
+            road.drawPolygon(poly2);
+
+        }
+
+
         Color textColor = Color.RED;
         g.setColor(textColor);  //greg
 

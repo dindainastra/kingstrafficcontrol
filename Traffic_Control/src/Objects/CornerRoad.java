@@ -27,6 +27,18 @@ public class CornerRoad extends JPanel implements Terrain{
     public CornerRoad(int x_Start, int y_Start, int start_angle, int type, TrafficManagement trafficManagement){
         this.start_angle = start_angle;
         this.xStart = x_Start;
+
+//            if (start_angle==90)
+//            {this.xStart =  x_Start;}
+//            else if(start_angle==180)
+//            { this.xStart = x_Start;}
+//            else if (start_angle==270)
+//            {this.xStart = x_Start-(road_width/2);}
+//            else {
+//                this.xStart = x_Start-(road_width/2) ;
+//            }
+
+
         this.yStart = y_Start;
         this.type=type;
         // for round about type=1
@@ -135,7 +147,7 @@ public class CornerRoad extends JPanel implements Terrain{
         Color textColor = Color.PINK;
         g.setColor(textColor);  
 
-        g.drawString(String.valueOf(this.trafficManagement.getTerrainList().indexOf(this)), xStart, yStart); 
+        g.drawString(String.valueOf(this.trafficManagement.getTerrainList().indexOf(this)), this.getxStart(), this.getYStart());
     }
 
 
@@ -212,12 +224,29 @@ public class CornerRoad extends JPanel implements Terrain{
 
     @Override
     public int getxStart() {
-        return 0;
+        if (start_angle==90)
+            {return xStart;}
+        else if(start_angle==180)
+            { return xStart;}
+        else if (start_angle==270)
+                {return xStart+(road_width/2);}
+        else {
+            return xStart+(road_width/2) ;
+        }
+
     }
 
     @Override
     public int getYStart() {
-        return 0;
+        if (start_angle==90)
+        {return yStart+(road_width/2);}
+        else if(start_angle==180)
+        { return yStart+(road_width/2);}
+        else if (start_angle==270)
+        {return yStart+(road_width/2);}
+        else {
+            return yStart+(road_width/2) ;
+        }
     }
 
     public int getcornerLength(){

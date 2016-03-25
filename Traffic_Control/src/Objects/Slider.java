@@ -3,6 +3,7 @@ package Objects;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.xml.bind.SchemaOutputResolver;
 
 import Controllers.TrafficManagement;
 
@@ -13,22 +14,23 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 
-/**
- * Created by SaiKu on 11/03/2016.
- */
-public class Slider extends JPanel{
+public class Slider  extends JPanel {
 
     private JLabel congestionLabel,emergencyLabel,roadNetworkLabel,timeIntervalLabel,weatherLabel, speedLimitLabel;
     private JSlider congestionSlider,timeIntervalSlider,speedLimitSlider;
     private JComboBox<String> weatherComboBox, emergencyComboBox,congestionComboBox;
     GridLayout gd;
     private TrafficManagement trafficManagement;
+    private Car car;
+    //private Terrain terrain;
 
     
 
     public Slider(TrafficManagement trafficManagement) {
     	initComponents();
-        this.trafficManagement = trafficManagement;	}
+        this.trafficManagement = trafficManagement;
+        //this.trafficLights = trafficLights;
+    }
 
 
 	
@@ -44,7 +46,7 @@ public class Slider extends JPanel{
         roadNetworkLabel = new JLabel();
         speedLimitLabel = new JLabel();
         //Create JSlider
-        timeIntervalSlider = new JSlider(0,5000);
+        timeIntervalSlider = new JSlider(0, 100);
         congestionSlider = new JSlider();
         speedLimitSlider = new JSlider();
         //Create JComboBox
@@ -53,11 +55,13 @@ public class Slider extends JPanel{
         congestionComboBox = new JComboBox<>();
 
         //slider interface for time interval and congestion rate
-        timeIntervalSlider.setMajorTickSpacing(1000);
-        timeIntervalSlider.setMinorTickSpacing(500);
+        timeIntervalSlider.setMajorTickSpacing(10);
+        timeIntervalSlider.setMinorTickSpacing(10);
         timeIntervalSlider.setPaintLabels(true);
         timeIntervalSlider.setPaintTicks(true);
+        timeIntervalSlider.setValue(50);
         timeIntervalSlider.setBorder(BorderFactory.createEmptyBorder(0,10,0,10));
+        
         timeIntervalSlider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 timeIntervalStateChanges(evt);
@@ -105,7 +109,7 @@ public class Slider extends JPanel{
             }
         });
 
-        String[] congestionCondition=new String[] { "   Normal", "   High", "   Low" };
+        String[] congestionCondition=new String[] { "Normal", "High", "Low" };
         congestionComboBox=new JComboBox<>(congestionCondition);
         congestionComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
         congestionComboBox.setPreferredSize(new Dimension(200,20));
@@ -117,7 +121,7 @@ public class Slider extends JPanel{
         });
 
         emergencyComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
-        emergencyComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "   0", "   1", "   2", "   3" }));
+        emergencyComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3" }));
         emergencyComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 emergencyComboBoxActionPerformed(evt);
@@ -155,37 +159,100 @@ public class Slider extends JPanel{
         // TODO add your handling code here:
     }
 
+    /*
+    This combo box is used to generate emergency cars.
+    Emergency cars have red colour.
+    This combo box provides 4 stated.
+    The default state 0 indicates that no emergency cars exist in the system.
+    The indicators 1,2 and 3 indicate the number of emergency cars in the system.
+     */
     private void emergencyComboBoxActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        if(evt.getSource()== emergencyComboBox){
+            JComboBox emergencyComboBox = (JComboBox)evt.getSource();
+            String msg = (String)emergencyComboBox.getSelectedItem();
+            switch (msg){
+                case "0":
+                    car.setPriority(0);
+                    trafficManagement.createPersons(1);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+
+                    break;
+                case "1":
+                    car.setPriority(1);
+                    trafficManagement.createPersons(1);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+
+                    break;
+                case "2":
+                    car.setPriority(1);
+                    trafficManagement.createPersons(2);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+
+                    break;
+                case "3":
+                    car.setPriority(1);
+                    trafficManagement.createPersons(3);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+
+            }
+        }
     }
 
+    /*
+    This combo box is used to set the level of congestion in the system.
+    The default state is the "normal", where 10 cars are introduced in the system.
+    The state "high" indicates rush hour, where 30 cars are introduced into te system.
+    The state "low indicates" that a low amount of cars are to be included in the system, cars might be removed.
+     */
     private void congestionComboBoxActionPerformed(ActionEvent evt) {
-    	if (congestionComboBox.getSelectedItem()=="Normal"){
-    		congestionComboBox.getSelectedIndex();
-    		
-    	}
-    	else if(congestionComboBox.getSelectedItem() == "High"){
-    		congestionComboBox.getSelectedIndex();
-    		
-    	}
-    	else if(congestionComboBox.getSelectedItem() =="Low"){
-    		congestionComboBox.getSelectedIndex();
-    		
-    	}
-        
+    	if(evt.getSource()== congestionComboBox){
+            JComboBox congestionCombobox = (JComboBox)evt.getSource();
+            String msg = (String)congestionCombobox.getSelectedItem();
+            switch (msg){
+                case "Normal":
+                    trafficManagement.createPersons(10);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+                    break;
+                case "High":
+                    trafficManagement.createPersons(20);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+                    break;
+                case "Low":
+                    trafficManagement.createPersons(5);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+                    //terrain.removeVehicleFromList();
+
+                    break;
+            }
+        }
+
     }
 
+    /*This slider is used for setting the time granularity of the system.
+    The bigger the value of the slider the bigger the delay, hence the slower the system is going to be.
+    */
     private void timeIntervalStateChanges(ChangeEvent evt) {
-     /*if (timeIntervalSlider.getValueIsAdjusting())
-       {
-         System.out.println("The value is"+timeIntervalSlider.getValue());
-       }*/
-     //System.out.println(timeIntervalSlider.getValue());
-    	trafficManagement.setTimeGranularity(timeIntervalSlider.getValue());
-    	
-    	
-    	
+
+        JSlider timeIntervalSlider =(JSlider)evt.getSource();
+        if (!timeIntervalSlider.getValueIsAdjusting()) {
+            trafficManagement.setTimeGranularity(timeIntervalSlider.getValue()/5);
+            trafficManagement.setTlDelay(timeIntervalSlider.getValue());
+
+
+
+        }
+
     }
+
+
+
   
 
     

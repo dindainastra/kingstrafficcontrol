@@ -27,6 +27,12 @@ public class TrafficManagement extends JFrame {
     private ArrayList<Runnable> runnableArrayList = new ArrayList<Runnable>();
     private int timeGranularity;
 
+
+
+    private int tlDelay;
+    private int sliderPersons;
+
+
     GridLayout gd=new GridLayout(0,2);
 
     //buttons
@@ -45,7 +51,8 @@ public class TrafficManagement extends JFrame {
         aPersonList = new ArrayList<Person>();
         aVehicleList = new ArrayList<Vehicle>();
         aTerrainList = new ArrayList<Terrain>();
-        timeGranularity = 1000;
+        timeGranularity = 50;
+        tlDelay = 3000;
         //for buttons
         //
         //
@@ -198,35 +205,35 @@ public class TrafficManagement extends JFrame {
     public void initializeStaticTrafficLights(){
 
         //junction25
-        TrafficLights ninthTL = new TrafficLights(715,10,3,1,0,3000);
-        TrafficLights twelfthTL = new TrafficLights(815,60,3,9,0,3000);
-        TrafficLights eighteenthTL = new TrafficLights(765,110,3,5,90,3000);
+        TrafficLights ninthTL = new TrafficLights(715,10,3,1,0,getTlDelay());
+        TrafficLights twelfthTL = new TrafficLights(815,60,3,9,0,getTlDelay());
+        TrafficLights eighteenthTL = new TrafficLights(765,110,3,5,90,getTlDelay());
 
         //junction 23
-        TrafficLights thirdTL = new TrafficLights(150,325,4, 1,90,3000);
-        TrafficLights firstTL = new TrafficLights(150,375,4, 13,0,3000);
-        TrafficLights fourthTL = new TrafficLights(100,425, 4, 9,90,3000);
-        TrafficLights secondTL = new TrafficLights(50,325,4, 5,0,3000);
+        TrafficLights thirdTL = new TrafficLights(150,325,4, 1,90,getTlDelay());
+        TrafficLights firstTL = new TrafficLights(150,375,4, 13,0,getTlDelay());
+        TrafficLights fourthTL = new TrafficLights(100,425, 4, 9,90,getTlDelay());
+        TrafficLights secondTL = new TrafficLights(50,325,4, 5,0,getTlDelay());
 
         //roundabout
-        TrafficLights fifteenTL = new TrafficLights(815,260,4, 1,90,3000);
-        TrafficLights eighthTL = new TrafficLights(880,375,4, 13,0,3000);
-        TrafficLights sixteenthTL = new TrafficLights(765,490,4 ,9,90,3000);
-        TrafficLights fifthTL = new TrafficLights(650,325,4, 5,0,3000);
+        TrafficLights fifteenTL = new TrafficLights(815,260,4, 1,90,getTlDelay());
+        TrafficLights eighthTL = new TrafficLights(880,375,4, 13,0,getTlDelay());
+        TrafficLights sixteenthTL = new TrafficLights(765,490,4 ,9,90,getTlDelay());
+        TrafficLights fifthTL = new TrafficLights(650,325,4, 5,0,getTlDelay());
 
 
         //junction22
-        TrafficLights thirteenthTL = new TrafficLights(1180,325,4, 1,90,3000);
-        TrafficLights seventhTL = new TrafficLights(1180,375,4, 13,0,3000);
-        TrafficLights fourteenthTL = new TrafficLights(1130,425,4,9,90,3000);
-        TrafficLights sixthTL = new TrafficLights(1080,325,4,5,0,3000);
+        TrafficLights thirteenthTL = new TrafficLights(1180,325,4, 1,90,getTlDelay());
+        TrafficLights seventhTL = new TrafficLights(1180,375,4, 13,0,getTlDelay());
+        TrafficLights fourteenthTL = new TrafficLights(1130,425,4,9,90,getTlDelay());
+        TrafficLights sixthTL = new TrafficLights(1080,325,4,5,0,getTlDelay());
 
 
         //junction24
 
-        TrafficLights seventeenthTL = new TrafficLights(815,590,3,1,90,3000);
-        TrafficLights eleventhTL = new TrafficLights(815,640,3,9,0,3000);
-        TrafficLights tenthTL = new TrafficLights(715,590,3,5,0,3000);
+        TrafficLights seventeenthTL = new TrafficLights(815,590,3,1,90,getTlDelay());
+        TrafficLights eleventhTL = new TrafficLights(815,640,3,9,0,getTlDelay());
+        TrafficLights tenthTL = new TrafficLights(715,590,3,5,0,getTlDelay());
 
         // direction ---->
 
@@ -375,12 +382,12 @@ public class TrafficManagement extends JFrame {
         aTerrainList.add(new StraightRoad(815,10,0,265,this));
 
         //add vertical roads
-        aTerrainList.add(new StraightRoad(815,110,90,150,this));              //12
-        aTerrainList.add(new StraightRoad(815,490,90,101,this));
-        aTerrainList.add(new StraightRoad(150,110,90,215,this));              //14
-        aTerrainList.add(new StraightRoad(150,425,90,165,this));
-        aTerrainList.add(new StraightRoad(1180,425,90,165,this));
-        aTerrainList.add(new StraightRoad(1180,110,90,215,this));
+        aTerrainList.add(new StraightRoad(715,110,90,150,this));              //12
+        aTerrainList.add(new StraightRoad(715,490,90,101,this));
+        aTerrainList.add(new StraightRoad(50,110,90,215,this));              //14
+        aTerrainList.add(new StraightRoad(50,425,90,165,this));
+        aTerrainList.add(new StraightRoad(1080,425,90,165,this));
+        aTerrainList.add(new StraightRoad(1080,110,90,215,this));
 
         //add curved roads
         aTerrainList.add(new CornerRoad(980,10,360,0,this));                         //18
@@ -389,11 +396,11 @@ public class TrafficManagement extends JFrame {
         aTerrainList.add(new CornerRoad(50,490,180,0,this));                         //21
         //aTerrainList.add(new CornerRoad(300,75,90));
 
-        //add junctions
-        aTerrainList.add(new SquareJunction(1080,325,this));
-        aTerrainList.add(new SquareJunction(50,325,this));                           //23
-        aTerrainList.add(new SquareJunction(715,590,this));
-        aTerrainList.add(new SquareJunction(715,10,this));
+        //add junctions (0,0,4,3: to close the square junctions)
+        aTerrainList.add(new SquareJunction(1080,325,this,0));
+        aTerrainList.add(new SquareJunction(50,325,this,0));                           //23
+        aTerrainList.add(new SquareJunction(715,590,this,4));
+        aTerrainList.add(new SquareJunction(715,10,this,3));
 
     }
 
@@ -436,12 +443,28 @@ public class TrafficManagement extends JFrame {
 
     //this for how fast or how slow the system goes
     public int getTimeGranularity() {
+
         return timeGranularity;
     }
 
 
     public void setTimeGranularity(int timeGranularity) {
+
         this.timeGranularity = timeGranularity;
     }
 
+    public int getTlDelay() {
+        return tlDelay;
+    }
+
+    public void setTlDelay(int tlDelay) {
+        this.tlDelay = tlDelay;
+    }
+   public int getSliderPersons() {
+       return sliderPersons;
+   }
+
+    public void setSliderPersons(int sliderPersons) {
+        this.sliderPersons = sliderPersons;
+    }
 }
