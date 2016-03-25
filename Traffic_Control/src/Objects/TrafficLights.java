@@ -21,7 +21,7 @@ public class TrafficLights extends JPanel implements Runnable{
     private TrafficLights resumeNextLight;
     private boolean suspendRequest;
     private int checkFirst;
-    private int delay;
+    private long delay;
     private int signal;
     private int numberOfWays;
 
@@ -33,7 +33,7 @@ public class TrafficLights extends JPanel implements Runnable{
      * @param y_coordinate
      * @param rotation
      */
-    public TrafficLights(int x_coordinate, int y_coordinate, int numberOfWays, int signal, int rotation, int delay){
+    public TrafficLights(int x_coordinate, int y_coordinate, int numberOfWays, int signal, int rotation, long delay){
         this.pos_x = x_coordinate;
         this.pos_y = y_coordinate;
         this.rotates = rotation;
@@ -168,7 +168,7 @@ public class TrafficLights extends JPanel implements Runnable{
             }
     }
 
-    private int getDelay() {
+    private long getDelay() {
         return delay;
     }
 }

@@ -26,7 +26,11 @@ public class TrafficManagement extends JFrame {
     private ExecutorService executor;
     private ArrayList<Runnable> runnableArrayList = new ArrayList<Runnable>();
     private int timeGranularity;
-    //private int tlDelay;
+
+
+
+    private int tlDelay;
+    private int sliderPersons;
 
 
     GridLayout gd=new GridLayout(0,2);
@@ -47,7 +51,8 @@ public class TrafficManagement extends JFrame {
         aPersonList = new ArrayList<Person>();
         aVehicleList = new ArrayList<Vehicle>();
         aTerrainList = new ArrayList<Terrain>();
-        timeGranularity = 1000;
+        timeGranularity = 50;
+        tlDelay = 3000;
         //for buttons
         //
         //
@@ -200,35 +205,35 @@ public class TrafficManagement extends JFrame {
     public void initializeStaticTrafficLights(){
 
         //junction25
-        TrafficLights ninthTL = new TrafficLights(715,10,3,1,0,this.getTimeGranularity()*10);
-        TrafficLights twelfthTL = new TrafficLights(815,60,3,9,0,this.getTimeGranularity()*10);
-        TrafficLights eighteenthTL = new TrafficLights(765,110,3,5,90,this.getTimeGranularity()*10);
+        TrafficLights ninthTL = new TrafficLights(715,10,3,1,0,getTlDelay());
+        TrafficLights twelfthTL = new TrafficLights(815,60,3,9,0,getTlDelay());
+        TrafficLights eighteenthTL = new TrafficLights(765,110,3,5,90,getTlDelay());
 
         //junction 23
-        TrafficLights thirdTL = new TrafficLights(150,325,4, 1,90,this.getTimeGranularity()*10);
-        TrafficLights firstTL = new TrafficLights(150,375,4, 13,0,this.getTimeGranularity()*10);
-        TrafficLights fourthTL = new TrafficLights(100,425, 4, 9,90,this.getTimeGranularity()*10);
-        TrafficLights secondTL = new TrafficLights(50,325,4, 5,0,this.getTimeGranularity()*10);
+        TrafficLights thirdTL = new TrafficLights(150,325,4, 1,90,getTlDelay());
+        TrafficLights firstTL = new TrafficLights(150,375,4, 13,0,getTlDelay());
+        TrafficLights fourthTL = new TrafficLights(100,425, 4, 9,90,getTlDelay());
+        TrafficLights secondTL = new TrafficLights(50,325,4, 5,0,getTlDelay());
 
         //roundabout
-        TrafficLights fifteenTL = new TrafficLights(815,260,4, 1,90,this.getTimeGranularity()*10);
-        TrafficLights eighthTL = new TrafficLights(880,375,4, 13,0,this.getTimeGranularity()*10);
-        TrafficLights sixteenthTL = new TrafficLights(765,490,4 ,9,90,this.getTimeGranularity()*10);
-        TrafficLights fifthTL = new TrafficLights(650,325,4, 5,0,this.getTimeGranularity()*10);
+        TrafficLights fifteenTL = new TrafficLights(815,260,4, 1,90,getTlDelay());
+        TrafficLights eighthTL = new TrafficLights(880,375,4, 13,0,getTlDelay());
+        TrafficLights sixteenthTL = new TrafficLights(765,490,4 ,9,90,getTlDelay());
+        TrafficLights fifthTL = new TrafficLights(650,325,4, 5,0,getTlDelay());
 
 
         //junction22
-        TrafficLights thirteenthTL = new TrafficLights(1180,325,4, 1,90,this.getTimeGranularity()*10);
-        TrafficLights seventhTL = new TrafficLights(1180,375,4, 13,0,this.getTimeGranularity()*10);
-        TrafficLights fourteenthTL = new TrafficLights(1130,425,4,9,90,this.getTimeGranularity()*10);
-        TrafficLights sixthTL = new TrafficLights(1080,325,4,5,0,this.getTimeGranularity()*10);
+        TrafficLights thirteenthTL = new TrafficLights(1180,325,4, 1,90,getTlDelay());
+        TrafficLights seventhTL = new TrafficLights(1180,375,4, 13,0,getTlDelay());
+        TrafficLights fourteenthTL = new TrafficLights(1130,425,4,9,90,getTlDelay());
+        TrafficLights sixthTL = new TrafficLights(1080,325,4,5,0,getTlDelay());
 
 
         //junction24
 
-        TrafficLights seventeenthTL = new TrafficLights(815,590,3,1,90,this.getTimeGranularity()*10);
-        TrafficLights eleventhTL = new TrafficLights(815,640,3,9,0,this.getTimeGranularity()*10);
-        TrafficLights tenthTL = new TrafficLights(715,590,3,5,0,this.getTimeGranularity()*10);
+        TrafficLights seventeenthTL = new TrafficLights(815,590,3,1,90,getTlDelay());
+        TrafficLights eleventhTL = new TrafficLights(815,640,3,9,0,getTlDelay());
+        TrafficLights tenthTL = new TrafficLights(715,590,3,5,0,getTlDelay());
 
         // direction ---->
 
@@ -448,11 +453,18 @@ public class TrafficManagement extends JFrame {
         this.timeGranularity = timeGranularity;
     }
 
-   /* public int getTlDelay() {
+    public int getTlDelay() {
         return tlDelay;
     }
 
     public void setTlDelay(int tlDelay) {
         this.tlDelay = tlDelay;
-    */
+    }
+   public int getSliderPersons() {
+       return sliderPersons;
+   }
+
+    public void setSliderPersons(int sliderPersons) {
+        this.sliderPersons = sliderPersons;
+    }
 }
