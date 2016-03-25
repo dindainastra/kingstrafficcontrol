@@ -83,6 +83,11 @@ public class Car extends JPanel implements Vehicle{
 		}
 	}
 
+	public void turnCorner(Point startPoint, Point endPoint, double interval){
+		this.pos_x = (int)(startPoint.x + ((endPoint.x - startPoint.x) * interval));
+		this.pos_y = (int)(startPoint.y + ((endPoint.y - startPoint.y) * interval));
+	}
+
 	public void turn(CarFlow.Direction d){
 		Double turnDir = Math.PI/2;
 
