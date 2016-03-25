@@ -14,14 +14,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 
-public class Slider extends JPanel{
+public class Slider  extends JPanel {
 
     private JLabel congestionLabel,emergencyLabel,roadNetworkLabel,timeIntervalLabel,weatherLabel, speedLimitLabel;
     private JSlider congestionSlider,timeIntervalSlider,speedLimitSlider;
     private JComboBox<String> weatherComboBox, emergencyComboBox,congestionComboBox;
     GridLayout gd;
     private TrafficManagement trafficManagement;
-    //private TrafficLights trafficLights;
+    private Car car;
+    //private Terrain terrain;
 
     
 
@@ -158,50 +159,100 @@ public class Slider extends JPanel{
         // TODO add your handling code here:
     }
 
+    /*
+    This combo box is used to generate emergency cars.
+    Emergency cars have red colour.
+    This combo box provides 4 stated.
+    The default state 0 indicates that no emergency cars exist in the system.
+    The indicators 1,2 and 3 indicate the number of emergency cars in the system.
+     */
     private void emergencyComboBoxActionPerformed(ActionEvent evt) {
         if(evt.getSource()== emergencyComboBox){
             JComboBox emergencyComboBox = (JComboBox)evt.getSource();
             String msg = (String)emergencyComboBox.getSelectedItem();
             switch (msg){
                 case "0":
-                    //System.out.println("I AM 0");
+                    car.setPriority(0);
+                    trafficManagement.createPersons(1);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+
                     break;
                 case "1":
-                    //System.out.println("I AM 1");
+                    car.setPriority(1);
+                    trafficManagement.createPersons(1);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+
                     break;
                 case "2":
-                    //System.out.println("I AM 2");
+                    car.setPriority(1);
+                    trafficManagement.createPersons(2);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+
                     break;
                 case "3":
-                    //System.out.println("I AM 3");
+                    car.setPriority(1);
+                    trafficManagement.createPersons(3);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+
             }
         }
     }
 
+    /*
+    This combo box is used to set the level of congestion in the system.
+    The default state is the "normal", where 10 cars are introduced in the system.
+    The state "high" indicates rush hour, where 30 cars are introduced into te system.
+    The state "low indicates" that a low amount of cars are to be included in the system, cars might be removed.
+     */
     private void congestionComboBoxActionPerformed(ActionEvent evt) {
     	if(evt.getSource()== congestionComboBox){
             JComboBox congestionCombobox = (JComboBox)evt.getSource();
             String msg = (String)congestionCombobox.getSelectedItem();
             switch (msg){
                 case "Normal":
-                    trafficManagement.run();
+                    trafficManagement.createPersons(10);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
                     break;
                 case "High":
-                    trafficManagement.run();
+                    trafficManagement.createPersons(20);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
                     break;
                 case "Low":
-                    trafficManagement.run();
+                    trafficManagement.createPersons(5);
+                    trafficManagement.createVehicles();
+                    trafficManagement.initializeForwardAndBackwardLists();
+                    //terrain.removeVehicleFromList();
+
                     break;
             }
         }
 
     }
 
+    /*This slider is used for setting the time granularity of the system.
+    The bigger the value of the slider the bigger the delay, hence the slower the system is going to be.
+    */
     private void timeIntervalStateChanges(ChangeEvent evt) {
-    	trafficManagement.setTimeGranularity(timeIntervalSlider.getValue()); 
 
+        JSlider timeIntervalSlider =(JSlider)evt.getSource();
+        if (!timeIntervalSlider.getValueIsAdjusting()) {
+            trafficManagement.setTimeGranularity(timeIntervalSlider.getValue());
+            trafficManagement.setTlDelay(timeIntervalSlider.getValue());
+
+
+
+        }
 
     }
+
+
+
   
 
     
