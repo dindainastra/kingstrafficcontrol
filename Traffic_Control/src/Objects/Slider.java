@@ -44,7 +44,7 @@ public class Slider extends JPanel{
         roadNetworkLabel = new JLabel();
         speedLimitLabel = new JLabel();
         //Create JSlider
-        timeIntervalSlider = new JSlider(0,5000);
+        timeIntervalSlider = new JSlider(0, 500);
         congestionSlider = new JSlider();
         speedLimitSlider = new JSlider();
         //Create JComboBox
@@ -53,11 +53,13 @@ public class Slider extends JPanel{
         congestionComboBox = new JComboBox<>();
 
         //slider interface for time interval and congestion rate
-        timeIntervalSlider.setMajorTickSpacing(1000);
-        timeIntervalSlider.setMinorTickSpacing(500);
+        timeIntervalSlider.setMajorTickSpacing(100);
+        timeIntervalSlider.setMinorTickSpacing(100);
         timeIntervalSlider.setPaintLabels(true);
         timeIntervalSlider.setPaintTicks(true);
+        timeIntervalSlider.setValue(100);
         timeIntervalSlider.setBorder(BorderFactory.createEmptyBorder(0,10,0,10));
+        
         timeIntervalSlider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 timeIntervalStateChanges(evt);
@@ -176,15 +178,8 @@ public class Slider extends JPanel{
     }
 
     private void timeIntervalStateChanges(ChangeEvent evt) {
-     /*if (timeIntervalSlider.getValueIsAdjusting())
-       {
-         System.out.println("The value is"+timeIntervalSlider.getValue());
-       }*/
-     //System.out.println(timeIntervalSlider.getValue());
-    	trafficManagement.setTimeGranularity(timeIntervalSlider.getValue());
-    	
-    	
-    	
+    	trafficManagement.setTimeGranularity(timeIntervalSlider.getValue()); 
+    	//trafficManagement.setTrafficLightsDelay(timeIntervalSlider.getValue());
     }
   
 
