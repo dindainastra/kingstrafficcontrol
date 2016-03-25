@@ -396,11 +396,11 @@ public class TrafficManagement extends JFrame {
         aTerrainList.add(new CornerRoad(50,490,180,0,this));                         //21
         //aTerrainList.add(new CornerRoad(300,75,90));
 
-        //add junctions
-        aTerrainList.add(new SquareJunction(1080,325,this));
-        aTerrainList.add(new SquareJunction(50,325,this));                           //23
-        aTerrainList.add(new SquareJunction(715,590,this));
-        aTerrainList.add(new SquareJunction(715,10,this));
+        //add junctions (0,0,4,3: to close the square junctions)
+        aTerrainList.add(new SquareJunction(1080,325,this,0));
+        aTerrainList.add(new SquareJunction(50,325,this,0));                           //23
+        aTerrainList.add(new SquareJunction(715,590,this,4));
+        aTerrainList.add(new SquareJunction(715,10,this,3));
 
     }
 
