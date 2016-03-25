@@ -3,6 +3,7 @@ package Objects;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.xml.bind.SchemaOutputResolver;
 
 import Controllers.TrafficManagement;
 
@@ -13,9 +14,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.net.URL;
 
-/**
- * Created by SaiKu on 11/03/2016.
- */
 public class Slider extends JPanel{
 
     private JLabel congestionLabel,emergencyLabel,roadNetworkLabel,timeIntervalLabel,weatherLabel, speedLimitLabel;
@@ -23,12 +21,15 @@ public class Slider extends JPanel{
     private JComboBox<String> weatherComboBox, emergencyComboBox,congestionComboBox;
     GridLayout gd;
     private TrafficManagement trafficManagement;
+    //private TrafficLights trafficLights;
 
     
 
     public Slider(TrafficManagement trafficManagement) {
     	initComponents();
-        this.trafficManagement = trafficManagement;	}
+        this.trafficManagement = trafficManagement;
+        //this.trafficLights = trafficLights;
+    }
 
 
 	
@@ -44,7 +45,7 @@ public class Slider extends JPanel{
         roadNetworkLabel = new JLabel();
         speedLimitLabel = new JLabel();
         //Create JSlider
-        timeIntervalSlider = new JSlider(0, 500);
+        timeIntervalSlider = new JSlider(0, 100);
         congestionSlider = new JSlider();
         speedLimitSlider = new JSlider();
         //Create JComboBox
@@ -53,11 +54,11 @@ public class Slider extends JPanel{
         congestionComboBox = new JComboBox<>();
 
         //slider interface for time interval and congestion rate
-        timeIntervalSlider.setMajorTickSpacing(100);
-        timeIntervalSlider.setMinorTickSpacing(100);
+        timeIntervalSlider.setMajorTickSpacing(10);
+        timeIntervalSlider.setMinorTickSpacing(10);
         timeIntervalSlider.setPaintLabels(true);
         timeIntervalSlider.setPaintTicks(true);
-        timeIntervalSlider.setValue(100);
+        timeIntervalSlider.setValue(50);
         timeIntervalSlider.setBorder(BorderFactory.createEmptyBorder(0,10,0,10));
         
         timeIntervalSlider.addChangeListener(new ChangeListener() {
@@ -107,7 +108,7 @@ public class Slider extends JPanel{
             }
         });
 
-        String[] congestionCondition=new String[] { "   Normal", "   High", "   Low" };
+        String[] congestionCondition=new String[] { "Normal", "High", "Low" };
         congestionComboBox=new JComboBox<>(congestionCondition);
         congestionComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
         congestionComboBox.setPreferredSize(new Dimension(200,20));
@@ -119,7 +120,7 @@ public class Slider extends JPanel{
         });
 
         emergencyComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
-        emergencyComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "   0", "   1", "   2", "   3" }));
+        emergencyComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3" }));
         emergencyComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 emergencyComboBoxActionPerformed(evt);
@@ -158,28 +159,48 @@ public class Slider extends JPanel{
     }
 
     private void emergencyComboBoxActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        if(evt.getSource()== emergencyComboBox){
+            JComboBox emergencyComboBox = (JComboBox)evt.getSource();
+            String msg = (String)emergencyComboBox.getSelectedItem();
+            switch (msg){
+                case "0":
+                    //System.out.println("I AM 0");
+                    break;
+                case "1":
+                    //System.out.println("I AM 1");
+                    break;
+                case "2":
+                    //System.out.println("I AM 2");
+                    break;
+                case "3":
+                    //System.out.println("I AM 3");
+            }
+        }
     }
 
     private void congestionComboBoxActionPerformed(ActionEvent evt) {
-    	if (congestionComboBox.getSelectedItem()=="Normal"){
-    		congestionComboBox.getSelectedIndex();
-    		
-    	}
-    	else if(congestionComboBox.getSelectedItem() == "High"){
-    		congestionComboBox.getSelectedIndex();
-    		
-    	}
-    	else if(congestionComboBox.getSelectedItem() =="Low"){
-    		congestionComboBox.getSelectedIndex();
-    		
-    	}
-        
+    	if(evt.getSource()== congestionComboBox){
+            JComboBox congestionCombobox = (JComboBox)evt.getSource();
+            String msg = (String)congestionCombobox.getSelectedItem();
+            switch (msg){
+                case "Normal":
+                    trafficManagement.run();
+                    break;
+                case "High":
+                    trafficManagement.run();
+                    break;
+                case "Low":
+                    trafficManagement.run();
+                    break;
+            }
+        }
+
     }
 
     private void timeIntervalStateChanges(ChangeEvent evt) {
     	trafficManagement.setTimeGranularity(timeIntervalSlider.getValue()); 
-    	//trafficManagement.setTrafficLightsDelay(timeIntervalSlider.getValue());
+
+
     }
   
 
