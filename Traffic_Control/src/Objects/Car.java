@@ -88,16 +88,22 @@ public class Car extends JPanel implements Vehicle{
 		this.pos_y = (int)(startPoint.y + ((endPoint.y - startPoint.y) * interval));
 	}
 
-	public void turn(CarFlow.Direction d){
-		Double turnDir = Math.PI/2;
-
-		if(d == CarFlow.Direction.LEFT || d == CarFlow.Direction.UP) {
+	public void turn(CarFlow.Direction d) {
+		if (d == CarFlow.Direction.UP) {
+			double turnDir = Math.toRadians(90);
 			rotate = -turnDir;
-		}else {
+		}else if(d == CarFlow.Direction.DOWN){
+			double turnDir = Math.toRadians(90);
 			rotate = turnDir;
+		}else if(d == CarFlow.Direction.RIGHT ){
+			double turnDir = Math.toRadians(90);
+			rotate = -turnDir;
+		}else{
+			double turnDir = Math.toRadians(90);
+			rotate = -turnDir;
 		}
 
-		repaint();
+		this.repaint();
 	}
 
 	public void turn(int x, int y){
@@ -113,7 +119,7 @@ public class Car extends JPanel implements Vehicle{
 	}
 
 	public void turnJunction(Car c){
-		System.out.println("Turn object");
+//		System.out.println("Turn object");
 		pos_x += 3;
 		rotate += 5;
 	}
@@ -209,7 +215,7 @@ public class Car extends JPanel implements Vehicle{
 	//YOU PAINT WITH doDrawing Method!
 	@Override
 	public void paintComponent(Graphics g){
-		System.out.println("Repainting car object - turn is "+rotate);
+		//System.out.println("Repainting car object - turn is "+rotate);
 		super.paintComponent(g);
 
 		Graphics2D gd = (Graphics2D) g;
@@ -218,11 +224,9 @@ public class Car extends JPanel implements Vehicle{
 		gd.rotate(rotate, pos_x, pos_y);
 		gd.setColor(new Color (R,G,B));
 		gd.fillRect(pos_x, pos_y, length, width);
-		//gd.translate(this.getWidth()/2, this.getHeight()/2);
+		gd.translate(this.getWidth()/2, this.getHeight()/2);
 
 		gd.setTransform(at);
-
-
 
         Color textColor = Color.BLACK;
         g.setColor(textColor);  //greg
