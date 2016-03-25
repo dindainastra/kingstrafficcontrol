@@ -277,13 +277,13 @@ public class StraightRoad extends JPanel implements Terrain {
 //            int xPoly[] = {xStart+road_length-5, xStart+road_length-20, xStart+road_length-20};
 //            int yPoly[] = {yStart+road_width/4, (yStart+road_width/4)+10, (yStart+road_width/4)-10};
 
-            int xPoly[] = {xStart+(road_width/4), (xStart+road_width/4)+10, (xStart+road_width/4)-10};
+            int xPoly[] = {xStart+road_width-25, xStart+road_width-15, xStart+road_width-35};
             int yPoly[] = {yStart+road_length-5, yStart+road_length-20, yStart+road_length-20};
 
 //            int xPoly2[] = {xStart+5, xStart+20, xStart+20};
 //            int yPoly2[] = {50+yStart+road_width/4, (yStart+road_width/4)+60, (yStart+road_width/4)+40};
 
-            int xPoly2[] = {50+xStart+road_width/4, (xStart+road_width/4)+60, (xStart+road_width/4)+40};
+            int xPoly2[] = {xStart+25, xStart+15, xStart+35};
             int yPoly2[] = {yStart+5, yStart+20, yStart+20};
 
             poly = new Polygon(xPoly, yPoly, 3);

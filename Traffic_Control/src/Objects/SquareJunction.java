@@ -30,7 +30,20 @@ public class SquareJunction extends JPanel implements Terrain{
         this.trafficManagement = trafficManagement;
     }
 
-    public SquareJunction(int x_Start, int y_Start, int close){
+    public SquareJunction(int x_Start, int y_Start, TrafficManagement trafficManagement,int close){
+        this.xStart = x_Start;
+        this.yStart = y_Start;
+        this.close=close;//1= close junction on rightside; 2=leftside; 3=close top; 4=close bottom; 0=open on all sides
+
+        nextTerrainList = new ArrayList<Terrain>();
+        previousTerrainList  = new ArrayList<Terrain>();
+        forwardListFlow = new ArrayList<Object>();
+        backwardListFlow = new ArrayList<Object>();
+        this.trafficManagement = trafficManagement;
+    }
+
+
+   /* public SquareJunction(int x_Start, int y_Start, int close){
         this.xStart = x_Start;
         this.yStart = y_Start;
         this.close=close;//1= close junction on rightside; 2=leftside; 3=close top; 4=close bottom.
@@ -39,7 +52,7 @@ public class SquareJunction extends JPanel implements Terrain{
         previousTerrainList  = new ArrayList<Terrain>();
         forwardListFlow = new ArrayList<Object>();
         backwardListFlow = new ArrayList<Object>();
-    }
+    }*/
 
 
 

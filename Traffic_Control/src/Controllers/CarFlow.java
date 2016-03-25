@@ -65,7 +65,7 @@ public class CarFlow implements Runnable {
             car.move(dir);
             map.repaint();
             try {
-                Thread.sleep(100);
+                Thread.sleep(trafficManagement.getTimeGranularity());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -78,7 +78,7 @@ public class CarFlow implements Runnable {
             car.move(dir);
             map.repaint();
             try {
-                Thread.sleep(100);
+                Thread.sleep(trafficManagement.getTimeGranularity());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -576,7 +576,7 @@ public class CarFlow implements Runnable {
             map.repaint();
             System.out.println("moving dirJunction: "+dirJunction);
             try {
-                Thread.sleep(100);
+                Thread.sleep(trafficManagement.getTimeGranularity());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -584,17 +584,18 @@ public class CarFlow implements Runnable {
 
         car.turn(dir);
         map.repaint();
-
-        //Should move you into the next terrain without this code
+//        
 //        for (int i = 0; i < (myCurrentTerrain.getLenght()/2)-car.getLength(); i++) {
+//
 //            car.move(dir);
 //            map.repaint();
 //            System.out.println("moving dir: "+dir);
 //            try {
-//                Thread.sleep(100);
+//                Thread.sleep(trafficManagement.getTimeGranularity());
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
+//
 //        }
 
         return true;
@@ -611,7 +612,7 @@ public class CarFlow implements Runnable {
             map.repaint();
             System.out.println("moving dirJunction: "+dirJunction);
             try {
-                Thread.sleep(100);
+                Thread.sleep(trafficManagement.getTimeGranularity());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
