@@ -242,7 +242,7 @@ public class Slider  extends JPanel {
 
         JSlider timeIntervalSlider =(JSlider)evt.getSource();
         if (!timeIntervalSlider.getValueIsAdjusting()) {
-            trafficManagement.setTimeGranularity(timeIntervalSlider.getValue());
+            trafficManagement.setTimeGranularity(timeIntervalSlider.getValue()/5);
             trafficManagement.setTlDelay(timeIntervalSlider.getValue());
 
 
