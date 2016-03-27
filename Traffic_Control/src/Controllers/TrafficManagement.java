@@ -411,12 +411,10 @@ public class TrafficManagement extends JFrame {
     public void drawTheMap(final Draw aDraw){
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                frame = new JFrame();
+                frame = new JFrame("King's Traffic Control Simulation");
                 frame.setLayout(new BorderLayout());
-
                 frame.add(new Buttons(), BorderLayout.PAGE_END);
                 frame.add(new Slider(TrafficManagement.this), BorderLayout.EAST);
-
                 //frame.add(new Buttons(), BorderLayout.PAGE_END);
                 Buttons buttons=new Buttons();
                 buttons.setPreferredSize(new Dimension(100,50));
@@ -430,6 +428,7 @@ public class TrafficManagement extends JFrame {
                 frame.setVisible(true);
                 /*frame.setSize(1500, 1000);*/
                 frame.setSize(1400, 700);
+                frame.setLocationRelativeTo(null);
                 frame.setResizable ( false );
             }
         });
