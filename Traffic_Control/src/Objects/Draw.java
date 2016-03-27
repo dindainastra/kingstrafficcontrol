@@ -46,7 +46,7 @@ public class Draw extends JPanel {
                 }
             for (Object v : aTerrain.getBackwardListFlow())
                 if (v instanceof Vehicle)
-                    ((Vehicle) v).doDrawing(f);
+                    ((Car) v).paintComponent(g);
                 else
                     ((TrafficLights) v).paintComponent(g);
         } 

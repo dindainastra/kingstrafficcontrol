@@ -48,9 +48,9 @@ public class CarFlow implements Runnable {
         this.flowDirection = direction;
         timer = new Timer(delay, null);
 
-        if (flowDirection == 1) {
+        if(flowDirection == 1){
             currectFlowList = this.aTerrain.getForwardListFlow();
-        }else {
+        }else{
             currectFlowList = this.aTerrain.getBackwardListFlow();
         }
 
@@ -85,19 +85,27 @@ public class CarFlow implements Runnable {
         }
     }
 
-    public void turnCorner(Car car, Terrain currentTerrain, Point startPoint, Point endPoint){
-        Direction direction = getDirection(car, currentTerrain);
-        double interval = 0.01;
+    public void turnCorner(Car car, CornerRoad terrain, double angle, Direction direction){
 
-        //take points to end of corner road
-        for (int i=1; i<currentTerrain.getLenght(); i++) {
-            System.out.println("Turning..");
-            System.out.println("CarX start: "+car.get_pos_x());
-            System.out.println("X start: "+aTerrain.getxStart());
+//Working code
+//        int centerX = (currentTerrain.getxStart())+(currentTerrain.getLenght()/2);
+//        int centerY = (currentTerrain.getYStart());
 
-            car.turnCorner(startPoint, endPoint, interval);
-            interval += 0.01;
+        System.out.println("I am corner road - X is "+car.get_pos_x()+" Y is "+car.get_pos_y());
+
+        int centerX = (terrain.getxStart())+(terrain.getLenght()/2);
+        int centerY = (terrain.getYStart())+10;
+
+        while(angle<=(Math.PI+Math.PI/2)){
+            System.out.println("+++++++++++++++++++turning...");
+            angle += 0.1;
+
+            car.turnCorner(angle, centerX, centerY);
+            car.bend(direction, 5.625);
             map.repaint();
+
+//            car.turnNew(Direction.RIGHT, angle);
+
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -105,9 +113,33 @@ public class CarFlow implements Runnable {
             }
         }
 
+
+        //take points to end of corner road
+//        for (int i=1; i<currentTerrain.getLenght(); i++) {
+//            System.out.println("Turning..");
+//            System.out.println("CarX start: "+car.get_pos_x());
+//            System.out.println("X start: "+aTerrain.getxStart());
+//
+//            angle += 0.1;
+//            if (angle > (Math.PI/2)) {
+//                angle = 0.0;
+//            }
+//
+////            car.turnCorner(startPoint, endPoint, interval);
+//            car.turnCorner(angle, endPoint, interval);
+//            interval += 0.01;
+//            map.repaint();
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+
         //turn towards the next destination
-        car.turn(direction);
-        map.repaint();
+//        car.turn(direction);
+//        map.repaint();
 
         //move to next stack
         //moveToEndOfRoad(car, )
@@ -126,25 +158,27 @@ public class CarFlow implements Runnable {
             	
             	if (isThereATrafficLight(this.aTerrain.getForwardListFlow()))
             		while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {}
-
                 //trafic check
 
                 for (Object o : this.currectFlowList){
                     if (o instanceof Vehicle){
-
                         Car tmpCar = (Car) o;
 
                         if(this.aTerrain instanceof  StraightRoad){
                            // System.out.println("I am StraightRoad:  ");
-                            final Direction dir = getDirection(tmpCar,this.aTerrain); //If delayed the direction changes
-                            tmpCar.setCurrentDirection(dir);
-                            System.out.println("================== dir is "+dir);
-
+                            Direction dir = getDirection(tmpCar, this.aTerrain); //If delayed the direction changes
+//                            tmpCar.setCurrentDirection(dir);
+//                            System.out.println("================== dir Straight Road is "+dir);
+//                            System.out.println("Car X is "+tmpCar.get_pos_x()+" Y is "+tmpCar.get_pos_y());
+//                            tmpCar.setRotate(0.0);
+                            System.out.println("Road width +++++++++++++ "+this.aTerrain.getLenght());
                             moveToEnd(tmpCar, this.aTerrain.getLenght() - (tmpCar.getLength()/2), dir);
+//                            moveToEnd(tmpCar, this.aTerrain.getLenght() - (tmpCar.getLength()), dir);
+
                             moveThisVehicleToTheNextCorrectStack(tmpCar);
-                            System.out.println("Lenght: "+ this.aTerrain.getLenght() + " this road: " + this.aTerrain);
+//                            System.out.println("Lenght: "+ this.aTerrain.getLenght() + " this road: " + this.aTerrain);
                         }else if (this.aTerrain instanceof CornerRoad){
-//                            CornerRoad tmpCR = (CornerRoad) this.aTerrain;
+                            CornerRoad cornerRoad = (CornerRoad) this.aTerrain;
 //                            Terrain nextTerrain = aTerrain.getNeighboursTerrainList().get(0);
 //                            System.out.println("CarX start: "+tmpCar.get_pos_x());
 //                            System.out.println("X start: "+aTerrain.getxStart());
@@ -159,29 +193,34 @@ public class CarFlow implements Runnable {
 //                            System.out.println("Terrain X end "+terrainXEnd+" terrains Y "+ aTerrain.getYStart());
 //
 //                            turnCorner(tmpCar, this.aTerrain, startPoint, endPoint);
+//                            Point startPoint = new Point(aTerrain.getxStart(), (aTerrain.getYStart()+aTerrain.getLenght()));
+//                            Point endPoint = new Point(aTerrain.getxStart()+aTerrain.getLenght(), aTerrain.getYStart());
 
-//                            if (tmpCR.getRotation()==90){ //Top Left
-//                                Point startPoint = new Point(aTerrain.getxStart(), (aTerrain.getYStart()+aTerrain.getLenght()));
-//                                Point endPoint = new Point(aTerrain.getxStart()+aTerrain.getLenght(), aTerrain.getYStart());
-//
-//                                turnCorner(tmpCar, tmpCR, startPoint, endPoint);
-//                            }else if (tmpCR.getRotation()==180){ //Bottom Left
-//
-//
-//                            }else if (tmpCR.getRotation()==270){ //Bottom Right
-//
-//                            }else{ //Top Right
-//
-//                            }
-//
+                            double angle;
+                            Direction direction;
+
+                            if (cornerRoad.getRotation()==90){ //Top Left
+                                angle = Math.PI;
+                                direction = Direction.RIGHT;
+                            }else if (cornerRoad.getRotation()==180){ //Bottom Left
+                                angle = Math.PI;
+                                direction = Direction.UP;
+                            }else if (cornerRoad.getRotation()==270){ //Bottom Right
+                                angle = Math.PI;
+                                direction = Direction.LEFT;
+                            }else{ //Top Right
+                                angle = Math.PI;
+                                direction = Direction.DOWN;
+                            }
+
+//                            turnCorner(tmpCar, cornerRoad, angle, direction);
 //                            moveThisVehicleToTheNextCorrectStack(tmpCar);
-
                         }else {  //SquareJunction
                             System.out.println("I am SquareJunction:  ");
-//
+
                             tmpCar.getPerson().decide(this.aTerrain.getNeighboursTerrainList());
                             int myDecision = tmpCar.getPerson().getDecision();
-//
+
                             Terrain nextTerrain = aTerrain.getNeighboursTerrainList().get(myDecision);
 
 //                            System.out.println("Which Node: "+  trafficManagement.getTerrainList().indexOf(nextTerrain));
@@ -201,6 +240,7 @@ public class CarFlow implements Runnable {
                                 System.out.println("Second Exit!");
                                 secondExit(tmpCar, nextTerrain, this.aTerrain, dir, dirJunction);
                             }
+
                             moveThisVehicleToTheNextCorrectStack(tmpCar);
                         }
                     }else if (o instanceof TrafficLights){
@@ -222,27 +262,26 @@ public class CarFlow implements Runnable {
                         if (this.aTerrain instanceof  StraightRoad){
                             Direction dir = getDirection(tmpCar, this.aTerrain);
                             tmpCar.setCurrentDirection(dir);
-                            System.out.println("I am StraightRoad:  flow is " + flowDirection);
-                            moveToEnd(tmpCar, this.aTerrain.getLenght() - (tmpCar.getLength()/2), dir);
+
+                            //The car calls the rotate when going up but not down
+//                            tmpCar.setRotate(Math.toRadians(90));
+
+//                            tmpCar.turn(Direction.DOWN);
+//                            System.out.println("Car X is "+tmpCar.get_pos_x()+" Y is "+tmpCar.get_pos_y()+" rotate is "+tmpCar.getRotate());
+
+//                            System.out.println("I am StraightRoad:  flow is " + flowDirection);
+//                            System.out.println("================== dir Straight Road is "+dir);
+
+                            System.out.println("Road width +++++++++++++ "+this.aTerrain.getLenght());
+//                            moveToEnd(tmpCar, this.aTerrain.getLenght(), dir);
+                            moveToEnd(tmpCar, this.aTerrain.getLenght()-(tmpCar.getLength()/2), dir);
                             moveThisVehicleToTheNextCorrectStack(tmpCar);
 
-                            System.out.println("Lenght: "+ this.aTerrain.getLenght() + " this road: " + this.aTerrain);
+                            System.out.println("Length: "+ this.aTerrain.getLenght() + " this road: " + this.aTerrain);
                         }else if (this.aTerrain instanceof CornerRoad){
-//
-//                            CornerRoad tmpCR = (CornerRoad) this.aTerrain;
-//
-//
-//                            if (tmpCR.getRotation()==90){
-//
-//
-//                            }else if (tmpCR.getRotation()==180){
-//
-//
-//                            }else if (tmpCR.getRotation()==270){
-//
-//                            }else{
-//
-//                            }
+
+                            CornerRoad tmpCR = (CornerRoad) this.aTerrain;
+
                         }else {//SquareJunction
 
                             System.out.println("I am SquareJunction:  ");
@@ -269,6 +308,7 @@ public class CarFlow implements Runnable {
                                 System.out.println("Second Exit!");
                                 secondExit(tmpCar, nextTerrain, this.aTerrain, dir, dirJunction);
                             }
+
                             moveThisVehicleToTheNextCorrectStack(tmpCar);
                         }
                     }else if (o instanceof TrafficLights){
@@ -610,7 +650,7 @@ public class CarFlow implements Runnable {
         for (int i = 0; i<(myCurrentTerrain.getLenght() - (car.getLength()/2)); i++) {
             car.move(dirJunction);
             map.repaint();
-            System.out.println("moving dirJunction: "+dirJunction);
+//            System.out.println("moving dirJunction: "+dirJunction);
             try {
                 Thread.sleep(trafficManagement.getTimeGranularity());
             } catch (InterruptedException e) {
@@ -618,21 +658,38 @@ public class CarFlow implements Runnable {
             }
         }
 
-        car.turn(dir);
-        map.repaint();
-
-        //moveToEnd(car, myCurrentTerrain.getLenght(), dir);
-
-        for (int i = 0; i < (myCurrentTerrain.getLenght()-car.getLength()); i++) {
-            car.move(dir);
+        double angle = 10;
+        for(int i=0; i<9; i++) {
+            car.turn(dir, Math.toRadians(angle));
             map.repaint();
-            System.out.println("moving dir: "+dir);
+            angle+=10;
             try {
-                Thread.sleep(100);
+                Thread.sleep(trafficManagement.getTimeGranularity()+50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+
+
+//        car.set_pos_x(car.get_pos_x()-car.getWidth());
+//        car.set_pos_y(car.get_pos_y()-car.getWidth());
+
+        moveToEnd(car, myCurrentTerrain.getLenght()-car.getLength(), dir);
+//        car.setCurrentDirection(dir);
+//
+//        car.setRotate();
+//        for (int i = 0; i < (myCurrentTerrain.getLenght()-car.getLength()); i++) {
+//            car.move(dir);
+//            map.repaint();
+//            System.out.println("moving dir: "+dir);
+//            try {
+//                Thread.sleep(100);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
+
+        //Reset the car X values - X and Y are wrong
 
         return true;
     }
