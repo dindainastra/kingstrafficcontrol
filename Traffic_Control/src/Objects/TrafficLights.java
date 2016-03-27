@@ -6,6 +6,8 @@ import java.awt.geom.AffineTransform;
 
 public class TrafficLights extends JPanel implements Runnable{
 
+    private int counter;
+
     private int pos_x, pos_y, rotates;
     private final int width = 3, length = 50;
     private int R,G,B;
@@ -13,17 +15,23 @@ public class TrafficLights extends JPanel implements Runnable{
     private final int Yellow = 2;
     private final int Green = 3;
     private final int YellowReverse = 4;
-    private int currentColour = Red;
+    private int currentColour;
     private final int RED_SECS = 30;
     private final int YELLOW_SECS = 30;
     private final int GREEN_SECS = 30;
     private final int YellowReverse_SECS = 30;
-    private TrafficLights resumeNextLight;
-    private boolean suspendRequest;
-    private int checkFirst;
+    private TrafficLights previousTrafficLight;
+    private TrafficLights nextTrafficLight;
+
+    private int delayForGreenLight=3;
+    private boolean canIChange=false;
+
     private long delay;
-    private int signal;
+    private int signal = 1;
     private int numberOfWays;
+    private boolean passInitial=false;
+    private boolean setNextTrafficPass;
+    private int initialSignal;
 
     //set traffic light colour and shape
     /**
@@ -37,7 +45,8 @@ public class TrafficLights extends JPanel implements Runnable{
         this.pos_x = x_coordinate;
         this.pos_y = y_coordinate;
         this.rotates = rotation;
-        this.signal = signal;
+        this.currentColour = signal;
+        //this.initialSignal = signal;
         this.delay = delay;
         this.numberOfWays = numberOfWays;
         //this.currentColour = RGB;
@@ -51,51 +60,32 @@ public class TrafficLights extends JPanel implements Runnable{
         switch (currentColour) {
             case Red:
                 currentColour = Yellow;
-                //this.checkSuspended();
-                //System.out.println("Yellow ");
                 break;
             case Yellow:
                 currentColour = Green;
-                //System.out.println("Green");
-
                 break;
             case Green:
                 currentColour = YellowReverse;
-                //System.out.println("Yellow");
-
                 break;
             case YellowReverse:
                 currentColour = Red;
-                //resumeNextLight.requestResume();
-                //this.requestSuspended();
         }
         return currentColour;
     }
 
-    public int getCurrentColour() {
-        return currentColour;
-    }
     /**
      * This method iterates the change of colours.
      */
 
     private int getSecs() {
-
         switch (currentColour) {
-
             case Red:
             default:
-
                 return RED_SECS * 100;
-
             case Yellow:
-
                 return YELLOW_SECS * 100;
-
             case Green:
-
                 return GREEN_SECS * 100;
-
             case YellowReverse:
                 return YellowReverse_SECS *100;
         }
@@ -129,49 +119,107 @@ public class TrafficLights extends JPanel implements Runnable{
     }
 
 
+    /**
+     * Run method
+     */
     @Override
     public void run() {
-            try {
-                if(numberOfWays == 4){
-                    //signal will change after 16 if the traffic light is in a junction
-                    if(signal ==1){
-                        this.currentColour = 3;
-                    } else if(signal ==5 || signal ==9 || signal ==13){
-                        this.currentColour = 1;
-                    } else if(signal==3 || signal == 4 || signal ==16 || signal == 1){
-                        this.currentColour = change();
-                    }
-                    Thread.sleep(getDelay());
-                    if(signal == 16){
-                        signal = 1;
-                    } else {
-                        signal++;
-                    }
-                } else if (numberOfWays == 3) {
-                    //signal will change after 12 if the traffic light is in a three-way junction
-                    if(signal ==1){
-                        this.currentColour = 3;
-                    } else if(signal ==5 ||signal ==9){
-                        this.currentColour = 1;
-                    } else if(signal==3 || signal == 4 || signal ==12 || signal == 1){
-                        this.currentColour = change();
-                    }
-                    Thread.sleep(getDelay());
-                    if(signal == 12){
-                        signal = 1;
-                    } else {
-                        signal++;
-                    }
-                }
-            } catch (InterruptedException e) {
-                System.out.println("Error: "+e.getLocalizedMessage());
-            }
+        counter = (counter + 1) % 30;
+        if (counter == 0) {
+            doRun();
+        }
     }
 
+    /**
+     * Run the traffic light simulation
+     */
+    public void doRun() {
+        //There are four states: 1 (RED), 2 (YELLOW AFTER RED), 3 GREEN, 4 (YELLOW AFTER GREEN)
+        if (currentColour == 1){
+            // If current colour is Red, then it need to check
+            // 1. next traffic light colour, to make sure the next traffic light's changing as it should be
+            // 2. previous traffic light colour, to make sure that it will change as it should be
+            if(canIChange && nextTrafficLight.currentColour==1){
+                nextTrafficLight.currentColour= nextTrafficLight.change();
+            }
+            canIChange = false;
+            if(isItMyTurnToChange()) {
+                this.currentColour = change();
+            }
+        } else if(currentColour ==2){
+            //If the previous colour is Yellow after red, change
+            this.currentColour = change();
+        } else if(currentColour ==3) {
+            //If the previous colour is green,
+            //wait for the delay
+            //then change
+            if(signal <=delayForGreenLight){
+                signal++;
+            } else {
+                this.currentColour = change();
+                signal=0;
+            }
+        } else if( currentColour == 4){
+            //If the previous colour is Yellow after green, change
+            this.currentColour = change();
+            this.delayForGreenLight = 3;
+            canIChange = true;
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
     private long getDelay() {
         return delay;
     }
+
+    /**
+     * To know which traffic light that should come after this traffic light
+     * @param nextTrafficLight
+     */
+    public void nextTrafficLightIs(TrafficLights nextTrafficLight) {
+        this.nextTrafficLight = nextTrafficLight;
+    }
+
+    /**
+     *
+     * @param previousTrafficLight
+     */
+    public void previousTrafficLightIs(TrafficLights previousTrafficLight) {
+        this.previousTrafficLight = previousTrafficLight;
+    }
+
+    /**
+     * Boolean check to know if it is already this traffic light turn to change
+     * @return
+     */
+    public boolean isItMyTurnToChange(){
+        if(previousTrafficLight.currentColour ==1 && previousTrafficLight.canIChange){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int getCurrentColour() {
+        return currentColour;
+    }
+
+    /**
+     * Set current colour
+     * @param currentColour
+     */
+    public void setCurrentColor(int currentColour) {
+        this.currentColour = currentColour;
+    }
+
+    /**
+     * Set the delay for green light
+     * @param delayForGreenLight
+     */
+    public void setGreenLightDelay(int delayForGreenLight) {
+        this.delayForGreenLight = delayForGreenLight;
+    }
 }
-
-
-

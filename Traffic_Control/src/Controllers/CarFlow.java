@@ -9,6 +9,7 @@ import Objects.Car;
 import Objects.StraightRoad;
 import Objects.CornerRoad;
 import Objects.SquareJunction;
+import com.sun.org.apache.xpath.internal.SourceTree;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -135,14 +136,15 @@ public class CarFlow implements Runnable {
                         Car tmpCar = (Car) o;
 
                         if(this.aTerrain instanceof  StraightRoad){
+                            //System.out.println("Is this terrain : " + aTerrain.getxStart()  + ", " + aTerrain.getYStart()+ "busy or not: " + isThisTerrainBusy());
                            // System.out.println("I am StraightRoad:  ");
                             final Direction dir = getDirection(tmpCar,this.aTerrain); //If delayed the direction changes
                             tmpCar.setCurrentDirection(dir);
-                            System.out.println("================== dir is "+dir);
+//                            System.out.println("================== dir is "+dir);
 
                             moveToEnd(tmpCar, this.aTerrain.getLenght() - (tmpCar.getLength()/2), dir);
                             moveThisVehicleToTheNextCorrectStack(tmpCar);
-                            System.out.println("Lenght: "+ this.aTerrain.getLenght() + " this road: " + this.aTerrain);
+//                            System.out.println("Lenght: "+ this.aTerrain.getLenght() + " this road: " + this.aTerrain);
                         }else if (this.aTerrain instanceof CornerRoad){
 //                            CornerRoad tmpCR = (CornerRoad) this.aTerrain;
 //                            Terrain nextTerrain = aTerrain.getNeighboursTerrainList().get(0);
@@ -177,7 +179,7 @@ public class CarFlow implements Runnable {
 //                            moveThisVehicleToTheNextCorrectStack(tmpCar);
 
                         }else {  //SquareJunction
-                            System.out.println("I am SquareJunction:  ");
+//                            System.out.println("I am SquareJunction:  ");
 //
                             tmpCar.getPerson().decide(this.aTerrain.getNeighboursTerrainList());
                             int myDecision = tmpCar.getPerson().getDecision();
@@ -204,10 +206,7 @@ public class CarFlow implements Runnable {
                             moveThisVehicleToTheNextCorrectStack(tmpCar);
                         }
                     }else if (o instanceof TrafficLights){
-                       // System.out.println("Im a traffic Light dude! " + Thread.currentThread().getName());
-                        TrafficLights tLOne = (TrafficLights)o;
-                        Thread t = new Thread(tLOne);
-                        t.start();
+                        startTraffic(o);
                     }
                 }
             }else {  //flow == 0
@@ -272,16 +271,31 @@ public class CarFlow implements Runnable {
                             moveThisVehicleToTheNextCorrectStack(tmpCar);
                         }
                     }else if (o instanceof TrafficLights){
-                        //System.out.println("Im a traffic Light dude! " + Thread.currentThread().getName());
-                        TrafficLights tLOne = (TrafficLights)o;
-                        Thread t = new Thread(tLOne);
-                        t.start();
+//                        System.out.println("Im a traffic Light dude! " + Thread.currentThread().getName());
+//                        TrafficLights tLOne = (TrafficLights)o;
+//                        //tLOne.run();
+//                        Thread t = new Thread(tLOne);
+//                        t.start();
+                        startTraffic(o);
                     }
                 }
             }
         } catch(Exception e) {
             System.out.println("Error: "+e.getLocalizedMessage());
         }
+    }
+
+    private void startTraffic(Object o) {
+//        System.out.println("Im a traffic Light dude! " + Thread.currentThread().getName());
+        TrafficLights tLOne = (TrafficLights)o;
+        //tLOne.run();
+        map.repaint();
+        //if the terrain busy then set the delay for this traffic light's greenlight longer
+//        if(isThisTerrainBusy()){
+//            tLOne.setGreenLightDelay(5);
+//        }
+        Thread t = new Thread(tLOne);
+        t.start();
     }
 
     /**
@@ -841,30 +855,54 @@ Yellow = 3
     }
 
     //policy
+
+    /**
+     * To check whether the road is busy or not
+     * @return
+     */
     public boolean isThisTerrainBusy(){
+        int numberOfCars = 0;
+        int threshold = 5;
 
-        int foo = 0;
-
+        //put code for the forward  flow / 100
+        //Parse the aTerrain.getForwardListFlow() and find how many vehicles are in there
+        //and return the proper boolean statement
         if (this.flowDirection == 1) {
-            //put code for the forward  flow / 100
-            //Parse the aTerrain.getForwardListFlow() and find how many vehicles are in there
-            //and return the proper boolean statement
+            currectFlowList = this.aTerrain.getForwardListFlow();
+            for (Object o : this.currectFlowList){
+                //System.out.println(this.getPerson().getName().substring("Person".length()));
+                //System.out.println(o.get);
+                if (o instanceof Vehicle) {
+                    numberOfCars++;
+//                    System.out.println("Car: "+ ((Vehicle) o).getPerson().getName().substring("Person".length()));
+                }
+            }
+//            System.out.println("Number of cars are: " + numberOfCars + " while the threshold is: " + threshold);
 
-            if (foo == 1)
+            if(numberOfCars>threshold){
                 return true;
-            else
+            } else {
                 return false;
-
-        }else{
+            }
+        } else {
             //put code for the backward  flow / 100
             //Parse the aTerrain.getBackwardListFlow() and find how many vehicles are in there
             //and return the proper boolean statement
 
-            if (foo == 1)
-                return true;
-            else
-                return false;
+            currectFlowList = this.aTerrain.getBackwardListFlow();
+            for (Object o : this.currectFlowList){
+                if (o instanceof Vehicle) {
+                    numberOfCars++;
+//                    System.out.println("Car: "+ ((Vehicle) o).getPerson().getName().substring("Person".length()));
+                }
+            }
+//            System.out.println("Number of cars are: " + numberOfCars + " while the threshold is: " + threshold);
 
+            if(numberOfCars>threshold){
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }
