@@ -120,8 +120,11 @@ public class Slider  extends JPanel {
             }
         });
 
+        String[] emergencyCondition=new String[] { "0", "1", "2", "3"  };
+        emergencyComboBox=new JComboBox<>(emergencyCondition);
         emergencyComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
-        emergencyComboBox.setModel(new DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3" }));
+        emergencyComboBox.setPreferredSize(new Dimension(200,20));
+        emergencyComboBox.setPrototypeDisplayValue("0");
         emergencyComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 emergencyComboBoxActionPerformed(evt);
