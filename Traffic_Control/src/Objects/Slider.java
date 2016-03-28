@@ -20,7 +20,7 @@ public class Slider  extends JPanel {
     private JSlider congestionSlider,timeIntervalSlider,speedLimitSlider;
     private JButton increaseButton, decreaseButton;
     private JComboBox<String> weatherComboBox, emergencyComboBox,congestionComboBox;
-    GridLayout gd,gp;
+    GridLayout gd;
     private TrafficManagement trafficManagement;
     private Car car;
     //private Terrain terrain;
@@ -154,7 +154,6 @@ public class Slider  extends JPanel {
 
 
         gd=new GridLayout(13,0,20,0);
-        gp= new GridLayout(0,2,0,0);
        /// / gd=new GridLayout(13,0,20,5);
         this.setLayout(gd);
         add(timeIntervalLabel);
