@@ -143,7 +143,7 @@ public class TrafficManagement extends JFrame {
                     else{
                     	Vehicle v = new Car(p, 1350, 405);
                     	aVehicleList.add(v);
-                    	this.aTerrainList.get(0).setBackwardListFlow(v);
+                    	this.aTerrainList.get(1).setBackwardListFlow(v);
                     }
                 }
             }
@@ -176,7 +176,7 @@ public class TrafficManagement extends JFrame {
                     	if (priority_flag==1)
                     		v.setPriority(1);
                     	aVehicleList.add(v);
-                    	this.aTerrainList.get(0).setBackwardListFlow(v);
+                    	this.aTerrainList.get(1).setBackwardListFlow(v);
                     }
                 }
             }
