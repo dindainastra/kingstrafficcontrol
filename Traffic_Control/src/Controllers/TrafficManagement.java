@@ -186,8 +186,8 @@ public class TrafficManagement extends JFrame {
     
     public void run(){
 
-        createPersons(10);
-        createVehicles();
+        //createPersons(10);
+        //createVehicles();
 
         staticMapCreator();
         //initComponents();
@@ -196,7 +196,7 @@ public class TrafficManagement extends JFrame {
         initializeStaticTrafficLights();
 
         //init all the vehicles
-        initializeForwardAndBackwardLists();
+        //initializeForwardAndBackwardLists();
 
         //do the graph to know every node their closest nodes
         initializeNeighboursTerrainLists();

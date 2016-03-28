@@ -113,11 +113,11 @@ public class Slider  extends JPanel {
             }
         });
 
-        String[] congestionCondition=new String[] { "Add 5 cars", "Add 10 cars", "Add 20 cars" };
+        String[] congestionCondition=new String[] {"Add cars to the system", "Add 5 cars", "Add 10 cars", "Add 20 cars" };
         congestionComboBox=new JComboBox<>(congestionCondition);
         congestionComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
         congestionComboBox.setPreferredSize(new Dimension(200,20));
-        congestionComboBox.setPrototypeDisplayValue("Normal");
+        congestionComboBox.setPrototypeDisplayValue("Add cars to the system");
         congestionComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 congestionComboBoxActionPerformed(evt);
@@ -185,11 +185,11 @@ public class Slider  extends JPanel {
     }// </editor-fold>
 
     private void increaseButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        trafficManagement.factoryVehicle(1);
     }
 
     private void decreaseButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        trafficManagement.deleteVehicle(1);
     }
 
     private void weatherComboBoxActionPerformed(ActionEvent evt) {
