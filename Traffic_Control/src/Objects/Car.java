@@ -27,6 +27,7 @@ public class Car extends JPanel implements Vehicle{
 	public double rotate;
 	public int rotateInt = 0;
 	volatile Boolean destination = false;
+	//private final int radius=100;
 
 	public CarFlow.Direction currentDirection = CarFlow.Direction.RIGHT;
 
@@ -83,10 +84,16 @@ public class Car extends JPanel implements Vehicle{
 		}
 	}
 
-	public void turnCorner(double angle, int centerX, int centerY){
-		this.pos_x = (int) ((Math.cos(angle) * 100) + centerX);
-		this.pos_y = (int) ((Math.sin(angle) * 100) + centerY);
-
+	public void turnCorner(double angle, int centerX, int centerY, int radius){
+		if(radius == 100) {
+			this.pos_x = (int) ((Math.cos(angle) * radius) + centerX);
+			this.pos_y = (int) ((Math.sin(angle) * radius) + centerY);
+		}else{
+			this.pos_y = (int) ((Math.cos(angle) * radius) + centerY);
+			this.pos_x = (int) ((Math.sin(angle) * radius) + centerX);
+		}
+//		this.pos_x = (int) ((Math.cos(angle) * radius/2) + centerX);
+//		this.pos_y = (int) ((Math.sin(angle) * radius/2) + centerY);
 		repaint();
 	}
 
@@ -109,7 +116,12 @@ public class Car extends JPanel implements Vehicle{
 	public void bend(CarFlow.Direction d, double degree){
 		//Bend based on direction
 
-		rotate += Math.toRadians(degree);
+		if(d == CarFlow.Direction.RIGHT) {
+			rotate += Math.toRadians(degree);
+		}else if(d == CarFlow.Direction.LEFT){
+			rotate -= Math.toRadians(degree);
+		}
+
 //		this.pos_x += degree;
 //		this.pos_y += degree;
 
