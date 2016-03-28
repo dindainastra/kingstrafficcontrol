@@ -105,6 +105,85 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    public void deleteVehicle(int number){
+    	
+    	for (int i=0; i<number; i++){
+    		
+    		int random_index = rand.nextInt(this.aVehicleList.size());
+    		Vehicle v = this.aVehicleList.get(random_index);
+    		this.aVehicleList.remove(v);
+    		
+    		for (Terrain t : aTerrainList)
+    			t.removeVehicleFromList(v);
+    	}
+    	
+    	
+    	
+    }
+  
+    public void factoryVehicle(int number){
+        
+    	// factoryVehicle(String.valueOf(msg));
+    	
+    	ArrayList<Person> tmpPersonList = new ArrayList<Person>();
+    	
+            for(int i=0; i<number; i++){
+            	Person tmpP = new Person("Person "+i, rand.nextInt(10), false, null);
+                aPersonList.add(tmpP);
+                tmpPersonList.add(tmpP);
+            }
+            
+            for (Person p : tmpPersonList) {
+                if (!p.isPedestrian()) {
+                    if (new Random().nextBoolean()){
+                    	Vehicle v = new Car(p, 0,330);
+                    	aVehicleList.add(v);
+                    	this.aTerrainList.get(0).setForwardListFlow(v);
+                    }
+                    else{
+                    	Vehicle v = new Car(p, 1350, 405);
+                    	aVehicleList.add(v);
+                    	this.aTerrainList.get(0).setBackwardListFlow(v);
+                    }
+                }
+            }
+    	
+    }
+    
+    public void factoryVehicle(int number,int priority_flag){
+    
+    	// factoryVehicle(String.valueOf(msg),1);
+    	
+    	ArrayList<Person> tmpPersonList = new ArrayList<Person>();
+    	
+            for(int i=0; i<number; i++){
+            	Person tmpP = new Person("Person "+i, rand.nextInt(10), false, null);
+                aPersonList.add(tmpP);
+                tmpPersonList.add(tmpP);
+            }
+            
+            for (Person p : tmpPersonList) {
+                if (!p.isPedestrian()) {
+                    if (new Random().nextBoolean()){
+                    	Vehicle v = new Car(p, 0,330);
+                    	if (priority_flag==1)
+                    		v.setPriority(1);
+                    	aVehicleList.add(v);
+                    	this.aTerrainList.get(0).setForwardListFlow(v);
+                    }
+                    else{
+                    	Vehicle v = new Car(p, 1350, 405);
+                    	if (priority_flag==1)
+                    		v.setPriority(1);
+                    	aVehicleList.add(v);
+                    	this.aTerrainList.get(0).setBackwardListFlow(v);
+                    }
+                }
+            }
+    	
+    }
+    
+    
     public void run(){
 
         createPersons(10);
@@ -527,4 +606,5 @@ public class TrafficManagement extends JFrame {
         // add the corner road and its neighbour too
         // delete all of this
     }
+    
 }

@@ -9,7 +9,6 @@ import Objects.Car;
 import Objects.StraightRoad;
 import Objects.CornerRoad;
 import Objects.SquareJunction;
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 import javax.swing.*;
 import javax.swing.Timer;
