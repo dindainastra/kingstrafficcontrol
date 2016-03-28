@@ -50,7 +50,7 @@ public class Startup extends JPanel{
     }
 
     private void RandomMapButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+        // new TrafficManagement().run(100);
         System.exit(0);
     }
 
