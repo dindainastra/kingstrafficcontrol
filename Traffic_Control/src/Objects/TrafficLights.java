@@ -6,6 +6,8 @@ import java.awt.geom.AffineTransform;
 
 public class TrafficLights extends JPanel implements Runnable{
 
+
+    private Draw map;
     private int counter;
 
     private int pos_x, pos_y, rotates;
@@ -23,7 +25,7 @@ public class TrafficLights extends JPanel implements Runnable{
     private TrafficLights previousTrafficLight;
     private TrafficLights nextTrafficLight;
 
-    private int delayForGreenLight=3;
+    private int delayForGreenLight=4;
     private boolean canIChange=false;
 
     private long delay;
@@ -91,31 +93,32 @@ public class TrafficLights extends JPanel implements Runnable{
         }
     }
 
- /**
-  * Draw of Traffic Light. RGB used.
-  * @param g
-  */
- public void doDrawing(Graphics2D g){
+    /**
+     * Draw of Traffic Light. RGB used.
+     * * @param g
+     * */
+    public void doDrawing(Graphics2D g){
         AffineTransform old3 = g.getTransform();
         g.rotate(Math.toRadians(rotates),pos_x,pos_y);
 
-     int R, G, B;
-     if (currentColour==Red){
-         R = 255; G=0; B=0;
-     }else if (currentColour==Green){
-         R = 0; G=255; B=0;
-     }else {//Yellow
-         R = 255; G=215; B=0;
-     }
+        int R, G, B;
+        if (currentColour==Red){
+            R = 255; G=0; B=0;
+        }else if (currentColour==Green){
+            R = 0; G=255; B=0;
+        }else {//Yellow
+            R = 255; G=215; B=0;
+        }
 
-     	g.setColor(new Color (R,G,B));
-  		g.fillRect(pos_x, pos_y, width, length);
+        g.setColor(new Color (R,G,B));
+        g.fillRect(pos_x, pos_y, width, length);
         g.setTransform(old3);
     }
 
     @Override
     public void paintComponent(Graphics g){
         doDrawing((Graphics2D)g);
+
     }
 
 
@@ -124,8 +127,12 @@ public class TrafficLights extends JPanel implements Runnable{
      */
     @Override
     public void run() {
-        counter = (counter + 1) % 30;
-        if (counter == 0) {
+        for(;;) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             doRun();
         }
     }
