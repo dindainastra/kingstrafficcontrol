@@ -59,7 +59,8 @@ public class Startup extends JPanel{
 
     private void setMapButtonActionPerformed(ActionEvent evt) {
         new TrafficManagement().run();
-       // System.exit(0);
+//        System.exit(0);
+        ((JFrame)this.getTopLevelAncestor()).dispose();
     }
 
 }
