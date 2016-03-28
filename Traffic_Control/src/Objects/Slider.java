@@ -21,6 +21,7 @@ public class Slider  extends JPanel {
     private JButton increaseButton, decreaseButton;
     private JComboBox<String> weatherComboBox, emergencyComboBox,congestionComboBox;
     GridLayout gd;
+    FlowLayout fy;
     private TrafficManagement trafficManagement;
     private Car car;
     //private Terrain terrain;
@@ -33,10 +34,6 @@ public class Slider  extends JPanel {
         //this.trafficLights = trafficLights;
     }
 
-
-
-
-
 	private void initComponents() {
 
         //Create JLabel
@@ -46,14 +43,17 @@ public class Slider  extends JPanel {
         emergencyLabel = new JLabel();
         roadNetworkLabel = new JLabel();
         speedLimitLabel = new JLabel();
+
         //Create JSlider
         timeIntervalSlider = new JSlider(0, 100);
         congestionSlider = new JSlider();
         speedLimitSlider = new JSlider();
+
         //Create JComboBox
         weatherComboBox = new JComboBox<>();
         emergencyComboBox = new JComboBox<>();
         congestionComboBox = new JComboBox<>();
+
         //Create JButton
         increaseButton = new JButton("+");
         decreaseButton = new JButton("-");
@@ -83,30 +83,37 @@ public class Slider  extends JPanel {
         });
 
         //set labels for interfaces
-        emergencyLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        //emergencyLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+
+        emergencyLabel.setFont(new Font("Verdana",Font.BOLD,12)); // NOI18N
         emergencyLabel.setBorder(BorderFactory.createEmptyBorder(20,10,0,0));
         emergencyLabel.setText("Emergency Services:");
-        roadNetworkLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        roadNetworkLabel.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
         roadNetworkLabel.setBorder(BorderFactory.createEmptyBorder(20,10,0,0));
         roadNetworkLabel.setText("Congestion Rate:");
-        timeIntervalLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        timeIntervalLabel.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
         timeIntervalLabel.setBorder(BorderFactory.createEmptyBorder(20,10,0,0));
         timeIntervalLabel.setText("Time Interval:");
-        congestionLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        congestionLabel.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
         congestionLabel.setBorder(BorderFactory.createEmptyBorder(20,10,0,0));
         congestionLabel.setText("Congestion Rate:");
-        weatherLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        weatherLabel.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
         weatherLabel.setBorder(BorderFactory.createEmptyBorder(20,10,0,0));
         weatherLabel.setText("Weather Option:");
-        speedLimitLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
+        speedLimitLabel.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
         speedLimitLabel.setBorder(BorderFactory.createEmptyBorder(20,10,0,0));
         speedLimitLabel.setText("Speed Limit Option:");
+
+        //increaseButton.setBorder(BorderFactory.createEmptyBorder(20,10,0,0));
+
+
 
         String[] weatherConditions=new String[] { "   Normal", "   Hazardous", "   Night", "   Day" };
         weatherComboBox=new JComboBox<>(weatherConditions);
         weatherComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
         weatherComboBox.setPreferredSize(new Dimension(200,20));
         weatherComboBox.setPrototypeDisplayValue("Normal");
+        weatherComboBox.setFont(new Font("Verdana", 0, 12));
         weatherComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 weatherComboBoxActionPerformed(evt);
@@ -118,6 +125,7 @@ public class Slider  extends JPanel {
         congestionComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
         congestionComboBox.setPreferredSize(new Dimension(200,20));
         congestionComboBox.setPrototypeDisplayValue("Normal");
+        congestionComboBox.setFont(new Font("Verdana", 0, 12));
         congestionComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 congestionComboBoxActionPerformed(evt);
@@ -129,6 +137,7 @@ public class Slider  extends JPanel {
         emergencyComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
         emergencyComboBox.setPreferredSize(new Dimension(200,20));
         emergencyComboBox.setPrototypeDisplayValue("0");
+        emergencyComboBox.setFont(new Font("Verdana", 0, 12));
         emergencyComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 emergencyComboBoxActionPerformed(evt);
@@ -153,34 +162,153 @@ public class Slider  extends JPanel {
 
 
 
-        gd=new GridLayout(13,0,20,0);
-       /// / gd=new GridLayout(13,0,20,5);
-        this.setLayout(gd);
-        add(timeIntervalLabel);
-        add(timeIntervalSlider);
+        //gd=new GridLayout(13,0,20,0);
+        //this.setLayout(gd);
 
+        this.setLayout(new GridBagLayout());
+        GridBagConstraints c=new GridBagConstraints();
+        c.fill=GridBagConstraints.VERTICAL;
+        //c.anchor=GridBagConstraints.CENTER;
+
+        c.ipady=0;
+        c.ipadx=0;
+        c.weightx=0;
+        c.weighty=0.1;
+        c.gridx=0;
+        c.gridy=0;
+        c.gridwidth=2;
+        c.insets=new Insets(0,0,0,0);
+        this.add(timeIntervalLabel,c);
+
+        c.weightx=0.5;
+        c.weighty=0;
+        c.ipady=0;
+        c.ipadx=200;
+        c.gridx=0;
+        c.gridy=1;
+        c.insets=new Insets(0,0,0,0);
+        this.add(timeIntervalSlider,c);
+
+        c.ipady=0;
+        c.ipadx=0;
+        c.weightx=0;
+        c.weighty=0.1;
+        c.gridx=0;
+        c.gridy=2;
+        c.insets=new Insets(0,0,0,0);
+       // c.anchor=GridBagConstraints.CENTER;
+        this.add(speedLimitLabel,c);
+
+        c.ipady=0;
+        c.ipadx=200;
+        c.weightx=0.5;
+        c.weighty=0;
+        c.gridx=0;
+        c.gridy=3;
+        c.insets=new Insets(0,0,0,0);
+        this.add(speedLimitSlider,c);
+
+        c.ipady=0;
+        c.ipadx=0;
+        c.weightx=0;
+        c.weighty=0.1;
+        c.gridx=0;
+        c.gridy=4;
+        c.insets=new Insets(0,0,0,0);
+        this.add(congestionLabel,c);
+
+        c.weightx=0.5;
+        c.weighty=0;
+        c.ipady=0;
+        c.ipadx=200;
+        c.gridx=0;
+        c.gridy=5;
+        c.insets=new Insets(0,0,0,0);
+        this.add(congestionComboBox,c);
+
+        c.weightx=0;
+        c.weighty=0;
+        c.ipady=0;
+        c.ipadx=0;
+        c.gridx=0;
+        c.gridy=6;
+        c.gridwidth=1;
+        c.insets=new Insets(10,50,0,10);
+        c.anchor=GridBagConstraints.CENTER;
+        this.add(increaseButton,c);
+
+        c.weightx=0;
+        c.weighty=0;
+        c.ipady=0;
+        c.ipadx=0;
+        c.gridx=1;
+        c.gridy=6;
+        c.insets=new Insets(10,50,0,50);
+        c.anchor=GridBagConstraints.CENTER;
+        this.add(decreaseButton,c);
+
+        c.ipady=0;
+        c.ipadx=0;
+        c.weightx=0;
+        c.weighty=0.1;
+        c.gridx=0;
+        c.gridy=7;
+        c.gridwidth=2;
+        c.insets=new Insets(0,0,0,0);
+        this.add(weatherLabel,c);
+
+        c.ipady=0;
+        c.ipadx=200;
+        c.weightx=0.5;
+        c.weighty=0;
+        c.gridx=0;
+        c.gridy=8;
+        this.add(weatherComboBox,c);
+
+        c.ipady=0;
+        c.ipadx=0;
+        c.weightx=0;
+        c.weighty=0.1;
+        c.gridx=0;
+        c.gridy=9;
+        this.add(emergencyLabel,c);
+
+        c.ipady=0;
+        c.ipadx=200;
+        c.weightx=0.5;
+        c.weighty=0;
+        c.gridx=0;
+        c.gridy=10;
+        c.insets=new Insets(0,0,30,0);
+        this.add(emergencyComboBox,c);
+
+
+
+//        add(timeIntervalLabel);
+//        add(timeIntervalSlider);
+//
+////        add(congestionLabel);
+////        add(congestionSlider);
+////        add(congestionValue);
+//
+//        add(speedLimitLabel);
+//        add(speedLimitSlider);
+//
+//
 //        add(congestionLabel);
-//        add(congestionSlider);
-//        add(congestionValue);
-
-        add(speedLimitLabel);
-        add(speedLimitSlider);
-
-
-        add(congestionLabel);
-        add(congestionComboBox);
-
-        //this.setLayout(gp);
-       // gp.setColumns(2);
-        add(increaseButton);
-        add(decreaseButton);
-
-
-        add(weatherLabel);
-        add(weatherComboBox);
-
-        add(emergencyLabel);
-        add(emergencyComboBox);
+//        add(congestionComboBox);
+//
+//        //this.setLayout(gp);
+//       // gp.setColumns(2);
+//        add(increaseButton);
+//        add(decreaseButton);
+//
+//
+//        add(weatherLabel);
+//        add(weatherComboBox);
+//
+//        add(emergencyLabel);
+//        add(emergencyComboBox);
 
     }// </editor-fold>
 
