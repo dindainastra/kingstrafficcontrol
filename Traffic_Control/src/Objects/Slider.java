@@ -18,13 +18,14 @@ public class Slider  extends JPanel {
 
     private JLabel congestionLabel,emergencyLabel,roadNetworkLabel,timeIntervalLabel,weatherLabel, speedLimitLabel;
     private JSlider congestionSlider,timeIntervalSlider,speedLimitSlider;
+    private JButton increaseButton, decreaseButton;
     private JComboBox<String> weatherComboBox, emergencyComboBox,congestionComboBox;
     GridLayout gd;
     private TrafficManagement trafficManagement;
     private Car car;
     //private Terrain terrain;
 
-    
+
 
     public Slider(TrafficManagement trafficManagement) {
     	initComponents();
@@ -33,7 +34,7 @@ public class Slider  extends JPanel {
     }
 
 
-	
+
 
 
 	private void initComponents() {
@@ -53,6 +54,9 @@ public class Slider  extends JPanel {
         weatherComboBox = new JComboBox<>();
         emergencyComboBox = new JComboBox<>();
         congestionComboBox = new JComboBox<>();
+        //Create JButton
+        increaseButton = new JButton("+");
+        decreaseButton = new JButton("-");
 
         //slider interface for time interval and congestion rate
         timeIntervalSlider.setMajorTickSpacing(10);
@@ -61,7 +65,7 @@ public class Slider  extends JPanel {
         timeIntervalSlider.setPaintTicks(true);
         timeIntervalSlider.setValue(50);
         timeIntervalSlider.setBorder(BorderFactory.createEmptyBorder(0,10,0,10));
-        
+
         timeIntervalSlider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 timeIntervalStateChanges(evt);
@@ -109,18 +113,18 @@ public class Slider  extends JPanel {
             }
         });
 
-        String[] congestionCondition=new String[] { "Normal", "High", "Low" };
+        String[] congestionCondition=new String[] {"Add cars to the system", "Add 5 cars", "Add 10 cars", "Add 20 cars" };
         congestionComboBox=new JComboBox<>(congestionCondition);
         congestionComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
         congestionComboBox.setPreferredSize(new Dimension(200,20));
-        congestionComboBox.setPrototypeDisplayValue("Normal");
+        congestionComboBox.setPrototypeDisplayValue("Add cars to the system");
         congestionComboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 congestionComboBoxActionPerformed(evt);
             }
         });
 
-        String[] emergencyCondition=new String[] { "0", "1", "2", "3"  };
+        String[] emergencyCondition=new String[] { "No emergency services", "1", "2", "3"  };
         emergencyComboBox=new JComboBox<>(emergencyCondition);
         emergencyComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
         emergencyComboBox.setPreferredSize(new Dimension(200,20));
@@ -131,10 +135,26 @@ public class Slider  extends JPanel {
             }
         });
 
+//        increaseButton.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
+//        increaseButton.setPreferredSize(new Dimension(200,20));
+        increaseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                increaseButtonActionPerformed(evt);
+            }
+        });
 
-       gd=new GridLayout(13,0,20,0);
+//        decreaseButton.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
+//        decreaseButton.setPreferredSize(new Dimension(200,20));
+        decreaseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                decreaseButtonActionPerformed(evt);
+            }
+        });
 
-       // gd=new GridLayout(13,0,20,5);
+
+
+        gd=new GridLayout(13,0,20,0);
+       /// / gd=new GridLayout(13,0,20,5);
         this.setLayout(gd);
         add(timeIntervalLabel);
         add(timeIntervalSlider);
@@ -150,6 +170,12 @@ public class Slider  extends JPanel {
         add(congestionLabel);
         add(congestionComboBox);
 
+        //this.setLayout(gp);
+       // gp.setColumns(2);
+        add(increaseButton);
+        add(decreaseButton);
+
+
         add(weatherLabel);
         add(weatherComboBox);
 
@@ -157,6 +183,14 @@ public class Slider  extends JPanel {
         add(emergencyComboBox);
 
     }// </editor-fold>
+
+    private void increaseButtonActionPerformed(ActionEvent evt) {
+        trafficManagement.factoryVehicle(1);
+    }
+
+    private void decreaseButtonActionPerformed(ActionEvent evt) {
+        trafficManagement.deleteVehicle(1);
+    }
 
     private void weatherComboBoxActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
@@ -173,35 +207,8 @@ public class Slider  extends JPanel {
         if(evt.getSource()== emergencyComboBox){
             JComboBox emergencyComboBox = (JComboBox)evt.getSource();
             String msg = (String)emergencyComboBox.getSelectedItem();
-            switch (msg){
-                case "0":
-                    car.setPriority(0);
-                    trafficManagement.createPersons(1);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
 
-                    break;
-                case "1":
-                    car.setPriority(1);
-                    trafficManagement.createPersons(1);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
-
-                    break;
-                case "2":
-                    car.setPriority(1);
-                    trafficManagement.createPersons(2);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
-
-                    break;
-                case "3":
-                    car.setPriority(1);
-                    trafficManagement.createPersons(3);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
-
-            }
+            trafficManagement.factoryVehicle(Integer.parseInt(msg),1);
         }
     }
 
@@ -216,21 +223,17 @@ public class Slider  extends JPanel {
             JComboBox congestionCombobox = (JComboBox)evt.getSource();
             String msg = (String)congestionCombobox.getSelectedItem();
             switch (msg){
-                case "Normal":
-                    trafficManagement.createPersons(10);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
+                case "Add 10 cars":
+                    int normal = 10;
+                    trafficManagement.factoryVehicle(normal);
                     break;
-                case "High":
-                    trafficManagement.createPersons(20);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
+                case "Add 20 cars":
+                    int high = 20;
+                    trafficManagement.factoryVehicle(high);
                     break;
-                case "Low":
-                    trafficManagement.createPersons(5);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
-                    //terrain.removeVehicleFromList();
+                case "Add 5 cars":
+                    int low = 5;
+                    trafficManagement.factoryVehicle(low);
 
                     break;
             }
@@ -256,9 +259,9 @@ public class Slider  extends JPanel {
 
 
 
-  
 
-    
+
+
     private void speedLimitStateChanges(ChangeEvent evt) {
         // TODO add your handling code here:
     }

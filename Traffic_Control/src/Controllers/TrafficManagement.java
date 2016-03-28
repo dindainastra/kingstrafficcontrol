@@ -105,10 +105,89 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    public void deleteVehicle(int number){
+    	
+    	for (int i=0; i<number; i++){
+    		
+    		int random_index = rand.nextInt(this.aVehicleList.size());
+    		Vehicle v = this.aVehicleList.get(random_index);
+    		this.aVehicleList.remove(v);
+    		
+    		for (Terrain t : aTerrainList)
+    			t.removeVehicleFromList(v);
+    	}
+    	
+    	
+    	
+    }
+  
+    public void factoryVehicle(int number){
+        
+    	// factoryVehicle(String.valueOf(msg));
+    	
+    	ArrayList<Person> tmpPersonList = new ArrayList<Person>();
+    	
+            for(int i=0; i<number; i++){
+            	Person tmpP = new Person("Person "+i, rand.nextInt(10), false, null);
+                aPersonList.add(tmpP);
+                tmpPersonList.add(tmpP);
+            }
+            
+            for (Person p : tmpPersonList) {
+                if (!p.isPedestrian()) {
+                    if (new Random().nextBoolean()){
+                    	Vehicle v = new Car(p, 0,330);
+                    	aVehicleList.add(v);
+                    	this.aTerrainList.get(0).setForwardListFlow(v);
+                    }
+                    else{
+                    	Vehicle v = new Car(p, 1350, 405);
+                    	aVehicleList.add(v);
+                    	this.aTerrainList.get(1).setBackwardListFlow(v);
+                    }
+                }
+            }
+    	
+    }
+    
+    public void factoryVehicle(int number,int priority_flag){
+    
+    	// factoryVehicle(String.valueOf(msg),1);
+    	
+    	ArrayList<Person> tmpPersonList = new ArrayList<Person>();
+    	
+            for(int i=0; i<number; i++){
+            	Person tmpP = new Person("Person "+i, rand.nextInt(10), false, null);
+                aPersonList.add(tmpP);
+                tmpPersonList.add(tmpP);
+            }
+            
+            for (Person p : tmpPersonList) {
+                if (!p.isPedestrian()) {
+                    if (new Random().nextBoolean()){
+                    	Vehicle v = new Car(p, 0,330);
+                    	if (priority_flag==1)
+                    		v.setPriority(1);
+                    	aVehicleList.add(v);
+                    	this.aTerrainList.get(0).setForwardListFlow(v);
+                    }
+                    else{
+                    	Vehicle v = new Car(p, 1350, 405);
+                    	if (priority_flag==1)
+                    		v.setPriority(1);
+                    	aVehicleList.add(v);
+                    	this.aTerrainList.get(1).setBackwardListFlow(v);
+                    }
+                }
+            }
+    	
+    }
+    
+    
     public void run(){
 
-        createPersons(15);
-        createVehicles();
+        //createPersons(10);
+        //createVehicles();
 
         staticMapCreator();
         //initComponents();
@@ -117,7 +196,7 @@ public class TrafficManagement extends JFrame {
         initializeStaticTrafficLights();
 
         //init all the vehicles
-        initializeForwardAndBackwardLists();
+        //initializeForwardAndBackwardLists();
 
         //do the graph to know every node their closest nodes
         initializeNeighboursTerrainLists();
@@ -206,9 +285,9 @@ public class TrafficManagement extends JFrame {
 
         //junction25
         //TrafficLights ninthTL = new TrafficLights(715,10,3,2,0,getTlDelay());
-        TrafficLights ninthTL = new TrafficLights(715,10,3,2,0,3000);
-        TrafficLights twelfthTL = new TrafficLights(815,60,3,1,0,3000);
-        TrafficLights eighteenthTL = new TrafficLights(765,110,3,1,90,3000);
+        TrafficLights ninthTL = new TrafficLights(815,10,3,2,0,3000);
+        TrafficLights twelfthTL = new TrafficLights(915,60,3,1,0,3000);
+        TrafficLights eighteenthTL = new TrafficLights(865,110,3,1,90,3000);
 
         ninthTL.previousTrafficLightIs(eighteenthTL);
         twelfthTL.previousTrafficLightIs(ninthTL);
@@ -219,10 +298,10 @@ public class TrafficManagement extends JFrame {
 
 
 //        //junction 23
-        TrafficLights thirdTL = new TrafficLights(150,325,4, 2,90,3000);
-        TrafficLights firstTL = new TrafficLights(150,375,4, 1,0,3000);
-        TrafficLights fourthTL = new TrafficLights(100,425, 4, 1,90,3000);
-        TrafficLights secondTL = new TrafficLights(50,325,4, 1,0,3000);
+        TrafficLights thirdTL = new TrafficLights(250,325,4, 2,90,3000);
+        TrafficLights firstTL = new TrafficLights(250,375,4, 1,0,3000);
+        TrafficLights fourthTL = new TrafficLights(200,425, 4, 1,90,3000);
+        TrafficLights secondTL = new TrafficLights(150,325,4, 1,0,3000);
         thirdTL.previousTrafficLightIs(secondTL);
         firstTL.previousTrafficLightIs(thirdTL);
         fourthTL.previousTrafficLightIs(firstTL);
@@ -234,10 +313,10 @@ public class TrafficManagement extends JFrame {
 
 
 //        //roundabout
-        TrafficLights fifteenTL = new TrafficLights(815,260,4, 2,90,3000);
-        TrafficLights eighthTL = new TrafficLights(880,375,4, 1,0,3000);
-        TrafficLights sixteenthTL = new TrafficLights(765,490,4 ,1,90,3000);
-        TrafficLights fifthTL = new TrafficLights(650,325,4, 1,0,3000);
+        TrafficLights fifteenTL = new TrafficLights(915,260,4, 2,90,3000);
+        TrafficLights eighthTL = new TrafficLights(980,375,4, 1,0,3000);
+        TrafficLights sixteenthTL = new TrafficLights(865,490,4 ,1,90,3000);
+        TrafficLights fifthTL = new TrafficLights(750,325,4, 1,0,3000);
         fifteenTL.previousTrafficLightIs(fifthTL);
         eighthTL.previousTrafficLightIs(fifteenTL);
         sixteenthTL.previousTrafficLightIs(eighthTL);
@@ -249,10 +328,10 @@ public class TrafficManagement extends JFrame {
 //
 //
 //        //junction22
-        TrafficLights thirteenthTL = new TrafficLights(1180,325,4, 2,90,3000);
-        TrafficLights seventhTL = new TrafficLights(1180,375,4, 1,0,3000);
-        TrafficLights fourteenthTL = new TrafficLights(1130,425,4,1,90,3000);
-        TrafficLights sixthTL = new TrafficLights(1080,325,4,1,0,3000);
+        TrafficLights thirteenthTL = new TrafficLights(1280,325,4, 2,90,3000);
+        TrafficLights seventhTL = new TrafficLights(1280,375,4, 1,0,3000);
+        TrafficLights fourteenthTL = new TrafficLights(1230,425,4,1,90,3000);
+        TrafficLights sixthTL = new TrafficLights(1180,325,4,1,0,3000);
         thirteenthTL.previousTrafficLightIs(sixthTL);
         seventhTL.previousTrafficLightIs(thirteenthTL);
         fourteenthTL.previousTrafficLightIs(seventhTL);
@@ -265,9 +344,9 @@ public class TrafficManagement extends JFrame {
 //
 //        //junction24
 
-        TrafficLights seventeenthTL = new TrafficLights(815,590,3,2,90,3000);
-        TrafficLights eleventhTL = new TrafficLights(815,640,3,1,0,3000);
-        TrafficLights tenthTL = new TrafficLights(715,590,3,1,0,3000);
+        TrafficLights seventeenthTL = new TrafficLights(915,590,3,2,90,3000);
+        TrafficLights eleventhTL = new TrafficLights(915,640,3,1,0,3000);
+        TrafficLights tenthTL = new TrafficLights(815,590,3,1,0,3000);
         seventeenthTL.previousTrafficLightIs(tenthTL);
         eleventhTL.previousTrafficLightIs(seventeenthTL);
         tenthTL.previousTrafficLightIs(eleventhTL);
@@ -401,46 +480,53 @@ public class TrafficManagement extends JFrame {
     public void staticMapCreator(){
 
         //create FIRSTLY the entry and exit roads
-        aTerrainList.add(new StraightRoad(10,325,0,40,this));//entry road    //0
-        aTerrainList.add(new StraightRoad(1180,325,0,170,this));//exit road  //1
+//        aTerrainList.add(new StraightRoad(10,325,0,40,this));//entry road    //0
+//        aTerrainList.add(new StraightRoad(1180,325,0,170,this));//exit road  //1
+        aTerrainList.add(new StraightRoad(50,325,0,100,this));//entry road    //0
+        aTerrainList.add(new StraightRoad(1280,325,0,100,this));//exit road  //1
+
 
         //next, create the rest map
 
         //add roundabout
-        aTerrainList.add(new CornerRoad(640,250,90,1,this));                         //2
-        aTerrainList.add(new CornerRoad(640,250,180,1,this));                        //3
-        aTerrainList.add(new CornerRoad(640,250,270,1,this));                        //4
-        aTerrainList.add(new CornerRoad(640,250,360,1,this));                        //5
+        aTerrainList.add(new CornerRoad(740,250,90,1,this));                         //2
+        aTerrainList.add(new CornerRoad(740,250,180,1,this));                        //3
+        aTerrainList.add(new CornerRoad(740,250,270,1,this));                        //4
+        aTerrainList.add(new CornerRoad(740,250,360,1,this));                        //5
 
         //add horizontal road
         //Added another traffic light color parameter to SRoad
-        aTerrainList.add(new StraightRoad(150,325,0,500,this));               //6   <-----
-        aTerrainList.add(new StraightRoad(880,325,0,200,this));
-        aTerrainList.add(new StraightRoad(150,10,0,565,this));
-        aTerrainList.add(new StraightRoad(150,590,0,565,this));
-        aTerrainList.add(new StraightRoad(815,590,0,265,this));
-        aTerrainList.add(new StraightRoad(815,10,0,265,this));
+        aTerrainList.add(new StraightRoad(250,325,0,500,this));               //6   <-----
+        aTerrainList.add(new StraightRoad(980,325,0,200,this));
+        aTerrainList.add(new StraightRoad(250,10,0,565,this));
+        aTerrainList.add(new StraightRoad(250,590,0,565,this));
+        aTerrainList.add(new StraightRoad(915,590,0,265,this));
+        aTerrainList.add(new StraightRoad(915,10,0,265,this));
+
 
         //add vertical roads
-        aTerrainList.add(new StraightRoad(715,110,90,150,this));              //12
-        aTerrainList.add(new StraightRoad(715,490,90,101,this));
-        aTerrainList.add(new StraightRoad(50,110,90,215,this));              //14
-        aTerrainList.add(new StraightRoad(50,425,90,165,this));
-        aTerrainList.add(new StraightRoad(1080,425,90,165,this));
-        aTerrainList.add(new StraightRoad(1080,110,90,215,this));
+        aTerrainList.add(new StraightRoad(815,110,90,150,this));              //12
+        aTerrainList.add(new StraightRoad(815,490,90,101,this));
+        aTerrainList.add(new StraightRoad(150,110,90,215,this));              //14
+        aTerrainList.add(new StraightRoad(150,425,90,165,this));
+        aTerrainList.add(new StraightRoad(1180,425,90,165,this));
+        aTerrainList.add(new StraightRoad(1180,110,90,215,this));
 
         //add curved roads
-        aTerrainList.add(new CornerRoad(980,10,360,0,this));                         //18
-        aTerrainList.add(new CornerRoad(980,490,270,0,this));                        //19
-        aTerrainList.add(new CornerRoad(50,10,90,0,this));                           //20
-        aTerrainList.add(new CornerRoad(50,490,180,0,this));                         //21
+        aTerrainList.add(new CornerRoad(1080,10,360,0,this));                         //18
+        aTerrainList.add(new CornerRoad(1080,490,270,0,this));                        //19
+        aTerrainList.add(new CornerRoad(150,10,90,0,this));                           //20
+        aTerrainList.add(new CornerRoad(150,490,180,0,this));                         //21
         //aTerrainList.add(new CornerRoad(300,75,90));
 
+
         //add junctions (0,0,4,3: to close the square junctions)
-        aTerrainList.add(new SquareJunction(1080,325,this,0));
-        aTerrainList.add(new SquareJunction(50,325,this,0));                           //23
-        aTerrainList.add(new SquareJunction(715,590,this,4));
-        aTerrainList.add(new SquareJunction(715,10,this,3));
+        aTerrainList.add(new SquareJunction(1180,325,this,0));
+        aTerrainList.add(new SquareJunction(150,325,this,0));                          //23
+        aTerrainList.add(new SquareJunction(815,590,this,4));
+        aTerrainList.add(new SquareJunction(815,10,this,3));
+//        aTerrainList.add(new SquareJunction(50,325,this,0));                          //23
+//        aTerrainList.add(new SquareJunction(715,590,this,4));
 
     }
 
@@ -520,4 +606,5 @@ public class TrafficManagement extends JFrame {
         // add the corner road and its neighbour too
         // delete all of this
     }
+    
 }
