@@ -109,7 +109,7 @@ public class Slider  extends JPanel {
             }
         });
 
-        String[] congestionCondition=new String[] { "Normal", "High", "Low" };
+        String[] congestionCondition=new String[] { "Add 5 cars", "Add 10 cars", "Add 20 cars" };
         congestionComboBox=new JComboBox<>(congestionCondition);
         congestionComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
         congestionComboBox.setPreferredSize(new Dimension(200,20));
@@ -120,7 +120,7 @@ public class Slider  extends JPanel {
             }
         });
 
-        String[] emergencyCondition=new String[] { "0", "1", "2", "3"  };
+        String[] emergencyCondition=new String[] { "No emergency services", "1", "2", "3"  };
         emergencyComboBox=new JComboBox<>(emergencyCondition);
         emergencyComboBox.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
         emergencyComboBox.setPreferredSize(new Dimension(200,20));
@@ -173,35 +173,8 @@ public class Slider  extends JPanel {
         if(evt.getSource()== emergencyComboBox){
             JComboBox emergencyComboBox = (JComboBox)evt.getSource();
             String msg = (String)emergencyComboBox.getSelectedItem();
-            switch (msg){
-                case "0":
-                    car.setPriority(0);
-                    trafficManagement.createPersons(1);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
 
-                    break;
-                case "1":
-                    car.setPriority(1);
-                    trafficManagement.createPersons(1);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
-
-                    break;
-                case "2":
-                    car.setPriority(1);
-                    trafficManagement.createPersons(2);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
-
-                    break;
-                case "3":
-                    car.setPriority(1);
-                    trafficManagement.createPersons(3);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
-
-            }
+            trafficManagement.factoryVehicle(Integer.parseInt(msg),1);
         }
     }
 
@@ -216,21 +189,17 @@ public class Slider  extends JPanel {
             JComboBox congestionCombobox = (JComboBox)evt.getSource();
             String msg = (String)congestionCombobox.getSelectedItem();
             switch (msg){
-                case "Normal":
-                    trafficManagement.createPersons(10);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
+                case "Add 10 cars":
+                    int normal = 10;
+                    trafficManagement.factoryVehicle(normal);
                     break;
-                case "High":
-                    trafficManagement.createPersons(20);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
+                case "Add 20 cars":
+                    int high = 20;
+                    trafficManagement.factoryVehicle(high);
                     break;
-                case "Low":
-                    trafficManagement.createPersons(5);
-                    trafficManagement.createVehicles();
-                    trafficManagement.initializeForwardAndBackwardLists();
-                    //terrain.removeVehicleFromList();
+                case "Add 5 cars":
+                    int low = 5;
+                    trafficManagement.factoryVehicle(low);
 
                     break;
             }
