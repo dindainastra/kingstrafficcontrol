@@ -367,9 +367,9 @@ public class TrafficManagement extends JFrame {
         aTerrainList.get(8).setForwardListFlow(eighteenthTL);//up supposed to be backward
 //
 //        //junction19
-        aTerrainList.get(11).setForwardListFlow(thirdTL); //down supposed to be backward
+        aTerrainList.get(11).setForwardListFlow(fourthTL); //down supposed to be backward
         aTerrainList.get(0).setForwardListFlow(secondTL); //supposed to be backward
-        aTerrainList.get(10).setBackwardListFlow(fourthTL); //up
+        aTerrainList.get(10).setBackwardListFlow(thirdTL); //up
         aTerrainList.get(2).setBackwardListFlow(firstTL);
 //
 //        //jun22
