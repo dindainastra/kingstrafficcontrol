@@ -168,6 +168,7 @@ public class Slider  extends JPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints c=new GridBagConstraints();
         c.fill=GridBagConstraints.VERTICAL;
+      
         //c.anchor=GridBagConstraints.CENTER;
 
         c.ipady=0;
@@ -226,6 +227,17 @@ public class Slider  extends JPanel {
         c.insets=new Insets(0,0,0,0);
         this.add(congestionComboBox,c);
 
+//        c.weightx=0;
+//        c.weighty=0;
+//        c.ipady=0;
+//        c.ipadx=0;
+//        c.gridx=0;
+//        c.gridy=6;
+//        c.gridwidth=1;
+//        c.insets=new Insets(10,50,0,10);
+//        c.anchor=GridBagConstraints.CENTER;
+//        this.add(increaseButton,c);
+
         c.weightx=0;
         c.weighty=0;
         c.ipady=0;
@@ -233,19 +245,22 @@ public class Slider  extends JPanel {
         c.gridx=0;
         c.gridy=6;
         c.gridwidth=1;
-        c.insets=new Insets(10,50,0,10);
+        //c.insets=new Insets(10,50,0,10);
+        c.insets=new Insets(10,10,0,50);
         c.anchor=GridBagConstraints.CENTER;
-        this.add(increaseButton,c);
-
+        this.add(decreaseButton,c);
+        
         c.weightx=0;
         c.weighty=0;
         c.ipady=0;
         c.ipadx=0;
         c.gridx=1;
         c.gridy=6;
-        c.insets=new Insets(10,50,0,50);
+        c.gridwidth=1;
+        c.insets=new Insets(10,50,0,10);
         c.anchor=GridBagConstraints.CENTER;
-        this.add(decreaseButton,c);
+        this.add(increaseButton,c);
+        
 
         c.ipady=0;
         c.ipadx=0;
@@ -313,11 +328,11 @@ public class Slider  extends JPanel {
     }// </editor-fold>
 
     private void increaseButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+       this.trafficManagement.factoryVehicle(1);
     }
 
     private void decreaseButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+    	this.trafficManagement.deleteVehicle(1);
     }
 
     private void weatherComboBoxActionPerformed(ActionEvent evt) {
