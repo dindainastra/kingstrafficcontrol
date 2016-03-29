@@ -49,7 +49,27 @@ public class Motorbike extends JPanel implements Vehicle {
 	public int getLength(){
 		return this.length;
 	}
-	
+
+	@Override
+	public boolean getLock() {
+		return false;
+	}
+
+	@Override
+	public void setLock(boolean lock) {
+
+	}
+
+	@Override
+	public boolean amIMoving() {
+		return false;
+	}
+
+	@Override
+	public void setThatIAmMoving(boolean lock) {
+
+	}
+
 	public int getPriority() {
 		return this.priorityLevel;
 	}

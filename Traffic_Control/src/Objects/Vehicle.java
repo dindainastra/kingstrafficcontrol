@@ -4,13 +4,17 @@ import java.awt.Graphics2D;
 
 public interface Vehicle {
 
-	public int getPriority();
-	public void setPriority(int priority);
-	public Person getPerson();
-	public void setPerson(Person p);
-	public void doDrawing(Graphics2D g);
-	public void set_pos_x(int x);
-	public int get_pos_x();
-	public void move();
-	public int getLength();
+	int getPriority();
+	void setPriority(int priority);
+	Person getPerson();
+	void setPerson(Person p);
+	void doDrawing(Graphics2D g);
+	void set_pos_x(int x);
+	int get_pos_x();
+	void move();
+	int getLength();
+	boolean getLock();
+	void setLock(boolean lock);
+	boolean amIMoving();
+	void setThatIAmMoving(boolean lock);
 }

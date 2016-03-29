@@ -6,22 +6,13 @@ import java.awt.geom.AffineTransform;
 
 public class TrafficLights extends JPanel implements Runnable{
 
-
-    private Draw map;
-    private int counter;
-
     private int pos_x, pos_y, rotates;
     private final int width = 3, length = 50;
-    private int R,G,B;
     private final int Red = 1;
     private final int Yellow = 2;
     private final int Green = 3;
     private final int YellowReverse = 4;
     private int currentColour;
-    private final int RED_SECS = 30;
-    private final int YELLOW_SECS = 30;
-    private final int GREEN_SECS = 30;
-    private final int YellowReverse_SECS = 30;
     private TrafficLights previousTrafficLight;
     private TrafficLights nextTrafficLight;
 
@@ -30,12 +21,7 @@ public class TrafficLights extends JPanel implements Runnable{
 
     private long delay;
     private int signal = 1;
-    private int numberOfWays;
-    private boolean passInitial=false;
-    private boolean setNextTrafficPass;
-    private int initialSignal;
 
-    //set traffic light colour and shape
     /**
      * Constructor. Sets the position of the traffic light. 
      * RGB values to be used for painting the GUI.
@@ -43,15 +29,12 @@ public class TrafficLights extends JPanel implements Runnable{
      * @param y_coordinate
      * @param rotation
      */
-    public TrafficLights(int x_coordinate, int y_coordinate, int numberOfWays, int signal, int rotation, long delay){
+    public TrafficLights(int x_coordinate, int y_coordinate, int signal, int rotation, long delay){
         this.pos_x = x_coordinate;
         this.pos_y = y_coordinate;
         this.rotates = rotation;
         this.currentColour = signal;
-        //this.initialSignal = signal;
         this.delay = delay;
-        this.numberOfWays = numberOfWays;
-        //this.currentColour = RGB;
     }
 
     /**
@@ -73,24 +56,6 @@ public class TrafficLights extends JPanel implements Runnable{
                 currentColour = Red;
         }
         return currentColour;
-    }
-
-    /**
-     * This method iterates the change of colours.
-     */
-
-    private int getSecs() {
-        switch (currentColour) {
-            case Red:
-            default:
-                return RED_SECS * 100;
-            case Yellow:
-                return YELLOW_SECS * 100;
-            case Green:
-                return GREEN_SECS * 100;
-            case YellowReverse:
-                return YellowReverse_SECS *100;
-        }
     }
 
     /**
@@ -120,7 +85,6 @@ public class TrafficLights extends JPanel implements Runnable{
         doDrawing((Graphics2D)g);
 
     }
-
 
     /**
      * Run method
@@ -178,7 +142,7 @@ public class TrafficLights extends JPanel implements Runnable{
      *
      * @return
      */
-    private long getDelay() {
+    public long getDelay() {
         return delay;
     }
 

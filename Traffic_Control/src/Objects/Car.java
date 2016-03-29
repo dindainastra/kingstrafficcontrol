@@ -1,13 +1,10 @@
 package Objects;
 
-import Controllers.CarFlow;
-import Controllers.TrafficManagement;
+import Controllers.VehicleFlow;
+import Controllers.VehicleFlowHelper;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 
 import javax.swing.*;
 
@@ -27,15 +24,20 @@ public class Car extends JPanel implements Vehicle{
 	public double rotate=0.0;
 //	public int rotateInt = 0;
 	volatile Boolean destination = false;
+	private volatile boolean lock;
+	private volatile boolean amIMoving;
 	//private final int radius=100;
 
-	public CarFlow.Direction currentDirection = CarFlow.Direction.RIGHT;
+	public VehicleFlowHelper.Direction currentDirection = VehicleFlowHelper.Direction.RIGHT;
 
 	public Car(Person p, int x_coordinate, int y_coordinate){
+
 		driver = p;
 		priorityLevel = 0; //default no priority
 		this.pos_x = x_coordinate;
 		this.pos_y = y_coordinate;
+		lock = false;
+		amIMoving = false;
 	}
 
 	public void move(){
@@ -64,22 +66,22 @@ public class Car extends JPanel implements Vehicle{
 		return rotate;
 	}
 
-	public void setCurrentDirection(CarFlow.Direction dir){
+	public void setCurrentDirection(VehicleFlowHelper.Direction dir){
 		currentDirection = dir;
 	}
 
-	public CarFlow.Direction getCurrentDirection(){
+	public VehicleFlowHelper.Direction getCurrentDirection(){
 		return currentDirection;
 	}
 
-	public void move(CarFlow.Direction d){
-		if(d == CarFlow.Direction.LEFT){
+	public void move(VehicleFlowHelper.Direction d){
+		if(d == VehicleFlowHelper.Direction.LEFT){
 			this.pos_x -= 1;
-		}else if(d == CarFlow.Direction.RIGHT){
+		}else if(d == VehicleFlowHelper.Direction.RIGHT){
 			this.pos_x += 1;
-		}else if(d == CarFlow.Direction.DOWN){
+		}else if(d == VehicleFlowHelper.Direction.DOWN){
 			this.pos_y += 1;
-		}else if(d == CarFlow.Direction.UP){
+		}else if(d == VehicleFlowHelper.Direction.UP){
 			this.pos_y -= 1;
 		}
 	}
@@ -97,23 +99,23 @@ public class Car extends JPanel implements Vehicle{
 		repaint();
 	}
 
-	public void turn(CarFlow.Direction d, CarFlow.Direction carDirection, double degree) {
+	public void turn(VehicleFlowHelper.Direction d, VehicleFlowHelper.Direction carDirection, double degree) {
 		double turnDir = degree;
 
 		if(degree == 0){
 			turnDir = Math.toRadians(90);
 		}
 
-//		if(carDirection == CarFlow.Direction.RIGHT || carDirection == CarFlow.Direction.UP) {
-			if (d == CarFlow.Direction.UP || d == CarFlow.Direction.LEFT) {
+//		if(carDirection == VehicleFlow.Direction.RIGHT || carDirection == VehicleFlow.Direction.UP) {
+			if (d == VehicleFlowHelper.Direction.UP || d == VehicleFlowHelper.Direction.LEFT) {
 				rotate = -turnDir;
-			} else if (d == CarFlow.Direction.DOWN || d == CarFlow.Direction.RIGHT) { //works
+			} else if (d == VehicleFlowHelper.Direction.DOWN || d == VehicleFlowHelper.Direction.RIGHT) { //works
 				rotate = turnDir;
 			}
-//		}else if(carDirection == CarFlow.Direction.LEFT || carDirection == CarFlow.Direction.DOWN){
-//			if (d == CarFlow.Direction.UP || d == CarFlow.Direction.LEFT) {
+//		}else if(carDirection == VehicleFlow.Direction.LEFT || carDirection == VehicleFlow.Direction.DOWN){
+//			if (d == VehicleFlow.Direction.UP || d == VehicleFlow.Direction.LEFT) {
 //				rotate = turnDir;
-//			} else if (d == CarFlow.Direction.DOWN || d == CarFlow.Direction.RIGHT) { //works
+//			} else if (d == VehicleFlow.Direction.DOWN || d == VehicleFlow.Direction.RIGHT) { //works
 //				rotate = -turnDir;
 //			}
 //		}
@@ -121,16 +123,16 @@ public class Car extends JPanel implements Vehicle{
 		this.repaint();
 	}
 
-	public void turn(CarFlow.Direction d, CarFlow.Direction carD) {
+	public void turn(VehicleFlowHelper.Direction d, VehicleFlowHelper.Direction carD) {
 		turn(d, carD, 0);
 	}
 
-	public void bend(CarFlow.Direction d, double degree){
+	public void bend(VehicleFlowHelper.Direction d, double degree){
 		//Bend based on direction
 
-		if(d == CarFlow.Direction.RIGHT) {
+		if(d == VehicleFlowHelper.Direction.RIGHT) {
 			rotate += Math.toRadians(degree);
-		}else if(d == CarFlow.Direction.LEFT){
+		}else if(d == VehicleFlowHelper.Direction.LEFT){
 			rotate -= Math.toRadians(degree);
 		}
 
@@ -176,6 +178,26 @@ public class Car extends JPanel implements Vehicle{
 	
 	public int getLength(){
 		return this.length;
+	}
+
+	@Override
+	public synchronized boolean getLock() {
+		return lock;
+	}
+
+	@Override
+	public synchronized void setLock(boolean lock) {
+		this.lock  = lock;
+	}
+
+	@Override
+	public boolean amIMoving() {
+		return amIMoving;
+	}
+
+	@Override
+	public void setThatIAmMoving(boolean flag) {
+		amIMoving = flag;
 	}
 
 	public int getWidth(){
@@ -271,21 +293,4 @@ public class Car extends JPanel implements Vehicle{
         g.setColor(textColor);  //greg
         g.drawString(this.getPerson().getName().substring("Person".length()), pos_x, pos_y); //greg
     }
-
-//	public void simulate(){
-//		TrafficManagement tm = new TrafficManagement();
-//		Terrain t = tm.getTerrainList().get(0);
-//
-//
-//		CarFlow.Direction dir = cf.getDirection(this, t);
-//
-//		cf.moveToDestinationTimer(this, dir);
-//
-//
-//	}
-
-//	@Override
-//	public void run() {
-//		simulate();
-//	}
 }

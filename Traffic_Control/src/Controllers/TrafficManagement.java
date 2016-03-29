@@ -5,15 +5,8 @@ import Objects.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class TrafficManagement extends JFrame {
 
@@ -23,26 +16,10 @@ public class TrafficManagement extends JFrame {
     private Random rand;
     private JFrame frame;
     private Draw map;
-    private ExecutorService executor;
     private ArrayList<Runnable> runnableArrayList = new ArrayList<Runnable>();
     private int timeGranularity;
 
-
-
     private int tlDelay;
-    private int sliderPersons;
-
-
-    GridLayout gd=new GridLayout(0,2);
-
-    //buttons
-    private JButton pauseButton, playButton, replayButton, stopButton;
-    /*private Container contentPane = getContentPane();
-    JPanel jPanel = new JPanel();
-    JPanel panel = new JPanel();
-    GroupLayout jPanelLayout = new GroupLayout(jPanel);
-    GroupLayout layout = new GroupLayout(contentPane);
-*/
 
     public TrafficManagement(){
 
@@ -53,39 +30,6 @@ public class TrafficManagement extends JFrame {
         aTerrainList = new ArrayList<Terrain>();
         timeGranularity = 20;
         tlDelay = 3000;
-        //for buttons
-        //
-        //
-        // initComponents();
-
-    }
-
-
-    private void initComponents() {
-        //Create JButton
-        replayButton = new JButton();
-        pauseButton = new JButton();
-        playButton = new JButton();
-        stopButton = new JButton();
-        //Create JLabel
-        //
-
-        URL stopURL = getClass().getResource("../Resources/stop.PNG");
-        URL rewindURL = getClass().getResource("../Resources/rewind.PNG");
-        URL playURL = getClass().getResource("../Resources/play.PNG");
-        URL pauseURL = getClass().getResource("../Resources/pause.PNG");
-
-        //set play, pause, stop and replay button icon and ActionListener
-        replayButton.setIcon(new ImageIcon(rewindURL));
-        playButton.setIcon(new ImageIcon(playURL));
-        pauseButton.setIcon(new ImageIcon(pauseURL));
-        stopButton.setIcon(new ImageIcon(stopURL));
-
-        //contentPane.setLayout(new FlowLayout());
-        //contentPane.add(replayButton);
-
-
-        //setLayout(new FlowLayout());
 
     }
 
@@ -117,14 +61,10 @@ public class TrafficManagement extends JFrame {
     			t.removeVehicleFromList(v);
     	}
     	
-    	
-    	
     }
   
     public void factoryVehicle(int number){
         
-    	// factoryVehicle(String.valueOf(msg));
-    	
     	ArrayList<Person> tmpPersonList = new ArrayList<Person>();
     	
             for(int i=0; i<number; i++){
@@ -153,8 +93,6 @@ public class TrafficManagement extends JFrame {
     
     public void factoryVehicle(int number,int priority_flag){
     
-    	// factoryVehicle(String.valueOf(msg),1);
-    	
     	ArrayList<Person> tmpPersonList = new ArrayList<Person>();
     	
             for(int i=0; i<number; i++){
@@ -191,7 +129,6 @@ public class TrafficManagement extends JFrame {
         //createVehicles();
 
         staticMapCreator();
-        //initComponents();
 
         //first init the trafficlights to have the firsts position in the Collection
          initializeStaticTrafficLights();
@@ -207,39 +144,10 @@ public class TrafficManagement extends JFrame {
 
         drawTheMap(map);
         printNetwork();
-//        System.exit(1);
+
         start();
 
     }
-
-    public void run(int foo){
-
-        createPersons(foo);
-
-        createVehicles();
-
-        randomMapCreator();
-
-        //first init the trafficlights to have the firsts position in the Collection
-        initializeRandomTrafficLights();
-
-        //init all the vehicles
-        initializeForwardAndBackwardLists();
-
-        map = new Draw(aTerrainList);
-
-        drawTheMap(map);
-
-    }
-
-    public ArrayList<Runnable> getRunnableArrayList() {
-        return runnableArrayList;
-    }
-
-    public void runExcectutor(Runnable worker){
-        executor.execute(worker);
-    }
-
 
     /**
      * Start the flow of cars in the node system
@@ -248,10 +156,9 @@ public class TrafficManagement extends JFrame {
     public void start(){
 
         for (Terrain t : aTerrainList){
-            new Thread(new CarFlow(t,map,1,this)).start();
-            new Thread(new CarFlow(t,map,0,this)).start();
+            new Thread(new VehicleFlow(t,map,1,this)).start();
+            new Thread(new VehicleFlow(t,map,0,this)).start();
         }
-        System.out.println("Finished all threads");
 
     }
 
@@ -290,10 +197,9 @@ public class TrafficManagement extends JFrame {
     public void initializeStaticTrafficLights(){
 
         //junction21
-        //TrafficLights ninthTL = new TrafficLights(715,10,3,2,0,getTlDelay());
-        TrafficLights ninthTL = new TrafficLights(815,10,3,2,0,3000);
-        TrafficLights twelfthTL = new TrafficLights(915,60,3,1,0,3000);
-        TrafficLights eighteenthTL = new TrafficLights(865,110,3,1,90,3000);
+        TrafficLights ninthTL = new TrafficLights(815,10, 2,0,3000);
+        TrafficLights twelfthTL = new TrafficLights(915,60, 1,0,3000);
+        TrafficLights eighteenthTL = new TrafficLights(865,110, 1,90,3000);
 
         ninthTL.previousTrafficLightIs(eighteenthTL);
         twelfthTL.previousTrafficLightIs(ninthTL);
@@ -304,10 +210,10 @@ public class TrafficManagement extends JFrame {
 
 
 //        //junction 19
-        TrafficLights thirdTL = new TrafficLights(250,325,4, 2,90,3000);
-        TrafficLights firstTL = new TrafficLights(250,375,4, 1,0,3000);
-        TrafficLights fourthTL = new TrafficLights(200,425, 4, 1,90,3000);
-        TrafficLights secondTL = new TrafficLights(150,325,4, 1,0,3000);
+        TrafficLights thirdTL = new TrafficLights(250,325, 2,90,3000);
+        TrafficLights firstTL = new TrafficLights(250,375, 1,0,3000);
+        TrafficLights fourthTL = new TrafficLights(200,425, 1,90,3000);
+        TrafficLights secondTL = new TrafficLights(150,325, 1,0,3000);
         thirdTL.previousTrafficLightIs(secondTL);
         firstTL.previousTrafficLightIs(thirdTL);
         fourthTL.previousTrafficLightIs(firstTL);
@@ -319,10 +225,10 @@ public class TrafficManagement extends JFrame {
 
 
 //        //junction22
-        TrafficLights fifteenTL = new TrafficLights(915,325,4, 2,90,3000);
-        TrafficLights eighthTL = new TrafficLights(915,375,4, 1,0,3000);
-        TrafficLights sixteenthTL = new TrafficLights(865,425,4 ,1,90,3000);
-        TrafficLights fifthTL = new TrafficLights(815,325,4, 1,0,3000);
+        TrafficLights fifteenTL = new TrafficLights(915,325, 2,90,3000);
+        TrafficLights eighthTL = new TrafficLights(915,375, 1,0,3000);
+        TrafficLights sixteenthTL = new TrafficLights(865,425, 1,90,3000);
+        TrafficLights fifthTL = new TrafficLights(815,325, 1,0,3000);
         fifteenTL.previousTrafficLightIs(fifthTL);
         eighthTL.previousTrafficLightIs(fifteenTL);
         sixteenthTL.previousTrafficLightIs(eighthTL);
@@ -334,10 +240,10 @@ public class TrafficManagement extends JFrame {
 //
 //
 //        //junction18
-        TrafficLights thirteenthTL = new TrafficLights(1280,325,4, 2,90,3000);
-        TrafficLights seventhTL = new TrafficLights(1280,375,4, 1,0,3000);
-        TrafficLights fourteenthTL = new TrafficLights(1230,425,4,1,90,3000);
-        TrafficLights sixthTL = new TrafficLights(1180,325,4,1,0,3000);
+        TrafficLights thirteenthTL = new TrafficLights(1280,325, 2,90,3000);
+        TrafficLights seventhTL = new TrafficLights(1280,375, 1,0,3000);
+        TrafficLights fourteenthTL = new TrafficLights(1230,425, 1,90,3000);
+        TrafficLights sixthTL = new TrafficLights(1180,325, 1,0,3000);
         thirteenthTL.previousTrafficLightIs(sixthTL);
         seventhTL.previousTrafficLightIs(thirteenthTL);
         fourteenthTL.previousTrafficLightIs(seventhTL);
@@ -350,17 +256,15 @@ public class TrafficManagement extends JFrame {
 //
 //        //junction20
 
-        TrafficLights seventeenthTL = new TrafficLights(915,590,3,2,90,3000);
-        TrafficLights eleventhTL = new TrafficLights(915,640,3,1,0,3000);
-        TrafficLights tenthTL = new TrafficLights(815,590,3,1,0,3000);
+        TrafficLights seventeenthTL = new TrafficLights(915,590, 2,90,3000);
+        TrafficLights eleventhTL = new TrafficLights(915,640, 1,0,3000);
+        TrafficLights tenthTL = new TrafficLights(815,590, 1,0,3000);
         seventeenthTL.previousTrafficLightIs(tenthTL);
         eleventhTL.previousTrafficLightIs(seventeenthTL);
         tenthTL.previousTrafficLightIs(eleventhTL);
         seventeenthTL.nextTrafficLightIs(eleventhTL);
         eleventhTL.nextTrafficLightIs(tenthTL);
         tenthTL.nextTrafficLightIs(seventeenthTL);
-
-        // direction ---->
 
         //junction21
         aTerrainList.get(4).setForwardListFlow(ninthTL);
@@ -492,7 +396,7 @@ public class TrafficManagement extends JFrame {
 
         //add vertical roads
         aTerrainList.add(new StraightRoad(815,110,90,215,this)); //8             
-        aTerrainList.add(new StraightRoad(815,425,90,265,this));//9
+        aTerrainList.add(new StraightRoad(815,425,90,165,this));//9
         aTerrainList.add(new StraightRoad(150,110,90,215,this));   //10          
         aTerrainList.add(new StraightRoad(150,425,90,165,this));//11
         aTerrainList.add(new StraightRoad(1180,425,90,165,this));//12
@@ -524,18 +428,15 @@ public class TrafficManagement extends JFrame {
                 frame.setLayout(new BorderLayout());
                 frame.add(new Buttons(), BorderLayout.PAGE_END);
                 frame.add(new Slider(TrafficManagement.this), BorderLayout.EAST);
-                //frame.add(new Buttons(), BorderLayout.PAGE_END);
                 Buttons buttons=new Buttons();
                 buttons.setPreferredSize(new Dimension(100,50));
                 frame.add(buttons,BorderLayout.SOUTH);
                 Slider slider=new Slider(TrafficManagement.this);
                 slider.setPreferredSize(new Dimension(250,0));
                 frame.add(slider,BorderLayout.EAST);
-                //frame.pack();
                 frame.add(aDraw, BorderLayout.CENTER);
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 frame.setVisible(true);
-                /*frame.setSize(1500, 1000);*/
                 frame.setSize(1400, 700);
                 frame.setLocationRelativeTo(null);
                 frame.setResizable ( false );
@@ -543,51 +444,18 @@ public class TrafficManagement extends JFrame {
         });
     }
 
-    public Terrain yourTerrain(Car car){
-
-
-        return null;
-    }
-
     //this for how fast or how slow the system goes
     public int getTimeGranularity() {
-
         return timeGranularity;
     }
 
 
     public void setTimeGranularity(int timeGranularity) {
-
         this.timeGranularity = timeGranularity;
-    }
-
-    public int getTlDelay() {
-        return tlDelay;
     }
 
     public void setTlDelay(int tlDelay) {
         this.tlDelay = tlDelay;
     }
-   public int getSliderPersons() {
-       return sliderPersons;
-   }
 
-    public void setSliderPersons(int sliderPersons) {
-        this.sliderPersons = sliderPersons;
-    }
-
-    /**
-     *
-     */
-    public void initializeRoadworksTo(){
-        //the param should be the node
-
-        //choose which road that we want to apply the roadworks
-        // if it is not ( a junction || entrance || road)
-        // if (straightroad )
-        //if it has neighbour: corner road
-        // add the corner road and its neighbour too
-        // delete all of this
-    }
-    
 }
