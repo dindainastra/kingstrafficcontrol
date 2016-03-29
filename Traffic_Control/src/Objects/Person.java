@@ -43,10 +43,10 @@ public class Person {
 
 		this.decision = new Random().nextInt(terrainArrayList.size());
 		int counter = 0;
-		while (decision == terrainArrayList.indexOf(myPreviousTerrainPosition)) {
+		while (decision == terrainArrayList.indexOf(myPreviousTerrainPosition) || terrainArrayList.get(decision) == null) {
 			counter++;
 			System.out.println(Thread.currentThread().getName() + " Collision found!" + " Decision: " + decision + " size: " + terrainArrayList.size());
-			if (counter>10){
+			if (counter>1000){
 				System.exit(1);
 			}
 			this.decision = new Random().nextInt(terrainArrayList.size());

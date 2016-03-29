@@ -245,9 +245,9 @@ public class CarFlow implements Runnable {
 
                             moveToEnd(tmpCar, this.aTerrain.getLenght(), dir);
                         	  if (isThereATrafficLight(this.aTerrain.getForwardListFlow())){
-                          			System.out.println("$$$$$$ Debug 1 $$$$$$");
+                          			
                         		  	while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {
-                        		  		System.out.println("$$$$$$ Debug 2 $$$$$$");
+                        		  		
                           		}
                         	  }
 
@@ -373,9 +373,9 @@ public class CarFlow implements Runnable {
                             }
 
                             if (isThereATrafficLight(this.aTerrain.getBackwardListFlow())){
-                          		System.out.println("$$$$$$ Debug 11 $$$$$$");
+                          		
                         		  	while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))) {
-                        		  		System.out.println("$$$$$$ Debug 22 $$$$$$");
+                        		  		
                           		}
                         	}
 
@@ -512,17 +512,13 @@ public class CarFlow implements Runnable {
             int decision = v.getPerson().getDecision();
 
             if (this.aTerrain instanceof SquareJunction) {
-                //move car to end of this.aTerrain and into decision
-                if (decision % 2 == 0) {
+
+            	if (decision % 2 == 0) {
                     System.out.println("Decision is "+decision);
                     //Move straight or left
-
-                    //moveIntoDecisionSquare((Car)v, this.aTerrain, this.aTerrain.getNeighboursTerrainList().get(decision));
                     this.aTerrain.getNeighboursTerrainList().get(decision).getForwardListFlow().add(v);
                 } else {
                     //move straight then turn right - i.e. moving across the junction and taking the side route
-
-                    //moveIntoDecisionSquare((Car)v, this.aTerrain, this.aTerrain.getNeighboursTerrainList().get(decision));
                     this.aTerrain.getNeighboursTerrainList().get(decision).getBackwardListFlow().add(v);
                 }
             }else{
