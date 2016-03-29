@@ -24,9 +24,10 @@ public class Car extends JPanel implements Vehicle{
     private int offset = 0;
 	private static final int INCREMENT_BY = 5;
 	public static Boolean draw = false;
-	public double rotate;
-	public int rotateInt = 0;
+	public double rotate=0.0;
+//	public int rotateInt = 0;
 	volatile Boolean destination = false;
+	//private final int radius=100;
 
 	public CarFlow.Direction currentDirection = CarFlow.Direction.RIGHT;
 
@@ -55,12 +56,12 @@ public class Car extends JPanel implements Vehicle{
 		return destination;
 	}
 
-	public void setRotate(int i){
-		rotateInt = i;
+	public void setRotate(double r){
+		rotate = Math.toRadians(r);
 	}
 
-	public int getRotate(){
-		return rotateInt;
+	public double getRotate(){
+		return rotate;
 	}
 
 	public void setCurrentDirection(CarFlow.Direction dir){
@@ -83,25 +84,58 @@ public class Car extends JPanel implements Vehicle{
 		}
 	}
 
-	public void turnCorner(Point startPoint, Point endPoint, double interval){
-		this.pos_x = (int)(startPoint.x + ((endPoint.x - startPoint.x) * interval));
-		this.pos_y = (int)(startPoint.y + ((endPoint.y - startPoint.y) * interval));
+	public void turnCorner(double angle, int centerX, int centerY, int radius){
+		if(radius == 100) {
+			this.pos_x = (int) ((Math.cos(angle) * radius) + centerX);
+			this.pos_y = (int) ((Math.sin(angle) * radius) + centerY);
+		}else{
+			this.pos_y = (int) ((Math.cos(angle) * radius) + centerY);
+			this.pos_x = (int) ((Math.sin(angle) * radius) + centerX);
+		}
+//		this.pos_x = (int) ((Math.cos(angle) * radius/2) + centerX);
+//		this.pos_y = (int) ((Math.sin(angle) * radius/2) + centerY);
+		repaint();
 	}
 
-	public void turn(CarFlow.Direction d) {
-		if (d == CarFlow.Direction.UP) {
-			double turnDir = Math.toRadians(90);
-			rotate = -turnDir;
-		}else if(d == CarFlow.Direction.DOWN){
-			double turnDir = Math.toRadians(90);
-			rotate = turnDir;
-		}else if(d == CarFlow.Direction.RIGHT ){
-			double turnDir = Math.toRadians(90);
-			rotate = -turnDir;
-		}else{
-			double turnDir = Math.toRadians(90);
-			rotate = -turnDir;
+	public void turn(CarFlow.Direction d, CarFlow.Direction carDirection, double degree) {
+		double turnDir = degree;
+
+		if(degree == 0){
+			turnDir = Math.toRadians(90);
 		}
+
+//		if(carDirection == CarFlow.Direction.RIGHT || carDirection == CarFlow.Direction.UP) {
+			if (d == CarFlow.Direction.UP || d == CarFlow.Direction.LEFT) {
+				rotate = -turnDir;
+			} else if (d == CarFlow.Direction.DOWN || d == CarFlow.Direction.RIGHT) { //works
+				rotate = turnDir;
+			}
+//		}else if(carDirection == CarFlow.Direction.LEFT || carDirection == CarFlow.Direction.DOWN){
+//			if (d == CarFlow.Direction.UP || d == CarFlow.Direction.LEFT) {
+//				rotate = turnDir;
+//			} else if (d == CarFlow.Direction.DOWN || d == CarFlow.Direction.RIGHT) { //works
+//				rotate = -turnDir;
+//			}
+//		}
+
+		this.repaint();
+	}
+
+	public void turn(CarFlow.Direction d, CarFlow.Direction carD) {
+		turn(d, carD, 0);
+	}
+
+	public void bend(CarFlow.Direction d, double degree){
+		//Bend based on direction
+
+		if(d == CarFlow.Direction.RIGHT) {
+			rotate += Math.toRadians(degree);
+		}else if(d == CarFlow.Direction.LEFT){
+			rotate -= Math.toRadians(degree);
+		}
+
+//		this.pos_x += degree;
+//		this.pos_y += degree;
 
 		this.repaint();
 	}
@@ -143,7 +177,11 @@ public class Car extends JPanel implements Vehicle{
 	public int getLength(){
 		return this.length;
 	}
-	
+
+	public int getWidth(){
+		return this.width;
+	}
+
 	public int getPriority() {
 		return this.priorityLevel;
 	}
@@ -198,16 +236,13 @@ public class Car extends JPanel implements Vehicle{
 
 	@Override
 	public void doDrawing(Graphics2D g) {
-
-
-
-		g.setColor(new Color(R, G, B));
-		g.fillRect(pos_x, pos_y, length, width);
-
-
-		Color textColor = Color.BLACK;
-		g.setColor(textColor);  //greg
-		g.drawString(this.getPerson().getName().substring("Person".length()), pos_x, pos_y+width); //greg
+//		g.setColor(new Color(R, G, B));
+//		g.fillRect(pos_x, pos_y, length, width);
+//
+//
+//		Color textColor = Color.BLACK;
+//		g.setColor(textColor);  //greg
+//		g.drawString(this.getPerson().getName().substring("Person".length()), pos_x, pos_y+width); //greg
 	}
 
 
@@ -221,16 +256,20 @@ public class Car extends JPanel implements Vehicle{
 		Graphics2D gd = (Graphics2D) g;
 		AffineTransform at = gd.getTransform();
 
-		gd.rotate(rotate, pos_x, pos_y);
+		//gd.translate(this.getWidth()/2, this.getHeight()/2);
+		if(rotate != 0) {
+			gd.rotate(rotate, pos_x, pos_y);
+		}
+//		gd.translate(getWidth()/2, getHeight()/2);
+
 		gd.setColor(new Color (R,G,B));
 		gd.fillRect(pos_x, pos_y, length, width);
-		gd.translate(this.getWidth()/2, this.getHeight()/2);
 
 		gd.setTransform(at);
 
         Color textColor = Color.BLACK;
         g.setColor(textColor);  //greg
-        g.drawString(this.getPerson().getName().substring("Person".length()), pos_x, pos_y+width); //greg
+        g.drawString(this.getPerson().getName().substring("Person".length()), pos_x, pos_y); //greg
     }
 
 //	public void simulate(){

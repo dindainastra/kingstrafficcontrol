@@ -51,7 +51,7 @@ public class TrafficManagement extends JFrame {
         aPersonList = new ArrayList<Person>();
         aVehicleList = new ArrayList<Vehicle>();
         aTerrainList = new ArrayList<Terrain>();
-        timeGranularity = 50;
+        timeGranularity = 20;
         tlDelay = 3000;
         //for buttons
         //
@@ -136,12 +136,13 @@ public class TrafficManagement extends JFrame {
             for (Person p : tmpPersonList) {
                 if (!p.isPedestrian()) {
                     if (new Random().nextBoolean()){
-                    	Vehicle v = new Car(p, 0,330);
+                    	Vehicle v = new Car(p, 30,330);
                     	aVehicleList.add(v);
                     	this.aTerrainList.get(0).setForwardListFlow(v);
                     }
                     else{
-                    	Vehicle v = new Car(p, 1350, 405);
+                    	Car v = new Car(p, 1380, 405);
+
                     	aVehicleList.add(v);
                     	this.aTerrainList.get(1).setBackwardListFlow(v);
                     }
@@ -165,14 +166,14 @@ public class TrafficManagement extends JFrame {
             for (Person p : tmpPersonList) {
                 if (!p.isPedestrian()) {
                     if (new Random().nextBoolean()){
-                    	Vehicle v = new Car(p, 0,330);
+                    	Vehicle v = new Car(p, 30,330);
                     	if (priority_flag==1)
                     		v.setPriority(1);
                     	aVehicleList.add(v);
                     	this.aTerrainList.get(0).setForwardListFlow(v);
                     }
                     else{
-                    	Vehicle v = new Car(p, 1350, 405);
+                    	Vehicle v = new Car(p, 1380, 405);
                     	if (priority_flag==1)
                     		v.setPriority(1);
                     	aVehicleList.add(v);
@@ -185,7 +186,6 @@ public class TrafficManagement extends JFrame {
     
     
     public void run(){
-
         //createPersons(10);
         //createVehicles();
 
@@ -258,10 +258,15 @@ public class TrafficManagement extends JFrame {
     public void createVehicles(){
         for (Person p : aPersonList) {
             if (!p.isPedestrian()) {
-                if (new Random().nextBoolean())
-                    aVehicleList.add(new Car(p, 0,330));
-                else
-                    aVehicleList.add(new Car(p, 1350, 405));
+                if (new Random().nextBoolean()) {
+                    Car c = new Car(p, 30, 330);
+//                    c.setRotate(180);
+                    aVehicleList.add(c);
+                }else {
+                    Car c = new Car(p, 1380, 420);
+                    c.setRotate(180);
+                    aVehicleList.add(c);
+                }
             }
         }
     }
@@ -274,7 +279,7 @@ public class TrafficManagement extends JFrame {
 
     public void initializeForwardAndBackwardLists(){
         for (Vehicle v : this.aVehicleList)
-            if (v.get_pos_x()==0)
+            if (v.get_pos_x()==30)
                 this.aTerrainList.get(0).setForwardListFlow(v);  //insert vehicle in the enter node direction list -->
             else
                 this.aTerrainList.get(1).setBackwardListFlow(v);  //insert vehicle in the exit node direction list <--
@@ -387,8 +392,6 @@ public class TrafficManagement extends JFrame {
     }
 
     public void initializeNeighboursTerrainLists(){
-
-        //Graph
         this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(23));
 
         this.aTerrainList.get(1).setNeighboursTerrainList(this.aTerrainList.get(22));
@@ -455,22 +458,21 @@ public class TrafficManagement extends JFrame {
 
         this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(1));
         this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(7));
-        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(17));
         this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(16));
+        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(17));
 
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(6));
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(0));
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(14));
         this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(15));
 
-        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(10));
         this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(9));
+        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(10));
         this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(13));
 
         this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(11));
-        this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(12));
         this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(8));
-
+        this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(12));
     }
 
     public void initializeRandomTrafficLights(){
