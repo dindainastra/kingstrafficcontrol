@@ -156,6 +156,9 @@ public class CornerRoad extends JPanel implements Terrain{
 		return road_width;  // probably this is the lenght of this. dunno
 	}
 
+    public int getStartAngle(){
+        return start_angle;
+    }
 
     @Override
     public void setForwardListFlow(ArrayList<Object> ol) {
