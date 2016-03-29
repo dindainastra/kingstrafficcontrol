@@ -190,12 +190,12 @@ public class SquareJunction extends JPanel implements Terrain{
 
     @Override
     public int getxStart() {
-        return 0;
+        return xStart;
     }
 
     @Override
     public int getYStart() {
-        return 0;
+        return yStart;
     }
 
 	@Override
