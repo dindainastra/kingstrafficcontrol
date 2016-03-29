@@ -3,38 +3,27 @@ package Objects;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import javax.xml.bind.SchemaOutputResolver;
 
 import Controllers.TrafficManagement;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.net.URL;
 
 public class Slider  extends JPanel {
 
     private JLabel congestionLabel,emergencyLabel,roadNetworkLabel,timeIntervalLabel,weatherLabel, speedLimitLabel;
-    private JSlider congestionSlider,timeIntervalSlider,speedLimitSlider;
+    private JSlider timeIntervalSlider,speedLimitSlider;
     private JButton increaseButton, decreaseButton;
     private JComboBox<String> weatherComboBox, emergencyComboBox,congestionComboBox;
-    GridLayout gd;
-    FlowLayout fy;
     private TrafficManagement trafficManagement;
-    private Car car;
-    //private Terrain terrain;
-
-
 
     public Slider(TrafficManagement trafficManagement) {
         initComponents();
         this.trafficManagement = trafficManagement;
-        //this.trafficLights = trafficLights;
     }
 
-    private void initComponents() {
+    public void initComponents() {
 
         //Create JLabel
         weatherLabel = new JLabel();
@@ -46,7 +35,6 @@ public class Slider  extends JPanel {
 
         //Create JSlider
         timeIntervalSlider = new JSlider(0, 100);
-        congestionSlider = new JSlider();
         speedLimitSlider = new JSlider();
 
         //Create JComboBox
@@ -83,8 +71,6 @@ public class Slider  extends JPanel {
         });
 
         //set labels for interfaces
-        //emergencyLabel.setFont(new Font("Tahoma", 0, 12)); // NOI18N
-
         emergencyLabel.setFont(new Font("Verdana",Font.BOLD,12)); // NOI18N
         emergencyLabel.setBorder(BorderFactory.createEmptyBorder(20,10,0,0));
         emergencyLabel.setText("Emergency Services:");
@@ -103,10 +89,6 @@ public class Slider  extends JPanel {
         speedLimitLabel.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
         speedLimitLabel.setBorder(BorderFactory.createEmptyBorder(20,10,0,0));
         speedLimitLabel.setText("Speed Limit Option:");
-
-        //increaseButton.setBorder(BorderFactory.createEmptyBorder(20,10,0,0));
-
-
 
         String[] weatherConditions=new String[] { "   Normal", "   Hazardous", "   Night", "   Day" };
         weatherComboBox=new JComboBox<>(weatherConditions);
@@ -144,31 +126,21 @@ public class Slider  extends JPanel {
             }
         });
 
-//        increaseButton.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
-//        increaseButton.setPreferredSize(new Dimension(200,20));
         increaseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 increaseButtonActionPerformed(evt);
             }
         });
 
-//        decreaseButton.setBorder(BorderFactory.createEmptyBorder(0,20,0,20));
-//        decreaseButton.setPreferredSize(new Dimension(200,20));
         decreaseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 decreaseButtonActionPerformed(evt);
             }
         });
 
-
-
-        //gd=new GridLayout(13,0,20,0);
-        //this.setLayout(gd);
-
         this.setLayout(new GridBagLayout());
         GridBagConstraints c=new GridBagConstraints();
         c.fill=GridBagConstraints.VERTICAL;
-        //c.anchor=GridBagConstraints.CENTER;
 
         c.ipady=0;
         c.ipadx=0;
@@ -196,7 +168,6 @@ public class Slider  extends JPanel {
         c.gridx=0;
         c.gridy=2;
         c.insets=new Insets(0,0,0,0);
-        // c.anchor=GridBagConstraints.CENTER;
         this.add(speedLimitLabel,c);
 
         c.ipady=0;
@@ -284,47 +255,19 @@ public class Slider  extends JPanel {
         c.insets=new Insets(0,0,30,0);
         this.add(emergencyComboBox,c);
 
+    }
 
-
-//        add(timeIntervalLabel);
-//        add(timeIntervalSlider);
-//
-////        add(congestionLabel);
-////        add(congestionSlider);
-////        add(congestionValue);
-//
-//        add(speedLimitLabel);
-//        add(speedLimitSlider);
-//
-//
-//        add(congestionLabel);
-//        add(congestionComboBox);
-//
-//        //this.setLayout(gp);
-//       // gp.setColumns(2);
-//        add(increaseButton);
-//        add(decreaseButton);
-//
-//
-//        add(weatherLabel);
-//        add(weatherComboBox);
-//
-//        add(emergencyLabel);
-//        add(emergencyComboBox);
-
-    }// </editor-fold>
-
-    private void increaseButtonActionPerformed(ActionEvent evt) {
+    public void increaseButtonActionPerformed(ActionEvent evt) {
         int click = 1;
         trafficManagement.factoryVehicle(click);
     }
 
-    private void decreaseButtonActionPerformed(ActionEvent evt) {
+    public void decreaseButtonActionPerformed(ActionEvent evt) {
         int click = 1;
         trafficManagement.deleteVehicle(click);
     }
 
-    private void weatherComboBoxActionPerformed(ActionEvent evt) {
+    public void weatherComboBoxActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -335,7 +278,7 @@ public class Slider  extends JPanel {
     The default state 0 indicates that no emergency cars exist in the system.
     The indicators 1,2 and 3 indicate the number of emergency cars in the system.
      */
-    private void emergencyComboBoxActionPerformed(ActionEvent evt) {
+    public void emergencyComboBoxActionPerformed(ActionEvent evt) {
         if(evt.getSource()== emergencyComboBox){
             JComboBox emergencyComboBox = (JComboBox)evt.getSource();
             String msg = (String)emergencyComboBox.getSelectedItem();
@@ -350,7 +293,7 @@ public class Slider  extends JPanel {
     The state "high" indicates rush hour, where 30 cars are introduced into te system.
     The state "low indicates" that a low amount of cars are to be included in the system, cars might be removed.
      */
-    private void congestionComboBoxActionPerformed(ActionEvent evt) {
+    public void congestionComboBoxActionPerformed(ActionEvent evt) {
         if(evt.getSource()== congestionComboBox){
             JComboBox congestionCombobox = (JComboBox)evt.getSource();
             String msg = (String)congestionCombobox.getSelectedItem();
@@ -376,27 +319,17 @@ public class Slider  extends JPanel {
     /*This slider is used for setting the time granularity of the system.
     The bigger the value of the slider the bigger the delay, hence the slower the system is going to be.
     */
-    private void timeIntervalStateChanges(ChangeEvent evt) {
+    public void timeIntervalStateChanges(ChangeEvent evt) {
 
         JSlider timeIntervalSlider =(JSlider)evt.getSource();
         if (!timeIntervalSlider.getValueIsAdjusting()) {
             trafficManagement.setTimeGranularity(timeIntervalSlider.getValue()/5);
             trafficManagement.setTlDelay(timeIntervalSlider.getValue());
-
-
-
         }
 
     }
 
-
-
-
-
-
-    private void speedLimitStateChanges(ChangeEvent evt) {
+    public void speedLimitStateChanges(ChangeEvent evt) {
         // TODO add your handling code here:
     }
-
-
 }

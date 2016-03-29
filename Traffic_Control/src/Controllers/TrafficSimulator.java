@@ -1,6 +1,5 @@
 package Controllers;
 
-import Objects.RoadNetworks;
 import Objects.Startup;
 
 import javax.swing.*;
@@ -16,7 +15,6 @@ public class TrafficSimulator extends JFrame{
 		JPanel panel4 = new JPanel();
 		frame = new JFrame("King's Traffic Control Simulation");
 		frame.setLayout(new BorderLayout());
-//		frame.setBackground( Color.black );
 		Startup buttons=new Startup();
 		buttons.setPreferredSize(new Dimension(50,50));
 		panel1.setPreferredSize(new Dimension(150, 100));
@@ -38,8 +36,6 @@ public class TrafficSimulator extends JFrame{
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 		frame.setResizable ( false );
-//		new TrafficManagement().run();
-
 
 	}
 

@@ -6,30 +6,30 @@ import java.util.ArrayList;
 public interface Terrain {
 
 
-	public void doDrawing(Graphics2D g);
+    void doDrawing(Graphics2D g);
 
-	public int  getLenght();
+    int  getLenght();
 
-    public void setForwardListFlow(ArrayList<Object> ol);
-    public void setForwardListFlow(Object o);
-    public ArrayList<Object> getForwardListFlow();
+    void setForwardListFlow(ArrayList<Object> ol);
+    void setForwardListFlow(Object o);
+    ArrayList<Object> getForwardListFlow();
 
-    public void setBackwardListFlow(ArrayList<Object> ol);
-    public void setBackwardListFlow(Object o);
-    public ArrayList<Object> getBackwardListFlow();
+    void setBackwardListFlow(ArrayList<Object> ol);
+    void setBackwardListFlow(Object o);
+    ArrayList<Object> getBackwardListFlow();
 
-    public ArrayList<Terrain> getNeighboursTerrainList();
-    public ArrayList<Terrain> getPreviousTerrainList();
+    ArrayList<Terrain> getNeighboursTerrainList();
+    ArrayList<Terrain> getPreviousTerrainList();
 
-    public void setNeighboursTerrainList(ArrayList<Terrain> tl);
-    public void setPreviousTerrainList(ArrayList<Terrain> tl);
+    void setNeighboursTerrainList(ArrayList<Terrain> tl);
+    void setPreviousTerrainList(ArrayList<Terrain> tl);
 
-    public void setNeighboursTerrainList(Terrain t);
-    public void setPreviousTerrainList(Terrain t);
+    void setNeighboursTerrainList(Terrain t);
+    void setPreviousTerrainList(Terrain t);
 
-    public void removeVehicleFromList(Vehicle v);
+    void removeVehicleFromList(Vehicle v);
 
-    public int getxStart();
-    public int getYStart();
-    public int getRotation();
+    int getxStart();
+    int getYStart();
+    int getRotation();
 }
