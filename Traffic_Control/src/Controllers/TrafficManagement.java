@@ -193,10 +193,10 @@ public class TrafficManagement extends JFrame {
         //initComponents();
 
         //first init the trafficlights to have the firsts position in the Collection
-        initializeStaticTrafficLights();
+         initializeStaticTrafficLights();
 
         //init all the vehicles
-        //initializeForwardAndBackwardLists();
+//        initializeForwardAndBackwardLists();
 
         //do the graph to know every node their closest nodes
         initializeNeighboursTerrainLists();
@@ -361,118 +361,112 @@ public class TrafficManagement extends JFrame {
 
         // direction ---->
 
-        //junction25
-        aTerrainList.get(8).setForwardListFlow(ninthTL);
-        aTerrainList.get(11).setBackwardListFlow(twelfthTL); //supposed to be backward
-        aTerrainList.get(12).setBackwardListFlow(eighteenthTL);//up supposed to be backward
+        //junction21
+        aTerrainList.get(4).setForwardListFlow(ninthTL);
+        aTerrainList.get(7).setBackwardListFlow(twelfthTL); //supposed to be backward
+        aTerrainList.get(8).setForwardListFlow(eighteenthTL);//up supposed to be backward
 //
-//        //junction23
-        aTerrainList.get(14).setForwardListFlow(thirdTL); //down supposed to be backward
-        aTerrainList.get(6).setBackwardListFlow(firstTL); //supposed to be backward
-        aTerrainList.get(15).setBackwardListFlow(fourthTL); //up
-        aTerrainList.get(0).setForwardListFlow(secondTL);
+//        //junction19
+        aTerrainList.get(11).setForwardListFlow(thirdTL); //down supposed to be backward
+        aTerrainList.get(0).setForwardListFlow(secondTL); //supposed to be backward
+        aTerrainList.get(10).setBackwardListFlow(fourthTL); //up
+        aTerrainList.get(2).setBackwardListFlow(firstTL);
 //
-//        //roundabout
-        aTerrainList.get(12).setForwardListFlow(fifteenTL);//down
-        aTerrainList.get(7).setBackwardListFlow(eighthTL); //supposed to be backward
-        aTerrainList.get(13).setBackwardListFlow(sixteenthTL);//up
-        aTerrainList.get(6).setForwardListFlow(fifthTL);
+//        //jun22
+        aTerrainList.get(8).setBackwardListFlow(fifteenTL);//down
+        aTerrainList.get(3).setBackwardListFlow(eighthTL); //supposed to be backward
+        aTerrainList.get(9).setForwardListFlow(sixteenthTL);//up
+        aTerrainList.get(2).setForwardListFlow(fifthTL);
 
-        //junction22
-        aTerrainList.get(7).setForwardListFlow(sixthTL);
+        //junction18
+        aTerrainList.get(3).setForwardListFlow(sixthTL);
         aTerrainList.get(1).setBackwardListFlow(seventhTL); //
-        aTerrainList.get(17).setForwardListFlow(thirteenthTL); //down
-        aTerrainList.get(16).setBackwardListFlow(fourteenthTL); //up
+        aTerrainList.get(13).setForwardListFlow(thirteenthTL); //down
+        aTerrainList.get(12).setBackwardListFlow(fourteenthTL); //up
 
-        //junction24
-        aTerrainList.get(13).setForwardListFlow(seventeenthTL);//down
-        aTerrainList.get(10).setBackwardListFlow(eleventhTL);
-        aTerrainList.get(9).setForwardListFlow(tenthTL);
+        //junction20
+        aTerrainList.get(9).setBackwardListFlow(seventeenthTL);//down
+        aTerrainList.get(6).setForwardListFlow(eleventhTL);
+        aTerrainList.get(5).setBackwardListFlow(tenthTL);
 
     }
 
     public void initializeNeighboursTerrainLists(){
-        this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(23));
+    	
+    	this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(19));
+    	
+    	this.aTerrainList.get(1).setNeighboursTerrainList(this.aTerrainList.get(18));
+    	
+    	this.aTerrainList.get(2).setNeighboursTerrainList(this.aTerrainList.get(22));
+    	this.aTerrainList.get(2).setNeighboursTerrainList(this.aTerrainList.get(19));
 
-        this.aTerrainList.get(1).setNeighboursTerrainList(this.aTerrainList.get(22));
+    	this.aTerrainList.get(3).setNeighboursTerrainList(this.aTerrainList.get(18));
+    	this.aTerrainList.get(3).setNeighboursTerrainList(this.aTerrainList.get(22));
+    	
+    	this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(21));
+    	this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(16));
 
-        this.aTerrainList.get(2).setNeighboursTerrainList(this.aTerrainList.get(12));
-        this.aTerrainList.get(2).setNeighboursTerrainList(this.aTerrainList.get(5));
+    	this.aTerrainList.get(5).setNeighboursTerrainList(this.aTerrainList.get(20));
+    	this.aTerrainList.get(5).setNeighboursTerrainList(this.aTerrainList.get(17));
 
-        this.aTerrainList.get(3).setNeighboursTerrainList(this.aTerrainList.get(6));
-        this.aTerrainList.get(3).setNeighboursTerrainList(this.aTerrainList.get(2));
+    	this.aTerrainList.get(6).setNeighboursTerrainList(this.aTerrainList.get(20));
+    	this.aTerrainList.get(6).setNeighboursTerrainList(this.aTerrainList.get(15));
 
-        this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(13));
-        this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(3));
+    	this.aTerrainList.get(7).setNeighboursTerrainList(this.aTerrainList.get(14));
+    	this.aTerrainList.get(7).setNeighboursTerrainList(this.aTerrainList.get(21));
+    	
+    	this.aTerrainList.get(8).setNeighboursTerrainList(this.aTerrainList.get(21));
+    	this.aTerrainList.get(8).setNeighboursTerrainList(this.aTerrainList.get(22));
+    
+    	this.aTerrainList.get(9).setNeighboursTerrainList(this.aTerrainList.get(22));
+    	this.aTerrainList.get(9).setNeighboursTerrainList(this.aTerrainList.get(20));
+    
+    	this.aTerrainList.get(10).setNeighboursTerrainList(this.aTerrainList.get(16));
+    	this.aTerrainList.get(10).setNeighboursTerrainList(this.aTerrainList.get(19));
+    
+    	this.aTerrainList.get(11).setNeighboursTerrainList(this.aTerrainList.get(19));
+    	this.aTerrainList.get(11).setNeighboursTerrainList(this.aTerrainList.get(17));
+    
+    	this.aTerrainList.get(12).setNeighboursTerrainList(this.aTerrainList.get(18));
+    	this.aTerrainList.get(12).setNeighboursTerrainList(this.aTerrainList.get(15));
+    
+    	this.aTerrainList.get(13).setNeighboursTerrainList(this.aTerrainList.get(14));
+    	this.aTerrainList.get(13).setNeighboursTerrainList(this.aTerrainList.get(18));
+    
+    	this.aTerrainList.get(14).setNeighboursTerrainList(this.aTerrainList.get(7));
+    	this.aTerrainList.get(14).setNeighboursTerrainList(this.aTerrainList.get(13));
 
-        this.aTerrainList.get(5).setNeighboursTerrainList(this.aTerrainList.get(7));
-        this.aTerrainList.get(5).setNeighboursTerrainList(this.aTerrainList.get(4));
+    	this.aTerrainList.get(15).setNeighboursTerrainList(this.aTerrainList.get(12));
+    	this.aTerrainList.get(15).setNeighboursTerrainList(this.aTerrainList.get(6));
 
-        this.aTerrainList.get(6).setNeighboursTerrainList(this.aTerrainList.get(23));
-        this.aTerrainList.get(6).setNeighboursTerrainList(this.aTerrainList.get(2));
+    	this.aTerrainList.get(16).setNeighboursTerrainList(this.aTerrainList.get(4));
+    	this.aTerrainList.get(16).setNeighboursTerrainList(this.aTerrainList.get(10));
 
-        this.aTerrainList.get(7).setNeighboursTerrainList(this.aTerrainList.get(22));
-        this.aTerrainList.get(7).setNeighboursTerrainList(this.aTerrainList.get(4));
+    	this.aTerrainList.get(17).setNeighboursTerrainList(this.aTerrainList.get(11));
+    	this.aTerrainList.get(17).setNeighboursTerrainList(this.aTerrainList.get(5));
 
-        this.aTerrainList.get(8).setNeighboursTerrainList(this.aTerrainList.get(25));
-        this.aTerrainList.get(8).setNeighboursTerrainList(this.aTerrainList.get(20));
-
-        this.aTerrainList.get(9).setNeighboursTerrainList(this.aTerrainList.get(24));
-        this.aTerrainList.get(9).setNeighboursTerrainList(this.aTerrainList.get(21));
-
-        this.aTerrainList.get(10).setNeighboursTerrainList(this.aTerrainList.get(19));
-        this.aTerrainList.get(10).setNeighboursTerrainList(this.aTerrainList.get(24));
-
-        this.aTerrainList.get(11).setNeighboursTerrainList(this.aTerrainList.get(18));
-        this.aTerrainList.get(11).setNeighboursTerrainList(this.aTerrainList.get(25));
-
-        this.aTerrainList.get(12).setNeighboursTerrainList(this.aTerrainList.get(25));
-        this.aTerrainList.get(12).setNeighboursTerrainList(this.aTerrainList.get(5));
-
-        this.aTerrainList.get(13).setNeighboursTerrainList(this.aTerrainList.get(3));
-        this.aTerrainList.get(13).setNeighboursTerrainList(this.aTerrainList.get(24));
-
-        this.aTerrainList.get(14).setNeighboursTerrainList(this.aTerrainList.get(20));
-        this.aTerrainList.get(14).setNeighboursTerrainList(this.aTerrainList.get(23));
-
-        this.aTerrainList.get(15).setNeighboursTerrainList(this.aTerrainList.get(23));
-        this.aTerrainList.get(15).setNeighboursTerrainList(this.aTerrainList.get(21));
-
-        this.aTerrainList.get(16).setNeighboursTerrainList(this.aTerrainList.get(22));
-        this.aTerrainList.get(16).setNeighboursTerrainList(this.aTerrainList.get(19));
-
-        this.aTerrainList.get(17).setNeighboursTerrainList(this.aTerrainList.get(18));
-        this.aTerrainList.get(17).setNeighboursTerrainList(this.aTerrainList.get(22));
-
-        this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(11));
-        this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(17));
-
-        this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(16));
-        this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(10));
-
-        this.aTerrainList.get(20).setNeighboursTerrainList(this.aTerrainList.get(8));
-        this.aTerrainList.get(20).setNeighboursTerrainList(this.aTerrainList.get(14));
-
-        this.aTerrainList.get(21).setNeighboursTerrainList(this.aTerrainList.get(9));
-        this.aTerrainList.get(21).setNeighboursTerrainList(this.aTerrainList.get(15));
-
-        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(1));
-        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(7));
-        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(16));
-        this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(17));
-
-        this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(6));
-        this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(0));
-        this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(14));
-        this.aTerrainList.get(23).setNeighboursTerrainList(this.aTerrainList.get(15));
-
-        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(9));
-        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(10));
-        this.aTerrainList.get(24).setNeighboursTerrainList(this.aTerrainList.get(13));
-
-        this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(11));
-        this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(8));
-        this.aTerrainList.get(25).setNeighboursTerrainList(this.aTerrainList.get(12));
+    	this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(1));
+    	this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(3));
+    	this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(12));
+    	this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(13));
+    	
+    	this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(2));
+    	this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(0));
+    	this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(10));
+    	this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(11));
+    	
+    	this.aTerrainList.get(20).setNeighboursTerrainList(this.aTerrainList.get(5));
+    	this.aTerrainList.get(20).setNeighboursTerrainList(this.aTerrainList.get(6));
+    	this.aTerrainList.get(20).setNeighboursTerrainList(this.aTerrainList.get(9));
+    	
+    	this.aTerrainList.get(21).setNeighboursTerrainList(this.aTerrainList.get(7));
+    	this.aTerrainList.get(21).setNeighboursTerrainList(this.aTerrainList.get(4));
+    	this.aTerrainList.get(21).setNeighboursTerrainList(this.aTerrainList.get(8));
+    	
+    	this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(3));
+    	this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(2));
+    	this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(8));
+    	this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(9));
     }
 
     public void initializeRandomTrafficLights(){
@@ -482,54 +476,40 @@ public class TrafficManagement extends JFrame {
     public void staticMapCreator(){
 
         //create FIRSTLY the entry and exit roads
-//        aTerrainList.add(new StraightRoad(10,325,0,40,this));//entry road    //0
-//        aTerrainList.add(new StraightRoad(1180,325,0,170,this));//exit road  //1
         aTerrainList.add(new StraightRoad(50,325,0,100,this));//entry road    //0
         aTerrainList.add(new StraightRoad(1280,325,0,100,this));//exit road  //1
 
-
         //next, create the rest map
 
-        //add roundabout
-        aTerrainList.add(new CornerRoad(740,250,90,1,this));                         //2
-        aTerrainList.add(new CornerRoad(740,250,180,1,this));                        //3
-        aTerrainList.add(new CornerRoad(740,250,270,1,this));                        //4
-        aTerrainList.add(new CornerRoad(740,250,360,1,this));                        //5
-
         //add horizontal road
-        //Added another traffic light color parameter to SRoad
-        aTerrainList.add(new StraightRoad(250,325,0,500,this));               //6   <-----
-        aTerrainList.add(new StraightRoad(980,325,0,200,this));
-        aTerrainList.add(new StraightRoad(250,10,0,565,this));
-        aTerrainList.add(new StraightRoad(250,590,0,565,this));
-        aTerrainList.add(new StraightRoad(915,590,0,265,this));
-        aTerrainList.add(new StraightRoad(915,10,0,265,this));
-
+        aTerrainList.add(new StraightRoad(250,325,0,565,this));     //2           
+        aTerrainList.add(new StraightRoad(915,325,0,265,this));//3
+        aTerrainList.add(new StraightRoad(250,10,0,565,this));//4
+        aTerrainList.add(new StraightRoad(250,590,0,565,this));//5
+        aTerrainList.add(new StraightRoad(915,590,0,265,this));//6
+        aTerrainList.add(new StraightRoad(915,10,0,265,this));//7
 
         //add vertical roads
-        aTerrainList.add(new StraightRoad(815,110,90,150,this));              //12
-        aTerrainList.add(new StraightRoad(815,490,90,101,this));
-        aTerrainList.add(new StraightRoad(150,110,90,215,this));              //14
-        aTerrainList.add(new StraightRoad(150,425,90,165,this));
-        aTerrainList.add(new StraightRoad(1180,425,90,165,this));
-        aTerrainList.add(new StraightRoad(1180,110,90,215,this));
+        aTerrainList.add(new StraightRoad(815,110,90,215,this)); //8             
+        aTerrainList.add(new StraightRoad(815,425,90,265,this));//9
+        aTerrainList.add(new StraightRoad(150,110,90,215,this));   //10          
+        aTerrainList.add(new StraightRoad(150,425,90,165,this));//11
+        aTerrainList.add(new StraightRoad(1180,425,90,165,this));//12
+        aTerrainList.add(new StraightRoad(1180,110,90,215,this));//13
 
         //add curved roads
-        aTerrainList.add(new CornerRoad(1080,10,360,0,this));                         //18
-        aTerrainList.add(new CornerRoad(1080,490,270,0,this));                        //19
-        aTerrainList.add(new CornerRoad(150,10,90,0,this));                           //20
-        aTerrainList.add(new CornerRoad(150,490,180,0,this));                         //21
-        //aTerrainList.add(new CornerRoad(300,75,90));
-
+        aTerrainList.add(new CornerRoad(1080,10,360,0,this));        //14                
+        aTerrainList.add(new CornerRoad(1080,490,270,0,this));           //15     
+        aTerrainList.add(new CornerRoad(150,10,90,0,this));                  //16    
+        aTerrainList.add(new CornerRoad(150,490,180,0,this));//17
 
         //add junctions (0,0,4,3: to close the square junctions)
-        aTerrainList.add(new SquareJunction(1180,325,this,0));
-        aTerrainList.add(new SquareJunction(150,325,this,0));                          //23
-        aTerrainList.add(new SquareJunction(815,590,this,4));
-        aTerrainList.add(new SquareJunction(815,10,this,3));
-//        aTerrainList.add(new SquareJunction(50,325,this,0));                          //23
-//        aTerrainList.add(new SquareJunction(715,590,this,4));
+        aTerrainList.add(new SquareJunction(1180,325,this,0));//18
+        aTerrainList.add(new SquareJunction(150,325,this,0));     //19          
+        aTerrainList.add(new SquareJunction(815,590,this,4));//20
+        aTerrainList.add(new SquareJunction(815,10,this,3));//21
 
+        aTerrainList.add(new SquareJunction(815,325,this,0));//22
     }
 
     public void randomMapCreator(){
