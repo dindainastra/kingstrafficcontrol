@@ -193,7 +193,7 @@ public class TrafficManagement extends JFrame {
         //initComponents();
 
         //first init the trafficlights to have the firsts position in the Collection
-//         initializeStaticTrafficLights();
+         initializeStaticTrafficLights();
 
         //init all the vehicles
 //        initializeForwardAndBackwardLists();
@@ -364,18 +364,18 @@ public class TrafficManagement extends JFrame {
         //junction21
         aTerrainList.get(4).setForwardListFlow(ninthTL);
         aTerrainList.get(7).setBackwardListFlow(twelfthTL); //supposed to be backward
-        aTerrainList.get(8).setBackwardListFlow(eighteenthTL);//up supposed to be backward
+        aTerrainList.get(8).setForwardListFlow(eighteenthTL);//up supposed to be backward
 //
 //        //junction19
         aTerrainList.get(11).setForwardListFlow(thirdTL); //down supposed to be backward
-        aTerrainList.get(0).setBackwardListFlow(firstTL); //supposed to be backward
+        aTerrainList.get(0).setForwardListFlow(secondTL); //supposed to be backward
         aTerrainList.get(10).setBackwardListFlow(fourthTL); //up
-        aTerrainList.get(2).setForwardListFlow(secondTL);
+        aTerrainList.get(2).setBackwardListFlow(firstTL);
 //
 //        //jun22
-        aTerrainList.get(8).setForwardListFlow(fifteenTL);//down
+        aTerrainList.get(8).setBackwardListFlow(fifteenTL);//down
         aTerrainList.get(3).setBackwardListFlow(eighthTL); //supposed to be backward
-        aTerrainList.get(9).setBackwardListFlow(sixteenthTL);//up
+        aTerrainList.get(9).setForwardListFlow(sixteenthTL);//up
         aTerrainList.get(2).setForwardListFlow(fifthTL);
 
         //junction18
@@ -385,9 +385,9 @@ public class TrafficManagement extends JFrame {
         aTerrainList.get(12).setBackwardListFlow(fourteenthTL); //up
 
         //junction20
-        aTerrainList.get(9).setForwardListFlow(seventeenthTL);//down
-        aTerrainList.get(6).setBackwardListFlow(eleventhTL);
-        aTerrainList.get(5).setForwardListFlow(tenthTL);
+        aTerrainList.get(9).setBackwardListFlow(seventeenthTL);//down
+        aTerrainList.get(6).setForwardListFlow(eleventhTL);
+        aTerrainList.get(5).setBackwardListFlow(tenthTL);
 
     }
 

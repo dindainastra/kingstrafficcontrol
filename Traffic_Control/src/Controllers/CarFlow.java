@@ -245,11 +245,12 @@ public class CarFlow implements Runnable {
 
                             moveToEnd(tmpCar, this.aTerrain.getLenght(), dir);
                         	  if (isThereATrafficLight(this.aTerrain.getForwardListFlow())){
-                          			
+                        		  System.out.println("DEBUG1");	
                         		  	while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {
-                        		  		
-                          		}
+                        		  		System.out.println("DEBUG2");	
+                        		  	}
                         	  }
+                        	  
 
                             moveThisVehicleToTheNextCorrectStack(tmpCar);
 //                            System.out.println("Lenght: "+ this.aTerrain.getLenght() + " this road: " + this.aTerrain);
@@ -373,12 +374,11 @@ public class CarFlow implements Runnable {
                             }
 
                             if (isThereATrafficLight(this.aTerrain.getBackwardListFlow())){
-                          		
-                        		  	while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))) {
-                        		  		
-                          		}
-                        	}
-
+                        		System.out.println("DEBUG11");  	
+                            	while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))) {
+                            		System.out.println("DEBUG22");
+                        		}
+                            }
                             moveThisVehicleToTheNextCorrectStack(tmpCar);
 
                             System.out.println("Length: "+ this.aTerrain.getLenght() + " this road: " + this.aTerrain);
