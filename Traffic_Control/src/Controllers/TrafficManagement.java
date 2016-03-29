@@ -288,7 +288,7 @@ public class TrafficManagement extends JFrame {
 
     public void initializeStaticTrafficLights(){
 
-        //junction25
+        //junction21
         //TrafficLights ninthTL = new TrafficLights(715,10,3,2,0,getTlDelay());
         TrafficLights ninthTL = new TrafficLights(815,10,3,2,0,3000);
         TrafficLights twelfthTL = new TrafficLights(915,60,3,1,0,3000);
@@ -302,7 +302,7 @@ public class TrafficManagement extends JFrame {
         eighteenthTL.nextTrafficLightIs(ninthTL);
 
 
-//        //junction 23
+//        //junction 19
         TrafficLights thirdTL = new TrafficLights(250,325,4, 2,90,3000);
         TrafficLights firstTL = new TrafficLights(250,375,4, 1,0,3000);
         TrafficLights fourthTL = new TrafficLights(200,425, 4, 1,90,3000);
@@ -317,11 +317,11 @@ public class TrafficManagement extends JFrame {
         secondTL.nextTrafficLightIs(thirdTL);
 
 
-//        //roundabout
-        TrafficLights fifteenTL = new TrafficLights(915,260,4, 2,90,3000);
-        TrafficLights eighthTL = new TrafficLights(980,375,4, 1,0,3000);
-        TrafficLights sixteenthTL = new TrafficLights(865,490,4 ,1,90,3000);
-        TrafficLights fifthTL = new TrafficLights(750,325,4, 1,0,3000);
+//        //junction22
+        TrafficLights fifteenTL = new TrafficLights(915,325,4, 2,90,3000);
+        TrafficLights eighthTL = new TrafficLights(915,375,4, 1,0,3000);
+        TrafficLights sixteenthTL = new TrafficLights(865,425,4 ,1,90,3000);
+        TrafficLights fifthTL = new TrafficLights(815,325,4, 1,0,3000);
         fifteenTL.previousTrafficLightIs(fifthTL);
         eighthTL.previousTrafficLightIs(fifteenTL);
         sixteenthTL.previousTrafficLightIs(eighthTL);
@@ -332,7 +332,7 @@ public class TrafficManagement extends JFrame {
         fifthTL.nextTrafficLightIs(fifteenTL);
 //
 //
-//        //junction22
+//        //junction18
         TrafficLights thirteenthTL = new TrafficLights(1280,325,4, 2,90,3000);
         TrafficLights seventhTL = new TrafficLights(1280,375,4, 1,0,3000);
         TrafficLights fourteenthTL = new TrafficLights(1230,425,4,1,90,3000);
@@ -347,7 +347,7 @@ public class TrafficManagement extends JFrame {
         sixthTL.nextTrafficLightIs(thirteenthTL);
 //
 //
-//        //junction24
+//        //junction20
 
         TrafficLights seventeenthTL = new TrafficLights(915,590,3,2,90,3000);
         TrafficLights eleventhTL = new TrafficLights(915,640,3,1,0,3000);
@@ -367,9 +367,9 @@ public class TrafficManagement extends JFrame {
         aTerrainList.get(8).setForwardListFlow(eighteenthTL);//up supposed to be backward
 //
 //        //junction19
-        aTerrainList.get(11).setForwardListFlow(thirdTL); //down supposed to be backward
+        aTerrainList.get(11).setForwardListFlow(fourthTL); //down supposed to be backward
         aTerrainList.get(0).setForwardListFlow(secondTL); //supposed to be backward
-        aTerrainList.get(10).setBackwardListFlow(fourthTL); //up
+        aTerrainList.get(10).setBackwardListFlow(thirdTL); //up
         aTerrainList.get(2).setBackwardListFlow(firstTL);
 //
 //        //jun22
