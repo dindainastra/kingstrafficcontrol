@@ -18,8 +18,11 @@ public class Startup extends JPanel{
     private void initComponents() {
         //Create JButton
         randomMapButton = new JButton("Random Map");
+        randomMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
         configurableMapButton = new JButton("Configurable Map");
+        configurableMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
         setMapButton = new JButton("Map");
+        setMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
 
         group=new GridLayout(3,0,20,0);
         this.setLayout(group);
