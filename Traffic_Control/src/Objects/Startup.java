@@ -10,11 +10,15 @@ import java.awt.event.ActionListener;
 /**
  * Created by daniellabacud on 26/03/2016.
  */
-public class Startup extends JPanel{
+public class Startup extends JPanel {
 
-    private JButton randomMapButton, configurableMapButton, setMapButton;
-    public Startup () {initComponents();}
     GridLayout group;
+    private JButton randomMapButton, configurableMapButton, setMapButton;
+
+    public Startup() {
+        initComponents();
+    }
+
     private void initComponents() {
         //Create JButton
         randomMapButton = new JButton("Random Map");
@@ -24,7 +28,7 @@ public class Startup extends JPanel{
         setMapButton = new JButton("Map");
         setMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
 
-        group=new GridLayout(3,0,20,0);
+        group = new GridLayout(3, 0, 20, 0);
         this.setLayout(group);
         add(randomMapButton);
         add(configurableMapButton);
@@ -47,6 +51,7 @@ public class Startup extends JPanel{
             }
         });
     }
+
     private void configurableMapButtonActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
         System.exit(0);
@@ -60,7 +65,7 @@ public class Startup extends JPanel{
     private void setMapButtonActionPerformed(ActionEvent evt) {
         new TrafficManagement().run();
 //        System.exit(0);
-        ((JFrame)this.getTopLevelAncestor()).dispose();
+        ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 
 }

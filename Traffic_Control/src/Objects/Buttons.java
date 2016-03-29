@@ -5,9 +5,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.net.URL;
 
 /**
@@ -16,10 +13,10 @@ import java.net.URL;
 public class Buttons extends JPanel {
 
 
-
     private JButton pauseButton, playButton, replayButton, stopButton;
     private JLabel teamName;
-    public Buttons () {
+
+    public Buttons() {
         initComponents();
     }
 
@@ -94,6 +91,6 @@ public class Buttons extends JPanel {
     }
 
     private void stopButtonActionPerformed(ActionEvent evt) {
-       System.exit(0);
+        System.exit(0);
     }
 }
