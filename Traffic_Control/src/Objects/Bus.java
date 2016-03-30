@@ -1,8 +1,10 @@
 package Objects;
 
-import java.awt.Graphics2D;
+import Controllers.VehicleFlowHelper;
+import Interfaces.Vehicle;
 
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class Bus extends JPanel implements Vehicle {
 
@@ -37,7 +39,37 @@ public class Bus extends JPanel implements Vehicle {
 	public int getLength(){
 		return this.length;
 	}
-	
+
+	@Override
+	public boolean getLock() {
+		return false;
+	}
+
+	@Override
+	public void setLock(boolean lock) {
+
+	}
+
+	@Override
+	public boolean amIMoving() {
+		return false;
+	}
+
+	@Override
+	public void setThatIAmMoving(boolean lock) {
+
+	}
+
+	@Override
+	public void turnCorner(double angle, int centerX, int centerY, int radius) {
+
+	}
+
+	@Override
+	public void bend(VehicleFlowHelper.Direction d, double degree) {
+
+	}
+
 	public int getPriority() {
 		return this.priorityLevel;
 	}
@@ -96,5 +128,9 @@ public class Bus extends JPanel implements Vehicle {
 		revalidate();
 		repaint();
 	}
-	
+
+	@Override
+	public void move(VehicleFlowHelper.Direction direction) {
+
+	}
 }

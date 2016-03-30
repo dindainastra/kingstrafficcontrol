@@ -1,21 +1,25 @@
 package Objects;
+
+import Controllers.VehicleFlowHelper;
+import Interfaces.Vehicle;
+
+import javax.swing.*;
 import java.awt.*;
 
-import javax.swing.JPanel;
-
 public class Lorry extends JPanel implements Vehicle {
-    
-	private Person driver;
-	private int priorityLevel;
-    private int pos_x,pos_y;
+
+    private final int length = 40, width = 17;
+    private Person driver;
+    private int priorityLevel;
+    private int pos_x, pos_y;
     private int R = 222, G = 184, B = 135;//pastel brown
-    private final int length = 40 ,width = 17;
-    
+
     //set lorry position
-    Lorry(int x_coordinate, int y_coordinate){  
+    public Lorry(int x_coordinate, int y_coordinate) {
         this.pos_x = x_coordinate;
         this.pos_y = y_coordinate;
     }
+
     //draw lorry
     protected void doDrawing(Graphics g){
         g.setColor(new Color (R,G,B));
@@ -47,7 +51,37 @@ public class Lorry extends JPanel implements Vehicle {
 	public int getLength(){
 		return this.length;
 	}
-	
+
+	@Override
+	public boolean getLock() {
+		return false;
+	}
+
+	@Override
+	public void setLock(boolean lock) {
+
+	}
+
+	@Override
+	public boolean amIMoving() {
+		return false;
+	}
+
+	@Override
+	public void setThatIAmMoving(boolean lock) {
+
+	}
+
+	@Override
+	public void turnCorner(double angle, int centerX, int centerY, int radius) {
+
+	}
+
+	@Override
+	public void bend(VehicleFlowHelper.Direction d, double degree) {
+
+	}
+
 	public int getPriority() {
 		return this.priorityLevel;
 	}
@@ -106,5 +140,9 @@ public class Lorry extends JPanel implements Vehicle {
 		revalidate();
 		repaint();
 	}
-      
+
+	@Override
+	public void move(VehicleFlowHelper.Direction direction) {
+
+	}
 }
