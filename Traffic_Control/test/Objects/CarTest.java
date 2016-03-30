@@ -49,8 +49,8 @@ public class CarTest {
     public void testTurn() throws Exception {
         car.turn(VehicleFlowHelper.Direction.DOWN, VehicleFlowHelper.Direction.DOWN, 90);
         assertEquals((Double)90.0,(Double)car.getRotate());
-//        car.turn(CarFlow.Direction.DOWN, CarFlow.Direction.DOWN, 0);
-//        assertEquals((Double)90.0,(Double)car.rotate);
+        car.turn(VehicleFlowHelper.Direction.DOWN, VehicleFlowHelper.Direction.DOWN, 0);
+        assertEquals((Double)Math.toRadians(90),(Double)car.getRotate());
 //        public void turn(CarFlow.Direction d, CarFlow.Direction carDirection, double degree) {
 //            double turnDir = degree;
 //

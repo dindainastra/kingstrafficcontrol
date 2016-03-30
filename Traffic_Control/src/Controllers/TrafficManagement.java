@@ -290,7 +290,7 @@ public class TrafficManagement extends JFrame {
 
     }
 
-    private void initializeNeighboursTerrainLists() {
+    public void initializeNeighboursTerrainLists() {
 
         this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(19));
 

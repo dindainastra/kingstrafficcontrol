@@ -18,6 +18,8 @@ public class TrafficManagementTest {
     ArrayList<Vehicle> aVehicleList;
     Terrain aTerrain;
     TrafficManagement trafficManagement;
+    ArrayList<Object> forwardListObjects;
+    ArrayList<Object> backwardListObjects;
 
     @Before
     public void setUp() throws Exception {
@@ -85,26 +87,6 @@ public class TrafficManagementTest {
         assertEquals(20, checkHowManyPersons);
     }
 
-
-
-    /**
-     * Testing:
-     * 1. if this is 0, then it is not equal 1
-     * 2. if this is 1, then it is not equal 0
-     */
-//    @Test
-//    public void testInitializeForwardAndBackwardLists() throws Exception {
-//        trafficManagement = new TrafficManagement();
-//        aVehicleList = trafficManagement.getVehicleList();
-//        for (Vehicle v : this.aVehicleList){
-//            if (v.get_pos_x()==0){
-//                //this v is in this.aTerrainList.get(0).setForwardListFlow(v);
-//            } else {
-//                //this.aTerrainList.get(1).setBackwardListFlow(v);
-//            }
-//        }
-//    }
-
     @Test
     public void testDeleteVehicle() throws Exception {
 
@@ -123,12 +105,11 @@ public class TrafficManagementTest {
     @Test
     public void testFactoryVehicle() throws Exception {
         trafficManagement = new TrafficManagement();
-
+        trafficManagement.run();
+        //aTerrainList = trafficManagement.getTerrainList();
         trafficManagement.factoryVehicle(20);
         int checkHowManyCars = trafficManagement.getVehicleListSize();
-
         assertEquals(20, checkHowManyCars);
-
     }
 
     @Test
@@ -138,14 +119,13 @@ public class TrafficManagementTest {
 
     @Test
     public void testInitializeStaticTrafficLights() throws Exception {
-        trafficManagement = new TrafficManagement();
-        aTerrainList = trafficManagement.getTerrainList();
-
-        ArrayList<Object> forwardListObjects = aTerrain.getForwardListFlow();
-        ArrayList<Object> backwardListObjects = aTerrain.getBackwardListFlow();
         int trafficLightsSize = 0;
-        trafficManagement.initializeStaticTrafficLights();
-        for (Terrain aTerrain : aTerrainList) {
+        trafficManagement = new TrafficManagement();
+        trafficManagement.run();
+        aTerrainList = trafficManagement.getTerrainList();
+        for(int i = 0;i<aTerrainList.size();i++) {
+            backwardListObjects = aTerrainList.get(i).getBackwardListFlow();
+            forwardListObjects = aTerrainList.get(i).getForwardListFlow();
             for (Object o : forwardListObjects)
                 if (o instanceof TrafficLights)
                     trafficLightsSize++;
@@ -154,5 +134,20 @@ public class TrafficManagementTest {
                     trafficLightsSize++;
         }
         assertNotEquals(0,trafficLightsSize);
+    }
+
+    @Test
+    public void testInitializeNeighboursTerrainLists() throws Exception {
+        trafficManagement = new TrafficManagement();
+        trafficManagement.run();
+        aTerrainList = trafficManagement.getTerrainList();
+//        trafficManagement.initializeNeighboursTerrainLists();
+        for(int i = 0;i<aTerrainList.size();i++) {
+            aTerrain = aTerrainList.get(i);
+            int checkSize = aTerrain.getNeighboursTerrainList().size();
+            assertNotEquals(0, checkSize);
+        }
+
+
     }
 }
