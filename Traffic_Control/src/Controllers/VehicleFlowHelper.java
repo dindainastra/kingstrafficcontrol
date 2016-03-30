@@ -32,9 +32,9 @@ public class VehicleFlowHelper implements Runnable {
 
     }
 
-    private void moveToEnd(Car car, int terrainLenght, Direction dir) {
-        for (int i = 0; i < terrainLenght; i++) {
-            car.move(dir);
+    public void moveToEnd(Vehicle vehicle, int terrainLenght, Direction dir){
+        for(int i=0; i<terrainLenght; i++){
+            vehicle.move(dir);
             map.repaint();
             try {
                 Thread.sleep(trafficManagement.getTimeGranularity());
@@ -45,17 +45,17 @@ public class VehicleFlowHelper implements Runnable {
 
     }
 
-    public void moveToEndChanged(Car car, Terrain terrain, Direction dir) {
-        if (dir == Direction.RIGHT || dir == Direction.LEFT) { //Check on the X axis
+    public void moveToEndChanged(Vehicle vehicle, Terrain terrain, Direction dir){
+        if(dir == Direction.RIGHT || dir == Direction.LEFT) { //Check on the X axis
             int x;
-            if (dir == Direction.RIGHT) {
-                x = ((terrain.getxStart() + terrain.getLenght()) - car.getLength());
-            } else {
-                x = (terrain.getxStart() + car.getLength());
+            if(dir == Direction.RIGHT){
+                x = ((terrain.getxStart() + terrain.getLenght()) - vehicle.getLength());
+            }else{
+                x = (terrain.getxStart() + vehicle.getLength());
             }
 
-            while (car.get_pos_x() != x) {
-                car.move(dir);
+            while(vehicle.get_pos_x() != x){
+                vehicle.move(dir);
 
 //
 //                int offset = 0;
@@ -77,14 +77,15 @@ public class VehicleFlowHelper implements Runnable {
 
         } else if (dir == Direction.UP || dir == Direction.DOWN) { //Check on the Y axis
             int y;
-            if (dir == Direction.UP) {
-                y = terrain.getYStart() + car.getLength();
-            } else {
-                y = (terrain.getYStart() + terrain.getLenght()) - car.getLength();
+
+            if(dir == Direction.UP){
+                y = terrain.getYStart() + vehicle.getLength();
+            }else{
+                y = (terrain.getYStart()+terrain.getLenght())- vehicle.getLength();
             }
 
-            while (car.get_pos_y() != y) {
-                car.move(dir);
+            while(vehicle.get_pos_y() != y){
+                vehicle.move(dir);
 
                 try {
                     Thread.sleep(trafficManagement.getTimeGranularity());
@@ -96,20 +97,18 @@ public class VehicleFlowHelper implements Runnable {
         }
     }
 
-    public void turnCorner(Car car, CornerRoad terrain, double angle, double endAngle, Direction direction, int radius, int centerX, int centerY) {
+    public void turnCorner(Vehicle vehicle, CornerRoad terrain, double angle, double endAngle, Direction direction, int radius, int centerX, int centerY){
 
-
-        System.out.println("Turn Corner Road - X is " + car.get_pos_x() + " Y is " + car.get_pos_y());
+        System.out.println("Turn Corner Road - X is "+vehicle.get_pos_x()+" Y is "+vehicle.get_pos_y());
 
         double nAngle = angle;
 
         if (radius == 100) { //Top flow
 
             while (angle <= endAngle) {
-
                 angle += 0.1;
-                car.turnCorner(angle, centerX, centerY, radius);
-                car.bend(direction, 5.625);
+                vehicle.turnCorner(angle, centerX, centerY, radius);
+                vehicle.bend(direction, 5.625);
                 map.repaint();
 
 //            car.turnNew(Direction.RIGHT, angle);
@@ -122,14 +121,13 @@ public class VehicleFlowHelper implements Runnable {
 
             }
 
-        } else {
+        }else{
 
             while (angle >= endAngle) {
-
                 angle -= 0.1;
                 nAngle += 0.1;
-                car.turnCorner(nAngle, centerX, centerY, radius);
-                car.bend(direction, 5.625);
+                vehicle.turnCorner(nAngle, centerX, centerY, radius);
+                vehicle.bend(direction, 5.625);
                 map.repaint();
 
                 try {
@@ -137,7 +135,6 @@ public class VehicleFlowHelper implements Runnable {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
             }
         }
 

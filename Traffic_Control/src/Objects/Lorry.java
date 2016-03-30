@@ -1,5 +1,6 @@
 package Objects;
 
+import Controllers.VehicleFlowHelper;
 import Interfaces.Vehicle;
 
 import javax.swing.*;
@@ -20,115 +21,128 @@ public class Lorry extends JPanel implements Vehicle {
     }
 
     //draw lorry
-    protected void doDrawing(Graphics g) {
-        g.setColor(new Color(R, G, B));
-        g.fillRect(pos_x, pos_y, length, width);
-        // repaint();
+    protected void doDrawing(Graphics g){
+        g.setColor(new Color (R,G,B));
+        g.fillRect(pos_x, pos_y, length, width);   
+       // repaint(); 
     }
+    
+	@Override
+	public void doDrawing(Graphics2D g) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void set_pos_x(int x){
+		this.pos_x = x;
+	}
+	
+	public int get_pos_x(){
+		return this.pos_x;
+	}
+	
+	public void set_pos_y(int y){
+		this.pos_y = y;
+	}
+	
+	public int get_pos_y(){
+		return this.pos_y;
+	}
+	
+	public int getLength(){
+		return this.length;
+	}
 
-    @Override
-    public void doDrawing(Graphics2D g) {
-        // TODO Auto-generated method stub
+	@Override
+	public boolean getLock() {
+		return false;
+	}
 
-    }
+	@Override
+	public void setLock(boolean lock) {
 
-    public int get_pos_x() {
-        return this.pos_x;
-    }
+	}
 
-    public void set_pos_x(int x) {
-        this.pos_x = x;
-    }
+	@Override
+	public boolean amIMoving() {
+		return false;
+	}
 
-    public int get_pos_y() {
-        return this.pos_y;
-    }
+	@Override
+	public void setThatIAmMoving(boolean lock) {
 
-    public void set_pos_y(int y) {
-        this.pos_y = y;
-    }
+	}
 
-    public int getLength() {
-        return this.length;
-    }
+	@Override
+	public void turnCorner(double angle, int centerX, int centerY, int radius) {
 
-    @Override
-    public boolean getLock() {
-        return false;
-    }
+	}
 
-    @Override
-    public void setLock(boolean lock) {
+	@Override
+	public void bend(VehicleFlowHelper.Direction d, double degree) {
 
-    }
+	}
 
-    @Override
-    public boolean amIMoving() {
-        return false;
-    }
+	public int getPriority() {
+		return this.priorityLevel;
+	}
 
-    @Override
-    public void setThatIAmMoving(boolean lock) {
-
-    }
-
-    public int getPriority() {
-        return this.priorityLevel;
-    }
-
-    public void setPriority(int priority) {
-        this.priorityLevel = priority;
-        checkEmergency();
-    }
-
-    private void checkEmergency() {
-        if (this.getPriority() == 1) {
-            //RGB=RED
-            this.setR(255);
-            this.setG(0);
-            this.setB(0);
+	public void setPriority(int priority) {
+		this.priorityLevel = priority;
+		checkEmergency();
+	}
+	
+	public void checkEmergency(){
+		if (this.getPriority()==1){
+			//RGB=RED
+			this.setR(255);
+			this.setG(0);
+			this.setB(0);
             revalidate();
             repaint();
-        }
-    }
+		}
+	}
 
-    private void setR(int r) {
-        this.R = r;
-    }
+	public void setR(int r){
+		this.R = r;
+	}
+	
+	public void setG(int g){
+		this.G = g;
+	}
+	
+	public void setB(int b){
+		this.B = b;
+	}
 
-    private void setG(int g) {
-        this.G = g;
-    }
+	public String getDriversName() {
+		return driver.getName();
+	}
+	
+	public int getDriversPolitenssLevel() {
+		return driver.getPolitenessLevel();
+	}
+	
+	public void setPerson(Person p) {
+		this.driver = p;
+	}
 
-    private void setB(int b) {
-        this.B = b;
-    }
+	public Person getPerson() {
+		return this.driver;
+	}	
+	
+	public String toString(){
+		return this.driver.getName();
+	}
 
-    public String getDriversName() {
-        return driver.getName();
-    }
+	@Override
+	public void move(){
+		this.set_pos_x(length + this.get_pos_x( ) + 5);
+		revalidate();
+		repaint();
+	}
 
-    public int getDriversPolitenssLevel() {
-        return driver.getPolitenessLevel();
-    }
+	@Override
+	public void move(VehicleFlowHelper.Direction direction) {
 
-    public Person getPerson() {
-        return this.driver;
-    }
-
-    public void setPerson(Person p) {
-        this.driver = p;
-    }
-
-    public String toString() {
-        return this.driver.getName();
-    }
-
-    @Override
-    public void move() {
-        this.set_pos_x(length + this.get_pos_x() + 5);
-        revalidate();
-        repaint();
-    }
-
+	}
 }
