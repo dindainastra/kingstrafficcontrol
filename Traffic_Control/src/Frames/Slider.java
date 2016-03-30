@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 public class Slider extends JPanel {
 
     private JLabel congestionLabel, emergencyLabel, roadNetworkLabel, timeIntervalLabel, weatherLabel, speedLimitLabel;
+    private JLabel noOfCars, cars;
     private JSlider timeIntervalSlider, speedLimitSlider;
     private JButton increaseButton, decreaseButton;
     private JComboBox<String> weatherComboBox, emergencyComboBox, congestionComboBox;
@@ -31,6 +32,8 @@ public class Slider extends JPanel {
         emergencyLabel = new JLabel();
         roadNetworkLabel = new JLabel();
         speedLimitLabel = new JLabel();
+        noOfCars=new JLabel();
+        cars=new JLabel();
 
         //Create JSlider
         timeIntervalSlider = new JSlider(0, 100);
@@ -88,6 +91,15 @@ public class Slider extends JPanel {
         speedLimitLabel.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
         speedLimitLabel.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 0));
         speedLimitLabel.setText("Speed Limit Option:");
+
+        noOfCars.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
+        noOfCars.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 0));
+        noOfCars.setText("Number of Cars in the system: ");
+        cars.setFont(new Font("Verdana", 0, 12)); // NOI18N
+        cars.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 0));
+
+        cars.setText("200");
+
 
         String[] weatherConditions = new String[]{"   Normal", "   Hazardous", "   Night", "   Day"};
         weatherComboBox = new JComboBox<>(weatherConditions);
@@ -254,6 +266,23 @@ public class Slider extends JPanel {
         c.insets = new Insets(0, 0, 30, 0);
         this.add(emergencyComboBox, c);
 
+        c.ipady = 0;
+        c.ipadx = 200;
+        c.weightx = 0.5;
+        c.weighty = 0;
+        c.gridx = 0;
+        c.gridy = 11;
+        c.insets = new Insets(0, 0, 30, 0);
+        this.add(noOfCars,c);
+
+        c.ipady = 0;
+        c.ipadx = 200;
+        c.weightx = 0.5;
+        c.weighty = 0;
+        c.gridx = 1;
+        c.gridy = 11;
+        c.insets = new Insets(0,190,30,10);
+        this.add(cars,c);
     }
 
     public void increaseButtonActionPerformed(ActionEvent evt) {
