@@ -122,6 +122,7 @@ public class VehicleFlowHelper implements Runnable {
                 if (isThereATrafficLight(currentObjectList)) {
                     //If the road has more than half of the road max. - set the road to green light
                     if (!checkIfTrafficLightIsGreen(((TrafficLights) currentObjectList.get(0))) && offset == 0) {
+                        // TODO: 30/03/2016 Patrick change this 30 into a variable when you do the different vehicles
                         if (currentObjectList.indexOf(vehicle) > Math.floor(aTerrain.getLenght() / 30))
                             offset = (int) (Math.floor(aTerrain.getLenght() / 30 - 1) * 30);
                         else offset = (currentObjectList.indexOf(vehicle) - 1) * 30;
@@ -169,6 +170,7 @@ public class VehicleFlowHelper implements Runnable {
                     //If the road has more than half of the road max. - set the road to green light
                     if (!checkIfTrafficLightIsGreen(((TrafficLights) currentObjectList.get(0))) && offset == 0) {
 
+                        // TODO: 30/03/2016 Patrick change this 30 into a variable when you do the different vehicles
                         if (currentObjectList.indexOf(vehicle) > Math.floor(aTerrain.getLenght() / 30))
                             offset = (int) (Math.floor(aTerrain.getLenght() / 30 - 1) * 30);
                         else offset = (currentObjectList.indexOf(vehicle) - 1) * 30;
