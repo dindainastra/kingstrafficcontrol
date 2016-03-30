@@ -1,10 +1,10 @@
 package Objects;
 
 import Controllers.VehicleFlowHelper;
+import Interfaces.Vehicle;
 
-import java.awt.Graphics2D;
-
-import javax.swing.JPanel;
+import javax.swing.*;
+import java.awt.*;
 
 public class Bus extends JPanel implements Vehicle {
 
@@ -133,5 +133,4 @@ public class Bus extends JPanel implements Vehicle {
 	public void move(VehicleFlowHelper.Direction direction) {
 
 	}
-
 }

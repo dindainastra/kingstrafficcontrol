@@ -1,25 +1,19 @@
-package Objects;
+package Frames;
 
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.net.URL;
 
-/**
- * Created by SaiKu on 11/03/2016.
- */
 public class Buttons extends JPanel {
-
 
 
     private JButton pauseButton, playButton, replayButton, stopButton;
     private JLabel teamName;
-    public Buttons () {
+
+    public Buttons() {
         initComponents();
     }
 
@@ -82,7 +76,7 @@ public class Buttons extends JPanel {
     }
 
     private void replayButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+
     }
 
     private void playButtonActionPerformed(ActionEvent evt) {
@@ -94,6 +88,6 @@ public class Buttons extends JPanel {
     }
 
     private void stopButtonActionPerformed(ActionEvent evt) {
-       System.exit(0);
+        System.exit(0);
     }
 }

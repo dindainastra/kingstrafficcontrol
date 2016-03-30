@@ -1,25 +1,25 @@
 package Objects;
 
 import Controllers.VehicleFlowHelper;
+import Interfaces.Vehicle;
 
+import javax.swing.*;
 import java.awt.*;
 
-import javax.swing.JPanel;
-
 public class Motorbike extends JPanel implements Vehicle {
-   
-	private Person driver;
-	private int priorityLevel;
-    private int pos_x,pos_y;
-    private int R=221, G=160, B=221; //pastel purple
-    private final int length = 10 ,width = 11;
-    
+
+    private final int length = 10, width = 11;
+    private Person driver;
+    private int priorityLevel;
+    private int pos_x, pos_y;
+    private int R = 221, G = 160, B = 221; //pastel purple
+
     //set Motorbike position
-    Motorbike(int x_coordinate, int y_coordinate){
+    public Motorbike(int x_coordinate, int y_coordinate) {
         this.pos_x = x_coordinate;
         this.pos_y = y_coordinate;
     }
-    
+
     //draw Motorbike
     protected void doDrawing(Graphics g){
         g.setColor(new Color (R,G,B));
