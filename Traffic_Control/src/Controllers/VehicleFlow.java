@@ -2,7 +2,6 @@ package Controllers;
 
 import Interfaces.Terrain;
 import Interfaces.Vehicle;
-import Nodes.StraightRoad;
 import Objects.TrafficLights;
 
 import javax.swing.*;
