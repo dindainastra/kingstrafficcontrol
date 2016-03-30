@@ -209,7 +209,7 @@ public class VehicleFlowHelper implements Runnable {
 
     public void turnCorner(Vehicle vehicle, CornerRoad terrain, double angle, double endAngle, Direction direction, int radius, int centerX, int centerY) {
 
-        System.out.println("Turn Corner Road - X is " + vehicle.get_pos_x() + " Y is " + vehicle.get_pos_y());
+//        System.out.println("Turn Corner Road - X is " + vehicle.get_pos_x() + " Y is " + vehicle.get_pos_y());
 
         double nAngle = angle;
 
@@ -271,7 +271,6 @@ public class VehicleFlowHelper implements Runnable {
     }
 
     public void moveThisVehicleToTheNextCorrectStack(Vehicle v) {
-        System.out.println("METHOD CALL -- moveThisVehicleToTheNextCorrectStack() running....");
 //        threadName  = Thread.currentThread().getName();
 
         if (
@@ -290,7 +289,7 @@ public class VehicleFlowHelper implements Runnable {
             if (this.aTerrain instanceof SquareJunction) {
 
                 if (decision % 2 == 0) {
-                    System.out.println("Decision is " + decision);
+//                    System.out.println("Decision is " + decision);
                     //Move straight or left
                     this.aTerrain.getNeighboursTerrainList().get(decision).getForwardListFlow().add(v);
                 } else {
@@ -375,7 +374,7 @@ public class VehicleFlowHelper implements Runnable {
     }
 
     public Boolean firstExit(Car car, Terrain nextTerrain, Terrain myCurrentTerrain, Direction direction, Direction directionJunction) {
-        System.out.println("Running - FIRST EXIT");
+//        System.out.println("Running - FIRST EXIT");
 
         Direction dirJunction = directionJunction;
         Direction dir = direction;
@@ -389,7 +388,7 @@ public class VehicleFlowHelper implements Runnable {
     }
 
     public Boolean secondExit(Car car, Terrain nextTerrain, Terrain myCurrentTerrain, Direction direction, Direction directionJunction) {
-        System.out.println("Running - SECOND EXIT");
+//        System.out.println("Running - SECOND EXIT");
 
         Direction dirJunction = directionJunction;
         Direction dir = direction;
@@ -420,7 +419,7 @@ public class VehicleFlowHelper implements Runnable {
             map.repaint();
             angle += 10;
             try {
-                Thread.sleep(trafficManagement.getTimeGranularity() + 50);
+                Thread.sleep(trafficManagement.getTimeGranularity());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -453,7 +452,6 @@ public class VehicleFlowHelper implements Runnable {
 
     // TODO: 30/03/2016  Patrick DELETE IT! :D
     public Boolean secondExitChanged(Car car, Terrain nextTerrain, SquareJunction myCurrentTerrain, Direction direction, Direction directionJunction) {
-        System.out.println("Running - SECOND EXIT");
 
         Direction dirJunction = directionJunction;
         Direction dir = direction;
@@ -505,7 +503,7 @@ public class VehicleFlowHelper implements Runnable {
             map.repaint();
             angle += 10;
             try {
-                Thread.sleep(trafficManagement.getTimeGranularity() + 50);
+                Thread.sleep(trafficManagement.getTimeGranularity());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -564,7 +562,7 @@ public class VehicleFlowHelper implements Runnable {
     //Give it the car to move, the direction to move, and how far to move
     public synchronized Boolean moveToDestination(Car car, Direction dir, int destination) {
 
-        System.out.println("moveToDestination(): isCarAtDestination " + car.getDestination() + " - Direction is " + dir);
+//        System.out.println("moveToDestination(): isCarAtDestination " + car.getDestination() + " - Direction is " + dir);
         if (car.get_pos_x() <= destination) {
             car.move(dir);
             map.repaint();
@@ -662,7 +660,6 @@ public class VehicleFlowHelper implements Runnable {
                     turnCorner(tmpCar, cornerRoad, angle, endAngle, direction, radius, centerX, centerY);
                     moveThisVehicleToTheNextCorrectStack(tmpCar);
                 } else { //SquareJunction
-                    System.out.println("I am SquareJunction:  ");
 
                     tmpCar.getPerson().decide(this.aTerrain.getNeighboursTerrainList());
                     int myDecision = tmpCar.getPerson().getDecision();
@@ -697,7 +694,6 @@ public class VehicleFlowHelper implements Runnable {
                     Direction dir = getDirection(tmpCar, this.aTerrain);
                     tmpCar.setCurrentDirection(dir);
 
-                    System.out.println("I am StraightRoad:  flow is " + flowDirection);
                     if (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 1) {
 //                                moveToEnd(tmpCar, this.aTerrain.getLenght()-tmpCar.getLength(), dir);
                         moveToEndChanged(tmpCar, this.aTerrain, dir);
@@ -716,7 +712,6 @@ public class VehicleFlowHelper implements Runnable {
                     }
                     moveThisVehicleToTheNextCorrectStack(tmpCar);
 
-                    System.out.println("Length: " + this.aTerrain.getLenght() + " this road: " + this.aTerrain);
                 } else if (this.aTerrain instanceof CornerRoad) {
                     CornerRoad cornerRoad = (CornerRoad) this.aTerrain;
                     double angle, endAngle;
@@ -757,28 +752,26 @@ public class VehicleFlowHelper implements Runnable {
                     moveThisVehicleToTheNextCorrectStack(tmpCar);
                 } else {//SquareJunction
 
-                    System.out.println("I am SquareJunction:  ");
-
                     tmpCar.getPerson().decide(this.aTerrain.getNeighboursTerrainList());
                     int myDecision = tmpCar.getPerson().getDecision();
 
                     Terrain nextTerrain = aTerrain.getNeighboursTerrainList().get(myDecision);
 
-                    System.out.println("Which Node: " + trafficManagement.getTerrainList().indexOf(nextTerrain));
+//                    System.out.println("Which Node: " + trafficManagement.getTerrainList().indexOf(nextTerrain));
 
                     Direction dir = getDirection(tmpCar, nextTerrain);
                     Direction dirJunction = tmpCar.getCurrentDirection();
 
-                    System.out.println("dir: " + dir + " dirJun: " + dirJunction);
+//                    System.out.println("dir: " + dir + " dirJun: " + dirJunction);
 
                     if (dir.equals(dirJunction)) {
-                        System.out.println("Go Straight!");
+//                        System.out.println("Go Straight!");
                         moveToEnd(tmpCar, this.aTerrain.getLenght(), dir);
                     } else if (isFirstExit(dirJunction, dir)) {
-                        System.out.println("First Exit!");
+//                        System.out.println("First Exit!");
                         firstExit(tmpCar, nextTerrain, this.aTerrain, dir, dirJunction);
                     } else {
-                        System.out.println("Second Exit!");
+//                        System.out.println("Second Exit!");
                         secondExitChanged(tmpCar, nextTerrain, (SquareJunction) this.aTerrain, dir, dirJunction);
                     }
 
