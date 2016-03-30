@@ -39,9 +39,9 @@ public interface Vehicle {
 
     void setThatIAmMoving(boolean lock);
 
-    public void turnCorner(double angle, int centerX, int centerY, int radius);
+    void turnCorner(double angle, int centerX, int centerY, int radius);
 
-    public void bend(VehicleFlowHelper.Direction d, double degree);
+    void bend(VehicleFlowHelper.Direction d, double degree);
 
 
 }
