@@ -1,5 +1,7 @@
 package Objects;
 
+import Controllers.VehicleFlowHelper;
+
 import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
@@ -55,6 +57,16 @@ public class Bus extends JPanel implements Vehicle {
 
 	@Override
 	public void setThatIAmMoving(boolean lock) {
+
+	}
+
+	@Override
+	public void turnCorner(double angle, int centerX, int centerY, int radius) {
+
+	}
+
+	@Override
+	public void bend(VehicleFlowHelper.Direction d, double degree) {
 
 	}
 
@@ -116,5 +128,10 @@ public class Bus extends JPanel implements Vehicle {
 		revalidate();
 		repaint();
 	}
-	
+
+	@Override
+	public void move(VehicleFlowHelper.Direction direction) {
+
+	}
+
 }

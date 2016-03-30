@@ -1,5 +1,7 @@
 package Objects;
 
+import Controllers.VehicleFlowHelper;
+
 import java.awt.*;
 
 import javax.swing.JPanel;
@@ -70,6 +72,16 @@ public class Motorbike extends JPanel implements Vehicle {
 
 	}
 
+	@Override
+	public void turnCorner(double angle, int centerX, int centerY, int radius) {
+
+	}
+
+	@Override
+	public void bend(VehicleFlowHelper.Direction d, double degree) {
+
+	}
+
 	public int getPriority() {
 		return this.priorityLevel;
 	}
@@ -127,5 +139,10 @@ public class Motorbike extends JPanel implements Vehicle {
 		this.set_pos_x(length + this.get_pos_x( ) + 5);
 		revalidate();
 		repaint();
+	}
+
+	@Override
+	public void move(VehicleFlowHelper.Direction direction) {
+
 	}
 }
