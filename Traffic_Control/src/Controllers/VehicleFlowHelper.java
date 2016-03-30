@@ -501,12 +501,14 @@ public class VehicleFlowHelper implements Runnable {
                     moveToEndChanged(tmpCar, this.aTerrain, dir);
 
                     if (isThereATrafficLight(this.aTerrain.getForwardListFlow())) {
+                        //If the road has more than half of the road max. - set the road to green light
+                        if (isThisTerrainBusy()) ((TrafficLights) aTerrain.getForwardListFlow().get(0)).setGreenLightDelay(8);
                         while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {
-                            System.out.println("DEBUG2");
+                            Thread.sleep(500);
                         }
                     }
-
                     moveThisVehicleToTheNextCorrectStack(tmpCar);
+
                 } else if (this.aTerrain instanceof CornerRoad) {
                     CornerRoad cornerRoad = (CornerRoad) this.aTerrain;
 
@@ -597,12 +599,13 @@ public class VehicleFlowHelper implements Runnable {
                     }
 
                     if (isThereATrafficLight(this.aTerrain.getBackwardListFlow())) {
-                        System.out.println("DEBUG11");
+                        //If the road has more than half of the road max. - set the road to green light
+                        if (isThisTerrainBusy()) ((TrafficLights) aTerrain.getBackwardListFlow().get(0)).setGreenLightDelay(8);
                         while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))) {
-                            System.out.println("DEBUG22");
+                            Thread.sleep(500);
                         }
                     }
-                    moveThisVehicleToTheNextCorrectStack(tmpCar);
+                        moveThisVehicleToTheNextCorrectStack(tmpCar);
 
                     System.out.println("Length: " + this.aTerrain.getLenght() + " this road: " + this.aTerrain);
                 } else if (this.aTerrain instanceof CornerRoad) {
@@ -679,6 +682,62 @@ public class VehicleFlowHelper implements Runnable {
         } catch (Exception e) {
             System.out.println("Error: " + e.getLocalizedMessage());
         }
+    }
+
+    //policy
+
+    /**
+     * To check whether the road is busy or not
+     * @return
+     */
+    public boolean isThisTerrainBusy(){
+        int numberOfCars = 0;
+        int threshold = 4;
+        int roadLength;
+
+        //put code for the forward  flow / 100
+        //Parse the aTerrain.getForwardListFlow() and find how many vehicles are in there
+        //and return the proper boolean statement
+        if (this.flowDirection == 1) {
+
+            if(this.aTerrain instanceof StraightRoad){
+                roadLength = aTerrain.getLenght();
+                threshold = (roadLength/60);
+            }
+            for (Object o : this.aTerrain.getForwardListFlow()){
+
+                if (o instanceof Vehicle) {
+                    numberOfCars++;
+                }
+            }
+
+            if(numberOfCars>threshold){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            //put code for the backward  flow / 100
+            //Parse the aTerrain.getBackwardListFlow() and find how many vehicles are in there
+            //and return the proper boolean statement
+            if(this.aTerrain instanceof StraightRoad){
+                roadLength = aTerrain.getLenght();
+                threshold = (roadLength/60);
+            }
+
+            for (Object o : this.aTerrain.getBackwardListFlow()){
+                if (o instanceof Vehicle) {
+                    numberOfCars++;
+                }
+            }
+
+            if(numberOfCars>threshold){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
     }
 
     @Override
