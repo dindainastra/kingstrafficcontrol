@@ -20,6 +20,7 @@ public class VehicleFlowHelper implements Runnable {
     private Terrain aTerrain;
     private VehicleFlow vehicleflow;
     private ArrayList<Object> currentObjectList = new ArrayList<Object>();
+    private volatile int offset;
 
     public VehicleFlowHelper(Vehicle vehicle, Draw aMap, int flowDirection, TrafficManagement trafficManagement, Terrain aTerrain, VehicleFlow vfl) {
 
@@ -29,11 +30,17 @@ public class VehicleFlowHelper implements Runnable {
         this.flowDirection = flowDirection;
         this.aTerrain = aTerrain;
         vehicleflow = vfl;
+        offset = 0;
 
+        if(flowDirection == 1) {
+            currentObjectList = this.aTerrain.getForwardListFlow();
+        }else{
+            currentObjectList = this.aTerrain.getBackwardListFlow();
+        }
     }
 
-    public void moveToEnd(Vehicle vehicle, int terrainLenght, Direction dir){
-        for(int i=0; i<terrainLenght; i++){
+    public void moveToEnd(Vehicle vehicle, int terrainLenght, Direction dir) {
+        for (int i = 0; i < terrainLenght; i++) {
             vehicle.move(dir);
             map.repaint();
             try {
@@ -45,46 +52,134 @@ public class VehicleFlowHelper implements Runnable {
 
     }
 
-    public int calculateOffset(ArrayList<Object> flowList, Vehicle vehicle){
-        int offset = 0;
+    public int calculateOffset(ArrayList<Object> flowList, Vehicle vehicle, int index) {
 
-        if (flowList.size() > 2) {
-            offset = (flowList.size() - 2) * vehicle.getLength();
-        }
-
-        return offset;
+//        offset = 0;
+//
+////        if (flowList.size() > 2 && index > 1) {
+////            offset = ( (flowList.size() - 2) * ( vehicle.getLength() + 5) );
+////        }
+//
+//        (index - 1)
+//
+        return 0;
     }
 
-    public void moveToEndChanged(Vehicle vehicle, Terrain terrain, Direction dir){
-        if(dir == Direction.RIGHT || dir == Direction.LEFT) { //Check on the X axis
+    public void moveOffSet(Vehicle vehicle, Direction dir, int offset) {
+        int distance = 0;
+
+        if (dir == Direction.RIGHT || dir == Direction.LEFT) {
+            if (dir == Direction.RIGHT) {
+                distance = vehicle.get_pos_x() + offset;
+            }else if (dir == Direction.LEFT) {
+                distance = vehicle.get_pos_x() - offset;
+            }
+
+            while (vehicle.get_pos_x() != distance) {
+                vehicle.move(dir);
+
+                try {
+                    Thread.sleep(trafficManagement.getTimeGranularity());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+        }else if (dir == Direction.DOWN || dir == Direction.UP) {
+            if (dir == Direction.DOWN) {
+                distance = vehicle.get_pos_y() + offset;
+            }else if (dir == Direction.UP) {
+                distance = vehicle.get_pos_y() - offset;
+            }
+
+            //while traffic light is red - loop
+            while (vehicle.get_pos_y() != distance) {
+                vehicle.move(dir);
+
+                try {
+                    Thread.sleep(trafficManagement.getTimeGranularity());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        map.repaint();
+    }
+
+    public synchronized void moveToEndChanged(Vehicle vehicle, Terrain terrain, Direction dir) throws InterruptedException {
+        if (dir == Direction.RIGHT || dir == Direction.LEFT) { //Check on the X axis
             int x;
-            if(dir == Direction.RIGHT){
+            if (dir == Direction.RIGHT) {
                 x = ((terrain.getxStart() + terrain.getLenght()) - vehicle.getLength());
-            }else{
+            } else {
                 x = (terrain.getxStart() + vehicle.getLength());
             }
 
-            int offset = 0;
-//            int offset = ((this.aTerrain.getBackwardListFlow().size() - 1) * 20);
-
-            while(vehicle.get_pos_x() != x){
+            while (vehicle.get_pos_x() != x) {
                 vehicle.move(dir);
 
-                if (flowDirection==1) {
-                    //If the traffic light is red and we don't already have an offset - calculate it
-                    if(!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0))) && offset != 0) {
-                        //If you're not the only vehicle on the road, calculate my offset
-//                        if (this.aTerrain.getForwardListFlow().size() > 2) {
-//                            offset = (this.aTerrain.getForwardListFlow().size() - 2) * vehicle.getLength();
-//                        }
-                        offset = calculateOffset(this.aTerrain.getForwardListFlow(), vehicle);
+                    if (isThereATrafficLight(currentObjectList)) {
+                        //If the road has more than half of the road max. - set the road to green light
+                        if (!checkIfTrafficLightIsGreen(((TrafficLights) currentObjectList.get(0))) && offset == 0) {
+                            if (currentObjectList.indexOf(vehicle) > Math.floor(aTerrain.getLenght() / 30))
+                                offset = (int) (Math.floor(aTerrain.getLenght() / 30 - 1) * 30);
+                            else offset = (currentObjectList.indexOf(vehicle) - 1) * 30;
+
+                            //Remove the offset from our destination
+                            if (dir == Direction.RIGHT) {
+                                x = x - offset;
+                            } else {
+                                x = x + offset;
+                            }
+
+                        }
+                    }
+
+                try {
+                    Thread.sleep(trafficManagement.getTimeGranularity());
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (isThereATrafficLight(currentObjectList)) {
+                while (!checkIfTrafficLightIsGreen(((TrafficLights) currentObjectList.get(0))) && offset != 0) {
+                    Thread.sleep(10);
+                }
+
+                if (offset != 0) {
+                    moveOffSet(vehicle, dir, offset);
+                }
+            }
+
+        } else if (dir == Direction.UP || dir == Direction.DOWN) { //Check on the Y axis
+            int y;
+
+            if (dir == Direction.UP) {
+                y = terrain.getYStart() + vehicle.getLength();
+            } else {
+                y = (terrain.getYStart() + terrain.getLenght()) - vehicle.getLength();
+            }
+
+            while (vehicle.get_pos_y() != y) {
+                vehicle.move(dir);
+
+                if (isThereATrafficLight(currentObjectList)) {
+                    //If the road has more than half of the road max. - set the road to green light
+                    if (!checkIfTrafficLightIsGreen(((TrafficLights) currentObjectList.get(0))) && offset == 0) {
+
+                        if (currentObjectList.indexOf(vehicle) > Math.floor(aTerrain.getLenght() / 30))
+                            offset = (int) (Math.floor(aTerrain.getLenght() / 30 - 1) * 30);
+                        else offset = (currentObjectList.indexOf(vehicle) - 1) * 30;
 
                         //Remove the offset from our destination
-                        if (dir == Direction.RIGHT) {
-                            x = x - offset;
+                        if (dir == Direction.UP) {
+                            y = y + offset;
                         } else {
-                            x = x + offset;
+                            y = y - offset;
                         }
+
                     }
                 }
 
@@ -95,31 +190,24 @@ public class VehicleFlowHelper implements Runnable {
                 }
             }
 
-        } else if (dir == Direction.UP || dir == Direction.DOWN) { //Check on the Y axis
-            int y;
+            if (isThereATrafficLight(currentObjectList)) {
+                while (!checkIfTrafficLightIsGreen(((TrafficLights) currentObjectList.get(0))) && offset != 0) {
+                    Thread.sleep(10);
+                }
 
-            if(dir == Direction.UP){
-                y = terrain.getYStart() + vehicle.getLength();
-            }else{
-                y = (terrain.getYStart()+terrain.getLenght())- vehicle.getLength();
-            }
-
-            while(vehicle.get_pos_y() != y){
-                vehicle.move(dir);
-
-                try {
-                    Thread.sleep(trafficManagement.getTimeGranularity());
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if (offset != 0) {
+                    moveOffSet(vehicle, dir, offset);
                 }
             }
 
         }
+
+
     }
 
-    public void turnCorner(Vehicle vehicle, CornerRoad terrain, double angle, double endAngle, Direction direction, int radius, int centerX, int centerY){
+    public void turnCorner(Vehicle vehicle, CornerRoad terrain, double angle, double endAngle, Direction direction, int radius, int centerX, int centerY) {
 
-//        System.out.println("Turn Corner Road - X is "+vehicle.get_pos_x()+" Y is "+vehicle.get_pos_y());
+        System.out.println("Turn Corner Road - X is " + vehicle.get_pos_x() + " Y is " + vehicle.get_pos_y());
 
         double nAngle = angle;
 
@@ -134,14 +222,14 @@ public class VehicleFlowHelper implements Runnable {
 //            car.turnNew(Direction.RIGHT, angle);
 
                 try {
-                    Thread.sleep(trafficManagement.getTimeGranularity());
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
 
             }
 
-        }else{
+        } else {
 
             while (angle >= endAngle) {
                 angle -= 0.1;
@@ -181,7 +269,7 @@ public class VehicleFlowHelper implements Runnable {
     }
 
     public void moveThisVehicleToTheNextCorrectStack(Vehicle v) {
-//        System.out.println("METHOD CALL -- moveThisVehicleToTheNextCorrectStack() running....");
+        System.out.println("METHOD CALL -- moveThisVehicleToTheNextCorrectStack() running....");
 //        threadName  = Thread.currentThread().getName();
 
         if (
@@ -200,7 +288,7 @@ public class VehicleFlowHelper implements Runnable {
             if (this.aTerrain instanceof SquareJunction) {
 
                 if (decision % 2 == 0) {
-//                    System.out.println("Decision is " + decision);
+                    System.out.println("Decision is " + decision);
                     //Move straight or left
                     this.aTerrain.getNeighboursTerrainList().get(decision).getForwardListFlow().add(v);
                 } else {
@@ -230,7 +318,7 @@ public class VehicleFlowHelper implements Runnable {
             }
 
         } else
-//            System.out.println("EXIT NODE: Delete " + v.toString() + " and worker is: " + Thread.currentThread().getName());
+            System.out.println("EXIT NODE: Delete " + v.toString() + " and worker is: " + Thread.currentThread().getName());
         vehicleflow.deleteFromCurrentList(vehicle);
         // TODO: 29/03/2016  to a deletevehicle (Vehicle v)
     }
@@ -285,7 +373,7 @@ public class VehicleFlowHelper implements Runnable {
     }
 
     public Boolean firstExit(Car car, Terrain nextTerrain, Terrain myCurrentTerrain, Direction direction, Direction directionJunction) {
-//        System.out.println("Running - FIRST EXIT");
+        System.out.println("Running - FIRST EXIT");
 
         Direction dirJunction = directionJunction;
         Direction dir = direction;
@@ -299,7 +387,7 @@ public class VehicleFlowHelper implements Runnable {
     }
 
     public Boolean secondExit(Car car, Terrain nextTerrain, Terrain myCurrentTerrain, Direction direction, Direction directionJunction) {
-//        System.out.println("Running - SECOND EXIT");
+        System.out.println("Running - SECOND EXIT");
 
         Direction dirJunction = directionJunction;
         Direction dir = direction;
@@ -330,7 +418,7 @@ public class VehicleFlowHelper implements Runnable {
             map.repaint();
             angle += 10;
             try {
-                Thread.sleep(trafficManagement.getTimeGranularity());
+                Thread.sleep(trafficManagement.getTimeGranularity() + 50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -363,7 +451,7 @@ public class VehicleFlowHelper implements Runnable {
 
     // TODO: 30/03/2016  Patrick DELETE IT! :D
     public Boolean secondExitChanged(Car car, Terrain nextTerrain, SquareJunction myCurrentTerrain, Direction direction, Direction directionJunction) {
-//        System.out.println("Running - SECOND EXIT");
+        System.out.println("Running - SECOND EXIT");
 
         Direction dirJunction = directionJunction;
         Direction dir = direction;
@@ -380,7 +468,7 @@ public class VehicleFlowHelper implements Runnable {
 
             while (car.get_pos_x() != x) {
                 car.move(directionJunction);
-//                System.out.println("Moving to the middle - Car x is " + car.get_pos_x() + " jX is " + myCurrentTerrain.getxStart());
+                System.out.println("Moving to the middle - Car x is " + car.get_pos_x() + " jX is " + myCurrentTerrain.getxStart());
                 try {
                     Thread.sleep(trafficManagement.getTimeGranularity());
                 } catch (InterruptedException e) {
@@ -415,7 +503,7 @@ public class VehicleFlowHelper implements Runnable {
             map.repaint();
             angle += 10;
             try {
-                Thread.sleep(trafficManagement.getTimeGranularity());
+                Thread.sleep(trafficManagement.getTimeGranularity() + 50);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -474,7 +562,7 @@ public class VehicleFlowHelper implements Runnable {
     //Give it the car to move, the direction to move, and how far to move
     public synchronized Boolean moveToDestination(Car car, Direction dir, int destination) {
 
-//        System.out.println("moveToDestination(): isCarAtDestination " + car.getDestination() + " - Direction is " + dir);
+        System.out.println("moveToDestination(): isCarAtDestination " + car.getDestination() + " - Direction is " + dir);
         if (car.get_pos_x() <= destination) {
             car.move(dir);
             map.repaint();
@@ -512,7 +600,7 @@ public class VehicleFlowHelper implements Runnable {
             if (this.flowDirection == 1) {
 
                 Car tmpCar = (Car) vehicle;
-//                System.out.println("Node:  " + this.trafficManagement.getTerrainList().indexOf(this.aTerrain) + " Flow : 1" + "  Car Name:  " + vehicle.toString());
+                System.out.println("Node:  " + this.trafficManagement.getTerrainList().indexOf(this.aTerrain) + " Flow : 1" + "  Car Name:  " + vehicle.toString());
 
                 if (this.aTerrain instanceof StraightRoad) {
 
@@ -522,7 +610,8 @@ public class VehicleFlowHelper implements Runnable {
 
                     if (isThereATrafficLight(this.aTerrain.getForwardListFlow())) {
                         //If the road has more than half of the road max. - set the road to green light
-                        if (isThisTerrainBusy()) ((TrafficLights) aTerrain.getForwardListFlow().get(0)).setGreenLightDelay(8);
+                        if (isThisTerrainBusy())
+                            ((TrafficLights) aTerrain.getForwardListFlow().get(0)).setGreenLightDelay(8);
                         while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getForwardListFlow().get(0)))) {
                             Thread.sleep(500);
                         }
@@ -571,7 +660,7 @@ public class VehicleFlowHelper implements Runnable {
                     turnCorner(tmpCar, cornerRoad, angle, endAngle, direction, radius, centerX, centerY);
                     moveThisVehicleToTheNextCorrectStack(tmpCar);
                 } else { //SquareJunction
-//                    System.out.println("I am SquareJunction:  ");
+                    System.out.println("I am SquareJunction:  ");
 
                     tmpCar.getPerson().decide(this.aTerrain.getNeighboursTerrainList());
                     int myDecision = tmpCar.getPerson().getDecision();
@@ -586,13 +675,10 @@ public class VehicleFlowHelper implements Runnable {
 //                            System.out.println("dir: " + dir + " dirJun: "+ dirJunction);
 
                     if (dir.equals(dirJunction)) {
-//                        System.out.println("Go Straight!");
                         moveToEnd(tmpCar, this.aTerrain.getLenght(), dir); //-tmpCar.getLength()
                     } else if (isFirstExit(dirJunction, dir)) { //Check this method
-//                        System.out.println("First Exit!");
                         firstExit(tmpCar, nextTerrain, this.aTerrain, dir, dirJunction);
                     } else {
-//                        System.out.println("Second Exit!");
                         secondExitChanged(tmpCar, nextTerrain, (SquareJunction) this.aTerrain, dir, dirJunction);
                     }
 
@@ -602,14 +688,14 @@ public class VehicleFlowHelper implements Runnable {
             } else {  //flow == 0
 
                 Car tmpCar = (Car) vehicle;
-//                System.out.println("Node:  " + this.trafficManagement.getTerrainList().indexOf(this.aTerrain) + " Flow : 0" + "  Car Name:  " + vehicle.toString());
+                System.out.println("Node:  " + this.trafficManagement.getTerrainList().indexOf(this.aTerrain) + " Flow : 0" + "  Car Name:  " + vehicle.toString());
                 if (this.aTerrain instanceof StraightRoad) {
 //                            int offset = ((this.aTerrain.getBackwardListFlow().size() - 1) * 20);
 
                     Direction dir = getDirection(tmpCar, this.aTerrain);
                     tmpCar.setCurrentDirection(dir);
 
-//                    System.out.println("I am StraightRoad:  flow is " + flowDirection);
+                    System.out.println("I am StraightRoad:  flow is " + flowDirection);
                     if (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 1) {
 //                                moveToEnd(tmpCar, this.aTerrain.getLenght()-tmpCar.getLength(), dir);
                         moveToEndChanged(tmpCar, this.aTerrain, dir);
@@ -620,14 +706,15 @@ public class VehicleFlowHelper implements Runnable {
 
                     if (isThereATrafficLight(this.aTerrain.getBackwardListFlow())) {
                         //If the road has more than half of the road max. - set the road to green light
-                        if (isThisTerrainBusy()) ((TrafficLights) aTerrain.getBackwardListFlow().get(0)).setGreenLightDelay(8);
+                        if (isThisTerrainBusy())
+                            ((TrafficLights) aTerrain.getBackwardListFlow().get(0)).setGreenLightDelay(8);
                         while (!checkIfTrafficLightIsGreen(((TrafficLights) aTerrain.getBackwardListFlow().get(0)))) {
                             Thread.sleep(500);
                         }
                     }
-                        moveThisVehicleToTheNextCorrectStack(tmpCar);
+                    moveThisVehicleToTheNextCorrectStack(tmpCar);
 
-//                    System.out.println("Length: " + this.aTerrain.getLenght() + " this road: " + this.aTerrain);
+                    System.out.println("Length: " + this.aTerrain.getLenght() + " this road: " + this.aTerrain);
                 } else if (this.aTerrain instanceof CornerRoad) {
                     CornerRoad cornerRoad = (CornerRoad) this.aTerrain;
                     double angle, endAngle;
@@ -668,28 +755,28 @@ public class VehicleFlowHelper implements Runnable {
                     moveThisVehicleToTheNextCorrectStack(tmpCar);
                 } else {//SquareJunction
 
-//                    System.out.println("I am SquareJunction:  ");
+                    System.out.println("I am SquareJunction:  ");
 
                     tmpCar.getPerson().decide(this.aTerrain.getNeighboursTerrainList());
                     int myDecision = tmpCar.getPerson().getDecision();
 
                     Terrain nextTerrain = aTerrain.getNeighboursTerrainList().get(myDecision);
 
-//                    System.out.println("Which Node: " + trafficManagement.getTerrainList().indexOf(nextTerrain));
+                    System.out.println("Which Node: " + trafficManagement.getTerrainList().indexOf(nextTerrain));
 
                     Direction dir = getDirection(tmpCar, nextTerrain);
                     Direction dirJunction = tmpCar.getCurrentDirection();
 
-//                    System.out.println("dir: " + dir + " dirJun: " + dirJunction);
+                    System.out.println("dir: " + dir + " dirJun: " + dirJunction);
 
                     if (dir.equals(dirJunction)) {
-//                        System.out.println("Go Straight!");
+                        System.out.println("Go Straight!");
                         moveToEnd(tmpCar, this.aTerrain.getLenght(), dir);
                     } else if (isFirstExit(dirJunction, dir)) {
-//                        System.out.println("First Exit!");
+                        System.out.println("First Exit!");
                         firstExit(tmpCar, nextTerrain, this.aTerrain, dir, dirJunction);
                     } else {
-//                        System.out.println("Second Exit!");
+                        System.out.println("Second Exit!");
                         secondExitChanged(tmpCar, nextTerrain, (SquareJunction) this.aTerrain, dir, dirJunction);
                     }
 
@@ -708,9 +795,10 @@ public class VehicleFlowHelper implements Runnable {
 
     /**
      * To check whether the road is busy or not
+     *
      * @return
      */
-    public boolean isThisTerrainBusy(){
+    public boolean isThisTerrainBusy() {
         int numberOfCars = 0;
         int threshold = 4;
         int roadLength;
@@ -720,18 +808,18 @@ public class VehicleFlowHelper implements Runnable {
         //and return the proper boolean statement
         if (this.flowDirection == 1) {
 
-            if(this.aTerrain instanceof StraightRoad){
+            if (this.aTerrain instanceof StraightRoad) {
                 roadLength = aTerrain.getLenght();
-                threshold = (roadLength/60);
+                threshold = (roadLength / 60);
             }
-            for (Object o : this.aTerrain.getForwardListFlow()){
+            for (Object o : this.aTerrain.getForwardListFlow()) {
 
                 if (o instanceof Vehicle) {
                     numberOfCars++;
                 }
             }
 
-            if(numberOfCars>threshold){
+            if (numberOfCars > threshold) {
                 return true;
             } else {
                 return false;
@@ -740,18 +828,18 @@ public class VehicleFlowHelper implements Runnable {
             //put code for the backward  flow / 100
             //Parse the aTerrain.getBackwardListFlow() and find how many vehicles are in there
             //and return the proper boolean statement
-            if(this.aTerrain instanceof StraightRoad){
+            if (this.aTerrain instanceof StraightRoad) {
                 roadLength = aTerrain.getLenght();
-                threshold = (roadLength/60);
+                threshold = (roadLength / 60);
             }
 
-            for (Object o : this.aTerrain.getBackwardListFlow()){
+            for (Object o : this.aTerrain.getBackwardListFlow()) {
                 if (o instanceof Vehicle) {
                     numberOfCars++;
                 }
             }
 
-            if(numberOfCars>threshold){
+            if (numberOfCars > threshold) {
                 return true;
             } else {
                 return false;

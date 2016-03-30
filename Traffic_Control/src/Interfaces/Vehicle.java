@@ -26,4 +26,6 @@ public interface Vehicle {
 
     public void turnCorner(double angle, int centerX, int centerY, int radius);
     public void bend(VehicleFlowHelper.Direction d, double degree);
+
+
 }
