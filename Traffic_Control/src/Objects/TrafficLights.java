@@ -169,7 +169,7 @@ public class TrafficLights extends JPanel implements Runnable {
         this.previousTrafficLight = previousTrafficLight;
     }
 
-    public TrafficLights getPreviousTrafficLight(){
+    public TrafficLights getPreviousTrafficLight() {
         return this.previousTrafficLight;
     }
 

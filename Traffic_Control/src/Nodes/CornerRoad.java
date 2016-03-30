@@ -195,13 +195,13 @@ public class CornerRoad extends JPanel implements Terrain {
         return this.nextTerrainList;
     }
 
+    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
+        this.nextTerrainList = tl;
+    }
+
     @Override
     public void setNeighboursTerrainList(Terrain t) {
         this.nextTerrainList.add(t);
-    }
-
-    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
-        this.nextTerrainList = tl;
     }
 
     @Override
@@ -210,13 +210,13 @@ public class CornerRoad extends JPanel implements Terrain {
     }
 
     @Override
-    public void setPreviousTerrainList(Terrain t) {
-        this.previousTerrainList.add(t);
+    public void setPreviousTerrainList(ArrayList<Terrain> tl) {
+        this.previousTerrainList = tl;
     }
 
     @Override
-    public void setPreviousTerrainList(ArrayList<Terrain> tl) {
-        this.previousTerrainList = tl;
+    public void setPreviousTerrainList(Terrain t) {
+        this.previousTerrainList.add(t);
     }
 
     @Override

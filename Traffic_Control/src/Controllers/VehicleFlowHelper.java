@@ -32,9 +32,9 @@ public class VehicleFlowHelper implements Runnable {
         vehicleflow = vfl;
         offset = 0;
 
-        if(flowDirection == 1) {
+        if (flowDirection == 1) {
             currentObjectList = this.aTerrain.getForwardListFlow();
-        }else{
+        } else {
             currentObjectList = this.aTerrain.getBackwardListFlow();
         }
     }
@@ -71,7 +71,7 @@ public class VehicleFlowHelper implements Runnable {
         if (dir == Direction.RIGHT || dir == Direction.LEFT) {
             if (dir == Direction.RIGHT) {
                 distance = vehicle.get_pos_x() + offset;
-            }else if (dir == Direction.LEFT) {
+            } else if (dir == Direction.LEFT) {
                 distance = vehicle.get_pos_x() - offset;
             }
 
@@ -85,10 +85,10 @@ public class VehicleFlowHelper implements Runnable {
                 }
             }
 
-        }else if (dir == Direction.DOWN || dir == Direction.UP) {
+        } else if (dir == Direction.DOWN || dir == Direction.UP) {
             if (dir == Direction.DOWN) {
                 distance = vehicle.get_pos_y() + offset;
-            }else if (dir == Direction.UP) {
+            } else if (dir == Direction.UP) {
                 distance = vehicle.get_pos_y() - offset;
             }
 
@@ -119,22 +119,22 @@ public class VehicleFlowHelper implements Runnable {
             while (vehicle.get_pos_x() != x) {
                 vehicle.move(dir);
 
-                    if (isThereATrafficLight(currentObjectList)) {
-                        //If the road has more than half of the road max. - set the road to green light
-                        if (!checkIfTrafficLightIsGreen(((TrafficLights) currentObjectList.get(0))) && offset == 0) {
-                            if (currentObjectList.indexOf(vehicle) > Math.floor(aTerrain.getLenght() / 30))
-                                offset = (int) (Math.floor(aTerrain.getLenght() / 30 - 1) * 30);
-                            else offset = (currentObjectList.indexOf(vehicle) - 1) * 30;
+                if (isThereATrafficLight(currentObjectList)) {
+                    //If the road has more than half of the road max. - set the road to green light
+                    if (!checkIfTrafficLightIsGreen(((TrafficLights) currentObjectList.get(0))) && offset == 0) {
+                        if (currentObjectList.indexOf(vehicle) > Math.floor(aTerrain.getLenght() / 30))
+                            offset = (int) (Math.floor(aTerrain.getLenght() / 30 - 1) * 30);
+                        else offset = (currentObjectList.indexOf(vehicle) - 1) * 30;
 
-                            //Remove the offset from our destination
-                            if (dir == Direction.RIGHT) {
-                                x = x - offset;
-                            } else {
-                                x = x + offset;
-                            }
-
+                        //Remove the offset from our destination
+                        if (dir == Direction.RIGHT) {
+                            x = x - offset;
+                        } else {
+                            x = x + offset;
                         }
+
                     }
+                }
 
                 try {
                     Thread.sleep(trafficManagement.getTimeGranularity());

@@ -23,15 +23,15 @@ public interface Terrain {
 
     ArrayList<Terrain> getNeighboursTerrainList();
 
-    void setNeighboursTerrainList(Terrain t);
-
     void setNeighboursTerrainList(ArrayList<Terrain> tl);
+
+    void setNeighboursTerrainList(Terrain t);
 
     ArrayList<Terrain> getPreviousTerrainList();
 
-    void setPreviousTerrainList(Terrain t);
-
     void setPreviousTerrainList(ArrayList<Terrain> tl);
+
+    void setPreviousTerrainList(Terrain t);
 
     void removeVehicleFromList(Vehicle v);
 
