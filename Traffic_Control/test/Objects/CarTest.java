@@ -1,6 +1,6 @@
 package Objects;
 
-import Controllers.CarFlow;
+import Controllers.VehicleFlowHelper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +9,6 @@ import static org.junit.Assert.*;
 
 public class CarTest {
     Person p;
-    CarFlow.Direction d;
     int pos_x=1400;
     int pos_y=700;
     Car car = new Car(p,pos_x,pos_y);
@@ -25,19 +24,19 @@ public class CarTest {
      */
     @Test
     public void testMove() throws Exception {
-        car.move(CarFlow.Direction.DOWN);
+        car.move(VehicleFlowHelper.Direction.LEFT);
         assertEquals(701,car.get_pos_y());
-        car.move(CarFlow.Direction.DOWN);
+        car.move(VehicleFlowHelper.Direction.DOWN);
         assertEquals(702,car.get_pos_y());
-        car.move(CarFlow.Direction.UP);
+        car.move(VehicleFlowHelper.Direction.UP);
         assertEquals(701,car.get_pos_y());
-        car.move(CarFlow.Direction.LEFT);
+        car.move(VehicleFlowHelper.Direction.LEFT);
         assertEquals(1399,car.get_pos_x());
         for(int i = 0; i < 10; i++){
-            car.move(CarFlow.Direction.LEFT);
+            car.move(VehicleFlowHelper.Direction.LEFT);
         }
         assertEquals(1389,car.get_pos_x());
-        car.move(CarFlow.Direction.RIGHT);
+        car.move(VehicleFlowHelper.Direction.RIGHT);
         assertEquals(1390,car.get_pos_x());
     }
 
@@ -48,8 +47,8 @@ public class CarTest {
 
     @Test
     public void testTurn() throws Exception {
-        car.turn(CarFlow.Direction.DOWN, CarFlow.Direction.DOWN, 90);
-        assertEquals((Double)90.0,(Double)car.rotate);
+        car.turn(VehicleFlowHelper.Direction.DOWN, VehicleFlowHelper.Direction.DOWN, 90);
+        assertEquals((Double)90.0,(Double)car.getRotate());
 //        car.turn(CarFlow.Direction.DOWN, CarFlow.Direction.DOWN, 0);
 //        assertEquals((Double)90.0,(Double)car.rotate);
 //        public void turn(CarFlow.Direction d, CarFlow.Direction carDirection, double degree) {

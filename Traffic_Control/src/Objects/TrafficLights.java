@@ -17,7 +17,7 @@ public class TrafficLights extends JPanel implements Runnable {
     private TrafficLights nextTrafficLight;
 
     private int delayForGreenLight = 4;
-    private boolean canIChange = false;
+    public boolean canIChange = false;
 
     private long delay;
     private int signal = 1;
@@ -43,7 +43,7 @@ public class TrafficLights extends JPanel implements Runnable {
      *
      * @return
      */
-    private int change() {
+    public void change() {
         switch (currentColour) {
             case Red:
                 currentColour = Yellow;
@@ -57,7 +57,6 @@ public class TrafficLights extends JPanel implements Runnable {
             case YellowReverse:
                 currentColour = Red;
         }
-        return currentColour;
     }
 
     /**
@@ -112,22 +111,22 @@ public class TrafficLights extends JPanel implements Runnable {
     /**
      * Run the traffic light simulation
      */
-    private void doRun() {
+    public void doRun() {
         //There are four states: 1 (RED), 2 (YELLOW AFTER RED), 3 GREEN, 4 (YELLOW AFTER GREEN)
         if (currentColour == 1) {
             // If current colour is Red, then it need to check
             // 1. next traffic light colour, to make sure the next traffic light's changing as it should be
             // 2. previous traffic light colour, to make sure that it will change as it should be
             if (canIChange && nextTrafficLight.currentColour == 1) {
-                nextTrafficLight.currentColour = nextTrafficLight.change();
+                nextTrafficLight.change();
             }
             canIChange = false;
             if (isItMyTurnToChange()) {
-                this.currentColour = change();
+                change();
             }
         } else if (currentColour == 2) {
             //If the previous colour is Yellow after red, change
-            this.currentColour = change();
+            change();
         } else if (currentColour == 3) {
             //If the previous colour is green,
             //wait for the delay
@@ -135,12 +134,12 @@ public class TrafficLights extends JPanel implements Runnable {
             if (signal <= delayForGreenLight) {
                 signal++;
             } else {
-                this.currentColour = change();
+                change();
                 signal = 0;
             }
         } else if (currentColour == 4) {
             //If the previous colour is Yellow after green, change
-            this.currentColour = change();
+            change();
             this.delayForGreenLight = 3;
             canIChange = true;
         }
@@ -178,7 +177,7 @@ public class TrafficLights extends JPanel implements Runnable {
      *
      * @return
      */
-    private boolean isItMyTurnToChange() {
+    public boolean isItMyTurnToChange() {
         return previousTrafficLight.currentColour == 1 && previousTrafficLight.canIChange;
     }
 

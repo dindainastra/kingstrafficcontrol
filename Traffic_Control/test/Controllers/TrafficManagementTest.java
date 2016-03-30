@@ -3,10 +3,11 @@ package Controllers;
 
 import static org.junit.Assert.*;
 
+import Interfaces.Terrain;
 import Objects.Person;
-import Objects.Terrain;
+import Controllers.VehicleFlow;
 import Objects.TrafficLights;
-import Objects.Vehicle;
+import Interfaces.Vehicle;
 import org.junit.*;
 
 import java.util.ArrayList;
@@ -91,18 +92,18 @@ public class TrafficManagementTest {
      * 1. if this is 0, then it is not equal 1
      * 2. if this is 1, then it is not equal 0
      */
-    @Test
-    public void testInitializeForwardAndBackwardLists() throws Exception {
-        trafficManagement = new TrafficManagement();
-        aVehicleList = trafficManagement.getVehicleList();
-        for (Vehicle v : this.aVehicleList){
-            if (v.get_pos_x()==0){
-                //this v is in this.aTerrainList.get(0).setForwardListFlow(v);
-            } else {
-                //this.aTerrainList.get(1).setBackwardListFlow(v);
-            }
-        }
-    }
+//    @Test
+//    public void testInitializeForwardAndBackwardLists() throws Exception {
+//        trafficManagement = new TrafficManagement();
+//        aVehicleList = trafficManagement.getVehicleList();
+//        for (Vehicle v : this.aVehicleList){
+//            if (v.get_pos_x()==0){
+//                //this v is in this.aTerrainList.get(0).setForwardListFlow(v);
+//            } else {
+//                //this.aTerrainList.get(1).setBackwardListFlow(v);
+//            }
+//        }
+//    }
 
     @Test
     public void testDeleteVehicle() throws Exception {

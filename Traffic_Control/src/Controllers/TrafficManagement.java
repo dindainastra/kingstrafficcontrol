@@ -188,7 +188,7 @@ public class TrafficManagement extends JFrame {
 
     }
 
-    private void initializeStaticTrafficLights() {
+    public void initializeStaticTrafficLights() {
 
         //junction21
         TrafficLights ninthTL = new TrafficLights(815, 10, 2, 0, 3000);
@@ -450,6 +450,18 @@ public class TrafficManagement extends JFrame {
 
     public void setTlDelay(int tlDelay) {
         this.tlDelay = tlDelay;
+    }
+
+    public int getVehicleListSize(){
+        return this.aVehicleList.size();
+    }
+
+    public int getPersonListSize(){
+        return this.aPersonList.size();
+    }
+
+    public ArrayList<Vehicle> getVehicleList(){
+        return this.aVehicleList;
     }
 
 }
