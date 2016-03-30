@@ -43,7 +43,7 @@ public class TrafficLights extends JPanel implements Runnable {
      *
      * @return
      */
-    public int change() {
+    private int change() {
         switch (currentColour) {
             case Red:
                 currentColour = Yellow;
@@ -64,7 +64,7 @@ public class TrafficLights extends JPanel implements Runnable {
      * Draw of Traffic Light. RGB used.
      * * @param g
      */
-    public void doDrawing(Graphics2D g) {
+    private void doDrawing(Graphics2D g) {
         AffineTransform old3 = g.getTransform();
         g.rotate(Math.toRadians(rotates), pos_x, pos_y);
 
@@ -112,7 +112,7 @@ public class TrafficLights extends JPanel implements Runnable {
     /**
      * Run the traffic light simulation
      */
-    public void doRun() {
+    private void doRun() {
         //There are four states: 1 (RED), 2 (YELLOW AFTER RED), 3 GREEN, 4 (YELLOW AFTER GREEN)
         if (currentColour == 1) {
             // If current colour is Red, then it need to check
@@ -174,12 +174,8 @@ public class TrafficLights extends JPanel implements Runnable {
      *
      * @return
      */
-    public boolean isItMyTurnToChange() {
-        if (previousTrafficLight.currentColour == 1 && previousTrafficLight.canIChange) {
-            return true;
-        } else {
-            return false;
-        }
+    private boolean isItMyTurnToChange() {
+        return previousTrafficLight.currentColour == 1 && previousTrafficLight.canIChange;
     }
 
     public int getCurrentColour() {

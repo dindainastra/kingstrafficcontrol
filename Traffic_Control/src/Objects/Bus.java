@@ -1,5 +1,7 @@
 package Objects;
 
+import Interfaces.Vehicle;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -66,7 +68,7 @@ public class Bus extends JPanel implements Vehicle {
         checkEmergency();
     }
 
-    public void checkEmergency() {
+    private void checkEmergency() {
         if (this.getPriority() == 1) {
             //RGB=RED
             this.setR(255);
@@ -77,15 +79,15 @@ public class Bus extends JPanel implements Vehicle {
         }
     }
 
-    public void setR(int r) {
+    private void setR(int r) {
         this.R = r;
     }
 
-    public void setG(int g) {
+    private void setG(int g) {
         this.G = g;
     }
 
-    public void setB(int b) {
+    private void setB(int b) {
         this.B = b;
     }
 

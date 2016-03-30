@@ -1,6 +1,8 @@
-package Objects;
+package Nodes;
 
 import Controllers.TrafficManagement;
+import Interfaces.Terrain;
+import Interfaces.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,9 +53,9 @@ public class CornerRoad extends JPanel implements Terrain {
     }
 
     public void doDrawing(Graphics2D g) {
-        Graphics2D road = (Graphics2D) g;
-        Graphics2D lane_divider = (Graphics2D) g;
-        Graphics2D sroad_border = (Graphics2D) g;
+        Graphics2D road = g;
+        Graphics2D lane_divider = g;
+        Graphics2D sroad_border = g;
 
         //draw straight road
         road.setColor(Color.gray);
@@ -96,7 +98,7 @@ public class CornerRoad extends JPanel implements Terrain {
 
     public void paintComponent(Graphics gr) {
         Graphics2D g = (Graphics2D) gr;
-        Graphics2D road = (Graphics2D) g;
+        Graphics2D road = g;
         //Graphics2D lane_divider=(Graphics2D) g;
         //Graphics2D sroad_border=(Graphics2D) g;
 
@@ -198,6 +200,10 @@ public class CornerRoad extends JPanel implements Terrain {
         this.nextTerrainList.add(t);
     }
 
+    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
+        this.nextTerrainList = tl;
+    }
+
     @Override
     public ArrayList<Terrain> getPreviousTerrainList() {
         return this.previousTerrainList;
@@ -206,10 +212,6 @@ public class CornerRoad extends JPanel implements Terrain {
     @Override
     public void setPreviousTerrainList(Terrain t) {
         this.previousTerrainList.add(t);
-    }
-
-    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
-        this.nextTerrainList = tl;
     }
 
     @Override

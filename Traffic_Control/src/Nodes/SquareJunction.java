@@ -1,6 +1,8 @@
-package Objects;
+package Nodes;
 
 import Controllers.TrafficManagement;
+import Interfaces.Terrain;
+import Interfaces.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -55,7 +57,7 @@ public class SquareJunction extends JPanel implements Terrain {
 
 
     public void doDrawing(Graphics2D g) {
-        Graphics2D road = (Graphics2D) g;
+        Graphics2D road = g;
 
         //draw junction
         road.setColor(Color.gray);
@@ -158,6 +160,10 @@ public class SquareJunction extends JPanel implements Terrain {
         this.nextTerrainList.add(t);
     }
 
+    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
+        this.nextTerrainList = tl;
+    }
+
     @Override
     public ArrayList<Terrain> getPreviousTerrainList() {
         return this.previousTerrainList;
@@ -166,10 +172,6 @@ public class SquareJunction extends JPanel implements Terrain {
     @Override
     public void setPreviousTerrainList(Terrain t) {
         this.previousTerrainList.add(t);
-    }
-
-    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
-        this.nextTerrainList = tl;
     }
 
     @Override

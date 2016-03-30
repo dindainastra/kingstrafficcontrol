@@ -1,6 +1,6 @@
 package Controllers;
 
-import Objects.Startup;
+import Frames.Startup;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +31,7 @@ public class TrafficSimulator extends JFrame {
         frame.add(panel2, BorderLayout.WEST);
         frame.add(panel3, BorderLayout.NORTH);
         frame.add(panel4, BorderLayout.SOUTH);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);

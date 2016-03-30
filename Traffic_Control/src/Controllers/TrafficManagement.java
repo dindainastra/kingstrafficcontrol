@@ -1,7 +1,16 @@
 package Controllers;
 
 
-import Objects.*;
+import Frames.Buttons;
+import Frames.Slider;
+import Interfaces.Terrain;
+import Interfaces.Vehicle;
+import Nodes.CornerRoad;
+import Nodes.SquareJunction;
+import Nodes.StraightRoad;
+import Objects.Car;
+import Objects.Person;
+import Objects.TrafficLights;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,18 +46,6 @@ public class TrafficManagement extends JFrame {
         return this.aTerrainList;
     }
 
-    public void printNetwork() {
-
-        int counter = 0;
-        for (Terrain terrain : this.aTerrainList) {
-            System.out.println(counter++);
-            System.out.println("Road: " + terrain.toString());
-            System.out.println("Forward list: " + terrain.getForwardListFlow());
-            System.out.println("Backward list" + terrain.getBackwardListFlow());
-        }
-
-    }
-
     public void deleteVehicle(int number) {
 
         for (int i = 0; i < number; i++) {
@@ -80,7 +77,7 @@ public class TrafficManagement extends JFrame {
                     aVehicleList.add(v);
                     this.aTerrainList.get(0).setForwardListFlow(v);
                 } else {
-                    Car v = new Car(p, 1380, 405);
+                    Car v = new Car(p, 1400, 395);
                     v.setRotate(180);
                     aVehicleList.add(v);
                     this.aTerrainList.get(1).setBackwardListFlow(v);
@@ -109,7 +106,7 @@ public class TrafficManagement extends JFrame {
                     aVehicleList.add(v);
                     this.aTerrainList.get(0).setForwardListFlow(v);
                 } else {
-                    Car v = new Car(p, 1380, 405);
+                    Car v = new Car(p, 1400, 395);
                     v.setRotate(180);
                     if (priority_flag == 1)
                         v.setPriority(1);
@@ -141,7 +138,6 @@ public class TrafficManagement extends JFrame {
 
 
         drawTheMap(map);
-        printNetwork();
 
         start();
 
@@ -151,7 +147,7 @@ public class TrafficManagement extends JFrame {
      * Start the flow of cars in the node system
      * For each car in the vehicle list, create a thread for the cars flow
      */
-    public void start() {
+    private void start() {
 
         for (Terrain t : aTerrainList) {
             new Thread(new VehicleFlow(t, map, 1, this)).start();
@@ -165,7 +161,7 @@ public class TrafficManagement extends JFrame {
         for (Person p : aPersonList) {
             if (!p.isPedestrian()) {
                 if (new Random().nextBoolean()) {
-                    Car c = new Car(p, 30, 330);
+                    Car c = new Car(p, 1400, 395);
 //                    c.setRotate(180);
                     aVehicleList.add(c);
                 } else {
@@ -192,7 +188,7 @@ public class TrafficManagement extends JFrame {
 
     }
 
-    public void initializeStaticTrafficLights() {
+    private void initializeStaticTrafficLights() {
 
         //junction21
         TrafficLights ninthTL = new TrafficLights(815, 10, 2, 0, 3000);
@@ -294,7 +290,7 @@ public class TrafficManagement extends JFrame {
 
     }
 
-    public void initializeNeighboursTerrainLists() {
+    private void initializeNeighboursTerrainLists() {
 
         this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(19));
 
@@ -376,7 +372,7 @@ public class TrafficManagement extends JFrame {
 
     }
 
-    public void staticMapCreator() {
+    private void staticMapCreator() {
 
         //create FIRSTLY the entry and exit roads
         aTerrainList.add(new StraightRoad(50, 325, 0, 100, this));//entry road    //0
@@ -419,7 +415,7 @@ public class TrafficManagement extends JFrame {
 
     }
 
-    public void drawTheMap(final Draw aDraw) {
+    private void drawTheMap(final Draw aDraw) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 frame = new JFrame("King's Traffic Control Simulation");
@@ -433,7 +429,7 @@ public class TrafficManagement extends JFrame {
                 slider.setPreferredSize(new Dimension(250, 0));
                 frame.add(slider, BorderLayout.EAST);
                 frame.add(aDraw, BorderLayout.CENTER);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 frame.setVisible(true);
                 frame.setSize(1400, 700);
                 frame.setLocationRelativeTo(null);

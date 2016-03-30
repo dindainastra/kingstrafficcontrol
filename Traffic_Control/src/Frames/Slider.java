@@ -1,4 +1,4 @@
-package Objects;
+package Frames;
 
 import Controllers.TrafficManagement;
 
@@ -22,7 +22,7 @@ public class Slider extends JPanel {
         this.trafficManagement = trafficManagement;
     }
 
-    public void initComponents() {
+    private void initComponents() {
 
         //Create JLabel
         weatherLabel = new JLabel();
@@ -261,12 +261,12 @@ public class Slider extends JPanel {
         trafficManagement.factoryVehicle(click);
     }
 
-    public void decreaseButtonActionPerformed(ActionEvent evt) {
+    private void decreaseButtonActionPerformed(ActionEvent evt) {
         int click = 1;
         trafficManagement.deleteVehicle(click);
     }
 
-    public void weatherComboBoxActionPerformed(ActionEvent evt) {
+    private void weatherComboBoxActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -277,7 +277,7 @@ public class Slider extends JPanel {
     The default state 0 indicates that no emergency cars exist in the system.
     The indicators 1,2 and 3 indicate the number of emergency cars in the system.
      */
-    public void emergencyComboBoxActionPerformed(ActionEvent evt) {
+    private void emergencyComboBoxActionPerformed(ActionEvent evt) {
         if (evt.getSource() == emergencyComboBox) {
             JComboBox emergencyComboBox = (JComboBox) evt.getSource();
             String msg = (String) emergencyComboBox.getSelectedItem();
@@ -292,7 +292,7 @@ public class Slider extends JPanel {
     The state "high" indicates rush hour, where 30 cars are introduced into te system.
     The state "low indicates" that a low amount of cars are to be included in the system, cars might be removed.
      */
-    public void congestionComboBoxActionPerformed(ActionEvent evt) {
+    private void congestionComboBoxActionPerformed(ActionEvent evt) {
         if (evt.getSource() == congestionComboBox) {
             JComboBox congestionCombobox = (JComboBox) evt.getSource();
             String msg = (String) congestionCombobox.getSelectedItem();
@@ -318,7 +318,7 @@ public class Slider extends JPanel {
     /*This slider is used for setting the time granularity of the system.
     The bigger the value of the slider the bigger the delay, hence the slower the system is going to be.
     */
-    public void timeIntervalStateChanges(ChangeEvent evt) {
+    private void timeIntervalStateChanges(ChangeEvent evt) {
 
         JSlider timeIntervalSlider = (JSlider) evt.getSource();
         if (!timeIntervalSlider.getValueIsAdjusting()) {
@@ -328,7 +328,7 @@ public class Slider extends JPanel {
 
     }
 
-    public void speedLimitStateChanges(ChangeEvent evt) {
+    private void speedLimitStateChanges(ChangeEvent evt) {
         // TODO add your handling code here:
     }
 }

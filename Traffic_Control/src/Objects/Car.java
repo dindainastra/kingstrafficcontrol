@@ -1,6 +1,7 @@
 package Objects;
 
 import Controllers.VehicleFlowHelper;
+import Interfaces.Vehicle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,10 +12,10 @@ public class Car extends JPanel implements Vehicle {
     private static final int INCREMENT_BY = 5;
     public static Boolean draw = false;
     private final int length = 20, width = 15;
-    public double rotate = 0.0;
-    public VehicleFlowHelper.Direction currentDirection = VehicleFlowHelper.Direction.RIGHT;
+    private double rotate = 0.0;
+    private VehicleFlowHelper.Direction currentDirection = VehicleFlowHelper.Direction.RIGHT;
     //	public int rotateInt = 0;
-    volatile Boolean destination = false;
+    private volatile Boolean destination = false;
     private Person driver;
     private int priorityLevel;
     private int pos_x, pos_y;
@@ -212,7 +213,7 @@ public class Car extends JPanel implements Vehicle {
         checkEmergency();
     }
 
-    public void checkEmergency() {
+    private void checkEmergency() {
         if (this.getPriority() == 1) {
             //RGB=RED
             this.setR(255);
@@ -223,15 +224,15 @@ public class Car extends JPanel implements Vehicle {
         }
     }
 
-    public void setR(int r) {
+    private void setR(int r) {
         this.R = r;
     }
 
-    public void setG(int g) {
+    private void setG(int g) {
         this.G = g;
     }
 
-    public void setB(int b) {
+    private void setB(int b) {
         this.B = b;
     }
 

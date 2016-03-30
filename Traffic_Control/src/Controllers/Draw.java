@@ -1,4 +1,12 @@
-package Objects;
+package Controllers;
+
+import Interfaces.Terrain;
+import Interfaces.Vehicle;
+import Nodes.CornerRoad;
+import Nodes.SquareJunction;
+import Nodes.StraightRoad;
+import Objects.Car;
+import Objects.TrafficLights;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +23,7 @@ public class Draw extends JPanel {
     }
 
     @Override
-    protected void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         //NOT OPTIMAL - EVERYTHING IS REPAINTED ON EVERY REPAINT CALL
         //System.out.println("Repaint called?");
 

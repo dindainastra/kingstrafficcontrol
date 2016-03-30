@@ -1,10 +1,9 @@
-package Objects;
+package Interfaces;
 
 import java.awt.*;
 import java.util.ArrayList;
 
 public interface Terrain {
-
 
     void doDrawing(Graphics2D g);
 
@@ -26,11 +25,11 @@ public interface Terrain {
 
     void setNeighboursTerrainList(Terrain t);
 
+    void setNeighboursTerrainList(ArrayList<Terrain> tl);
+
     ArrayList<Terrain> getPreviousTerrainList();
 
     void setPreviousTerrainList(Terrain t);
-
-    void setNeighboursTerrainList(ArrayList<Terrain> tl);
 
     void setPreviousTerrainList(ArrayList<Terrain> tl);
 

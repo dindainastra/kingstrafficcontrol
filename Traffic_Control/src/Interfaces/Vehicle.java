@@ -1,4 +1,6 @@
-package Objects;
+package Interfaces;
+
+import Objects.Person;
 
 import java.awt.*;
 

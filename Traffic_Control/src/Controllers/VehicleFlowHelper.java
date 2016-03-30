@@ -1,6 +1,12 @@
 package Controllers;
 
-import Objects.*;
+import Interfaces.Terrain;
+import Interfaces.Vehicle;
+import Nodes.CornerRoad;
+import Nodes.SquareJunction;
+import Nodes.StraightRoad;
+import Objects.Car;
+import Objects.TrafficLights;
 
 import java.util.ArrayList;
 
@@ -10,11 +16,11 @@ public class VehicleFlowHelper implements Runnable {
     private Draw map;
     private int flowDirection;
 
-    ;
     private TrafficManagement trafficManagement;
     private Terrain aTerrain;
     private VehicleFlow vehicleflow;
     private ArrayList<Object> currentObjectList = new ArrayList<Object>();
+
     public VehicleFlowHelper(Vehicle vehicle, Draw aMap, int flowDirection, TrafficManagement trafficManagement, Terrain aTerrain, VehicleFlow vfl) {
 
         this.vehicle = vehicle;
@@ -26,7 +32,7 @@ public class VehicleFlowHelper implements Runnable {
 
     }
 
-    public void moveToEnd(Car car, int terrainLenght, Direction dir) {
+    private void moveToEnd(Car car, int terrainLenght, Direction dir) {
         for (int i = 0; i < terrainLenght; i++) {
             car.move(dir);
             map.repaint();
@@ -220,11 +226,8 @@ public class VehicleFlowHelper implements Runnable {
         } else if (curD == Direction.LEFT && nextD == Direction.DOWN) {
             return true;
         }
-        if (curD == Direction.UP && nextD == Direction.LEFT) {
-            return true;
-        }
+        return curD == Direction.UP && nextD == Direction.LEFT;
 
-        return false;
     }
 
     /**
@@ -478,9 +481,7 @@ public class VehicleFlowHelper implements Runnable {
 
     public boolean checkIfTrafficLightIsGreen(TrafficLights trafficLight) {
 
-        if (trafficLight.getCurrentColour() == 3) //green color = 3
-            return true;
-        return false;
+        return trafficLight.getCurrentColour() == 3;
     }
 
     /**

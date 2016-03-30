@@ -1,4 +1,4 @@
-package Objects;
+package Frames;
 
 import Controllers.TrafficManagement;
 
@@ -7,12 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Created by daniellabacud on 26/03/2016.
- */
 public class Startup extends JPanel {
 
-    GridLayout group;
+    private GridLayout group;
     private JButton randomMapButton, configurableMapButton, setMapButton;
 
     public Startup() {

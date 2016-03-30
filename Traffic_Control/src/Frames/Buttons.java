@@ -1,4 +1,4 @@
-package Objects;
+package Frames;
 
 
 import javax.swing.*;
@@ -7,9 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 
-/**
- * Created by SaiKu on 11/03/2016.
- */
 public class Buttons extends JPanel {
 
 
@@ -79,7 +76,7 @@ public class Buttons extends JPanel {
     }
 
     private void replayButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
+
     }
 
     private void playButtonActionPerformed(ActionEvent evt) {

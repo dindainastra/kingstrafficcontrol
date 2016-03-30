@@ -1,9 +1,8 @@
 package Controllers;
 
-import Objects.Draw;
-import Objects.Terrain;
+import Interfaces.Terrain;
+import Interfaces.Vehicle;
 import Objects.TrafficLights;
-import Objects.Vehicle;
 
 import javax.swing.*;
 import java.util.ArrayList;

@@ -1,5 +1,7 @@
 package Objects;
 
+import Interfaces.Terrain;
+
 import java.util.ArrayList;
 import java.util.Random;
 
