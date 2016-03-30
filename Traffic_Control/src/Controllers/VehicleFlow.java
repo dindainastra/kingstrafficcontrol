@@ -41,12 +41,10 @@ public class VehicleFlow implements Runnable {
 
     private void startTraffic(Object o) {
         TrafficLights tLOne = (TrafficLights) o;
-        //tLOne.run();
         map.repaint();
         Thread t = new Thread(tLOne);
         t.start();
     }
-
 
     public void run() {
 

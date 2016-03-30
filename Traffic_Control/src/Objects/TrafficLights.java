@@ -169,6 +169,10 @@ public class TrafficLights extends JPanel implements Runnable {
         this.previousTrafficLight = previousTrafficLight;
     }
 
+    public TrafficLights getPreviousTrafficLight() {
+        return this.previousTrafficLight;
+    }
+
     /**
      * Boolean check to know if it is already this traffic light turn to change
      *

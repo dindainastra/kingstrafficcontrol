@@ -1,5 +1,6 @@
 package Interfaces;
 
+import Controllers.VehicleFlowHelper;
 import Objects.Person;
 
 import java.awt.*;
@@ -20,7 +21,13 @@ public interface Vehicle {
 
     void set_pos_x(int x);
 
+    int get_pos_y();
+
+    void set_pos_y(int y);
+
     void move();
+
+    void move(VehicleFlowHelper.Direction direction);
 
     int getLength();
 
@@ -31,4 +38,10 @@ public interface Vehicle {
     boolean amIMoving();
 
     void setThatIAmMoving(boolean lock);
+
+    void turnCorner(double angle, int centerX, int centerY, int radius);
+
+    void bend(VehicleFlowHelper.Direction d, double degree);
+
+
 }
