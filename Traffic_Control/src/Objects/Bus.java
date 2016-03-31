@@ -9,11 +9,10 @@ import java.awt.*;
 
 public class Bus extends JPanel implements Vehicle {
 
-    private final int length = 20, width = 15; //<---Change these variables
+    private final int length = 20, width = 15;
     private Person driver;
     private int priorityLevel;
     private int pos_x, pos_y;
-    private int R = 173, G = 216, B = 230; //pastel blue   <---Change this color
 
     @Override
     public void doDrawing(Graphics2D g) {
@@ -92,15 +91,15 @@ public class Bus extends JPanel implements Vehicle {
     }
 
     public void setR(int r) {
-        this.R = r;
+        int r1 = r;
     }
 
     public void setG(int g) {
-        this.G = g;
+        int g1 = g;
     }
 
     public void setB(int b) {
-        this.B = b;
+        int b1 = b;
     }
 
     public String getDriversName() {

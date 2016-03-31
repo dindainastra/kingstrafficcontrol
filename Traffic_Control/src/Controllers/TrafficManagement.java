@@ -88,6 +88,11 @@ public class TrafficManagement extends JFrame {
                     this.aTerrainList.get(1).setBackwardListFlow(v);
                 }
             }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
     }
@@ -118,6 +123,11 @@ public class TrafficManagement extends JFrame {
                     aVehicleList.add(v);
                     this.aTerrainList.get(1).setBackwardListFlow(v);
                 }
+            }
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         }
 
@@ -171,7 +181,7 @@ public class TrafficManagement extends JFrame {
      * Start the flow of cars in the node system
      * For each car in the vehicle list, create a thread for the cars flow
      */
-    private void start() {
+    public void start() {
 
         for (Terrain t : aTerrainList) {
             new Thread(new VehicleFlow(t, map, 1, this)).start();
@@ -750,7 +760,7 @@ public class TrafficManagement extends JFrame {
 
     }
 
-    private void drawTheMap(final Draw aDraw) {
+    public void drawTheMap(final Draw aDraw) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 frame = new JFrame("King's Traffic Control Simulation");

@@ -11,12 +11,9 @@ import java.awt.event.ActionListener;
 
 public class Slider extends JPanel {
 
-    private JLabel congestionLabel, emergencyLabel, roadNetworkLabel, timeIntervalLabel, weatherLabel, speedLimitLabel;
-    private JLabel noOfCars, cars, roadWorksLabel;
-    private JSlider timeIntervalSlider, speedLimitSlider;
-    private JButton increaseButton, decreaseButton, roadworksButton;
-    private JComboBox<String> weatherComboBox, emergencyComboBox, congestionComboBox;
-//    private JRadioButton roadWorksRadioButtonOn, roadWorkRadioButtonOff;
+    private JComboBox<String> emergencyComboBox;
+    private JComboBox<String> congestionComboBox;
+    //    private JRadioButton roadWorksRadioButtonOn, roadWorkRadioButtonOff;
     private TrafficManagement trafficManagement;
 
     public Slider(TrafficManagement trafficManagement) {
@@ -24,36 +21,36 @@ public class Slider extends JPanel {
         this.trafficManagement = trafficManagement;
     }
 
-    private void initComponents() {
+    public void initComponents() {
 
         //Creats Radio Buttons
 //        roadWorksRadioButtonOn=new JRadioButton("On");
 //        roadWorkRadioButtonOff=new JRadioButton("Off");
 
         //Create JLabel
-        weatherLabel = new JLabel();
-        timeIntervalLabel = new JLabel();
-        congestionLabel = new JLabel();
-        emergencyLabel = new JLabel();
-        roadNetworkLabel = new JLabel();
-        speedLimitLabel = new JLabel();
-        noOfCars=new JLabel();
-        cars=new JLabel();
-        roadWorksLabel=new JLabel();
+        JLabel weatherLabel = new JLabel();
+        JLabel timeIntervalLabel = new JLabel();
+        JLabel congestionLabel = new JLabel();
+        JLabel emergencyLabel = new JLabel();
+        JLabel roadNetworkLabel = new JLabel();
+        JLabel speedLimitLabel = new JLabel();
+        JLabel noOfCars = new JLabel();
+        JLabel cars = new JLabel();
+        JLabel roadWorksLabel = new JLabel();
 
         //Create JSlider
-        timeIntervalSlider = new JSlider(0, 100);
-        speedLimitSlider = new JSlider();
+        JSlider timeIntervalSlider = new JSlider(0, 100);
+        JSlider speedLimitSlider = new JSlider();
 
         //Create JComboBox
-        weatherComboBox = new JComboBox<>();
+        JComboBox<String> weatherComboBox = new JComboBox<>();
         emergencyComboBox = new JComboBox<>();
         congestionComboBox = new JComboBox<>();
 
         //Create JButton
-        increaseButton = new JButton("+");
-        decreaseButton = new JButton("-");
-        roadworksButton=new JButton("Apply Road Work");
+        JButton increaseButton = new JButton("+");
+        JButton decreaseButton = new JButton("-");
+        JButton roadworksButton = new JButton("Apply Road Work");
 
         //slider interface for time interval and congestion rate
         timeIntervalSlider.setMajorTickSpacing(10);
@@ -105,13 +102,6 @@ public class Slider extends JPanel {
 
         noOfCars.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
         noOfCars.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 0));
-        noOfCars.setText("Number of Cars in the system: ");
-
-        cars.setFont(new Font("Verdana", 0, 12)); // NOI18N
-        cars.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 0));
-
-        cars.setText("200");
-
 
         String[] weatherConditions = new String[]{"   Normal", "   Hazardous", "   Night", "   Day"};
         weatherComboBox = new JComboBox<>(weatherConditions);
@@ -251,7 +241,7 @@ public class Slider extends JPanel {
         c.weighty = 0.1;
         c.gridx = 0;
         c.gridy = 6;
-        c.gridwidth=2;
+        c.gridwidth = 2;
         c.insets = new Insets(0, 0, 0, 0);
         this.add(emergencyLabel, c);
 
@@ -271,7 +261,7 @@ public class Slider extends JPanel {
         c.gridx = 0;
         c.gridy = 8;
         c.insets = new Insets(0, 0, 30, 0);
-        this.add(noOfCars,c);
+        this.add(noOfCars, c);
 
     }
 
@@ -280,16 +270,13 @@ public class Slider extends JPanel {
         trafficManagement.factoryVehicle(click);
     }
 
-    private void decreaseButtonActionPerformed(ActionEvent evt) {
+    public void decreaseButtonActionPerformed(ActionEvent evt) {
         int click = 1;
         trafficManagement.deleteVehicle(click);
     }
 
 
-
-
-
-    private void weatherComboBoxActionPerformed(ActionEvent evt) {
+    public void weatherComboBoxActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -300,7 +287,7 @@ public class Slider extends JPanel {
     The default state 0 indicates that no emergency cars exist in the system.
     The indicators 1,2 and 3 indicate the number of emergency cars in the system.
      */
-    private void emergencyComboBoxActionPerformed(ActionEvent evt) {
+    public void emergencyComboBoxActionPerformed(ActionEvent evt) {
         if (evt.getSource() == emergencyComboBox) {
             JComboBox emergencyComboBox = (JComboBox) evt.getSource();
             String msg = (String) emergencyComboBox.getSelectedItem();
@@ -315,7 +302,7 @@ public class Slider extends JPanel {
     The state "high" indicates rush hour, where 30 cars are introduced into te system.
     The state "low indicates" that a low amount of cars are to be included in the system, cars might be removed.
      */
-    private void congestionComboBoxActionPerformed(ActionEvent evt) {
+    public void congestionComboBoxActionPerformed(ActionEvent evt) {
         if (evt.getSource() == congestionComboBox) {
             JComboBox congestionCombobox = (JComboBox) evt.getSource();
             String msg = (String) congestionCombobox.getSelectedItem();
@@ -341,7 +328,7 @@ public class Slider extends JPanel {
     /*This slider is used for setting the time granularity of the system.
     The bigger the value of the slider the bigger the delay, hence the slower the system is going to be.
     */
-    private void timeIntervalStateChanges(ChangeEvent evt) {
+    public void timeIntervalStateChanges(ChangeEvent evt) {
 
         JSlider timeIntervalSlider = (JSlider) evt.getSource();
         if (!timeIntervalSlider.getValueIsAdjusting()) {
@@ -351,7 +338,8 @@ public class Slider extends JPanel {
 
     }
 
-    private void speedLimitStateChanges(ChangeEvent evt) {
+    public void speedLimitStateChanges(ChangeEvent evt) {
         // TODO add your handling code here:
     }
+
 }

@@ -13,28 +13,25 @@ import java.net.URL;
 public class Buttons extends JPanel {
 
 
-    private JButton pauseButton, playButton, replayButton, stopButton;
-    private JLabel teamName;
     private TrafficSimulator traffic;
-    private int selectMap2;
     private TrafficManagement trafficManagement = new TrafficManagement();
 
     public Buttons(int selectMap) {
         initComponents();
-        selectMap2 = selectMap;
+        int selectMap2 = selectMap;
 
 
     }
 
-    private void initComponents() {
+    public void initComponents() {
         //this.setLayout();
 
         //Create JButton
-        replayButton = new JButton("Replay");
-        pauseButton = new JButton("Pause");
-        playButton = new JButton("Play");
-        stopButton = new JButton("Stop");
-        teamName = new JLabel();
+        JButton replayButton = new JButton("Replay");
+        JButton pauseButton = new JButton("Pause");
+        JButton playButton = new JButton("Play");
+        JButton stopButton = new JButton("Stop");
+        JLabel teamName = new JLabel();
         //Create JLabel
         URL stopURL = getClass().getResource("../Resources/stop.PNG");
         URL rewindURL = getClass().getResource("../Resources/rewind.PNG");
@@ -84,7 +81,7 @@ public class Buttons extends JPanel {
         });
     }
 
-    private void replayButtonActionPerformed(ActionEvent evt) {
+    public void replayButtonActionPerformed(ActionEvent evt) {
         TrafficSimulator trafficSimulator = new TrafficSimulator();
         Startup startup = new Startup();
         trafficSimulator.add(startup);
@@ -93,15 +90,15 @@ public class Buttons extends JPanel {
         ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 
-    private void playButtonActionPerformed(ActionEvent evt) {
+    public void playButtonActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void pauseButtonActionPerformed(ActionEvent evt) {
+    public void pauseButtonActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
     }
 
-    private void stopButtonActionPerformed(ActionEvent evt) {
+    public void stopButtonActionPerformed(ActionEvent evt) {
         System.exit(0);
     }
 }

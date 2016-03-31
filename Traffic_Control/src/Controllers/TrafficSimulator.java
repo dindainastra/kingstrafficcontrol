@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 
 public class TrafficSimulator extends JFrame {
-    private static JFrame frame;
 
     public static void main(String[] args) {
 
@@ -14,7 +13,7 @@ public class TrafficSimulator extends JFrame {
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
         JPanel panel4 = new JPanel();
-        frame = new JFrame("King's Traffic Control Simulation");
+        JFrame frame = new JFrame("King's Traffic Control Simulation");
         frame.setLayout(new BorderLayout());
         Startup buttons = new Startup();
         buttons.setPreferredSize(new Dimension(50, 50));

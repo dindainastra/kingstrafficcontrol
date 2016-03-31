@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Motorbike extends JPanel implements Vehicle {
 
-    private final int length = 10, width = 11;
+    private final int length = 10;
     private Person driver;
     private int priorityLevel;
     private int pos_x, pos_y;
@@ -24,6 +24,7 @@ public class Motorbike extends JPanel implements Vehicle {
     //draw Motorbike
     protected void doDrawing(Graphics g) {
         g.setColor(new Color(R, G, B));
+        int width = 11;
         g.fillRect(pos_x, pos_y, length, width);
         // repaint();
     }
