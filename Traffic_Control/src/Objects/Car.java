@@ -230,4 +230,9 @@ public class Car extends JPanel implements Vehicle {
         g.setColor(textColor);  //greg
         g.drawString(this.getPerson().getName().substring("Person".length()), pos_x, pos_y); //greg
     }
+
+    public double getRotate() {
+        return rotate;
+    }
 }
+

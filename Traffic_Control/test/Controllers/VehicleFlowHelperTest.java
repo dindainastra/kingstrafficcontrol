@@ -21,31 +21,8 @@ public class VehicleFlowHelperTest {
     Terrain aTerrain;
     VehicleFlow vfl;
     Person p;
-
-    @Test
-    public void testMoveToEnd() throws Exception {
-
-    }
-
-    @Test
-    public void testMoveToEndChanged() throws Exception {
-
-    }
-
-    @Test
-    public void testTurnCorner() throws Exception {
-
-    }
-
-    @Test
-    public void testInCurrentTerrain() throws Exception {
-
-    }
-
-    @Test
-    public void testMoveThisVehicleToTheNextCorrectStack() throws Exception {
-
-    }
+    VehicleFlowHelper.Direction dir;
+    ArrayList<Terrain> aTerrainList;
 
     @Test
     public void testIsFirstExit() throws Exception {
@@ -61,40 +38,12 @@ public class VehicleFlowHelperTest {
     }
 
     @Test
-    public void testFirstExit() throws Exception {
-
-    }
-
-    @Test
-    public void testSecondExit() throws Exception {
-
-    }
-
-    @Test
-    public void testSecondExitChanged() throws Exception {
-
-    }
-
-    @Test
     public void testIsThereATrafficLight() throws Exception {
         vehicleFlowHelper = new VehicleFlowHelper(vehicle, aMap, flowDirection, trafficManagement, aTerrain, vfl);
         TrafficLights trafficLights = new TrafficLights(0,0,0,0,0);
         ArrayList<Object> objectArrayList = new ArrayList<>();
-
         objectArrayList.add(trafficLights);
-
-        //this.aTerrain.getForwardListFlow()
         assertTrue(vehicleFlowHelper.isThereATrafficLight(objectArrayList));
-    }
-
-    @Test
-    public void testMoveToDestination() throws Exception {
-
-    }
-
-    @Test
-    public void testMoveToDestination1() throws Exception {
-
     }
 
     @Test
@@ -102,7 +51,6 @@ public class VehicleFlowHelperTest {
         vehicleFlowHelper = new VehicleFlowHelper(vehicle, aMap, flowDirection, trafficManagement, aTerrain, vfl);
         TrafficLights trafficLight = new TrafficLights(1,1,3,1,1);
         TrafficLights trafficLight2 = new TrafficLights(1,1,2,1,1);
-        //Boolean check = vehicleFlowHelper.checkIfTrafficLightIsGreen(trafficLight);
         Boolean check2 = vehicleFlowHelper.checkIfTrafficLightIsGreen(trafficLight2);
         for (int i = 0; i< 4;i++){
             trafficLight.doRun();
@@ -125,5 +73,20 @@ public class VehicleFlowHelperTest {
         aTerrain.setForwardListFlow(v3);
         vehicleFlowHelper = new VehicleFlowHelper(vehicle, aMap, flowDirection, trafficManagement, aTerrain, vfl);
         assertTrue(vehicleFlowHelper.isThisTerrainBusy());
+    }
+
+    @Test
+    public void testMoveToPoint() throws Exception {
+        Vehicle v = new Car(p, 30, 330);
+        trafficManagement = new TrafficManagement();
+        trafficManagement.createPersons(20);
+        aTerrain = new StraightRoad(250, 325, 0, 100, trafficManagement);
+        aMap = new Draw(aTerrainList);
+        aTerrainList = trafficManagement.getTerrainList();
+        vehicleFlowHelper = new VehicleFlowHelper(v, aMap, 1, trafficManagement, aTerrain, vfl);
+        vehicleFlowHelper.moveToPoint(v, 60, VehicleFlowHelper.Direction.RIGHT);
+        assertEquals(90, v.get_pos_x());
+        vehicleFlowHelper.moveToPoint(v, 60, VehicleFlowHelper.Direction.UP);
+        assertEquals(270, v.get_pos_y());
     }
 }
