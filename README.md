@@ -1,6 +1,9 @@
 ﻿# kingstrafficcontrol
-﻿TRAFFIC SIMULATION MANUAL:
-Run the jar file.
+﻿Traffic Simulation Software based on Java as part of Group Project Modules, created by KCL Students.
+﻿
+﻿# Installation
+﻿
+﻿# Manual:
 
 Three main options: - Cross Road
 		    - Town
@@ -30,3 +33,6 @@ Buttons: - Time interval      : * A slider that adjusts the pace of the system. 
 	 - Emergency services : * Drop down list that adds emergency (red) cars into the system. Selection of adding 1,2 or 3 cars available.
 
          - Stop               : * Terminates the system and closes the window.
+         
+.#Contributors
+
