@@ -12,9 +12,11 @@ import java.awt.event.ActionListener;
 public class Slider extends JPanel {
 
     private JLabel congestionLabel, emergencyLabel, roadNetworkLabel, timeIntervalLabel, weatherLabel, speedLimitLabel;
+    private JLabel noOfCars, cars, roadWorksLabel;
     private JSlider timeIntervalSlider, speedLimitSlider;
-    private JButton increaseButton, decreaseButton;
+    private JButton increaseButton, decreaseButton, roadworksButton;
     private JComboBox<String> weatherComboBox, emergencyComboBox, congestionComboBox;
+//    private JRadioButton roadWorksRadioButtonOn, roadWorkRadioButtonOff;
     private TrafficManagement trafficManagement;
 
     public Slider(TrafficManagement trafficManagement) {
@@ -24,6 +26,10 @@ public class Slider extends JPanel {
 
     private void initComponents() {
 
+        //Creats Radio Buttons
+//        roadWorksRadioButtonOn=new JRadioButton("On");
+//        roadWorkRadioButtonOff=new JRadioButton("Off");
+
         //Create JLabel
         weatherLabel = new JLabel();
         timeIntervalLabel = new JLabel();
@@ -31,6 +37,9 @@ public class Slider extends JPanel {
         emergencyLabel = new JLabel();
         roadNetworkLabel = new JLabel();
         speedLimitLabel = new JLabel();
+        noOfCars=new JLabel();
+        cars=new JLabel();
+        roadWorksLabel=new JLabel();
 
         //Create JSlider
         timeIntervalSlider = new JSlider(0, 100);
@@ -44,6 +53,7 @@ public class Slider extends JPanel {
         //Create JButton
         increaseButton = new JButton("+");
         decreaseButton = new JButton("-");
+        roadworksButton=new JButton("Apply Road Work");
 
         //slider interface for time interval and congestion rate
         timeIntervalSlider.setMajorTickSpacing(10);
@@ -88,6 +98,20 @@ public class Slider extends JPanel {
         speedLimitLabel.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
         speedLimitLabel.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 0));
         speedLimitLabel.setText("Speed Limit Option:");
+
+        roadWorksLabel.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
+        roadWorksLabel.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 0));
+        roadWorksLabel.setText("Road Works:");
+
+        noOfCars.setFont(new Font("Verdana", Font.BOLD, 12)); // NOI18N
+        noOfCars.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 0));
+        noOfCars.setText("Number of Cars in the system: ");
+
+        cars.setFont(new Font("Verdana", 0, 12)); // NOI18N
+        cars.setBorder(BorderFactory.createEmptyBorder(20, 10, 0, 0));
+
+        cars.setText("200");
+
 
         String[] weatherConditions = new String[]{"   Normal", "   Hazardous", "   Night", "   Day"};
         weatherComboBox = new JComboBox<>(weatherConditions);
@@ -137,6 +161,7 @@ public class Slider extends JPanel {
             }
         });
 
+
         this.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.VERTICAL;
@@ -167,7 +192,7 @@ public class Slider extends JPanel {
         c.gridx = 0;
         c.gridy = 2;
         c.insets = new Insets(0, 0, 0, 0);
-        this.add(speedLimitLabel, c);
+        //this.add(speedLimitLabel, c);
 
         c.ipady = 0;
         c.ipadx = 200;
@@ -176,14 +201,14 @@ public class Slider extends JPanel {
         c.gridx = 0;
         c.gridy = 3;
         c.insets = new Insets(0, 0, 0, 0);
-        this.add(speedLimitSlider, c);
+        //this.add(speedLimitSlider, c);
 
         c.ipady = 0;
         c.ipadx = 0;
         c.weightx = 0;
         c.weighty = 0.1;
         c.gridx = 0;
-        c.gridy = 4;
+        c.gridy = 3;
         c.insets = new Insets(0, 0, 0, 0);
         this.add(congestionLabel, c);
 
@@ -192,7 +217,7 @@ public class Slider extends JPanel {
         c.ipady = 0;
         c.ipadx = 200;
         c.gridx = 0;
-        c.gridy = 5;
+        c.gridy = 4;
         c.insets = new Insets(0, 0, 0, 0);
         this.add(congestionComboBox, c);
 
@@ -201,7 +226,7 @@ public class Slider extends JPanel {
         c.ipady = 0;
         c.ipadx = 0;
         c.gridx = 0;
-        c.gridy = 6;
+        c.gridy = 5;
         c.gridwidth = 1;
         c.insets = new Insets(10, 50, 0, 10);
         c.anchor = GridBagConstraints.CENTER;
@@ -212,37 +237,22 @@ public class Slider extends JPanel {
         c.ipady = 0;
         c.ipadx = 0;
         c.gridx = 1;
-        c.gridy = 6;
+        c.gridy = 5;
         c.gridwidth = 1;
         //c.
         c.insets = new Insets(10, 10, 0, 50);
         c.anchor = GridBagConstraints.CENTER;
         this.add(decreaseButton, c);
 
+
         c.ipady = 0;
         c.ipadx = 0;
         c.weightx = 0;
         c.weighty = 0.1;
         c.gridx = 0;
-        c.gridy = 7;
-        c.gridwidth = 2;
+        c.gridy = 6;
+        c.gridwidth=2;
         c.insets = new Insets(0, 0, 0, 0);
-        this.add(weatherLabel, c);
-
-        c.ipady = 0;
-        c.ipadx = 200;
-        c.weightx = 0.5;
-        c.weighty = 0;
-        c.gridx = 0;
-        c.gridy = 8;
-        this.add(weatherComboBox, c);
-
-        c.ipady = 0;
-        c.ipadx = 0;
-        c.weightx = 0;
-        c.weighty = 0.1;
-        c.gridx = 0;
-        c.gridy = 9;
         this.add(emergencyLabel, c);
 
         c.ipady = 0;
@@ -250,9 +260,18 @@ public class Slider extends JPanel {
         c.weightx = 0.5;
         c.weighty = 0;
         c.gridx = 0;
-        c.gridy = 10;
+        c.gridy = 7;
         c.insets = new Insets(0, 0, 30, 0);
         this.add(emergencyComboBox, c);
+
+        c.ipady = 0;
+        c.ipadx = 200;
+        c.weightx = 0.5;
+        c.weighty = 0;
+        c.gridx = 0;
+        c.gridy = 8;
+        c.insets = new Insets(0, 0, 30, 0);
+        this.add(noOfCars,c);
 
     }
 
@@ -265,6 +284,10 @@ public class Slider extends JPanel {
         int click = 1;
         trafficManagement.deleteVehicle(click);
     }
+
+
+
+
 
     private void weatherComboBoxActionPerformed(ActionEvent evt) {
         // TODO add your handling code here:
