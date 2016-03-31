@@ -230,7 +230,7 @@ public class VehicleFlowHelper implements Runnable {
                 map.repaint();
 
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(trafficManagement.getTimeGranularity());
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
