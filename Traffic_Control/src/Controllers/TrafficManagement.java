@@ -546,27 +546,21 @@ public class TrafficManagement extends JFrame {
         secondTL.nextTrafficLightIs(thirdTL);
 
         //junction18
-        TrafficLights seventeenthTL = new TrafficLights(715, 640, 2, 90, 3000);
-        TrafficLights eleventhTL = new TrafficLights(765, 590, 1, 0, 3000);
+        TrafficLights eleventhTL = new TrafficLights(765, 590, 2, 0, 3000);
         TrafficLights tenthTL = new TrafficLights(665, 540, 1, 0, 3000);
-        seventeenthTL.previousTrafficLightIs(eleventhTL);
         eleventhTL.previousTrafficLightIs(tenthTL);
-        tenthTL.previousTrafficLightIs(seventeenthTL);
-        seventeenthTL.nextTrafficLightIs(tenthTL);
-        eleventhTL.nextTrafficLightIs(seventeenthTL);
+        tenthTL.previousTrafficLightIs(eleventhTL);
+        eleventhTL.nextTrafficLightIs(tenthTL);
         tenthTL.nextTrafficLightIs(eleventhTL);
 
         //junction21
         TrafficLights ninthTL = new TrafficLights(665, 110, 2, 0, 3000);
         TrafficLights twelfthTL = new TrafficLights(765, 160, 1, 0, 3000);
-        TrafficLights eighteenthTL = new TrafficLights(765, 110, 1, 90, 3000);
 
-        ninthTL.previousTrafficLightIs(eighteenthTL);
+        ninthTL.previousTrafficLightIs(twelfthTL);
         twelfthTL.previousTrafficLightIs(ninthTL);
-        eighteenthTL.previousTrafficLightIs(twelfthTL);
         ninthTL.nextTrafficLightIs(twelfthTL);
-        twelfthTL.nextTrafficLightIs(eighteenthTL);
-        eighteenthTL.nextTrafficLightIs(ninthTL);
+        twelfthTL.nextTrafficLightIs(ninthTL);
 
         //junction16
         aTerrainList.get(1).setBackwardListFlow(seventhTL); //
@@ -579,14 +573,12 @@ public class TrafficManagement extends JFrame {
         aTerrainList.get(8).setBackwardListFlow(thirdTL); //up
 
         //junction18
-        aTerrainList.get(3).setBackwardListFlow(seventeenthTL);//down
         aTerrainList.get(6).setForwardListFlow(eleventhTL);
         aTerrainList.get(5).setBackwardListFlow(tenthTL);
 
         //junction21
         aTerrainList.get(4).setForwardListFlow(ninthTL);
         aTerrainList.get(7).setBackwardListFlow(twelfthTL); //supposed to be backward
-        aTerrainList.get(2).setForwardListFlow(eighteenthTL);//up supposed to be backward
     }
 
     public void staticMapCreatorCrossRoad() {
@@ -605,23 +597,16 @@ public class TrafficManagement extends JFrame {
 
         //draw traffic lights
         //junction22
-        TrafficLights fifteenTL = new TrafficLights(800, 325, 2, 90, 3000);
-        TrafficLights eighthTL = new TrafficLights(800, 375, 1, 0, 3000);
-        TrafficLights sixteenthTL = new TrafficLights(750, 425, 1, 90, 3000);
+        TrafficLights eighthTL = new TrafficLights(800, 375, 2, 0, 3000);
         TrafficLights fifthTL = new TrafficLights(700, 325, 1, 0, 3000);
 
-        fifteenTL.previousTrafficLightIs(fifthTL);
-        eighthTL.previousTrafficLightIs(fifteenTL);
-        sixteenthTL.previousTrafficLightIs(eighthTL);
-        fifthTL.previousTrafficLightIs(sixteenthTL);
-        fifteenTL.nextTrafficLightIs(eighthTL);
-        eighthTL.nextTrafficLightIs(sixteenthTL);
-        sixteenthTL.nextTrafficLightIs(fifthTL);
-        fifthTL.nextTrafficLightIs(fifteenTL);
+        eighthTL.nextTrafficLightIs(fifthTL);
+        fifthTL.nextTrafficLightIs(eighthTL);
+        eighthTL.previousTrafficLightIs(fifthTL);
+        fifthTL.previousTrafficLightIs(eighthTL);
 
-        aTerrainList.get(2).setBackwardListFlow(fifteenTL);//down
+
         aTerrainList.get(1).setBackwardListFlow(eighthTL); //supposed to be backward
-        aTerrainList.get(3).setForwardListFlow(sixteenthTL);//up
         aTerrainList.get(0).setForwardListFlow(fifthTL);
     }
 
