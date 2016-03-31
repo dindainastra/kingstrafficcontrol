@@ -13,15 +13,6 @@ public class CarTest {
     int pos_y=700;
     Car car = new Car(p,pos_x,pos_y);
 
-    /**
-     * Test:
-     * 1. It never goes out of bound, so the x should not be more than 1400
-     * and the y should not more than 700
-     * //assertFalse(car.get_pos_x()>1400);
-     * //assertFalse(car.get_pos_y()>700);
-     * 2.
-     * @throws Exception
-     */
     @Test
     public void testMove() throws Exception {
         car.move(VehicleFlowHelper.Direction.LEFT);
@@ -40,39 +31,11 @@ public class CarTest {
         assertEquals(1390,car.get_pos_x());
     }
 
-    /**
-     *
-     * @throws Exception
-     */
-
     @Test
     public void testTurn() throws Exception {
-        car.turn(VehicleFlowHelper.Direction.DOWN, VehicleFlowHelper.Direction.DOWN, 90);
+        car.turn(VehicleFlowHelper.Direction.DOWN, 90.0);
         assertEquals((Double)90.0,(Double)car.getRotate());
-        car.turn(VehicleFlowHelper.Direction.DOWN, VehicleFlowHelper.Direction.DOWN, 0);
+        car.turn(VehicleFlowHelper.Direction.DOWN, 0.0);
         assertEquals((Double)Math.toRadians(90),(Double)car.getRotate());
-//        public void turn(CarFlow.Direction d, CarFlow.Direction carDirection, double degree) {
-//            double turnDir = degree;
-//
-//            if(degree == 0){
-//                turnDir = Math.toRadians(90);
-//            }
-//
-////		if(carDirection == CarFlow.Direction.RIGHT || carDirection == CarFlow.Direction.UP) {
-//            if (d == CarFlow.Direction.UP || d == CarFlow.Direction.LEFT) {
-//                rotate = -turnDir;
-//            } else if (d == CarFlow.Direction.DOWN || d == CarFlow.Direction.RIGHT) { //works
-//                rotate = turnDir;
-//            }
-////		}else if(carDirection == CarFlow.Direction.LEFT || carDirection == CarFlow.Direction.DOWN){
-////			if (d == CarFlow.Direction.UP || d == CarFlow.Direction.LEFT) {
-////				rotate = turnDir;
-////			} else if (d == CarFlow.Direction.DOWN || d == CarFlow.Direction.RIGHT) { //works
-////				rotate = -turnDir;
-////			}
-////		}
-//
-//            this.repaint();
-//        }
     }
 }
