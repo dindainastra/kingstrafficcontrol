@@ -44,6 +44,7 @@ public interface Vehicle {
     void bend(VehicleFlowHelper.Direction d, double degree);
 
     VehicleFlowHelper.Direction getCurrentDirection();
+
     void setCurrentDirection(VehicleFlowHelper.Direction dir);
 
     void turn(VehicleFlowHelper.Direction d, double degree);

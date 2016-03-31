@@ -85,11 +85,11 @@ public class Buttons extends JPanel {
     }
 
     private void replayButtonActionPerformed(ActionEvent evt) {
-      TrafficSimulator trafficSimulator = new TrafficSimulator();
+        TrafficSimulator trafficSimulator = new TrafficSimulator();
         Startup startup = new Startup();
         trafficSimulator.add(startup);
         trafficSimulator.setVisible(true);
-        setSize(500,500);
+        setSize(500, 500);
         ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 

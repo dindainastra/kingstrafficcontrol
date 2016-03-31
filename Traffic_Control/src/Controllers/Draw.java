@@ -38,9 +38,9 @@ public class Draw extends JPanel {
             //aTerrain.doDrawing(f);
             if (aTerrain instanceof StraightRoad) {
                 ((StraightRoad) aTerrain).doDrawing(f);
-               // ((StraightRoad) aTerrain).doDrawing(f);
+                // ((StraightRoad) aTerrain).doDrawing(f);
             } else if (aTerrain instanceof CornerRoad) {
-               // ((CornerRoad) aTerrain).paintComponent(g);
+                // ((CornerRoad) aTerrain).paintComponent(g);
                 ((CornerRoad) aTerrain).doDrawing(f);
             } else if (aTerrain instanceof SquareJunction) {
 //                ((SquareJunction) aTerrain).paintComponent(g);
