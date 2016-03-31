@@ -3,18 +3,23 @@ package Controllers;
 
 import static org.junit.Assert.*;
 
+import Interfaces.Terrain;
 import Objects.Person;
-import Objects.Terrain;
-import Objects.Vehicle;
+import Controllers.VehicleFlow;
+import Objects.TrafficLights;
+import Interfaces.Vehicle;
 import org.junit.*;
 
 import java.util.ArrayList;
 
 public class TrafficManagementTest {
-
     ArrayList<Person>  aPersonList;
     ArrayList<Terrain> aTerrainList;
     ArrayList<Vehicle> aVehicleList;
+    Terrain aTerrain;
+    TrafficManagement trafficManagement;
+    ArrayList<Object> forwardListObjects;
+    ArrayList<Object> backwardListObjects;
 
     @Before
     public void setUp() throws Exception {
@@ -54,18 +59,14 @@ public class TrafficManagementTest {
 
     @Test
     public void testCreateVehicles() throws Exception {
-        //assertTrue(TrafficManagement.createPerson() >0);
-        /*
-            public void createVehicles(){
-                for (Person p : aPersonList) {
-                    if (!p.isPedestrian()) {
-                        if (new Random().nextBoolean())
-                            aVehicleList.add(new Car(p, 0,330));
-                        else
-                            aVehicleList.add(new Car(p, 1350, 405));
-                    }
-                }
-            }*/
+        //call the constructor
+        //trafficManagement
+        trafficManagement = new TrafficManagement();
+        trafficManagement.createPersons(20);
+        trafficManagement.createVehicles();
+        int checkHowManyCars = trafficManagement.getVehicleListSize();
+
+        assertEquals(20, checkHowManyCars);
     }
 
     /**
@@ -77,32 +78,76 @@ public class TrafficManagementTest {
      */
     @Test
     public void testCreatePersons() throws Exception {
-        //assertArrayEquals(TrafficManagement.createPersons(10),aPersonList.size(10)); //1
-        //assertTrue(aNumber<50 && aNumber >0);//2
-        //assertFalse(TrafficManagement.createPersons(10)=> TrafficManagement.createVehicles());//3
 
-        /*for(int i=0; i<aNumber; i++){
-            aPersonList.add(new Person("Person "+i, rand.nextInt(10), false, null));
-        }*/
+        //call the constructor
+        trafficManagement = new TrafficManagement();
+        trafficManagement.createPersons(20);
+        int checkHowManyPersons = trafficManagement.getPersonListSize();
+
+        assertEquals(20, checkHowManyPersons);
     }
 
-
-
-    /**
-     * Testing:
-     * 1. if this is 0, then it is not equal 1
-     * 2. if this is 1, then it is not equal 0
-     */
     @Test
-    public void testInitializeForwardAndBackwardLists() throws Exception {
-        /*
-            public void initializeForwardAndBackwardLists(){
-                for (Vehicle v : this.aVehicleList)
-                    if (v.get_pos_x()==0)
-                        this.aTerrainList.get(0).setForwardListFlow(v);  //insert vehicle in the enter node direction list -->
-                    else
-                        this.aTerrainList.get(1).setBackwardListFlow(v);  //insert vehicle in the exit node direction list <--
+    public void testDeleteVehicle() throws Exception {
 
-            }*/
+        //call the constructor
+        //trafficManagement
+        trafficManagement = new TrafficManagement();
+        trafficManagement.createPersons(20);
+        trafficManagement.createVehicles();
+        trafficManagement.deleteVehicle(5);
+        int checkHowManyCars = trafficManagement.getVehicleListSize();
+
+        assertEquals(15, checkHowManyCars);
+
+    }
+
+    @Test
+    public void testFactoryVehicle() throws Exception {
+        trafficManagement = new TrafficManagement();
+        trafficManagement.run();
+        //aTerrainList = trafficManagement.getTerrainList();
+        trafficManagement.factoryVehicle(20);
+        int checkHowManyCars = trafficManagement.getVehicleListSize();
+        assertEquals(20, checkHowManyCars);
+    }
+
+    @Test
+    public void testFactoryVehicle1() throws Exception {
+
+    }
+
+    @Test
+    public void testInitializeStaticTrafficLights() throws Exception {
+        int trafficLightsSize = 0;
+        trafficManagement = new TrafficManagement();
+        trafficManagement.run();
+        aTerrainList = trafficManagement.getTerrainList();
+        for(int i = 0;i<aTerrainList.size();i++) {
+            backwardListObjects = aTerrainList.get(i).getBackwardListFlow();
+            forwardListObjects = aTerrainList.get(i).getForwardListFlow();
+            for (Object o : forwardListObjects)
+                if (o instanceof TrafficLights)
+                    trafficLightsSize++;
+            for (Object o : backwardListObjects)
+                if (o instanceof TrafficLights)
+                    trafficLightsSize++;
+        }
+        assertNotEquals(0,trafficLightsSize);
+    }
+
+    @Test
+    public void testInitializeNeighboursTerrainLists() throws Exception {
+        trafficManagement = new TrafficManagement();
+        trafficManagement.run();
+        aTerrainList = trafficManagement.getTerrainList();
+//        trafficManagement.initializeNeighboursTerrainLists();
+        for(int i = 0;i<aTerrainList.size();i++) {
+            aTerrain = aTerrainList.get(i);
+            int checkSize = aTerrain.getNeighboursTerrainList().size();
+            assertNotEquals(0, checkSize);
+        }
+
+
     }
 }
