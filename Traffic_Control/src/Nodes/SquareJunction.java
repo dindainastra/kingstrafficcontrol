@@ -45,19 +45,6 @@ public class SquareJunction extends JPanel implements Terrain {
         this.trafficManagement = trafficManagement;
     }
 
-
-   /* public SquareJunction(int x_Start, int y_Start, int close){
-        this.xStart = x_Start;
-        this.yStart = y_Start;
-        this.close=close;//1= close junction on rightside; 2=leftside; 3=close top; 4=close bottom.
-
-        nextTerrainList = new ArrayList<Terrain>();
-        previousTerrainList  = new ArrayList<Terrain>();
-        forwardListFlow = new ArrayList<Object>();
-        backwardListFlow = new ArrayList<Object>();
-    }*/
-
-
     public void doDrawing(Graphics2D g) {
         Graphics2D road = g;
 
@@ -135,13 +122,7 @@ public class SquareJunction extends JPanel implements Terrain {
 
     }
 
-//    public void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        doDrawing((Graphics2D) g);
-//    }
-
-
-    //@Override
+    @Override
     public int getLenght() {
         return this.road_width;
     }

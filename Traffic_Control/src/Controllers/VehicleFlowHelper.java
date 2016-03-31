@@ -770,11 +770,7 @@ public class VehicleFlowHelper implements Runnable {
                 }
             }
 
-            if (numberOfCars > threshold) {
-                return true;
-            } else {
-                return false;
-            }
+            return numberOfCars > threshold;
         } else {
             //put code for the backward  flow / 100
             //Parse the aTerrain.getBackwardListFlow() and find how many vehicles are in there
@@ -790,11 +786,7 @@ public class VehicleFlowHelper implements Runnable {
                 }
             }
 
-            if (numberOfCars > threshold) {
-                return true;
-            } else {
-                return false;
-            }
+            return numberOfCars > threshold;
         }
 
     }

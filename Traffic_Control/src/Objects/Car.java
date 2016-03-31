@@ -9,12 +9,10 @@ import java.awt.geom.AffineTransform;
 
 public class Car extends JPanel implements Vehicle {
 
-    private static final int INCREMENT_BY = 5;
     public static Boolean draw = false;
     private final int length = 20, width = 15;
     private double rotate = 0.0;
     private VehicleFlowHelper.Direction currentDirection = VehicleFlowHelper.Direction.RIGHT;
-    private volatile Boolean destination = false;
     private Person driver;
     private int priorityLevel;
     private int pos_x, pos_y;
@@ -74,8 +72,6 @@ public class Car extends JPanel implements Vehicle {
             this.pos_y = (int) ((Math.cos(angle) * radius) + centerY);
             this.pos_x = (int) ((Math.sin(angle) * radius) + centerX);
         }
-//		this.pos_x = (int) ((Math.cos(angle) * radius/2) + centerX);
-//		this.pos_y = (int) ((Math.sin(angle) * radius/2) + centerY);
         repaint();
     }
 
@@ -102,9 +98,6 @@ public class Car extends JPanel implements Vehicle {
         } else if (d == VehicleFlowHelper.Direction.LEFT) {
             rotate -= Math.toRadians(degree);
         }
-
-//		this.pos_x += degree;
-//		this.pos_y += degree;
 
         this.repaint();
     }

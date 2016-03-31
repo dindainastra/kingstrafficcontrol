@@ -9,11 +9,9 @@ import java.util.ArrayList;
 
 public class VehicleFlow implements Runnable {
 
-    private final int delay = 30;
     private Draw map;
     private Terrain aTerrain;
     private int flowDirection;   // 0 <---   and 1 ---->
-    private volatile Timer timer = null;
     private ArrayList<Object> currentFlowList;
     private TrafficManagement trafficManagement;
     private String threadName;
@@ -22,7 +20,8 @@ public class VehicleFlow implements Runnable {
         this.aTerrain = t;
         this.map = map;
         this.flowDirection = direction;
-        timer = new Timer(delay, null);
+        int delay = 30;
+        Timer timer = new Timer(delay, null);
 
         if (flowDirection == 1) {
             currentFlowList = this.aTerrain.getForwardListFlow();
@@ -39,7 +38,7 @@ public class VehicleFlow implements Runnable {
     }
 
 
-    private void startTraffic(Object o) {
+    public void startTraffic(Object o) {
         TrafficLights tLOne = (TrafficLights) o;
         map.repaint();
         Thread t = new Thread(tLOne);
@@ -65,13 +64,6 @@ public class VehicleFlow implements Runnable {
                     }
                 }
             }
-
-//            try {
-//                startFlow();
-//                Thread.sleep(trafficManagement.getTimeGranularity());
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
 
         }
 

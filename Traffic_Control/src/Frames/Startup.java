@@ -9,8 +9,6 @@ import java.awt.event.ActionListener;
 
 public class Startup extends JPanel {
 
-    private GridLayout group;
-    private JButton crossRoadMapButton, townMapButton, roundaboutMapButton;
     private TrafficManagement trafficManagement = new TrafficManagement();
 
     public Startup() {
@@ -21,14 +19,14 @@ public class Startup extends JPanel {
 
     public void initComponents() {
         //Create JButton
-        crossRoadMapButton = new JButton("Cross Road");
+        JButton crossRoadMapButton = new JButton("Cross Road");
         crossRoadMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
-        townMapButton = new JButton("Town      ");
+        JButton townMapButton = new JButton("Town      ");
         townMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
-        roundaboutMapButton = new JButton("Roundabout");
+        JButton roundaboutMapButton = new JButton("Roundabout");
         roundaboutMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
 
-        group = new GridLayout(3, 0, 20, 0);
+        GridLayout group = new GridLayout(3, 0, 20, 0);
         this.setLayout(group);
         add(crossRoadMapButton);
         add(townMapButton);
@@ -53,21 +51,21 @@ public class Startup extends JPanel {
         });
     }
 
-    private void townMapButtonActionPerformed(ActionEvent evt) { //town
+    public void townMapButtonActionPerformed(ActionEvent evt) { //town
         trafficManagement.setOption(1);
         trafficManagement.run();
 
         ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 
-    private void crossRoadMapButtonActionPerformed(ActionEvent evt) { //cross road
+    public void crossRoadMapButtonActionPerformed(ActionEvent evt) { //cross road
         trafficManagement.setOption(0);
         trafficManagement.run();
 
         ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 
-    private void roundaboutMapButtonActionPerformed(ActionEvent evt) { //round about
+    public void roundaboutMapButtonActionPerformed(ActionEvent evt) { //round about
         trafficManagement.setOption(2);
         trafficManagement.run();
         ((JFrame) this.getTopLevelAncestor()).dispose();

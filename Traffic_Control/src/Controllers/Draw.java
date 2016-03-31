@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class Draw extends JPanel {
 
-    private ArrayList<Terrain> terrainList = new ArrayList<Terrain>();
+    private ArrayList<Terrain> terrainList = new ArrayList<>();
 
     //Draw cars, roads, traffic lights
     public Draw(ArrayList<Terrain> aTerrainList) {
@@ -25,7 +25,6 @@ public class Draw extends JPanel {
     @Override
     public void paintComponent(Graphics g) {
         //NOT OPTIMAL - EVERYTHING IS REPAINTED ON EVERY REPAINT CALL
-        //System.out.println("Repaint called?");
 
         Graphics2D f = (Graphics2D) g;
         super.paintComponent(g);

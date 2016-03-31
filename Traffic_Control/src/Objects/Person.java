@@ -13,7 +13,6 @@ public class Person {
     private boolean pedestrian;
     private int decision;
     private int turningCounter;
-    private int direction = 1;
 
     public Person(String name, int politenessLevel, boolean pedestrian, Terrain myPreviousTerrainPosition) {
         super();
@@ -26,6 +25,7 @@ public class Person {
     }
 
     public int getDirection() {
+        int direction = 1;
         return direction;
     }
 
