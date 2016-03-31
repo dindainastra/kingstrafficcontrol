@@ -108,6 +108,14 @@ public class VehicleFlowHelper implements Runnable {
         map.repaint();
     }
 
+    /**
+     * Moves a Vehicle from the current Terrain to a given destination
+     *
+     * @param vehicle
+     * @param terrain
+     * @param dir
+     * @throws InterruptedException
+     */
     public synchronized void moveToDestination(Vehicle vehicle, Terrain terrain, Direction dir) throws InterruptedException {
         if (dir == Direction.RIGHT || dir == Direction.LEFT) {
             int x;
@@ -122,7 +130,6 @@ public class VehicleFlowHelper implements Runnable {
 
                 if (isThereATrafficLight(currentObjectList)) {
                     if (!checkIfTrafficLightIsGreen(((TrafficLights) currentObjectList.get(0))) && offset == 0) {
-                        // TODO: 30/03/2016 Patrick change this 30 into a variable when you do the different vehicles
                         if (currentObjectList.indexOf(vehicle) > Math.floor(aTerrain.getLenght() / 30))
                             offset = (int) (Math.floor(aTerrain.getLenght() / 30 - 1) * 30);
                         else offset = (currentObjectList.indexOf(vehicle) - 1) * 30;
@@ -169,8 +176,6 @@ public class VehicleFlowHelper implements Runnable {
                 if (isThereATrafficLight(currentObjectList)) {
                     //If the road has more than half of the road max. - set the road to green light
                     if (!checkIfTrafficLightIsGreen(((TrafficLights) currentObjectList.get(0))) && offset == 0) {
-
-                        // TODO: 30/03/2016 Patrick change this 30 into a variable when you do the different vehicles
                         if (currentObjectList.indexOf(vehicle) > Math.floor(aTerrain.getLenght() / 30))
                             offset = (int) (Math.floor(aTerrain.getLenght() / 30 - 1) * 30);
                         else offset = (currentObjectList.indexOf(vehicle) - 1) * 30;
@@ -253,6 +258,13 @@ public class VehicleFlowHelper implements Runnable {
         }
     }
 
+    /**
+     * Moves a vehicle to the next stack of the Next node.
+     * If it is an exit point delete the vehicle from every stack-list.
+     * If it isn' move the vehicle to the correct stack
+     *
+     * @param v is the vehicle that is going to be moved to the next stack
+     */
     public void moveThisVehicleToTheNextCorrectStack(Vehicle v) {
 
         if (
@@ -331,21 +343,14 @@ public class VehicleFlowHelper implements Runnable {
             if (this.aTerrain instanceof SquareJunction) {
 
                 if (decision % 2 == 0) {
-//                    System.out.println("Decision is " + decision);
-                    //Move straight or left
                     this.aTerrain.getNeighboursTerrainList().get(decision).getForwardListFlow().add(v);
                 } else {
-                    //move straight then turn right - i.e. moving across the junction and taking the side route
                     this.aTerrain.getNeighboursTerrainList().get(decision).getBackwardListFlow().add(v);
                 }
             } else {
                 if (this.flowDirection == 1) {
-                    //Move straight in direction of nextTerrain
-                    //moveIntoDecision((Car)v, this.aTerrain, this.aTerrain.getNeighboursTerrainList().get(decision));
                     this.aTerrain.getNeighboursTerrainList().get(decision).getForwardListFlow().add(v);
                 } else {
-                    //Move straight in direction of nextTerrain
-                    //moveIntoDecision((Car)v, this.aTerrain, this.aTerrain.getNeighboursTerrainList().get(decision));
                     this.aTerrain.getNeighboursTerrainList().get(decision).getBackwardListFlow().add(v);
                 }
             }
@@ -362,7 +367,6 @@ public class VehicleFlowHelper implements Runnable {
 
         }
         vehicleflow.deleteFromCurrentList(vehicle);
-        // TODO: 29/03/2016  to a deletevehicle (Vehicle v)
     }
 
     /**
@@ -547,6 +551,12 @@ public class VehicleFlowHelper implements Runnable {
         return true;
     }
 
+    /**
+     * Checks if there is any traffic light in the 1st index of the stack
+     *
+     * @param objectArrayList is the stack of the current flow
+     * @return true or false
+     */
     public boolean isThereATrafficLight(ArrayList<Object> objectArrayList) {
 
         for (Object o : objectArrayList)
@@ -556,6 +566,12 @@ public class VehicleFlowHelper implements Runnable {
 
     }
 
+    /**
+     * Checks if this traffic light is green
+     *
+     * @param trafficLight is a given traffic light
+     * @return true or false
+     */
     public boolean checkIfTrafficLightIsGreen(TrafficLights trafficLight) {
 
         return trafficLight.getCurrentColour() == 3;
@@ -791,6 +807,9 @@ public class VehicleFlowHelper implements Runnable {
 
     }
 
+    /**
+     * Runs and set and unset the locks when the startFlow() is done
+     */
     @Override
     public void run() {
 
@@ -802,5 +821,8 @@ public class VehicleFlowHelper implements Runnable {
 
     }
 
+    /**
+     * Enum Direction to control where a vehicle is going to
+     */
     public enum Direction {LEFT, RIGHT, UP, DOWN}
 }

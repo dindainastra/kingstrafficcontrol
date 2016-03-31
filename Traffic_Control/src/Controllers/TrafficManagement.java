@@ -47,10 +47,20 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    /**
+     *  Returns the Terrain List /  In other words, all the nodes
+     *
+     * @return aTerrainList
+     */
     public ArrayList<Terrain> getTerrainList() {
         return this.aTerrainList;
     }
 
+    /**
+     * Deletes Vehicles randomly from the Node and from the All vehicle list
+     *
+     * @param number of how many Vehicle will be randomly deleted
+     */
     public void deleteVehicle(int number) {
 
         for (int i = 0; i < number; i++) {
@@ -65,6 +75,11 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    /**
+     * Creates vehicles and add them in the 0 or 1 node entry randomly
+     *
+     * @param number of how many vehicle to be created
+     */
     public void factoryVehicle(int number) {
 
         ArrayList<Person> tmpPersonList = new ArrayList<Person>();
@@ -97,6 +112,12 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    /**
+     * Creates vehicles and add them in the 0 or 1 node entry randomly with a set priority
+     *
+     * @param number of how many vehicle to be created
+     * @param priority_flag if it is 1 is it priority
+     */
     public void factoryVehicle(int number, int priority_flag) {
 
         ArrayList<Person> tmpPersonList = new ArrayList<Person>();
@@ -138,6 +159,9 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    /**
+     * Runnable method that run and initialize everything. Also initializes the proper graphs and traffic lights dependencies
+     */
     public void run() {
         //createPersons(10);
         //createVehicles();
@@ -206,12 +230,19 @@ public class TrafficManagement extends JFrame {
         }
     }
 
+    /**
+     * Creates a Persons
+     * @param aNumber of how many persons has to be created
+     */
     public void createPersons(int aNumber) {
         for (int i = 0; i < aNumber; i++) {
             aPersonList.add(new Person("Person " + i, rand.nextInt(10), false, null));
         }
     }
 
+    /**
+     * initialize the forward and backward flow lists
+     */
     public void initializeForwardAndBackwardLists() {
         for (Vehicle v : this.aVehicleList)
             if (v.get_pos_x() == 30)
@@ -221,108 +252,9 @@ public class TrafficManagement extends JFrame {
 
     }
 
-    public void initializeStaticTrafficLights() {
-
-        //junction21
-        TrafficLights ninthTL = new TrafficLights(815, 10, 2, 0, 3000);
-        TrafficLights twelfthTL = new TrafficLights(915, 60, 1, 0, 3000);
-        TrafficLights eighteenthTL = new TrafficLights(865, 110, 1, 90, 3000);
-
-        ninthTL.previousTrafficLightIs(eighteenthTL);
-        twelfthTL.previousTrafficLightIs(ninthTL);
-        eighteenthTL.previousTrafficLightIs(twelfthTL);
-        ninthTL.nextTrafficLightIs(twelfthTL);
-        twelfthTL.nextTrafficLightIs(eighteenthTL);
-        eighteenthTL.nextTrafficLightIs(ninthTL);
-
-
-//        //junction 19
-        TrafficLights thirdTL = new TrafficLights(250, 325, 2, 90, 3000);
-        TrafficLights firstTL = new TrafficLights(250, 375, 1, 0, 3000);
-        TrafficLights fourthTL = new TrafficLights(200, 425, 1, 90, 3000);
-        TrafficLights secondTL = new TrafficLights(150, 325, 1, 0, 3000);
-        thirdTL.previousTrafficLightIs(secondTL);
-        firstTL.previousTrafficLightIs(thirdTL);
-        fourthTL.previousTrafficLightIs(firstTL);
-        secondTL.previousTrafficLightIs(fourthTL);
-        thirdTL.nextTrafficLightIs(firstTL);
-        firstTL.nextTrafficLightIs(fourthTL);
-        fourthTL.nextTrafficLightIs(secondTL);
-        secondTL.nextTrafficLightIs(thirdTL);
-
-
-//        //junction22
-        TrafficLights fifteenTL = new TrafficLights(915, 325, 2, 90, 3000);
-        TrafficLights eighthTL = new TrafficLights(915, 375, 1, 0, 3000);
-        TrafficLights sixteenthTL = new TrafficLights(865, 425, 1, 90, 3000);
-        TrafficLights fifthTL = new TrafficLights(815, 325, 1, 0, 3000);
-        fifteenTL.previousTrafficLightIs(fifthTL);
-        eighthTL.previousTrafficLightIs(fifteenTL);
-        sixteenthTL.previousTrafficLightIs(eighthTL);
-        fifthTL.previousTrafficLightIs(sixteenthTL);
-        fifteenTL.nextTrafficLightIs(eighthTL);
-        eighthTL.nextTrafficLightIs(sixteenthTL);
-        sixteenthTL.nextTrafficLightIs(fifthTL);
-        fifthTL.nextTrafficLightIs(fifteenTL);
-//
-//
-//        //junction18
-        TrafficLights thirteenthTL = new TrafficLights(1280, 325, 2, 90, 3000);
-        TrafficLights seventhTL = new TrafficLights(1280, 375, 1, 0, 3000);
-        TrafficLights fourteenthTL = new TrafficLights(1230, 425, 1, 90, 3000);
-        TrafficLights sixthTL = new TrafficLights(1180, 325, 1, 0, 3000);
-        thirteenthTL.previousTrafficLightIs(sixthTL);
-        seventhTL.previousTrafficLightIs(thirteenthTL);
-        fourteenthTL.previousTrafficLightIs(seventhTL);
-        sixthTL.previousTrafficLightIs(fourteenthTL);
-        thirteenthTL.nextTrafficLightIs(seventhTL);
-        seventhTL.nextTrafficLightIs(fourteenthTL);
-        fourteenthTL.nextTrafficLightIs(sixthTL);
-        sixthTL.nextTrafficLightIs(thirteenthTL);
-//
-//
-//        //junction20
-
-        TrafficLights seventeenthTL = new TrafficLights(915, 590, 2, 90, 3000);
-        TrafficLights eleventhTL = new TrafficLights(915, 640, 1, 0, 3000);
-        TrafficLights tenthTL = new TrafficLights(815, 590, 1, 0, 3000);
-        seventeenthTL.previousTrafficLightIs(tenthTL);
-        eleventhTL.previousTrafficLightIs(seventeenthTL);
-        tenthTL.previousTrafficLightIs(eleventhTL);
-        seventeenthTL.nextTrafficLightIs(eleventhTL);
-        eleventhTL.nextTrafficLightIs(tenthTL);
-        tenthTL.nextTrafficLightIs(seventeenthTL);
-
-        //junction21
-        aTerrainList.get(4).setForwardListFlow(ninthTL);
-        aTerrainList.get(7).setBackwardListFlow(twelfthTL); //supposed to be backward
-        aTerrainList.get(8).setForwardListFlow(eighteenthTL);//up supposed to be backward
-//
-//        //junction19
-        aTerrainList.get(11).setForwardListFlow(fourthTL); //down supposed to be backward
-        aTerrainList.get(0).setForwardListFlow(secondTL); //supposed to be backward
-        aTerrainList.get(10).setBackwardListFlow(thirdTL); //up
-        aTerrainList.get(2).setBackwardListFlow(firstTL);
-//
-//        //jun22
-        aTerrainList.get(8).setBackwardListFlow(fifteenTL);//down
-        aTerrainList.get(3).setBackwardListFlow(eighthTL); //supposed to be backward
-        aTerrainList.get(9).setForwardListFlow(sixteenthTL);//up
-        aTerrainList.get(2).setForwardListFlow(fifthTL);
-
-        //junction18
-        aTerrainList.get(3).setForwardListFlow(sixthTL);
-        aTerrainList.get(1).setBackwardListFlow(seventhTL); //
-        aTerrainList.get(13).setForwardListFlow(thirteenthTL); //down
-        aTerrainList.get(12).setBackwardListFlow(fourteenthTL); //up
-
-        //junction20
-        aTerrainList.get(9).setBackwardListFlow(seventeenthTL);//down
-        aTerrainList.get(6).setForwardListFlow(eleventhTL);
-        aTerrainList.get(5).setBackwardListFlow(tenthTL);
-
-    }
-
+    /**
+     * Initialize Node Neighbours - Relationships for CrossRoad Map
+     */
     public void initializeNeighboursTerrainListsForCrossRoad() {
 
         this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(4));
@@ -340,6 +272,9 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    /**
+     * Initialize Node Neighbours - Relationships for Roundabout
+     */
     public void initializeNeighboursTerrainListsForRoundabout() {
 
         Terrain t = null;
@@ -408,6 +343,9 @@ public class TrafficManagement extends JFrame {
 
     }
 
+    /**
+     * Initialize Node Neighbours - Relationships for Town Map
+     */
     public void initializeNeighboursTerrainListsForTown() {
 
         this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(19));
@@ -486,10 +424,16 @@ public class TrafficManagement extends JFrame {
         this.aTerrainList.get(22).setNeighboursTerrainList(this.aTerrainList.get(9));
     }
 
+    /**
+     * Initialize Node Neighbours - Relationships for Random Map
+     */
     public void initializeRandomTrafficLights() {
 
     }
 
+    /**
+     * Create the Terrains - Nodes for Roundabout
+     */
     public void staticMapCreatorRoundabout() {
 
         //create FIRSTLY the entry and exit roads
@@ -591,6 +535,9 @@ public class TrafficManagement extends JFrame {
         aTerrainList.get(7).setBackwardListFlow(twelfthTL); //supposed to be backward
     }
 
+    /**
+     * Create the Terrains - Nodes for CrossRoad Map
+     */
     public void staticMapCreatorCrossRoad() {
 
         //create FIRSTLY the horizontal entry and exit roads
@@ -620,6 +567,9 @@ public class TrafficManagement extends JFrame {
         aTerrainList.get(0).setForwardListFlow(fifthTL);
     }
 
+    /**
+     * Create the Terrains - Nodes for Town Map
+     */
     public void staticMapCreatorTown() {
 
         //create FIRSTLY the entry and exit roads
@@ -756,10 +706,16 @@ public class TrafficManagement extends JFrame {
         aTerrainList.get(5).setBackwardListFlow(tenthTL);
     }
 
+    /**
+     * Create the Terrains - Nodes for Random Map
+     */
     public void randomMapCreator() {
 
     }
 
+    /**
+     * Draw the map
+     */
     public void drawTheMap(final Draw aDraw) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
@@ -790,6 +746,9 @@ public class TrafficManagement extends JFrame {
         return timeGranularity;
     }
 
+    /**
+     * set the time Granularity
+     */
     public void setTimeGranularity(int timeGranularity) {
         this.timeGranularity = timeGranularity;
     }
@@ -810,10 +769,16 @@ public class TrafficManagement extends JFrame {
         return this.aVehicleList;
     }
 
+    /**
+     * Get which map has to be selected
+     */
     public int getOption() {
         return option;
     }
 
+    /**
+     * Select which map
+     */
     public void setOption(int i) {
         option = i;
     }
