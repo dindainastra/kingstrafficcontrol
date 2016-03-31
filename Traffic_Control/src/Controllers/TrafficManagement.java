@@ -123,33 +123,31 @@ public class TrafficManagement extends JFrame {
 
     }
 
-    public void mapSelector(int mapNo)
-    {
-        this.selectMap=mapNo;
+    public void mapSelector(int mapNo) {
+        this.selectMap = mapNo;
 
-    }
-
-    public void setOption(int i){
-        option = i;
     }
 
     public void run() {
         //createPersons(10);
         //createVehicles();
 
-        if (option==0){
+        if (option == 0) {
 
             staticMapCreatorCrossRoad();
+            initializeNeighboursTerrainListsForCrossRoad();
 
-        }else if (option==1){
+        } else if (option == 1) {
 
             staticMapCreatorTown();
+            initializeNeighboursTerrainListsForTown();
+
 
         } else {
 
             staticMapCreatorRoundabout();
+            initializeNeighboursTerrainListsForRoundabout();
         }
-
 
 
         //first init the trafficlights to have the firsts position in the Collection
@@ -159,7 +157,6 @@ public class TrafficManagement extends JFrame {
 //        initializeForwardAndBackwardLists();
 
         //do the graph to know every node their closest nodes
-//        initializeNeighboursTerrainLists();
 
         map = new Draw(aTerrainList);
 
@@ -182,7 +179,6 @@ public class TrafficManagement extends JFrame {
         }
 
     }
-
 
     public void createVehicles() {
         for (Person p : aPersonList) {
@@ -317,7 +313,92 @@ public class TrafficManagement extends JFrame {
 
     }
 
-    public void initializeNeighboursTerrainLists() {
+    public void initializeNeighboursTerrainListsForCrossRoad() {
+
+        this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(4));
+
+        this.aTerrainList.get(1).setNeighboursTerrainList(this.aTerrainList.get(4));
+
+        this.aTerrainList.get(2).setNeighboursTerrainList(this.aTerrainList.get(4));
+
+        this.aTerrainList.get(3).setNeighboursTerrainList(this.aTerrainList.get(4));
+
+        this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(1));
+        this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(0));
+        this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(2));
+        this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(3));
+
+    }
+
+    public void initializeNeighboursTerrainListsForRoundabout() {
+
+        Terrain t = null;
+
+        this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(17));
+
+        this.aTerrainList.get(1).setNeighboursTerrainList(this.aTerrainList.get(16));
+
+        this.aTerrainList.get(2).setNeighboursTerrainList(this.aTerrainList.get(19));
+
+        this.aTerrainList.get(3).setNeighboursTerrainList(this.aTerrainList.get(18));
+
+        this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(19));
+        this.aTerrainList.get(4).setNeighboursTerrainList(this.aTerrainList.get(14));
+
+        this.aTerrainList.get(5).setNeighboursTerrainList(this.aTerrainList.get(15));
+        this.aTerrainList.get(5).setNeighboursTerrainList(this.aTerrainList.get(18));
+
+        this.aTerrainList.get(6).setNeighboursTerrainList(this.aTerrainList.get(18));
+        this.aTerrainList.get(6).setNeighboursTerrainList(this.aTerrainList.get(13));
+
+        this.aTerrainList.get(7).setNeighboursTerrainList(this.aTerrainList.get(12));
+        this.aTerrainList.get(7).setNeighboursTerrainList(this.aTerrainList.get(19));
+
+        this.aTerrainList.get(8).setNeighboursTerrainList(this.aTerrainList.get(14));
+        this.aTerrainList.get(8).setNeighboursTerrainList(this.aTerrainList.get(17));
+
+        this.aTerrainList.get(9).setNeighboursTerrainList(this.aTerrainList.get(17));
+        this.aTerrainList.get(9).setNeighboursTerrainList(this.aTerrainList.get(15));
+
+        this.aTerrainList.get(10).setNeighboursTerrainList(this.aTerrainList.get(13));
+        this.aTerrainList.get(10).setNeighboursTerrainList(this.aTerrainList.get(16));
+
+        this.aTerrainList.get(11).setNeighboursTerrainList(this.aTerrainList.get(16));
+        this.aTerrainList.get(11).setNeighboursTerrainList(this.aTerrainList.get(12));
+
+        this.aTerrainList.get(12).setNeighboursTerrainList(this.aTerrainList.get(11));
+        this.aTerrainList.get(12).setNeighboursTerrainList(this.aTerrainList.get(7));
+
+        this.aTerrainList.get(13).setNeighboursTerrainList(this.aTerrainList.get(6));
+        this.aTerrainList.get(13).setNeighboursTerrainList(this.aTerrainList.get(10));
+
+        this.aTerrainList.get(14).setNeighboursTerrainList(this.aTerrainList.get(4));
+        this.aTerrainList.get(14).setNeighboursTerrainList(this.aTerrainList.get(8));
+
+        this.aTerrainList.get(15).setNeighboursTerrainList(this.aTerrainList.get(9));
+        this.aTerrainList.get(15).setNeighboursTerrainList(this.aTerrainList.get(5));
+
+        this.aTerrainList.get(16).setNeighboursTerrainList(this.aTerrainList.get(1));
+        this.aTerrainList.get(16).setNeighboursTerrainList(this.aTerrainList.get(11));
+        this.aTerrainList.get(16).setNeighboursTerrainList(this.aTerrainList.get(10));
+
+        this.aTerrainList.get(17).setNeighboursTerrainList(this.aTerrainList.get(8));
+        this.aTerrainList.get(17).setNeighboursTerrainList(this.aTerrainList.get(0));
+        this.aTerrainList.get(17).setNeighboursTerrainList(t);
+        this.aTerrainList.get(17).setNeighboursTerrainList(this.aTerrainList.get(9));
+
+        this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(5));
+        this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(6));
+        this.aTerrainList.get(18).setNeighboursTerrainList(t);
+        this.aTerrainList.get(18).setNeighboursTerrainList(this.aTerrainList.get(3));
+
+        this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(7));
+        this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(4));
+        this.aTerrainList.get(19).setNeighboursTerrainList(this.aTerrainList.get(2));
+
+    }
+
+    public void initializeNeighboursTerrainListsForTown() {
 
         this.aTerrainList.get(0).setNeighboursTerrainList(this.aTerrainList.get(19));
 
@@ -428,60 +509,57 @@ public class TrafficManagement extends JFrame {
 //        aTerrainList.add(new CornerRoad(150, 440, 180, 0, this));//16-move up by 50
 
 //        //add junctions (0,0,4,3: to close the square junctions)
-        aTerrainList.add(new SquareJunction(1180, 110, this, 0,2));//18 (top right)
-        aTerrainList.add(new SquareJunction(1180, 540, this, 0,4)); //19 (bottom right)
-        aTerrainList.add(new SquareJunction(150, 110, this, 0,1));//20-move up by 50 (top left)
-        aTerrainList.add(new SquareJunction(150, 540, this, 0,3));//21 -moved down 100 (bottom left)
+        aTerrainList.add(new SquareJunction(1180, 110, this, 0, 2));//18 (top right)
+        aTerrainList.add(new SquareJunction(1180, 540, this, 0, 4)); //19 (bottom right)
+        aTerrainList.add(new SquareJunction(150, 110, this, 0, 1));//20-move up by 50 (top left)
+        aTerrainList.add(new SquareJunction(150, 540, this, 0, 3));//21 -moved down 100 (bottom left)
 
         //add junctions (0,0,4,3: to close the square junctions)
-        aTerrainList.add(new SquareJunction(1180, 325, this, 2,0));//18
-        aTerrainList.add(new SquareJunction(150, 325, this, 1,0)); //19
-        aTerrainList.add(new SquareJunction(665, 540, this, 3,0));//20-move up by 50
-        aTerrainList.add(new SquareJunction(665, 110, this, 4,0));//21 -moved down 100
+        aTerrainList.add(new SquareJunction(1180, 325, this, 2, 0));//18
+        aTerrainList.add(new SquareJunction(150, 325, this, 1, 0)); //19
+        aTerrainList.add(new SquareJunction(665, 540, this, 3, 0));//20-move up by 50
+        aTerrainList.add(new SquareJunction(665, 110, this, 4, 0));//21 -moved down 100
 
-        //junction18
+        //junction16
         TrafficLights thirteenthTL = new TrafficLights(1280, 325, 2, 90, 3000);
         TrafficLights seventhTL = new TrafficLights(1280, 375, 1, 0, 3000);
         TrafficLights fourteenthTL = new TrafficLights(1230, 425, 1, 90, 3000);
-        TrafficLights sixthTL = new TrafficLights(1180, 325, 1, 0, 3000);
-        thirteenthTL.previousTrafficLightIs(sixthTL);
+        thirteenthTL.previousTrafficLightIs(fourteenthTL);
         seventhTL.previousTrafficLightIs(thirteenthTL);
         fourteenthTL.previousTrafficLightIs(seventhTL);
-        sixthTL.previousTrafficLightIs(fourteenthTL);
         thirteenthTL.nextTrafficLightIs(seventhTL);
         seventhTL.nextTrafficLightIs(fourteenthTL);
-        fourteenthTL.nextTrafficLightIs(sixthTL);
-        sixthTL.nextTrafficLightIs(thirteenthTL);
+        fourteenthTL.nextTrafficLightIs(thirteenthTL);
 
-        //junction 19
+        //junction 17
         TrafficLights thirdTL = new TrafficLights(250, 325, 2, 90, 3000);
-        TrafficLights firstTL = new TrafficLights(250, 375, 1, 0, 3000);
+        //TrafficLights firstTL = new TrafficLights(250, 375, 1, 0, 3000);
         TrafficLights fourthTL = new TrafficLights(200, 425, 1, 90, 3000);
         TrafficLights secondTL = new TrafficLights(150, 325, 1, 0, 3000);
         thirdTL.previousTrafficLightIs(secondTL);
-        firstTL.previousTrafficLightIs(thirdTL);
-        fourthTL.previousTrafficLightIs(firstTL);
+        //firstTL.previousTrafficLightIs(thirdTL);
+        fourthTL.previousTrafficLightIs(thirdTL);
         secondTL.previousTrafficLightIs(fourthTL);
-        thirdTL.nextTrafficLightIs(firstTL);
-        firstTL.nextTrafficLightIs(fourthTL);
+        thirdTL.nextTrafficLightIs(fourthTL);
+        //firstTL.nextTrafficLightIs(fourthTL);
         fourthTL.nextTrafficLightIs(secondTL);
         secondTL.nextTrafficLightIs(thirdTL);
 
-        //junction20
-        TrafficLights seventeenthTL = new TrafficLights(765, 540, 2, 90, 3000);
+        //junction18
+        TrafficLights seventeenthTL = new TrafficLights(715, 640, 2, 90, 3000);
         TrafficLights eleventhTL = new TrafficLights(765, 590, 1, 0, 3000);
         TrafficLights tenthTL = new TrafficLights(665, 540, 1, 0, 3000);
-        seventeenthTL.previousTrafficLightIs(tenthTL);
-        eleventhTL.previousTrafficLightIs(seventeenthTL);
-        tenthTL.previousTrafficLightIs(eleventhTL);
-        seventeenthTL.nextTrafficLightIs(eleventhTL);
-        eleventhTL.nextTrafficLightIs(tenthTL);
-        tenthTL.nextTrafficLightIs(seventeenthTL);
+        seventeenthTL.previousTrafficLightIs(eleventhTL);
+        eleventhTL.previousTrafficLightIs(tenthTL);
+        tenthTL.previousTrafficLightIs(seventeenthTL);
+        seventeenthTL.nextTrafficLightIs(tenthTL);
+        eleventhTL.nextTrafficLightIs(seventeenthTL);
+        tenthTL.nextTrafficLightIs(eleventhTL);
 
         //junction21
         TrafficLights ninthTL = new TrafficLights(665, 110, 2, 0, 3000);
         TrafficLights twelfthTL = new TrafficLights(765, 160, 1, 0, 3000);
-        TrafficLights eighteenthTL = new TrafficLights(715, 210, 1, 90, 3000);
+        TrafficLights eighteenthTL = new TrafficLights(765, 110, 1, 90, 3000);
 
         ninthTL.previousTrafficLightIs(eighteenthTL);
         twelfthTL.previousTrafficLightIs(ninthTL);
@@ -490,17 +568,17 @@ public class TrafficManagement extends JFrame {
         twelfthTL.nextTrafficLightIs(eighteenthTL);
         eighteenthTL.nextTrafficLightIs(ninthTL);
 
-        //junction18
+        //junction16
         aTerrainList.get(1).setBackwardListFlow(seventhTL); //
         aTerrainList.get(11).setForwardListFlow(thirteenthTL); //down
         aTerrainList.get(10).setBackwardListFlow(fourteenthTL); //up
 
-        //junction19
+        //junction17
         aTerrainList.get(9).setForwardListFlow(fourthTL); //down supposed to be backward
         aTerrainList.get(0).setForwardListFlow(secondTL); //supposed to be backward
         aTerrainList.get(8).setBackwardListFlow(thirdTL); //up
 
-        //junction20
+        //junction18
         aTerrainList.get(3).setBackwardListFlow(seventeenthTL);//down
         aTerrainList.get(6).setForwardListFlow(eleventhTL);
         aTerrainList.get(5).setBackwardListFlow(tenthTL);
@@ -523,7 +601,7 @@ public class TrafficManagement extends JFrame {
         //next, create the rest map
 
         //add square junction
-        aTerrainList.add(new SquareJunction(700, 325, this, 0,0));//4
+        aTerrainList.add(new SquareJunction(700, 325, this, 0, 0));//4
 
         //draw traffic lights
         //junction22
@@ -578,11 +656,11 @@ public class TrafficManagement extends JFrame {
         aTerrainList.add(new CornerRoad(150, 490, 180, 0, this));//17
 
         //add junctions (0,0,4,3: to close the square junctions)
-        aTerrainList.add(new SquareJunction(1180, 325, this, 0,0));//18
-        aTerrainList.add(new SquareJunction(150, 325, this, 0,0));     //19
-        aTerrainList.add(new SquareJunction(815, 590, this, 4,0));//20
-        aTerrainList.add(new SquareJunction(815, 10, this, 3,0));//21
-        aTerrainList.add(new SquareJunction(815, 325, this, 0,0));//22
+        aTerrainList.add(new SquareJunction(1180, 325, this, 0, 0));//18
+        aTerrainList.add(new SquareJunction(150, 325, this, 0, 0));     //19
+        aTerrainList.add(new SquareJunction(815, 590, this, 4, 0));//20
+        aTerrainList.add(new SquareJunction(815, 10, this, 3, 0));//21
+        aTerrainList.add(new SquareJunction(815, 325, this, 0, 0));//22
 
         //junction21
         TrafficLights ninthTL = new TrafficLights(815, 10, 2, 0, 3000);
@@ -717,7 +795,6 @@ public class TrafficManagement extends JFrame {
         return timeGranularity;
     }
 
-
     public void setTimeGranularity(int timeGranularity) {
         this.timeGranularity = timeGranularity;
     }
@@ -726,16 +803,24 @@ public class TrafficManagement extends JFrame {
         this.tlDelay = tlDelay;
     }
 
-    public int getVehicleListSize(){
+    public int getVehicleListSize() {
         return this.aVehicleList.size();
     }
 
-    public int getPersonListSize(){
+    public int getPersonListSize() {
         return this.aPersonList.size();
     }
 
-    public ArrayList<Vehicle> getVehicleList(){
+    public ArrayList<Vehicle> getVehicleList() {
         return this.aVehicleList;
+    }
+
+    public int getOption() {
+        return option;
+    }
+
+    public void setOption(int i) {
+        option = i;
     }
 
 }

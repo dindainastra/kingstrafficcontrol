@@ -487,13 +487,13 @@ public class StraightRoad extends JPanel implements Terrain {
         return this.neighboursTerrainList;
     }
 
+    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
+        this.neighboursTerrainList = tl;
+    }
+
     @Override
     public void setNeighboursTerrainList(Terrain t) {
         this.neighboursTerrainList.add(t);
-    }
-
-    public void setNeighboursTerrainList(ArrayList<Terrain> tl) {
-        this.neighboursTerrainList = tl;
     }
 
     @Override
@@ -502,13 +502,13 @@ public class StraightRoad extends JPanel implements Terrain {
     }
 
     @Override
-    public void setPreviousTerrainList(Terrain t) {
-        this.previousTerrainList.add(t);
+    public void setPreviousTerrainList(ArrayList<Terrain> tl) {
+        this.previousTerrainList = tl;
     }
 
     @Override
-    public void setPreviousTerrainList(ArrayList<Terrain> tl) {
-        this.previousTerrainList = tl;
+    public void setPreviousTerrainList(Terrain t) {
+        this.previousTerrainList.add(t);
     }
 
     @Override

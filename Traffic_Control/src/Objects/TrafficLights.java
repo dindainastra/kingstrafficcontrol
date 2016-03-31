@@ -11,14 +11,12 @@ public class TrafficLights extends JPanel implements Runnable {
     private final int Yellow = 2;
     private final int Green = 3;
     private final int YellowReverse = 4;
+    public boolean canIChange = false;
     private int pos_x, pos_y, rotates;
     private int currentColour;
     private TrafficLights previousTrafficLight;
     private TrafficLights nextTrafficLight;
-
     private int delayForGreenLight = 4;
-    public boolean canIChange = false;
-
     private long delay;
     private int signal = 1;
 

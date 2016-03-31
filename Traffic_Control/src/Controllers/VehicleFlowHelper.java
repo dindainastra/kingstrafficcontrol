@@ -40,6 +40,7 @@ public class VehicleFlowHelper implements Runnable {
 
     /**
      * Drives a vehicle to a specified point on it current terrain
+     *
      * @param vehicle
      * @param terrainLenght
      * @param dir
@@ -60,6 +61,7 @@ public class VehicleFlowHelper implements Runnable {
     /**
      * Drives the vehicle to the remaining length of the road based on the offset
      * calculated after the traffic light went red.
+     *
      * @param vehicle
      * @param dir
      * @param offset
@@ -207,6 +209,7 @@ public class VehicleFlowHelper implements Runnable {
 
     /**
      * Drive the vehicle past the corner road
+     *
      * @param vehicle
      * @param angle
      * @param endAngle
@@ -251,14 +254,73 @@ public class VehicleFlowHelper implements Runnable {
     }
 
     public void moveThisVehicleToTheNextCorrectStack(Vehicle v) {
-//        threadName  = Thread.currentThread().getName();
 
         if (
-                (trafficManagement.getTerrainList().indexOf(this.aTerrain) != 1 && this.flowDirection == 1)
-                        ||
-                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) != 0 && this.flowDirection == 0)
+                (
+                        (
+                                (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 1 && this.flowDirection == 1)
+                                        ||
+                                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 0 && this.flowDirection == 0)
 
-                ) { //exit node on flow -> and  <-
+                        )
+                                && this.trafficManagement.getOption() == 1
+                )
+
+
+                ) {
+            System.out.println("EXIT NODE: Delete " + v.toString() + " and worker is: " + Thread.currentThread().getName());
+        } else if
+                (
+                (
+                        (
+                                (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 1 && this.flowDirection == 1)
+                                        ||
+                                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 0 && this.flowDirection == 0)
+                                        ||
+                                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 2 && this.flowDirection == 1)
+                                        ||
+                                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 3 && this.flowDirection == 0)
+
+                        )
+                                && this.trafficManagement.getOption() == 0
+                )
+                ) {
+            System.out.println("EXIT NODE: Delete " + v.toString() + " and worker is: " + Thread.currentThread().getName());
+        } else if
+                (
+                (
+                        (
+                                (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 1 && this.flowDirection == 1)
+                                        ||
+                                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 0 && this.flowDirection == 0)
+                                        ||
+                                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 2 && this.flowDirection == 1)
+                                        ||
+                                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 3 && this.flowDirection == 0)
+
+                        )
+                                && this.trafficManagement.getOption() == 0
+                )
+                ) {
+            System.out.println("EXIT NODE: Delete " + v.toString() + " and worker is: " + Thread.currentThread().getName());
+        } else if
+                (
+                (
+                        (
+                                (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 1 && this.flowDirection == 1)
+                                        ||
+                                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 0 && this.flowDirection == 0)
+                                        ||
+                                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 2 && this.flowDirection == 1)
+                                        ||
+                                        (trafficManagement.getTerrainList().indexOf(this.aTerrain) == 3 && this.flowDirection == 0)
+
+                        )
+                                && this.trafficManagement.getOption() == 2
+                )
+                ) {
+            System.out.println("EXIT NODE: Delete " + v.toString() + " and worker is: " + Thread.currentThread().getName());
+        } else {
 
             if (!(this.aTerrain instanceof SquareJunction)) {
                 v.getPerson().decide(this.aTerrain.getNeighboursTerrainList());
@@ -298,8 +360,7 @@ public class VehicleFlowHelper implements Runnable {
 //                System.out.println("Thread: "+ threadName + " cant removed!");
             }
 
-        } else
-            System.out.println("EXIT NODE: Delete " + v.toString() + " and worker is: " + Thread.currentThread().getName());
+        }
         vehicleflow.deleteFromCurrentList(vehicle);
         // TODO: 29/03/2016  to a deletevehicle (Vehicle v)
     }
@@ -308,6 +369,7 @@ public class VehicleFlowHelper implements Runnable {
      * Calculates whether the combination of directions the car is about to take leads to
      * the first or second exit.
      * Returns true if it is the first exit
+     *
      * @param curD
      * @param nextD
      * @return
@@ -366,6 +428,7 @@ public class VehicleFlowHelper implements Runnable {
      * Drives a vehicle out of its current terrain, into the junction and places
      * it in the terrain it chose which in this case is the first possible exit
      * from the junction
+     *
      * @param vehicle
      * @param direction
      * @param dirJunction
@@ -383,6 +446,7 @@ public class VehicleFlowHelper implements Runnable {
 
     /**
      * Drives the car from its current terrain and into the third exit from the junction
+     *
      * @param vehicle
      * @param myCurrentTerrain
      * @param dir

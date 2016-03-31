@@ -51,6 +51,7 @@ public class Car extends JPanel implements Vehicle {
     /**
      * Drive the vehicle to the given direction by either adding or subtracting one on
      * either the X or Y axis
+     *
      * @param d
      */
     public void move(VehicleFlowHelper.Direction d) {

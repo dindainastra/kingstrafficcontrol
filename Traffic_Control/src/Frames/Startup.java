@@ -6,13 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 
 public class Startup extends JPanel {
 
     private GridLayout group;
     private JButton crossRoadMapButton, townMapButton, roundaboutMapButton;
     private TrafficManagement trafficManagement = new TrafficManagement();
+
     public Startup() {
 
 
@@ -64,13 +64,13 @@ public class Startup extends JPanel {
         trafficManagement.setOption(0);
         trafficManagement.run();
 
-         ((JFrame) this.getTopLevelAncestor()).dispose();
+        ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 
     private void roundaboutMapButtonActionPerformed(ActionEvent evt) { //round about
         trafficManagement.setOption(2);
         trafficManagement.run();
-          ((JFrame) this.getTopLevelAncestor()).dispose();
+        ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 
 }

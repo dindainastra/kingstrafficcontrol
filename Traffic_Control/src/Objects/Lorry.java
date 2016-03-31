@@ -148,21 +148,21 @@ public class Lorry extends JPanel implements Vehicle {
 
     }
 
-	@Override
-	public Direction getCurrentDirection() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public Direction getCurrentDirection() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
-	@Override
-	public void setCurrentDirection(Direction dir) {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void setCurrentDirection(Direction dir) {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void turn(Direction d, double degree) {
-		// TODO Auto-generated method stub
-		
-	}
+    }
+
+    @Override
+    public void turn(Direction d, double degree) {
+        // TODO Auto-generated method stub
+
+    }
 }
