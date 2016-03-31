@@ -1,6 +1,7 @@
 package Objects;
 
 import Controllers.VehicleFlowHelper;
+import Controllers.VehicleFlowHelper.Direction;
 import Interfaces.Vehicle;
 
 import javax.swing.*;
@@ -133,4 +134,22 @@ public class Bus extends JPanel implements Vehicle {
     public void move(VehicleFlowHelper.Direction direction) {
 
     }
+
+	@Override
+	public Direction getCurrentDirection() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void setCurrentDirection(Direction dir) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void turn(Direction d, double degree) {
+		// TODO Auto-generated method stub
+		
+	}
 }
