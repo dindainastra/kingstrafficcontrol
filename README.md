@@ -1,9 +1,9 @@
-﻿# kingstrafficcontrol
-﻿Traffic Simulation Software based on Java as part of Group Project Modules, created by KCL Students.
-﻿
-﻿# Installation
-﻿
-﻿# Manual:
+# kingstrafficcontrol
+Traffic Simulation Software based on Java as part of Group Project Modules, created by KCL Students.
+
+## Installation
+
+### Manual:
 
 Three main options: - Cross Road
 		    - Town
@@ -34,5 +34,6 @@ Buttons: - Time interval      : * A slider that adjusts the pace of the system. 
 
          - Stop               : * Terminates the system and closes the window.
          
-.#Contributors
+
+#### Contributors
 
