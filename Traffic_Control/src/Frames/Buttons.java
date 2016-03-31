@@ -1,6 +1,9 @@
 package Frames;
 
 
+import Controllers.TrafficManagement;
+import Controllers.TrafficSimulator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,19 +15,25 @@ public class Buttons extends JPanel {
 
     private JButton pauseButton, playButton, replayButton, stopButton;
     private JLabel teamName;
+    private TrafficSimulator traffic;
+    private int selectMap2;
+    private TrafficManagement trafficManagement = new TrafficManagement();
 
-    public Buttons() {
+    public Buttons(int selectMap) {
         initComponents();
+        selectMap2 = selectMap;
+
+
     }
 
     private void initComponents() {
         //this.setLayout();
 
         //Create JButton
-        replayButton = new JButton();
-        pauseButton = new JButton();
-        playButton = new JButton();
-        stopButton = new JButton();
+        replayButton = new JButton("Replay");
+        pauseButton = new JButton("Pause");
+        playButton = new JButton("Play");
+        stopButton = new JButton("Stop");
         teamName = new JLabel();
         //Create JLabel
         URL stopURL = getClass().getResource("../Resources/stop.PNG");
@@ -42,8 +51,8 @@ public class Buttons extends JPanel {
         teamName.setText("King's Traffic Control");
 
         //add(teamName);
-        add(playButton);
-        add(pauseButton);
+//        add(playButton);
+//        add(pauseButton);
         add(replayButton);
         add(stopButton);
 
@@ -76,7 +85,12 @@ public class Buttons extends JPanel {
     }
 
     private void replayButtonActionPerformed(ActionEvent evt) {
-
+      TrafficSimulator trafficSimulator = new TrafficSimulator();
+        Startup startup = new Startup();
+        trafficSimulator.add(startup);
+        trafficSimulator.setVisible(true);
+        setSize(500,500);
+        ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 
     private void playButtonActionPerformed(ActionEvent evt) {

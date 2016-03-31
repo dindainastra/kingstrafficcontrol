@@ -18,7 +18,7 @@ public class SquareJunction extends JPanel implements Terrain {
     private ArrayList<Object> backwardListFlow;
     private TrafficManagement trafficManagement;
     //Set size of road
-    private int xStart, yStart, close;
+    private int xStart, yStart, close, corner;
 
     public SquareJunction(int x_Start, int y_Start, TrafficManagement trafficManagement) {
         this.xStart = x_Start;
@@ -31,10 +31,12 @@ public class SquareJunction extends JPanel implements Terrain {
         this.trafficManagement = trafficManagement;
     }
 
-    public SquareJunction(int x_Start, int y_Start, TrafficManagement trafficManagement, int close) {
+    public SquareJunction(int x_Start, int y_Start, TrafficManagement trafficManagement, int close, int corner) {
         this.xStart = x_Start;
         this.yStart = y_Start;
         this.close = close;//1= close junction on rightside; 2=leftside; 3=close top; 4=close bottom; 0=open on all sides
+
+        this.corner=corner;//0=nothing; 1=left top corner; 2=right top corner; 3=right bottom corner; 4=left bottom corner;
 
         nextTerrainList = new ArrayList<Terrain>();
         previousTerrainList = new ArrayList<Terrain>();
@@ -77,6 +79,34 @@ public class SquareJunction extends JPanel implements Terrain {
         road.drawLine(xStart, yStart + road_width, xStart + road_width - 1, yStart + road_width);//bottom
 
 
+        if (corner==1)// top left
+        {
+            road.setStroke(bs2);
+            road.setColor(Color.black);
+            road.drawLine(xStart, yStart, xStart, yStart + road_width - 1);//left
+            road.drawLine(xStart, yStart, xStart + road_width - 1, yStart);//top
+        }
+        else if (corner==2){ // top right
+            road.setStroke(bs2);
+            road.setColor(Color.black);
+            road.drawLine(xStart + road_width, yStart, xStart + road_width, yStart + road_width - 1);//right
+            road.drawLine(xStart, yStart, xStart + road_width - 1, yStart);//top
+        }
+        else if (corner==3){ //bottom left
+            road.setStroke(bs2);
+            road.setColor(Color.black);
+            road.drawLine(xStart, yStart, xStart, yStart + road_width - 1);//left
+            road.drawLine(xStart, yStart + road_width, xStart + road_width - 1, yStart + road_width);//bottom
+        }
+        else if (corner==4){ // bottom right
+            road.setStroke(bs2);
+            road.setColor(Color.black);
+            road.drawLine(xStart + road_width, yStart, xStart + road_width, yStart + road_width - 1);//right
+            road.drawLine(xStart, yStart + road_width, xStart + road_width - 1, yStart + road_width);//bottom
+        }
+
+
+
         if (close == 1) {//close right
             road.setStroke(bs2);
             road.setColor(Color.black);
@@ -109,10 +139,10 @@ public class SquareJunction extends JPanel implements Terrain {
 
     }
 
-    public void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        doDrawing((Graphics2D) g);
-    }
+//    public void paintComponent(Graphics g) {
+//        super.paintComponent(g);
+//        doDrawing((Graphics2D) g);
+//    }
 
 
     //@Override
