@@ -9,6 +9,7 @@ public class TrafficSimulator extends JFrame {
     private static JFrame frame;
 
     public static void main(String[] args) {
+
         JPanel panel1 = new JPanel();
         JPanel panel2 = new JPanel();
         JPanel panel3 = new JPanel();
@@ -34,10 +35,9 @@ public class TrafficSimulator extends JFrame {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(500, 500);
         frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
         frame.setResizable(false);
-
+        frame.setVisible(true);
     }
 
-
 }
+

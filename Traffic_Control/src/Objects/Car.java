@@ -14,18 +14,12 @@ public class Car extends JPanel implements Vehicle {
     private final int length = 20, width = 15;
     private double rotate = 0.0;
     private VehicleFlowHelper.Direction currentDirection = VehicleFlowHelper.Direction.RIGHT;
-    //	public int rotateInt = 0;
     private volatile Boolean destination = false;
     private Person driver;
     private int priorityLevel;
     private int pos_x, pos_y;
     private int R = 173, G = 216, B = 230; //pastel blue
-    private JPanel myPanel;
-    private int tmp = 0;
-    private double distanceFromNodeToNode;
-    private int offset = 0;
     private volatile boolean lock;
-    //private final int radius=100;
     private volatile boolean amIMoving;
 
     public Car(Person p, int x_coordinate, int y_coordinate) {
@@ -42,24 +36,6 @@ public class Car extends JPanel implements Vehicle {
         this.pos_x += 2;
     }
 
-    public void move(int flow, int x, int y) {
-//		if() {
-//			this.pos_x += 2;
-//		}else{}
-    }
-
-    public Boolean getDestination() {
-        return destination;
-    }
-
-    public void setDestination(Boolean des) {
-        this.destination = des;
-    }
-
-    public double getRotate() {
-        return rotate;
-    }
-
     public void setRotate(double r) {
         rotate = Math.toRadians(r);
     }
@@ -72,6 +48,12 @@ public class Car extends JPanel implements Vehicle {
         currentDirection = dir;
     }
 
+    /**
+     * Drive the vehicle to the given direction by either adding or subtracting one on
+     * either the X or Y axis
+     *
+     * @param d
+     */
     public void move(VehicleFlowHelper.Direction d) {
         if (d == VehicleFlowHelper.Direction.LEFT) {
             this.pos_x -= 1;
@@ -97,37 +79,24 @@ public class Car extends JPanel implements Vehicle {
         repaint();
     }
 
-    public void turn(VehicleFlowHelper.Direction d, VehicleFlowHelper.Direction carDirection, double degree) {
+    public void turn(VehicleFlowHelper.Direction d, double degree) {
         double turnDir = degree;
 
         if (degree == 0) {
             turnDir = Math.toRadians(90);
         }
 
-//		if(carDirection == VehicleFlow.Direction.RIGHT || carDirection == VehicleFlow.Direction.UP) {
         if (d == VehicleFlowHelper.Direction.UP || d == VehicleFlowHelper.Direction.LEFT) {
             rotate = -turnDir;
         } else if (d == VehicleFlowHelper.Direction.DOWN || d == VehicleFlowHelper.Direction.RIGHT) { //works
             rotate = turnDir;
         }
-//		}else if(carDirection == VehicleFlow.Direction.LEFT || carDirection == VehicleFlow.Direction.DOWN){
-//			if (d == VehicleFlow.Direction.UP || d == VehicleFlow.Direction.LEFT) {
-//				rotate = turnDir;
-//			} else if (d == VehicleFlow.Direction.DOWN || d == VehicleFlow.Direction.RIGHT) { //works
-//				rotate = -turnDir;
-//			}
-//		}
 
         this.repaint();
     }
 
-    public void turn(VehicleFlowHelper.Direction d, VehicleFlowHelper.Direction carD) {
-        turn(d, carD, 0);
-    }
-
     public void bend(VehicleFlowHelper.Direction d, double degree) {
         //Bend based on direction
-
         if (d == VehicleFlowHelper.Direction.RIGHT) {
             rotate += Math.toRadians(degree);
         } else if (d == VehicleFlowHelper.Direction.LEFT) {
@@ -138,26 +107,6 @@ public class Car extends JPanel implements Vehicle {
 //		this.pos_y += degree;
 
         this.repaint();
-    }
-
-    public void turn(int x, int y) {
-        //turning left
-        if (x < pos_x) {
-            //first move the car onto the new Y
-            if (y != pos_y) {
-                pos_y++;
-            }
-            //change the way the car is paint and move on the X coords
-            //this.redraw("Left")
-        } else if (x > pos_x) { //turning right
-
-        }
-    }
-
-    public void turnJunction(Car c) {
-//		System.out.println("Turn object");
-        pos_x += 3;
-        rotate += 5;
     }
 
     public int get_pos_x() {
@@ -215,12 +164,9 @@ public class Car extends JPanel implements Vehicle {
 
     private void checkEmergency() {
         if (this.getPriority() == 1) {
-            //RGB=RED
             this.setR(255);
             this.setG(0);
             this.setB(0);
-            //revalidate();
-            //repaint();
         }
     }
 
@@ -268,8 +214,6 @@ public class Car extends JPanel implements Vehicle {
     }
 
 
-    //WHAT IS THIS ???? THIS IS NOT PAINT!!!
-    //YOU PAINT WITH doDrawing Method!
     @Override
     public void paintComponent(Graphics g) {
         //System.out.println("Repainting car object - turn is "+rotate);

@@ -10,58 +10,66 @@ import java.awt.event.ActionListener;
 public class Startup extends JPanel {
 
     private GridLayout group;
-    private JButton randomMapButton, configurableMapButton, setMapButton;
+    private JButton crossRoadMapButton, townMapButton, roundaboutMapButton;
+    private TrafficManagement trafficManagement = new TrafficManagement();
 
     public Startup() {
+
+
         initComponents();
     }
 
-    private void initComponents() {
+    public void initComponents() {
         //Create JButton
-        randomMapButton = new JButton("Random Map");
-        randomMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
-        configurableMapButton = new JButton("Configurable Map");
-        configurableMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
-        setMapButton = new JButton("Map");
-        setMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
+        crossRoadMapButton = new JButton("Cross Road");
+        crossRoadMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
+        townMapButton = new JButton("Town      ");
+        townMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
+        roundaboutMapButton = new JButton("Roundabout");
+        roundaboutMapButton.setFont(new Font("Verdana", Font.BOLD, 12));
 
         group = new GridLayout(3, 0, 20, 0);
         this.setLayout(group);
-        add(randomMapButton);
-        add(configurableMapButton);
-        add(setMapButton);
+        add(crossRoadMapButton);
+        add(townMapButton);
+        add(roundaboutMapButton);
 
         //set play, pause, stop and replay button icon and ActionListener
-        randomMapButton.addActionListener(new ActionListener() {
+        crossRoadMapButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                RandomMapButtonActionPerformed(evt);
+                crossRoadMapButtonActionPerformed(evt);
             }
         });
-        configurableMapButton.addActionListener(new ActionListener() {
+        townMapButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                configurableMapButtonActionPerformed(evt);
+                townMapButtonActionPerformed(evt);
             }
         });
-        setMapButton.addActionListener(new ActionListener() {
+        roundaboutMapButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                setMapButtonActionPerformed(evt);
+                roundaboutMapButtonActionPerformed(evt);
             }
+
         });
     }
 
-    private void configurableMapButtonActionPerformed(ActionEvent evt) {
-        // TODO add your handling code here:
-        System.exit(0);
+    private void townMapButtonActionPerformed(ActionEvent evt) { //town
+        trafficManagement.setOption(1);
+        trafficManagement.run();
+
+        ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 
-    private void RandomMapButtonActionPerformed(ActionEvent evt) {
-        // new TrafficManagement().run(100);
-        System.exit(0);
+    private void crossRoadMapButtonActionPerformed(ActionEvent evt) { //cross road
+        trafficManagement.setOption(0);
+        trafficManagement.run();
+
+        ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 
-    private void setMapButtonActionPerformed(ActionEvent evt) {
-        new TrafficManagement().run();
-//        System.exit(0);
+    private void roundaboutMapButtonActionPerformed(ActionEvent evt) { //round about
+        trafficManagement.setOption(2);
+        trafficManagement.run();
         ((JFrame) this.getTopLevelAncestor()).dispose();
     }
 
