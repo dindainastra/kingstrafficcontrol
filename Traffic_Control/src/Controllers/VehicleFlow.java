@@ -33,11 +33,18 @@ public class VehicleFlow implements Runnable {
 
     }
 
+    /**
+     * Deletes an object from the current Flow stack-list
+     * @param item
+     */
     public void deleteFromCurrentList(Object item) {
         currentFlowList.remove(item);
     }
 
-
+    /**
+     * Start the Traffic Light Thread
+     * @param o
+     */
     public void startTraffic(Object o) {
         TrafficLights tLOne = (TrafficLights) o;
         map.repaint();
@@ -45,6 +52,11 @@ public class VehicleFlow implements Runnable {
         t.start();
     }
 
+    /**
+     * Create the threads and trap the VehicleFlow into a infinity loop with locks.
+     * Threads of VehicleFlowHelper Object are created only if the lock is false.
+     * That prevents to create unlimited Threads inside this infinity loop
+     */
     public void run() {
 
         for (Object o : this.currentFlowList) {

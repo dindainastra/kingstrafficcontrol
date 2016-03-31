@@ -24,11 +24,6 @@ public class Person {
         this.myPreviousTerrainPosition = myPreviousTerrainPosition;
     }
 
-    public int getDirection() {
-        int direction = 1;
-        return direction;
-    }
-
     public void setTurningCounter() {
         turningCounter++;
     }
@@ -41,13 +36,19 @@ public class Person {
         this.myPreviousTerrainPosition = terrainPosition;
     }
 
+    /**
+     * Person get a decision based on how many options he/she has.
+     * If there isn't an option we have a cirle, so program is going to be stoped after 1000 collide decisions.
+     * Circle is prevented by checking (last Node each time != decided Next Node)
+     * @param terrainArrayList is the Neighbour list of Person's current Node-Terrain
+     */
     public void decide(ArrayList<Terrain> terrainArrayList) {
 
         this.decision = new Random().nextInt(terrainArrayList.size());
         int counter = 0;
         while (decision == terrainArrayList.indexOf(myPreviousTerrainPosition) || terrainArrayList.get(decision) == null) {
             counter++;
-            System.out.println(Thread.currentThread().getName() + " Collision found!" + " Decision: " + decision + " size: " + terrainArrayList.size());
+//            System.out.println(Thread.currentThread().getName() + " Collision found!" + " Decision: " + decision + " size: " + terrainArrayList.size());
             if (counter > 1000) {
                 System.exit(1);
             }
@@ -56,6 +57,10 @@ public class Person {
 
     }
 
+    /**
+     * Returns Person's name
+     * @return name
+     */
     public String getName() {
         return name;
     }
@@ -72,6 +77,13 @@ public class Person {
         this.politenessLevel = politenessLevel;
     }
 
+    /**
+     * Checks if it pedestrian.
+     * This will be used for Pedestrian Streets
+     * Later implementation
+     *
+     * @return true or false
+     */
     public boolean isPedestrian() {
         return pedestrian;
     }
